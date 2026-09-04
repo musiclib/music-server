@@ -3,7 +3,7 @@ import { ApiProperty } from '@nestjs/swagger';
 import { BadRequestResponseDto, SuccessResponseDto } from 'src/api/response.dto';
 import { ErrorCodes } from 'src/constants/error-codes';
 import { IsDate, IsEnum, IsInt, IsNotEmpty, IsOptional, IsString, Length, Max, Min } from 'class-validator';
-import { LibraryTrackExtendedDto } from 'src/library/dtos/library.track.dto';
+import { LibraryTrackDto } from 'src/library/dtos/library.track.dto';
 import { PaginationQueryDto } from 'src/api/request.dto';
 import { SortDirectionEnum, TrackSortFieldEnum } from 'src/types/enums';
 import { Transform } from 'class-transformer';
@@ -191,10 +191,10 @@ export class UserListTracksResponseDto extends SuccessResponseDto {
    * The list of tracks that match the query parameters, which may be limited by pagination.
    */
   @ApiProperty({
-    type: LibraryTrackExtendedDto,
+    type: LibraryTrackDto,
     isArray: true,
   })
-  declare tracks: LibraryTrackExtendedDto[];
+  declare tracks: LibraryTrackDto[];
 
   /**
    * The offset of the first track in the tracks array, which may be greater than 0 if

@@ -1,20 +1,26 @@
 /* eslint-disable max-classes-per-file */
-import { ApiProperty } from '@nestjs/swagger';
+import { ApiProperty, OmitType } from '@nestjs/swagger';
 import { IsDate, IsInt, IsString } from 'class-validator';
+import { LibraryArtistDto } from './library.artist.dto';
+import { LibraryComposerDto } from './library.composer.dto';
+import { LibraryGenreDto } from './library.genre.dto';
 import { LibraryTrackDto } from './library.track.dto';
 
 export class LibraryAlbumDto {
   /**
    * The artist for the album, which is all the album artists in a comma-delimited list
    */
-  @IsString({ each: true })
-  declare albumArtists: string[];
+  @ApiProperty({
+    type: LibraryArtistDto,
+    isArray: true,
+  })
+  declare artists: LibraryArtistDto[];
 
-  @IsString({ each: true })
-  declare albumComposers: string[];
-
-  @IsString({ each: true })
-  declare albumGenres: string[];
+  @ApiProperty({
+    type: LibraryComposerDto,
+    isArray: true,
+  })
+  declare composers: LibraryComposerDto[];
 
   /**
    * A color detected in the cover art image
@@ -58,20 +64,11 @@ export class LibraryAlbumDto {
   @IsDate()
   declare createdAt: Date;
 
-  /**
-   * The display name of the artist, which is used for sorting and display consistency when albums
-   * have a different artist name than the album artist name.  For example, a compilation album may have
-   * multiple artists but the album artist is "Various Artists" and the display artist is "Various".
-   */
-  @IsString({ each: true })
-  declare displayArtist: string[];
-
-  /**
-   * The name or title of the album, this would usually come from an official source such as MusicBrainz
-   * or Discogs.
-   */
-  @IsString()
-  declare displayName: string;
+  @ApiProperty({
+    type: LibraryGenreDto,
+    isArray: true,
+  })
+  declare genres: LibraryGenreDto[];
 
   /**
    * The internally-generated unique ID of the album
@@ -86,11 +83,11 @@ export class LibraryAlbumDto {
   declare rating: number;
 
   /**
-   * The name of the album used for sorting and display consistency, eg "Greatest Hits" but the display
-   * name is "Greatest Hits (Remastered)".
+   * The name or title of the album, this would usually come from an official source such as MusicBrainz
+   * or Discogs.
    */
   @IsString()
-  declare sortName: string;
+  declare title: string;
 
   /**
    * The year the album was released.
@@ -99,13 +96,16 @@ export class LibraryAlbumDto {
   declare year: number;
 }
 
+export class LibraryAlbumTrackDto extends OmitType(LibraryTrackDto, [
+  'albumArtists',
+  'albumId',
+  'albumTitle',
+] as const) {}
+
 export class LibraryAlbumWithTracksDto extends LibraryAlbumDto {
   /**
    * The list of tracks for the album
    */
-  @ApiProperty({
-    type: LibraryTrackDto,
-    isArray: true,
-  })
-  declare tracks: LibraryTrackDto[];
+  @ApiProperty() // not sure why but defining type + isArray results in LibraryAlbumWithTracksDto[][]
+  declare tracks: LibraryAlbumTrackDto[];
 }

@@ -138,8 +138,8 @@ describe('/users/list-albums', () => {
         const { albums, total } = data || { albums: [], total: 0 };
         expect(total).toBe(2);
         expect(albums.length).toBe(2);
-        expect(albums[0]?.displayName).toBe('Album 2');
-        expect(albums[1]?.displayName).toBe('Album 4');
+        expect(albums[0]?.title).toBe('Album 2');
+        expect(albums[1]?.title).toBe('Album 4');
       });
 
       it('should filter by artist', async () => {
@@ -147,8 +147,8 @@ describe('/users/list-albums', () => {
         const { albums, total } = data || { albums: [], total: 0 };
         expect(total).toBe(2);
         expect(albums.length).toBe(2);
-        expect(albums[0]?.displayName).toBe('Album 4');
-        expect(albums[1]?.displayName).toBe('Album 5');
+        expect(albums[0]?.title).toBe('Album 4');
+        expect(albums[1]?.title).toBe('Album 5');
       });
 
       it('should filter by composer', async () => {
@@ -156,8 +156,8 @@ describe('/users/list-albums', () => {
         const { albums, total } = data || { albums: [], total: 0 };
         expect(total).toBe(2);
         expect(albums.length).toBe(2);
-        expect(albums[0]?.displayName).toBe('Album 3');
-        expect(albums[1]?.displayName).toBe('Album 4');
+        expect(albums[0]?.title).toBe('Album 3');
+        expect(albums[1]?.title).toBe('Album 4');
       });
 
       it('should filter by search term', async () => {
@@ -165,7 +165,7 @@ describe('/users/list-albums', () => {
         const { albums, total } = data || { albums: [], total: 0 };
         expect(total).toBe(1);
         expect(albums.length).toBe(1);
-        expect(albums[0]?.displayName).toBe('Album 4');
+        expect(albums[0]?.title).toBe('Album 4');
       });
 
       it('should filter by year', async () => {
@@ -173,7 +173,7 @@ describe('/users/list-albums', () => {
         const { albums, total } = data || { albums: [], total: 0 };
         expect(total).toBe(1);
         expect(albums.length).toBe(1);
-        expect(albums[0]?.displayName).toBe('Album 5');
+        expect(albums[0]?.title).toBe('Album 5');
       });
     });
 
@@ -186,11 +186,11 @@ describe('/users/list-albums', () => {
         const { albums, total } = data || { albums: [], total: 0 };
         expect(total).toBe(5);
         expect(albums.length).toBe(5);
-        expect(albums[0]?.displayName).toBe('Album 1');
-        expect(albums[1]?.displayName).toBe('Album 2');
-        expect(albums[2]?.displayName).toBe('Album 3');
-        expect(albums[3]?.displayName).toBe('Album 4');
-        expect(albums[4]?.displayName).toBe('Album 5');
+        expect(albums[0]?.title).toBe('Album 1');
+        expect(albums[1]?.title).toBe('Album 2');
+        expect(albums[2]?.title).toBe('Album 3');
+        expect(albums[3]?.title).toBe('Album 4');
+        expect(albums[4]?.title).toBe('Album 5');
       });
 
       it('should sort by album name DESC', async () => {
@@ -201,11 +201,11 @@ describe('/users/list-albums', () => {
         const { albums, total } = data || { albums: [], total: 0 };
         expect(total).toBe(5);
         expect(albums.length).toBe(5);
-        expect(albums[4]?.displayName).toBe('Album 1');
-        expect(albums[3]?.displayName).toBe('Album 2');
-        expect(albums[2]?.displayName).toBe('Album 3');
-        expect(albums[1]?.displayName).toBe('Album 4');
-        expect(albums[0]?.displayName).toBe('Album 5');
+        expect(albums[4]?.title).toBe('Album 1');
+        expect(albums[3]?.title).toBe('Album 2');
+        expect(albums[2]?.title).toBe('Album 3');
+        expect(albums[1]?.title).toBe('Album 4');
+        expect(albums[0]?.title).toBe('Album 5');
       });
 
       it('should sort by year ASC', async () => {
@@ -216,11 +216,11 @@ describe('/users/list-albums', () => {
         const { albums, total } = data || { albums: [], total: 0 };
         expect(total).toBe(5);
         expect(albums.length).toBe(5);
-        expect(albums[0]?.displayName).toBe('Album 1');
-        expect(albums[1]?.displayName).toBe('Album 2');
-        expect(albums[2]?.displayName).toBe('Album 4');
-        expect(albums[3]?.displayName).toBe('Album 5');
-        expect(albums[4]?.displayName).toBe('Album 3');
+        expect(albums[0]?.title).toBe('Album 1');
+        expect(albums[1]?.title).toBe('Album 2');
+        expect(albums[2]?.title).toBe('Album 4');
+        expect(albums[3]?.title).toBe('Album 5');
+        expect(albums[4]?.title).toBe('Album 3');
       });
 
       it('should sort by year DESC', async () => {
@@ -231,11 +231,11 @@ describe('/users/list-albums', () => {
         const { albums, total } = data || { albums: [], total: 0 };
         expect(total).toBe(5);
         expect(albums.length).toBe(5);
-        expect(albums[0]?.displayName).toBe('Album 3');
-        expect(albums[1]?.displayName).toBe('Album 5');
-        expect(albums[2]?.displayName).toBe('Album 4');
-        expect(albums[3]?.displayName).toBe('Album 2');
-        expect(albums[4]?.displayName).toBe('Album 1');
+        expect(albums[0]?.title).toBe('Album 3');
+        expect(albums[1]?.title).toBe('Album 5');
+        expect(albums[2]?.title).toBe('Album 4');
+        expect(albums[3]?.title).toBe('Album 2');
+        expect(albums[4]?.title).toBe('Album 1');
       });
 
       it('should sort by album artist ASC', async () => {
@@ -246,11 +246,11 @@ describe('/users/list-albums', () => {
         const { albums, total } = data || { albums: [], total: 0 };
         expect(total).toBe(5);
         expect(albums.length).toBe(5);
-        expect(albums[0]?.albumArtists[0]).toBe('Artist 1');
-        expect(albums[1]?.albumArtists[0]).toBe('Artist 1');
-        expect(albums[2]?.albumArtists[0]).toBe('Artist 2');
-        expect(albums[3]?.albumArtists[0]).toBe('Artist 3');
-        expect(albums[4]?.albumArtists[0]).toBe('Artist 3');
+        expect(albums[0]?.artists[0]?.name).toBe('Artist 1');
+        expect(albums[1]?.artists[0]?.name).toBe('Artist 1');
+        expect(albums[2]?.artists[0]?.name).toBe('Artist 2');
+        expect(albums[3]?.artists[0]?.name).toBe('Artist 3');
+        expect(albums[4]?.artists[0]?.name).toBe('Artist 3');
       });
 
       it('should sort by album artist DESC', async () => {
@@ -261,11 +261,11 @@ describe('/users/list-albums', () => {
         const { albums, total } = data || { albums: [], total: 0 };
         expect(total).toBe(5);
         expect(albums.length).toBe(5);
-        expect(albums[0]?.albumArtists[0]).toBe('Artist 3');
-        expect(albums[1]?.albumArtists[0]).toBe('Artist 3');
-        expect(albums[2]?.albumArtists[0]).toBe('Artist 2');
-        expect(albums[3]?.albumArtists[0]).toBe('Artist 1');
-        expect(albums[4]?.albumArtists[0]).toBe('Artist 1');
+        expect(albums[0]?.artists[0]?.name).toBe('Artist 3');
+        expect(albums[1]?.artists[0]?.name).toBe('Artist 3');
+        expect(albums[2]?.artists[0]?.name).toBe('Artist 2');
+        expect(albums[3]?.artists[0]?.name).toBe('Artist 1');
+        expect(albums[4]?.artists[0]?.name).toBe('Artist 1');
       });
     });
   });
@@ -283,19 +283,19 @@ describe('/users/list-albums', () => {
       const { albums, total } = data || { albums: [], total: 0 };
       expect(total).toBe(5);
       expect(albums.length).toBe(2);
-      expect(albums[0]?.displayName).toBe('Album 1');
-      expect(albums[1]?.displayName).toBe('Album 2');
+      expect(albums[0]?.title).toBe('Album 1');
+      expect(albums[1]?.title).toBe('Album 2');
       const { data: data2 } = await userApi.listAlbums({ offset: 2, limit: 2 });
       const { albums: albums2, total: total2 } = data2 || { albums: [], total: 0 };
       expect(total2).toBe(5);
       expect(albums2.length).toBe(2);
-      expect(albums2[0]?.displayName).toBe('Album 3');
-      expect(albums2[1]?.displayName).toBe('Album 4');
+      expect(albums2[0]?.title).toBe('Album 3');
+      expect(albums2[1]?.title).toBe('Album 4');
       const { data: data3 } = await userApi.listAlbums({ offset: 4, limit: 2 });
       const { albums: albums3, total: total3 } = data3 || { albums: [], total: 0 };
       expect(total3).toBe(5);
       expect(albums3.length).toBe(1);
-      expect(albums3[0]?.displayName).toBe('Album 5');
+      expect(albums3[0]?.title).toBe('Album 5');
     });
   });
 });

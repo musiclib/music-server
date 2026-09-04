@@ -4,8195 +4,8252 @@
  */
 
 export type paths = {
-    "/api/admin/create-account": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        put?: never;
-        /**
-         * Create a new account
-         * @description Creates a new account with the specified roles.
-         */
-        post: operations["AdminCreateAccountController_post"];
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+  '/api/admin/create-account': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    "/api/admin/create-root-path": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        put?: never;
-        /**
-         * Create a new root path
-         * @description Creates a new root path for the specified account.
-         */
-        post: operations["AdminCreateRootPathController_post"];
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+    get?: never;
+    put?: never;
+    /**
+     * Create a new account
+     * @description Creates a new account with the specified roles.
+     */
+    post: operations['AdminCreateAccountController_post'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/admin/create-root-path': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    "/api/admin/delete-account": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        put?: never;
-        post?: never;
-        /**
-         * Delete an account
-         * @description Deletes the specified account.  If it is the only admin account a new one account must be created first.
-         */
-        delete: operations["AdminDeleteAccountController_delete"];
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+    get?: never;
+    put?: never;
+    /**
+     * Create a new root path
+     * @description Creates a new root path for the specified account.
+     */
+    post: operations['AdminCreateRootPathController_post'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/admin/delete-account': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    "/api/admin/delete-root-path": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        put?: never;
-        post?: never;
-        /**
-         * Delete a root path
-         * @description Deletes the specified root path.  This will delete all associated information in the database immediately, the songs and folders will no longer be present in their data.  This will not affect any files on the file system.
-         */
-        delete: operations["AdminDeleteRootPathController_delete"];
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+    get?: never;
+    put?: never;
+    post?: never;
+    /**
+     * Delete an account
+     * @description Deletes the specified account.  If it is the only admin account a new one account must be created first.
+     */
+    delete: operations['AdminDeleteAccountController_delete'];
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/admin/delete-root-path': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    "/api/admin/indexer-configuration": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Get the indexer configuration
-         * @description Retrieves the current indexer configuration for the platform.
-         */
-        get: operations["AdminIndexerConfigurationController_get"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+    get?: never;
+    put?: never;
+    post?: never;
+    /**
+     * Delete a root path
+     * @description Deletes the specified root path.  This will delete all associated information in the database immediately, the songs and folders will no longer be present in their data.  This will not affect any files on the file system.
+     */
+    delete: operations['AdminDeleteRootPathController_delete'];
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/admin/indexer-configuration': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    "/api/admin/list-accounts": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * List all accounts
-         * @description Retrieves a list of all accounts in the system.
-         */
-        get: operations["AdminListAccountsController_get"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+    /**
+     * Get the indexer configuration
+     * @description Retrieves the current indexer configuration for the platform.
+     */
+    get: operations['AdminIndexerConfigurationController_get'];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/admin/list-accounts': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    "/api/admin/list-indexer-logs": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * List indexer logs
-         * @description Retrieves a list of indexer logs based on the provided query parameters which may filter by user or root path or search term.  The logs are only held in memory and will disappear when the server restarts or to stay within the log size specified in the `system_configurations` table.
-         */
-        get: operations["AdminListIndexerLogsController_get"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+    /**
+     * List all accounts
+     * @description Retrieves a list of all accounts in the system.
+     */
+    get: operations['AdminListAccountsController_get'];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/admin/list-indexer-logs': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    "/api/admin/list-root-paths": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * List all root paths
-         * @description Retrieves a list of all root paths in the system.
-         */
-        get: operations["AdminListRootPathsController_get"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+    /**
+     * List indexer logs
+     * @description Retrieves a list of indexer logs based on the provided query parameters which may filter by user or root path or search term.  The logs are only held in memory and will disappear when the server restarts or to stay within the log size specified in the `system_configurations` table.
+     */
+    get: operations['AdminListIndexerLogsController_get'];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/admin/list-root-paths': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    "/api/admin/regenerate-master-session-key": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        put?: never;
-        /**
-         * Invalidate all user sessions
-         * @description Regenerates the master session key for the platform.  This will invalidate all existing sessions and require users to log in again.
-         */
-        post: operations["AdminRegenerateMasterSessionKeyController_post"];
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+    /**
+     * List all root paths
+     * @description Retrieves a list of all root paths in the system.
+     */
+    get: operations['AdminListRootPathsController_get'];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/admin/regenerate-master-session-key': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    "/api/admin/regenerate-user-session-key": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        put?: never;
-        /**
-         * Invalidate a user's sessions
-         * @description Regenerates the session key for a specified user account. This operation is typically used when a user needs to reset their session key for security reasons.
-         */
-        post: operations["AdminRegenerateUserSessionKeyController_post"];
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+    get?: never;
+    put?: never;
+    /**
+     * Invalidate all user sessions
+     * @description Regenerates the master session key for the platform.  This will invalidate all existing sessions and require users to log in again.
+     */
+    post: operations['AdminRegenerateMasterSessionKeyController_post'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/admin/regenerate-user-session-key': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    "/api/admin/reset-user-password": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        put?: never;
-        /**
-         * Reset user password
-         * @description Resets the password for a specified user account. This operation is typically used when an administrator needs to reset a user's password for security or account recovery purposes.
-         */
-        post: operations["AdminResetUserPasswordController_post"];
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+    get?: never;
+    put?: never;
+    /**
+     * Invalidate a user's sessions
+     * @description Regenerates the session key for a specified user account. This operation is typically used when a user needs to reset their session key for security reasons.
+     */
+    post: operations['AdminRegenerateUserSessionKeyController_post'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/admin/reset-user-password': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    "/api/admin/set-indexer-status": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        /**
-         * Set the indexer status
-         * @description Enables or disables the indexer to allow moving root paths or to preserve system resources.
-         */
-        patch: operations["AdminSetIndexerStatusController_patch"];
-        trace?: never;
+    get?: never;
+    put?: never;
+    /**
+     * Reset user password
+     * @description Resets the password for a specified user account. This operation is typically used when an administrator needs to reset a user's password for security or account recovery purposes.
+     */
+    post: operations['AdminResetUserPasswordController_post'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/admin/set-indexer-status': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    "/api/admin/update-root-path": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        /**
-         * Update a root path
-         * @description Updates the specified root path with a new path. If the scanner is running then all previous data will be removed and recreated when it indexes the new path.  If the scanner is paued you may move the files to the new path and then resume the scanner to continue indexing.
-         */
-        patch: operations["AdminUpdateRootPathController_patch"];
-        trace?: never;
+    get?: never;
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    /**
+     * Set the indexer status
+     * @description Enables or disables the indexer to allow moving root paths or to preserve system resources.
+     */
+    patch: operations['AdminSetIndexerStatusController_patch'];
+    trace?: never;
+  };
+  '/api/admin/update-root-path': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    "/api/admin/update-user-roles": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        /**
-         * Update user roles
-         * @description Updates the roles of a specified user account.  There must be at least one administrator account so if the last administrator account is having the `admin` role removed a new administrator account must be created first.
-         */
-        patch: operations["AdminUpdateUserRolesController_patch"];
-        trace?: never;
+    get?: never;
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    /**
+     * Update a root path
+     * @description Updates the specified root path with a new path. If the scanner is running then all previous data will be removed and recreated when it indexes the new path.  If the scanner is paued you may move the files to the new path and then resume the scanner to continue indexing.
+     */
+    patch: operations['AdminUpdateRootPathController_patch'];
+    trace?: never;
+  };
+  '/api/admin/update-user-roles': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    "/api/guest/create-session": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        put?: never;
-        /**
-         * Signs in
-         * @description Creates a user session and returns a JWT token used for authenticating and accessing APIs requiring authentication.
-         */
-        post: operations["GuestCreateSessionController_post"];
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+    get?: never;
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    /**
+     * Update user roles
+     * @description Updates the roles of a specified user account.  There must be at least one administrator account so if the last administrator account is having the `admin` role removed a new administrator account must be created first.
+     */
+    patch: operations['AdminUpdateUserRolesController_patch'];
+    trace?: never;
+  };
+  '/api/guest/create-session': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    "/api/guest/healthcheck": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get: operations["GuestHealthcheckController_healthcheck"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+    get?: never;
+    put?: never;
+    /**
+     * Signs in
+     * @description Creates a user session and returns a JWT token used for authenticating and accessing APIs requiring authentication.
+     */
+    post: operations['GuestCreateSessionController_post'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/guest/healthcheck': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    "/api/user/album-cover": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /** Cover images for albums */
-        get: operations["UserAlbumCoverController_get"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+    get: operations['GuestHealthcheckController_healthcheck'];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/user/album-cover': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    "/api/user/artist-cover": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /** Cover images for artists */
-        get: operations["UserArtistCoverController_get"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+    /** Cover images for albums */
+    get: operations['UserAlbumCoverController_get'];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/user/artist-cover': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    "/api/user/composer-cover": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /** Cover images for composers */
-        get: operations["UserComposerCoverController_get"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+    /** Cover images for artists */
+    get: operations['UserArtistCoverController_get'];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/user/composer-cover': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    "/api/user/create-root-path": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        put?: never;
-        /**
-         * Create a new root path
-         * @description Creates a new root path for the specified account.
-         */
-        post: operations["UserCreateRootPathController_post"];
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+    /** Cover images for composers */
+    get: operations['UserComposerCoverController_get'];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/user/create-root-path': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    "/api/user/delete-root-path": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        put?: never;
-        post?: never;
-        /**
-         * Delete a root path
-         * @description Deletes the specified root path.  This will delete all associated information in the database immediately, the songs and folders will no longer be present in their data.  This will not affect any files on the file system.
-         */
-        delete: operations["UserDeleteRootPathController_delete"];
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+    get?: never;
+    put?: never;
+    /**
+     * Create a new root path
+     * @description Creates a new root path for the specified account.
+     */
+    post: operations['UserCreateRootPathController_post'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/user/delete-root-path': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    "/api/user/end-session": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        put?: never;
-        post?: never;
-        /**
-         * Signs out
-         * @description Ends a user session and invalidates the associated JWT token.
-         */
-        delete: operations["UserEndSessionController_delete"];
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+    get?: never;
+    put?: never;
+    post?: never;
+    /**
+     * Delete a root path
+     * @description Deletes the specified root path.  This will delete all associated information in the database immediately, the songs and folders will no longer be present in their data.  This will not affect any files on the file system.
+     */
+    delete: operations['UserDeleteRootPathController_delete'];
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/user/end-session': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    "/api/user/folder-structure": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Retrieve library folder structure
-         * @description Returns the folder and file structure of the library.
-         */
-        get: operations["UserFolderStructureController_get"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+    get?: never;
+    put?: never;
+    post?: never;
+    /**
+     * Signs out
+     * @description Ends a user session and invalidates the associated JWT token.
+     */
+    delete: operations['UserEndSessionController_delete'];
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/user/folder-structure': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    "/api/user/genre-cover": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /** Cover images for genres */
-        get: operations["UserGenreCoverController_get"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+    /**
+     * Retrieve library folder structure
+     * @description Returns the folder and file structure of the library.
+     */
+    get: operations['UserFolderStructureController_get'];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/user/genre-cover': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    "/api/user/list-album-artists": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * List album artists
-         * @description Retrieves a list of album artists for the user based on the provided query parameters.
-         */
-        get: operations["UserListAlbumArtistsController_get"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+    /** Cover images for genres */
+    get: operations['UserGenreCoverController_get'];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/user/list-album-artists': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    "/api/user/list-album-artists-with-tracks": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * List album artists with tracks
-         * @description Retrieves a list of album artists for the user with their tracks for the user based on the provided query parameters.
-         */
-        get: operations["UserListAlbumArtistsWithTracksController_get"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+    /**
+     * List album artists
+     * @description Retrieves a list of album artists for the user based on the provided query parameters.
+     */
+    get: operations['UserListAlbumArtistsController_get'];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/user/list-album-artists-with-tracks': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    "/api/user/list-albums": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * List albums
-         * @description Retrieves a list of albums for the user based on the provided query parameters.
-         */
-        get: operations["UserListAlbumsController_get"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+    /**
+     * List album artists with tracks
+     * @description Retrieves a list of album artists for the user with their tracks for the user based on the provided query parameters.
+     */
+    get: operations['UserListAlbumArtistsWithTracksController_get'];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/user/list-albums': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    "/api/user/list-albums-with-tracks": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * List albums with tracks
-         * @description Retrieves a list of albums with their tracks for the user based on the provided query parameters.
-         */
-        get: operations["UserListAlbumsWithTracksController_get"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+    /**
+     * List albums
+     * @description Retrieves a list of albums for the user based on the provided query parameters.
+     */
+    get: operations['UserListAlbumsController_get'];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/user/list-albums-with-tracks': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    "/api/user/list-indexer-logs": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * List indexer logs
-         * @description Retrieves a list of indexer logs based on the provided query parameters which may filter by root path or search term.  The logs are only held in memory and will disappear when the server restarts or to stay within the log size specified in the `system_configurations` table.
-         */
-        get: operations["UserListIndexerLogsController_get"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+    /**
+     * List albums with tracks
+     * @description Retrieves a list of albums with their tracks for the user based on the provided query parameters.
+     */
+    get: operations['UserListAlbumsWithTracksController_get'];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/user/list-indexer-logs': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    "/api/user/list-root-paths": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * List all root paths
-         * @description Retrieves a list of all root paths in the system.
-         */
-        get: operations["UserListRootPathsController_get"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+    /**
+     * List indexer logs
+     * @description Retrieves a list of indexer logs based on the provided query parameters which may filter by root path or search term.  The logs are only held in memory and will disappear when the server restarts or to stay within the log size specified in the `system_configurations` table.
+     */
+    get: operations['UserListIndexerLogsController_get'];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/user/list-root-paths': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    "/api/user/list-track-artists": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * List artists
-         * @description Retrieves a list of artists for the user based on the provided query parameters.
-         */
-        get: operations["UserListTrackArtistsController_get"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+    /**
+     * List all root paths
+     * @description Retrieves a list of all root paths in the system.
+     */
+    get: operations['UserListRootPathsController_get'];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/user/list-track-artists': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    "/api/user/list-track-artists-with-tracks": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * List artists with tracks
-         * @description Retrieves a list of artists along with their tracks for the user based on the
-         *         provided query parameters.
-         */
-        get: operations["UserListTrackArtistsWithTracksController_get"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+    /**
+     * List artists
+     * @description Retrieves a list of artists for the user based on the provided query parameters.
+     */
+    get: operations['UserListTrackArtistsController_get'];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/user/list-track-artists-with-tracks': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    "/api/user/list-track-composers": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * List composers
-         * @description Retrieves a list of composers for the user based on the provided query parameters.
-         */
-        get: operations["UserListTrackComposersController_get"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+    /**
+     * List artists with tracks
+     * @description Retrieves a list of artists along with their tracks for the user based on the
+     *         provided query parameters.
+     */
+    get: operations['UserListTrackArtistsWithTracksController_get'];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/user/list-track-composers': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    "/api/user/list-track-composers-with-tracks": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * List composers
-         * @description Retrieves a list of composers for the user based on the provided query parameters.
-         */
-        get: operations["UserListTrackComposersWithTracksController_get"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+    /**
+     * List composers
+     * @description Retrieves a list of composers for the user based on the provided query parameters.
+     */
+    get: operations['UserListTrackComposersController_get'];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/user/list-track-composers-with-tracks': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    "/api/user/list-track-genres": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * List genres
-         * @description Retrieves a list of genres for the user based on the provided query parameters.
-         */
-        get: operations["UserListTrackGenresController_get"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+    /**
+     * List composers
+     * @description Retrieves a list of composers for the user based on the provided query parameters.
+     */
+    get: operations['UserListTrackComposersWithTracksController_get'];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/user/list-track-genres': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    "/api/user/list-track-genres-with-tracks": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * List genres
-         * @description Retrieves a list of genres for the user based on the provided query parameters.
-         */
-        get: operations["UserListTrackGenresWithTracksController_get"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+    /**
+     * List genres
+     * @description Retrieves a list of genres for the user based on the provided query parameters.
+     */
+    get: operations['UserListTrackGenresController_get'];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/user/list-track-genres-with-tracks': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    "/api/user/list-tracks": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * List tracks
-         * @description Retrieves a list of tracks for the user based on the provided query parameters.
-         */
-        get: operations["UserListTracksController_get"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+    /**
+     * List genres
+     * @description Retrieves a list of genres for the user based on the provided query parameters.
+     */
+    get: operations['UserListTrackGenresWithTracksController_get'];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/user/list-tracks': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    "/api/user/regenerate-session-key": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        put?: never;
-        /**
-         * Invalidate a user's sessions
-         * @description Regenerates the session key for the user invalidating all existing sessions for their account.
-         */
-        post: operations["UserRegenerateSessionKeyController_post"];
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+    /**
+     * List tracks
+     * @description Retrieves a list of tracks for the user based on the provided query parameters.
+     */
+    get: operations['UserListTracksController_get'];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/user/regenerate-session-key': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    "/api/user/retrieve-album": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Retrieve album
-         * @description Retrieves an album with all of its information necessary for viewing and playing-back the tracks.
-         */
-        get: operations["UserRetrieveAlbumController_get"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+    get?: never;
+    put?: never;
+    /**
+     * Invalidate a user's sessions
+     * @description Regenerates the session key for the user invalidating all existing sessions for their account.
+     */
+    post: operations['UserRegenerateSessionKeyController_post'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/user/retrieve-album': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    "/api/user/update-password": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        put?: never;
-        /**
-         * Reset password
-         * @description Resets the user's password to a new value.
-         */
-        post: operations["UserUpdatePasswordController_post"];
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+    /**
+     * Retrieve album
+     * @description Retrieves an album with all of its information necessary for viewing and playing-back the tracks.
+     */
+    get: operations['UserRetrieveAlbumController_get'];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/user/update-password': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    "/webapi/AudioStation/album.cgi": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        put?: never;
-        /**
-         * Lists albums in the music library
-         * @description Lists albums found in the music library.  The albums can be filtered by artist, composer or genre.
-         *
-         *     The data is returned in a paginated format, with the ability to specify an offset and limit for the results, where the offset indicates the starting point in the list and the limit specifies the maximum number of items to return.
-         *
-         *     The request must be authenticated using a valid Synology session ID and device ID cookie for the user, which can be obtained by signing in via the `entry.cgi` endpoint, a two-step process requesting the encryption public key from `/certs` and then  submitting credentials encrypted with it.
-         */
-        post: operations["SynologyAlbumController_route"];
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+    get?: never;
+    put?: never;
+    /**
+     * Reset password
+     * @description Resets the user's password to a new value.
+     */
+    post: operations['UserUpdatePasswordController_post'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/webapi/AudioStation/album.cgi': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    "/webapi/AudioStation/artist.cgi": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        put?: never;
-        /**
-         * Lists artists in the music library
-         * @description Lists artists found in the music library.  The artists can be filtered by genre.
-         *
-         *     The data is returned in a paginated format, with the ability to specify an offset and limit for the results, where the offset indicates the starting point in the list and the limit specifies the maximum number of items to return.
-         *
-         *     The request must be authenticated using a valid Synology session ID and device ID cookie for the user, which can be obtained by signing in via the `entry.cgi` endpoint, a two-step process requesting the encryption public key from `/certs` and then  submitting credentials encrypted with it.
-         */
-        post: operations["SynologyArtistController_route"];
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+    get?: never;
+    put?: never;
+    /**
+     * Lists albums in the music library
+     * @description Lists albums found in the music library.  The albums can be filtered by artist, composer or genre.
+     *
+     *     The data is returned in a paginated format, with the ability to specify an offset and limit for the results, where the offset indicates the starting point in the list and the limit specifies the maximum number of items to return.
+     *
+     *     The request must be authenticated using a valid Synology session ID and device ID cookie for the user, which can be obtained by signing in via the `entry.cgi` endpoint, a two-step process requesting the encryption public key from `/certs` and then  submitting credentials encrypted with it.
+     */
+    post: operations['SynologyAlbumController_route'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/webapi/AudioStation/artist.cgi': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    "/webapi/AudioStation/composer.cgi": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        put?: never;
-        /**
-         * Lists composers in the music library
-         * @description Lists composers found in the music library.  These are extracted from song metadata and are not necessarily the same as the artists.  This field can be problematic due to inconsistent structure for multiple composers, such as "Composer 1, Composer 2" vs "Composer 1; Composer 2" vs "Composer 1 & Composer 2".
-         *
-         *     When a track is recognized as having multiple composers, each composer is counted as a separate composer.  For  instance, a track with the composer "Composer 1, Composer 2" will be counted as both "Composer 1" and "Composer 2".
-         *
-         *     The data is returned in a paginated format, with the ability to specify an offset and limit for the results, where the offset indicates the starting point in the list and the limit specifies the maximum number of items to return.
-         *
-         *     The request must be authenticated using a valid Synology session ID and device ID cookie for the user, which can be obtained by signing in via the `entry.cgi` endpoint, a two-step process requesting the encryption public key from `/certs` and then  submitting credentials encrypted with it.
-         */
-        post: operations["SynologyComposerController_route"];
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+    get?: never;
+    put?: never;
+    /**
+     * Lists artists in the music library
+     * @description Lists artists found in the music library.  The artists can be filtered by genre.
+     *
+     *     The data is returned in a paginated format, with the ability to specify an offset and limit for the results, where the offset indicates the starting point in the list and the limit specifies the maximum number of items to return.
+     *
+     *     The request must be authenticated using a valid Synology session ID and device ID cookie for the user, which can be obtained by signing in via the `entry.cgi` endpoint, a two-step process requesting the encryption public key from `/certs` and then  submitting credentials encrypted with it.
+     */
+    post: operations['SynologyArtistController_route'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/webapi/AudioStation/composer.cgi': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    "/webapi/AudioStation/cover.cgi": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Retrieves the cover image for an album, artist, composer or song
-         * @description Retrieves the cover image for an album, artist, composer or song.  The cover image can be retrieved by specifying the appropriate query parameters in the request.  If an image is not found a default blank cover image will be returned.
-         *
-         *     The request must be authenticated using a valid Synology session ID and device ID cookie for the user, which can be obtained by signing in via the `entry.cgi` endpoint, a two-step process requesting the encryption public key from `/certs` and then  submitting credentials encrypted with it.
-         */
-        get: operations["SynologyCoverImageController_route"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+    get?: never;
+    put?: never;
+    /**
+     * Lists composers in the music library
+     * @description Lists composers found in the music library.  These are extracted from song metadata and are not necessarily the same as the artists.  This field can be problematic due to inconsistent structure for multiple composers, such as "Composer 1, Composer 2" vs "Composer 1; Composer 2" vs "Composer 1 & Composer 2".
+     *
+     *     When a track is recognized as having multiple composers, each composer is counted as a separate composer.  For  instance, a track with the composer "Composer 1, Composer 2" will be counted as both "Composer 1" and "Composer 2".
+     *
+     *     The data is returned in a paginated format, with the ability to specify an offset and limit for the results, where the offset indicates the starting point in the list and the limit specifies the maximum number of items to return.
+     *
+     *     The request must be authenticated using a valid Synology session ID and device ID cookie for the user, which can be obtained by signing in via the `entry.cgi` endpoint, a two-step process requesting the encryption public key from `/certs` and then  submitting credentials encrypted with it.
+     */
+    post: operations['SynologyComposerController_route'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/webapi/AudioStation/cover.cgi': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    "/webapi/AudioStation/folder.cgi": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        put?: never;
-        /**
-         * Lists folders in the music library
-         * @description Lists folders found in the music library to enable navigating music by the file path.  In this server the root folders are presented as the top-level contents.
-         *
-         *     The folders are returned in a paginated format, with the ability to specify an offset and limit for the results, where the offset indicates the starting point in the list and the limit specifies the maximum number of folders to return.
-         *
-         *     The request must be authenticated using a valid Synology session ID and device ID cookie for the user, which can be obtained by signing in via the `entry.cgi` endpoint, a two-step process requesting the encryption public key from `/certs` and then  submitting credentials encrypted with it.
-         */
-        post: operations["SynologyFolderController_route"];
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+    /**
+     * Retrieves the cover image for an album, artist, composer or song
+     * @description Retrieves the cover image for an album, artist, composer or song.  The cover image can be retrieved by specifying the appropriate query parameters in the request.  If an image is not found a default blank cover image will be returned.
+     *
+     *     The request must be authenticated using a valid Synology session ID and device ID cookie for the user, which can be obtained by signing in via the `entry.cgi` endpoint, a two-step process requesting the encryption public key from `/certs` and then  submitting credentials encrypted with it.
+     */
+    get: operations['SynologyCoverImageController_route'];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/webapi/AudioStation/folder.cgi': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    "/webapi/AudioStation/genre.cgi": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        put?: never;
-        /**
-         * Lists genres in the music library or default genres
-         * @description Returns a list of genres found in the music library, or a hard-coded list of default genres.  The default genres are a hard-coded list that Synology appears to internally remap to actual genres, for instance "Rock/Metal" encompasses the "AlternRock" genre.  Exactly what they remap is unclear.
-         *
-         *     Each track can have one or more genres separated by `,` and they will each be counted as a separate genre.  For instance, a track with the genre "Rock, Pop" will be counted as both "Rock" and "Pop".
-         *
-         *     The data is returned in a paginated format, with the ability to specify an offset and limit for the results, where the offset indicates the starting point in the list and the limit specifies the maximum number of items to return.
-         *
-         *     The request must be authenticated using a valid Synology session ID and device ID cookie for the user, which can be obtained by signing in via the `entry.cgi` endpoint, a two-step process requesting the encryption public key from `/certs` and then  submitting credentials encrypted with it.
-         */
-        post: operations["SynologyGenreController_route"];
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+    get?: never;
+    put?: never;
+    /**
+     * Lists folders in the music library
+     * @description Lists folders found in the music library to enable navigating music by the file path.  In this server the root folders are presented as the top-level contents.
+     *
+     *     The folders are returned in a paginated format, with the ability to specify an offset and limit for the results, where the offset indicates the starting point in the list and the limit specifies the maximum number of folders to return.
+     *
+     *     The request must be authenticated using a valid Synology session ID and device ID cookie for the user, which can be obtained by signing in via the `entry.cgi` endpoint, a two-step process requesting the encryption public key from `/certs` and then  submitting credentials encrypted with it.
+     */
+    post: operations['SynologyFolderController_route'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/webapi/AudioStation/genre.cgi': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    "/webapi/AudioStation/info.cgi": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        put?: never;
-        /**
-         * Returns configuration information for the Synology AudioStation API and client capabilities
-         * @description The `info.cgi` endpoint returns configuration information for the Synology DS Audio apps.
-         *
-         *     The request must be authenticated using a valid Synology session ID and device ID cookie for the user, which can be obtained by signing in via the `entry.cgi` endpoint, a two-step process requesting the encryption public key from `/certs` and then submitting credentials encrypted with it.
-         *
-         *     The request must be authenticated using a valid Synology session ID and device ID cookie for the user, which can be obtained by signing in via the `entry.cgi` endpoint, a two-step process requesting the encryption public key from `/certs` and then  submitting credentials encrypted with it.
-         */
-        post: operations["SynologyInfoController_route"];
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+    get?: never;
+    put?: never;
+    /**
+     * Lists genres in the music library or default genres
+     * @description Returns a list of genres found in the music library, or a hard-coded list of default genres.  The default genres are a hard-coded list that Synology appears to internally remap to actual genres, for instance "Rock/Metal" encompasses the "AlternRock" genre.  Exactly what they remap is unclear.
+     *
+     *     Each track can have one or more genres separated by `,` and they will each be counted as a separate genre.  For instance, a track with the genre "Rock, Pop" will be counted as both "Rock" and "Pop".
+     *
+     *     The data is returned in a paginated format, with the ability to specify an offset and limit for the results, where the offset indicates the starting point in the list and the limit specifies the maximum number of items to return.
+     *
+     *     The request must be authenticated using a valid Synology session ID and device ID cookie for the user, which can be obtained by signing in via the `entry.cgi` endpoint, a two-step process requesting the encryption public key from `/certs` and then  submitting credentials encrypted with it.
+     */
+    post: operations['SynologyGenreController_route'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/webapi/AudioStation/info.cgi': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    "/webapi/AudioStation/playlist.cgi": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        put?: never;
-        /**
-         * Manages playlists
-         * @description Manages playlists in the music library.  This endpoint is used to list, create, delete, rename, and update playlists, as well as add and remove tracks and radio stations from playlists.  It provides the ability to retrieve playlist information and track/radio lists for playlists.
-         *
-         *     Playlists can be a "normal" playlist containing a static list of tracks and radio stations you add, or a "smart" playlist which is a dynamic filter based on criteria such as genre, artist, album, and more.
-         *
-         *     Listing playlists are not returned in a paginated format, but the tracks and radio stations within them are.
-         *
-         *     The data is returned in a paginated format, with the ability to specify an offset and limit for the results, where the offset indicates the starting point in the list and the limit specifies the maximum number of items to return.
-         *
-         *     The request must be authenticated using a valid Synology session ID and device ID cookie for the user, which can be obtained by signing in via the `entry.cgi` endpoint, a two-step process requesting the encryption public key from `/certs` and then  submitting credentials encrypted with it.
-         */
-        post: operations["SynologyPlaylistController_routeRequest"];
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+    get?: never;
+    put?: never;
+    /**
+     * Returns configuration information for the Synology AudioStation API and client capabilities
+     * @description The `info.cgi` endpoint returns configuration information for the Synology DS Audio apps.
+     *
+     *     The request must be authenticated using a valid Synology session ID and device ID cookie for the user, which can be obtained by signing in via the `entry.cgi` endpoint, a two-step process requesting the encryption public key from `/certs` and then submitting credentials encrypted with it.
+     *
+     *     The request must be authenticated using a valid Synology session ID and device ID cookie for the user, which can be obtained by signing in via the `entry.cgi` endpoint, a two-step process requesting the encryption public key from `/certs` and then  submitting credentials encrypted with it.
+     */
+    post: operations['SynologyInfoController_route'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/webapi/AudioStation/playlist.cgi': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    "/webapi/AudioStation/proxy.cgi": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Proxies SHOUTcast radio streams
-         * @description Pipes the SHOUTcast radio stream to the client.
-         */
-        get: operations["SynologyProxyController_getProxyCgi"];
-        put?: never;
-        /**
-         * Proxies SHOUTcast radio streams
-         * @description Creates and terminates a basic HTTP proxy to a SHOUTcast radio stream.
-         *
-         *     The request must be authenticated using a valid Synology session ID and device ID cookie for the user, which can be obtained by signing in via the `entry.cgi` endpoint, a two-step process requesting the encryption public key from `/certs` and then  submitting credentials encrypted with it.
-         */
-        post: operations["SynologyProxyController_route"];
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+    get?: never;
+    put?: never;
+    /**
+     * Manages playlists
+     * @description Manages playlists in the music library.  This endpoint is used to list, create, delete, rename, and update playlists, as well as add and remove tracks and radio stations from playlists.  It provides the ability to retrieve playlist information and track/radio lists for playlists.
+     *
+     *     Playlists can be a "normal" playlist containing a static list of tracks and radio stations you add, or a "smart" playlist which is a dynamic filter based on criteria such as genre, artist, album, and more.
+     *
+     *     Listing playlists are not returned in a paginated format, but the tracks and radio stations within them are.
+     *
+     *     The data is returned in a paginated format, with the ability to specify an offset and limit for the results, where the offset indicates the starting point in the list and the limit specifies the maximum number of items to return.
+     *
+     *     The request must be authenticated using a valid Synology session ID and device ID cookie for the user, which can be obtained by signing in via the `entry.cgi` endpoint, a two-step process requesting the encryption public key from `/certs` and then  submitting credentials encrypted with it.
+     */
+    post: operations['SynologyPlaylistController_routeRequest'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/webapi/AudioStation/proxy.cgi': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    "/webapi/AudioStation/radio.cgi": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        put?: never;
-        /**
-         * Manages SHOUTcast radio integration
-         * @description SHOUTcast radio integration is a feature of Synology AudioStation that allows users to listen to SHOUTcast radio stations directly from the AudioStation interface. This endpoint provides information about available SHOUTcast genres and stations
-         *
-         *     The genres are a hard-coded list.  The stations are retrieved from the SHOUTcast API and briefly cached.
-         *
-         *     The integration does not require a SHOUTcast account, but it does require an active internet connection.
-         *
-         *     The request must be authenticated using a valid Synology session ID and device ID cookie for the user, which can be obtained by signing in via the `entry.cgi` endpoint, a two-step process requesting the encryption public key from `/certs` and then  submitting credentials encrypted with it.
-         */
-        post: operations["SynologyRadioController_routeRequests"];
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+    /**
+     * Proxies SHOUTcast radio streams
+     * @description Pipes the SHOUTcast radio stream to the client.
+     */
+    get: operations['SynologyProxyController_getProxyCgi'];
+    put?: never;
+    /**
+     * Proxies SHOUTcast radio streams
+     * @description Creates and terminates a basic HTTP proxy to a SHOUTcast radio stream.
+     *
+     *     The request must be authenticated using a valid Synology session ID and device ID cookie for the user, which can be obtained by signing in via the `entry.cgi` endpoint, a two-step process requesting the encryption public key from `/certs` and then  submitting credentials encrypted with it.
+     */
+    post: operations['SynologyProxyController_route'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/webapi/AudioStation/radio.cgi': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    "/webapi/AudioStation/search.cgi": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        put?: never;
-        /**
-         * Searches for artists, albums and songs in the music library
-         * @description Searches for artists, albums and songs in the music library matching a search query.  The search  is case-insensitive and supports partially matching names and titles, a search for "beat" will match "The Beatles" and "Beat It".
-         *
-         *     The search results are unpaginated.
-         *
-         *     The request must be authenticated using a valid Synology session ID and device ID cookie for the user, which can be obtained by signing in via the `entry.cgi` endpoint, a two-step process requesting the encryption public key from `/certs` and then  submitting credentials encrypted with it.
-         */
-        post: operations["SynologySearchController_route"];
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+    get?: never;
+    put?: never;
+    /**
+     * Manages SHOUTcast radio integration
+     * @description SHOUTcast radio integration is a feature of Synology AudioStation that allows users to listen to SHOUTcast radio stations directly from the AudioStation interface. This endpoint provides information about available SHOUTcast genres and stations
+     *
+     *     The genres are a hard-coded list.  The stations are retrieved from the SHOUTcast API and briefly cached.
+     *
+     *     The integration does not require a SHOUTcast account, but it does require an active internet connection.
+     *
+     *     The request must be authenticated using a valid Synology session ID and device ID cookie for the user, which can be obtained by signing in via the `entry.cgi` endpoint, a two-step process requesting the encryption public key from `/certs` and then  submitting credentials encrypted with it.
+     */
+    post: operations['SynologyRadioController_routeRequests'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/webapi/AudioStation/search.cgi': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    "/webapi/AudioStation/song.cgi": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        put?: never;
-        /**
-         * Lists songs in the music library
-         * @description Lists songs found in the music library.  The songs can be filtered by album, artist, composer, or genre.
-         *
-         *     The data is returned in a paginated format, with the ability to specify an offset and limit for the results, where the offset indicates the starting point in the list and the limit specifies the maximum number of items to return.
-         *
-         *     The request must be authenticated using a valid Synology session ID and device ID cookie for the user, which can be obtained by signing in via the `entry.cgi` endpoint, a two-step process requesting the encryption public key from `/certs` and then  submitting credentials encrypted with it.
-         */
-        post: operations["SynologySongController_route"];
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+    get?: never;
+    put?: never;
+    /**
+     * Searches for artists, albums and songs in the music library
+     * @description Searches for artists, albums and songs in the music library matching a search query.  The search  is case-insensitive and supports partially matching names and titles, a search for "beat" will match "The Beatles" and "Beat It".
+     *
+     *     The search results are unpaginated.
+     *
+     *     The request must be authenticated using a valid Synology session ID and device ID cookie for the user, which can be obtained by signing in via the `entry.cgi` endpoint, a two-step process requesting the encryption public key from `/certs` and then  submitting credentials encrypted with it.
+     */
+    post: operations['SynologySearchController_route'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/webapi/AudioStation/song.cgi': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    "/webapi/AudioStation/stream.cgi": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Streams audio files
-         * @description Downloads audio files from the music library to the client.  This is used to stream audio files for playback or to download for offline usage.  The audio files are streamed in their original format, and the client is responsible for decoding and playing the audio.  Synology implements transcoding for certain formats, but this is not supported in this server.
-         *
-         *     The request must be authenticated using a valid Synology session ID and device ID cookie for the user, which can be obtained by signing in via the `entry.cgi` endpoint, a two-step process requesting the encryption public key from `/certs` and then  submitting credentials encrypted with it.
-         */
-        get: operations["SynologyStreamController_getStreamCgi"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+    get?: never;
+    put?: never;
+    /**
+     * Lists songs in the music library
+     * @description Lists songs found in the music library.  The songs can be filtered by album, artist, composer, or genre.
+     *
+     *     The data is returned in a paginated format, with the ability to specify an offset and limit for the results, where the offset indicates the starting point in the list and the limit specifies the maximum number of items to return.
+     *
+     *     The request must be authenticated using a valid Synology session ID and device ID cookie for the user, which can be obtained by signing in via the `entry.cgi` endpoint, a two-step process requesting the encryption public key from `/certs` and then  submitting credentials encrypted with it.
+     */
+    post: operations['SynologySongController_route'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/webapi/AudioStation/stream.cgi': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    "/webapi/entry.cgi": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        put?: never;
-        /**
-         * Authentication, session management, and miscellaneous operations for playlists and favorites
-         * @description This endpoint handles various system-level operations such as authentication, along with certain operations such as listing and managing favorite/pinned items, and adding certain items to playlists.
-         *
-         *     Some of the operations require authentication - logging out, adding items to playlists, and listing/managing pinned items.  Other operations do not require authentication - retrieving the encryption key and signing in.
-         *
-         *     For the actions requiring authentication, the request must be authenticated using a valid Synology session ID and device ID cookie for the user, which can be obtained by signing in via the `entry.cgi` endpoint, a two-step process requesting the encryption public key from `/certs` and then submitting credentials encrypted with it.
-         *
-         *     The request must be authenticated using a valid Synology session ID and device ID cookie for the user, which can be obtained by signing in via the `entry.cgi` endpoint, a two-step process requesting the encryption public key from `/certs` and then  submitting credentials encrypted with it.
-         */
-        post: operations["SynologyEntryController_route"];
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+    /**
+     * Streams audio files
+     * @description Downloads audio files from the music library to the client.  This is used to stream audio files for playback or to download for offline usage.  The audio files are streamed in their original format, and the client is responsible for decoding and playing the audio.  Synology implements transcoding for certain formats, but this is not supported in this server.
+     *
+     *     The request must be authenticated using a valid Synology session ID and device ID cookie for the user, which can be obtained by signing in via the `entry.cgi` endpoint, a two-step process requesting the encryption public key from `/certs` and then  submitting credentials encrypted with it.
+     */
+    get: operations['SynologyStreamController_getStreamCgi'];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/webapi/entry.cgi': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    "/webapi/query.cgi": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        put?: never;
-        /**
-         * Returns information about the Synology AudioStation API
-         * @description Provides information to Synology DS Audio apps about the server and its capabilities.
-         *
-         *     The request must be authenticated using a valid Synology session ID and device ID cookie for the user, which can be obtained by signing in via the `entry.cgi` endpoint, a two-step process requesting the encryption public key from `/certs` and then  submitting credentials encrypted with it.
-         */
-        post: operations["SynologyQueryController_route"];
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+    get?: never;
+    put?: never;
+    /**
+     * Authentication, session management, and miscellaneous operations for playlists and favorites
+     * @description This endpoint handles various system-level operations such as authentication, along with certain operations such as listing and managing favorite/pinned items, and adding certain items to playlists.
+     *
+     *     Some of the operations require authentication - logging out, adding items to playlists, and listing/managing pinned items.  Other operations do not require authentication - retrieving the encryption key and signing in.
+     *
+     *     For the actions requiring authentication, the request must be authenticated using a valid Synology session ID and device ID cookie for the user, which can be obtained by signing in via the `entry.cgi` endpoint, a two-step process requesting the encryption public key from `/certs` and then submitting credentials encrypted with it.
+     *
+     *     The request must be authenticated using a valid Synology session ID and device ID cookie for the user, which can be obtained by signing in via the `entry.cgi` endpoint, a two-step process requesting the encryption public key from `/certs` and then  submitting credentials encrypted with it.
+     */
+    post: operations['SynologyEntryController_route'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/webapi/query.cgi': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
+    get?: never;
+    put?: never;
+    /**
+     * Returns information about the Synology AudioStation API
+     * @description Provides information to Synology DS Audio apps about the server and its capabilities.
+     *
+     *     The request must be authenticated using a valid Synology session ID and device ID cookie for the user, which can be obtained by signing in via the `entry.cgi` endpoint, a two-step process requesting the encryption public key from `/certs` and then  submitting credentials encrypted with it.
+     */
+    post: operations['SynologyQueryController_route'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
 };
 export type webhooks = Record<string, never>;
 export type components = {
-    schemas: {
-        AdminAccountDto: {
-            id: number;
-            roles: components["schemas"]["UserRoleEnum"][];
-            username: string;
+  schemas: {
+    AdminAccountDto: {
+      id: number;
+      roles: components['schemas']['UserRoleEnum'][];
+      username: string;
+    };
+    /**
+     * @description The error message(s) that occurred during the validation of the request data or additional requirements
+     *     applied during the execution of the request
+     * @enum {string}
+     */
+    AdminCreateAccountBadRequestErrorMessageEnum: AdminCreateAccountBadRequestErrorMessageEnum;
+    AdminCreateAccountBadRequestResponseDto: {
+      /** @description General description of the error class */
+      error: string;
+      /**
+       * @description The error message(s) that occurred during the validation of the request data or additional requirements
+       *     applied during the execution of the request
+       * @default bad-request-error
+       */
+      message: components['schemas']['AdminCreateAccountBadRequestErrorMessageEnum'][];
+      /**
+       * @description The success being "false" indicates that the request failed to complete.
+       * @default false
+       */
+      success: boolean;
+    };
+    AdminCreateAccountBodyDto: {
+      /** @description The plain-text password the user will enter to sign in.  It will be hashed and securely-stored in the database. */
+      password: string;
+      roles: components['schemas']['UserRoleEnum'][];
+      /** @description The username for signing in */
+      username: string;
+    };
+    AdminCreateAccountResponseDto: {
+      /**
+       * Format: constant
+       * @description The success being "true" indicates that the request completed.
+       * @default true
+       */
+      success: boolean;
+    };
+    /**
+     * @description The error message(s) that occurred during the validation of the request data or additional requirements
+     *     applied during the execution of the request
+     * @enum {string}
+     */
+    AdminCreateRootPathBadRequestErrorMessageEnum: AdminCreateRootPathBadRequestErrorMessageEnum;
+    AdminCreateRootPathBadRequestResponseDto: {
+      /** @description General description of the error class */
+      error: string;
+      /**
+       * @description The error message(s) that occurred during the validation of the request data or additional requirements
+       *     applied during the execution of the request
+       * @default root-path-does-not-exist-error
+       */
+      message: components['schemas']['AdminCreateRootPathBadRequestErrorMessageEnum'][];
+      /**
+       * @description The success being "false" indicates that the request failed to complete.
+       * @default false
+       */
+      success: boolean;
+    };
+    AdminCreateRootPathBodyDto: {
+      /** @description The fully-qualified path to set for the root path */
+      rootPath: string;
+    };
+    /**
+     * @description The error message(s) that occurred during the validation of the request data or additional requirements
+     *     applied during the execution of the request
+     * @enum {string}
+     */
+    AdminCreateRootPathNotFoundErrorMessageEnum: AdminCreateRootPathNotFoundErrorMessageEnum;
+    AdminCreateRootPathNotFoundResponseDto: {
+      /** @description General description of the error class */
+      error: string;
+      /**
+       * @description The error message(s) that occurred during the validation of the request data or additional requirements
+       *     applied during the execution of the request
+       * @default account-not-found-error
+       */
+      message: components['schemas']['AdminCreateRootPathNotFoundErrorMessageEnum'][];
+      /**
+       * @description The success being "false" indicates that the request failed to complete.
+       * @default false
+       */
+      success: boolean;
+    };
+    AdminCreateRootPathResponseDto: {
+      /**
+       * Format: constant
+       * @description The success being "true" indicates that the request completed.
+       * @default true
+       */
+      success: boolean;
+    };
+    /**
+     * @description The error message(s) that occurred during the validation of the request data or additional requirements
+     *     applied during the execution of the request
+     * @enum {string}
+     */
+    AdminDeleteAccountBadRequestErrorMessageEnum: AdminDeleteAccountBadRequestErrorMessageEnum;
+    AdminDeleteAccountBadRequestResponseDto: {
+      /** @description General description of the error class */
+      error: string;
+      /**
+       * @description The error message(s) that occurred during the validation of the request data or additional requirements
+       *     applied during the execution of the request
+       * @default invalid-account-id-error
+       */
+      message: components['schemas']['AdminDeleteAccountBadRequestErrorMessageEnum'][];
+      /**
+       * @description The success being "false" indicates that the request failed to complete.
+       * @default false
+       */
+      success: boolean;
+    };
+    /**
+     * @description The error message(s) that occurred during the validation of the request data or additional requirements
+     *     applied during the execution of the request
+     * @enum {string}
+     */
+    AdminDeleteAccountNotFoundErrorMessageEnum: AdminDeleteAccountNotFoundErrorMessageEnum;
+    AdminDeleteAccountNotFoundResponseDto: {
+      /** @description General description of the error class */
+      error: string;
+      /**
+       * @description The error message(s) that occurred during the validation of the request data or additional requirements
+       *     applied during the execution of the request
+       * @default invalid-account-id-error
+       */
+      message: components['schemas']['AdminDeleteAccountNotFoundErrorMessageEnum'][];
+      /**
+       * @description The success being "false" indicates that the request failed to complete.
+       * @default false
+       */
+      success: boolean;
+    };
+    AdminDeleteAccountResponseDto: {
+      /**
+       * Format: constant
+       * @description The success being "true" indicates that the request completed.
+       * @default true
+       */
+      success: boolean;
+    };
+    /**
+     * @description The error message(s) that occurred during the validation of the request data or additional requirements
+     *     applied during the execution of the request
+     * @enum {string}
+     */
+    AdminDeleteRootPathNotFoundErrorMessageEnum: AdminDeleteRootPathNotFoundErrorMessageEnum;
+    AdminDeleteRootPathNotFoundResponseDto: {
+      /** @description General description of the error class */
+      error: string;
+      /**
+       * @description The error message(s) that occurred during the validation of the request data or additional requirements
+       *     applied during the execution of the request
+       * @default root-path-not-found-error
+       */
+      message: components['schemas']['AdminDeleteRootPathNotFoundErrorMessageEnum'][];
+      /**
+       * @description The success being "false" indicates that the request failed to complete.
+       * @default false
+       */
+      success: boolean;
+    };
+    AdminDeleteRootPathResponseDto: {
+      /**
+       * Format: constant
+       * @description The success being "true" indicates that the request completed.
+       * @default true
+       */
+      success: boolean;
+    };
+    AdminIndexerConfigurationDto: {
+      /** Format: date-time */
+      createdAt: string;
+      createdByAccountId: number;
+      createdByUsername: string;
+      id: number;
+      isEnabled: boolean;
+    };
+    AdminIndexerConfigurationResponseDto: {
+      configuration: components['schemas']['AdminIndexerConfigurationDto'];
+      /**
+       * Format: constant
+       * @description The success being "true" indicates that the request completed.
+       * @default true
+       */
+      success: boolean;
+    };
+    AdminListAccountsResponseDto: {
+      accounts: components['schemas']['AdminAccountDto'][];
+      /**
+       * Format: constant
+       * @description The success being "true" indicates that the request completed.
+       * @default true
+       */
+      success: boolean;
+    };
+    /**
+     * @description The error message(s) that occurred during the validation of the request data or additional requirements
+     *     applied during the execution of the request
+     * @enum {string}
+     */
+    AdminListIndexerLogsBadRequestErrorMessageEnum: AdminListIndexerLogsBadRequestErrorMessageEnum;
+    AdminListIndexerLogsBadRequestResponseDto: {
+      /** @description General description of the error class */
+      error: string;
+      /**
+       * @description The error message(s) that occurred during the validation of the request data or additional requirements
+       *     applied during the execution of the request
+       * @default invalid-account-id-error
+       */
+      message: components['schemas']['AdminListIndexerLogsBadRequestErrorMessageEnum'][];
+      /**
+       * @description The success being "false" indicates that the request failed to complete.
+       * @default false
+       */
+      success: boolean;
+    };
+    /**
+     * @description The error message(s) that occurred during the validation of the request data or additional requirements
+     *     applied during the execution of the request
+     * @enum {string}
+     */
+    AdminListIndexerLogsNotFoundErrorMessageEnum: AdminListIndexerLogsNotFoundErrorMessageEnum;
+    AdminListIndexerLogsNotFoundResponseDto: {
+      /** @description General description of the error class */
+      error: string;
+      /**
+       * @description The error message(s) that occurred during the validation of the request data or additional requirements
+       *     applied during the execution of the request
+       * @default invalid-account-id-error
+       */
+      message: components['schemas']['AdminListIndexerLogsNotFoundErrorMessageEnum'][];
+      /**
+       * @description The success being "false" indicates that the request failed to complete.
+       * @default false
+       */
+      success: boolean;
+    };
+    AdminListIndexerLogsResponseDto: {
+      logs: components['schemas']['AdminLogEntryDto'][];
+      /**
+       * Format: constant
+       * @description The success being "true" indicates that the request completed.
+       * @default true
+       */
+      success: boolean;
+    };
+    AdminListRootPathsResponseDto: {
+      /** @description The list of root paths with associated account owner information */
+      rootPaths: components['schemas']['AdminRootPathDto'][];
+      /**
+       * Format: constant
+       * @description The success being "true" indicates that the request completed.
+       * @default true
+       */
+      success: boolean;
+    };
+    AdminLogEntryDto: {
+      accountId: number;
+      /** Format: date-time */
+      date: string;
+      message: string;
+      rootPath: string;
+      rootPathId: number;
+      username: string;
+    };
+    AdminRegenerateMasterSessionKeyResponseDto: {
+      /**
+       * Format: constant
+       * @description The success being "true" indicates that the request completed.
+       * @default true
+       */
+      success: boolean;
+    };
+    /**
+     * @description The error message(s) that occurred during the validation of the request data or additional requirements
+     *     applied during the execution of the request
+     * @enum {string}
+     */
+    AdminRegenerateUserSessionKeyNotFoundErrorMessageEnum: AdminRegenerateUserSessionKeyNotFoundErrorMessageEnum;
+    AdminRegenerateUserSessionKeyNotFoundResponseDto: {
+      /** @description General description of the error class */
+      error: string;
+      /**
+       * @description The error message(s) that occurred during the validation of the request data or additional requirements
+       *     applied during the execution of the request
+       * @default account-not-found-error
+       */
+      message: components['schemas']['AdminRegenerateUserSessionKeyNotFoundErrorMessageEnum'][];
+      /**
+       * @description The success being "false" indicates that the request failed to complete.
+       * @default false
+       */
+      success: boolean;
+    };
+    AdminRegenerateUserSessionKeyResponseDto: {
+      /**
+       * Format: constant
+       * @description The success being "true" indicates that the request completed.
+       * @default true
+       */
+      success: boolean;
+    };
+    /**
+     * @description The error message(s) that occurred during the validation of the request data or additional requirements
+     *     applied during the execution of the request
+     * @enum {string}
+     */
+    AdminResetUserPasswordBadRequestErrorMessageEnum: AdminResetUserPasswordBadRequestErrorMessageEnum;
+    AdminResetUserPasswordBadRequestResponseDto: {
+      /** @description General description of the error class */
+      error: string;
+      /**
+       * @description The error message(s) that occurred during the validation of the request data or additional requirements
+       *     applied during the execution of the request
+       * @default invalid-password-error
+       */
+      message: components['schemas']['AdminResetUserPasswordBadRequestErrorMessageEnum'][];
+      /**
+       * @description The success being "false" indicates that the request failed to complete.
+       * @default false
+       */
+      success: boolean;
+    };
+    AdminResetUserPasswordBodyDto: {
+      newPassword: string;
+    };
+    /**
+     * @description The error message(s) that occurred during the validation of the request data or additional requirements
+     *     applied during the execution of the request
+     * @enum {string}
+     */
+    AdminResetUserPasswordNotFoundErrorMessageEnum: AdminResetUserPasswordNotFoundErrorMessageEnum;
+    AdminResetUserPasswordNotFoundResponseDto: {
+      /** @description General description of the error class */
+      error: string;
+      /**
+       * @description The error message(s) that occurred during the validation of the request data or additional requirements
+       *     applied during the execution of the request
+       * @default account-not-found-error
+       */
+      message: components['schemas']['AdminResetUserPasswordNotFoundErrorMessageEnum'][];
+      /**
+       * @description The success being "false" indicates that the request failed to complete.
+       * @default false
+       */
+      success: boolean;
+    };
+    AdminResetUserPasswordResponseDto: {
+      /**
+       * Format: constant
+       * @description The success being "true" indicates that the request completed.
+       * @default true
+       */
+      success: boolean;
+    };
+    AdminRootPathDto: {
+      /** @description The ID of the account that owns this root path */
+      accountId: number;
+      /**
+       * Format: date-time
+       * @description The date and time the row was created
+       */
+      createdAt: string;
+      /**
+       * @description The number of files or songs that have been found in this root path, this excludes
+       *     anything that is not a music track.
+       */
+      fileCount: number;
+      /** @description The ID of the root path row in the database */
+      id: number;
+      /** @description The fully-qualified path of the root path, this is the base path where music is stored for a user */
+      rootPath: string;
+      /** @description The total size of all the files in this root path contained in the `fileCount` field */
+      totalSize: number;
+      /**
+       * Format: date-time
+       * @description The date and time the row was last updated, this field is optional and may not be present
+       *     if the row has never been updated
+       */
+      updatedAt?: string;
+      /** @description The username of the account that owns this root path */
+      username: string;
+    };
+    AdminSetIndexerStatusBodyDto: {
+      /** @description Whether the scanner should be enabled or disabled */
+      enabled: boolean;
+    };
+    AdminSetIndexerStatusResponseDto: {
+      /**
+       * Format: constant
+       * @description The success being "true" indicates that the request completed.
+       * @default true
+       */
+      success: boolean;
+    };
+    /**
+     * @description The error message(s) that occurred during the validation of the request data or additional requirements
+     *     applied during the execution of the request
+     * @enum {string}
+     */
+    AdminUpdateRootPathBadRequestErrorMessageEnum: AdminUpdateRootPathBadRequestErrorMessageEnum;
+    AdminUpdateRootPathBadRequestResponseDto: {
+      /** @description General description of the error class */
+      error: string;
+      /**
+       * @description The error message(s) that occurred during the validation of the request data or additional requirements
+       *     applied during the execution of the request
+       * @default root-path-does-not-exist-error
+       */
+      message: components['schemas']['AdminUpdateRootPathBadRequestErrorMessageEnum'][];
+      /**
+       * @description The success being "false" indicates that the request failed to complete.
+       * @default false
+       */
+      success: boolean;
+    };
+    AdminUpdateRootPathBodyDto: {
+      /** @description The new path to set for the root path */
+      newPath: string;
+    };
+    /**
+     * @description The error message(s) that occurred during the validation of the request data or additional requirements
+     *     applied during the execution of the request
+     * @enum {string}
+     */
+    AdminUpdateRootPathNotFoundErrorMessageEnum: AdminUpdateRootPathNotFoundErrorMessageEnum;
+    AdminUpdateRootPathNotFoundResponseDto: {
+      /** @description General description of the error class */
+      error: string;
+      /**
+       * @description The error message(s) that occurred during the validation of the request data or additional requirements
+       *     applied during the execution of the request
+       * @default root-path-not-found-error
+       */
+      message: components['schemas']['AdminUpdateRootPathNotFoundErrorMessageEnum'][];
+      /**
+       * @description The success being "false" indicates that the request failed to complete.
+       * @default false
+       */
+      success: boolean;
+    };
+    AdminUpdateRootPathResponseDto: {
+      /**
+       * Format: constant
+       * @description The success being "true" indicates that the request completed.
+       * @default true
+       */
+      success: boolean;
+    };
+    /**
+     * @description The error message(s) that occurred during the validation of the request data or additional requirements
+     *     applied during the execution of the request
+     * @enum {string}
+     */
+    AdminUpdateUserRolesBadRequestErrorMessageEnum: AdminUpdateUserRolesBadRequestErrorMessageEnum;
+    AdminUpdateUserRolesBadRequestResponseDto: {
+      /** @description General description of the error class */
+      error: string;
+      /**
+       * @description The error message(s) that occurred during the validation of the request data or additional requirements
+       *     applied during the execution of the request
+       * @default invalid-user-role-error
+       */
+      message: components['schemas']['AdminUpdateUserRolesBadRequestErrorMessageEnum'][];
+      /**
+       * @description The success being "false" indicates that the request failed to complete.
+       * @default false
+       */
+      success: boolean;
+    };
+    AdminUpdateUserRolesBodyDto: {
+      roles: components['schemas']['UserRoleEnum'][];
+    };
+    /**
+     * @description The error message(s) that occurred during the validation of the request data or additional requirements
+     *     applied during the execution of the request
+     * @enum {string}
+     */
+    AdminUpdateUserRolesNotFoundErrorMessageEnum: AdminUpdateUserRolesNotFoundErrorMessageEnum;
+    AdminUpdateUserRolesNotFoundResponseDto: {
+      /** @description General description of the error class */
+      error: string;
+      /**
+       * @description The error message(s) that occurred during the validation of the request data or additional requirements
+       *     applied during the execution of the request
+       * @default account-not-found-error
+       */
+      message: components['schemas']['AdminUpdateUserRolesNotFoundErrorMessageEnum'][];
+      /**
+       * @description The success being "false" indicates that the request failed to complete.
+       * @default false
+       */
+      success: boolean;
+    };
+    AdminUpdateUserRolesResponseDto: {
+      /**
+       * Format: constant
+       * @description The success being "true" indicates that the request completed.
+       * @default true
+       */
+      success: boolean;
+    };
+    /** @enum {string} */
+    AlbumSortFieldEnum: AlbumSortFieldEnum;
+    /** @enum {string} */
+    ArtistSortFieldEnum: ArtistSortFieldEnum;
+    /**
+     * @description A bad request occurred due to validation or other issues with the submitted data.
+     * @enum {string}
+     */
+    BadRequestErrorEnum: BadRequestErrorEnum;
+    BadRequestResponseDto: {
+      /** @description General description of the error class */
+      error: string;
+      /**
+       * @description A bad request occurred due to validation or other issues with the submitted data.
+       * @default bad-request-error
+       */
+      message: components['schemas']['BadRequestErrorEnum'][];
+      /**
+       * @description The success being "false" indicates that the request failed to complete.
+       * @default false
+       */
+      success: boolean;
+    };
+    Buffer: Record<string, never>;
+    /** @enum {string} */
+    ComposerSortFieldEnum: ComposerSortFieldEnum;
+    /**
+     * @description The content type, folder or file
+     * @enum {string}
+     */
+    ContentTypeEnum: ContentTypeEnum;
+    /** @enum {string} */
+    FileTypeEnum: FileTypeEnum;
+    /** @enum {string} */
+    GenreSortFieldEnum: GenreSortFieldEnum;
+    /**
+     * @description The error message(s) that occurred during the validation of the request data or additional requirements
+     *     applied during the execution of the request
+     * @enum {string}
+     */
+    GuestCreateSessionBadRequestErrorMessageEnum: GuestCreateSessionBadRequestErrorMessageEnum;
+    GuestCreateSessionBadRequestResponseDto: {
+      /** @description General description of the error class */
+      error: string;
+      /**
+       * @description The error message(s) that occurred during the validation of the request data or additional requirements
+       *     applied during the execution of the request
+       * @default bad-request-error
+       */
+      message: components['schemas']['GuestCreateSessionBadRequestErrorMessageEnum'][];
+      /**
+       * @description The success being "false" indicates that the request failed to complete.
+       * @default false
+       */
+      success: boolean;
+    };
+    GuestCreateSessionBodyDto: {
+      /** @description The number of days until the session expires */
+      expiresDays?: number;
+      /** @description The password for the account */
+      password: string;
+      /** @description The username for the account */
+      username: string;
+    };
+    GuestCreateSessionResponseDto: {
+      /** @description The JWT session token that can be attached to requests to authenticate against the API */
+      jwtToken: string;
+      /**
+       * Format: constant
+       * @description The success being "true" indicates that the request completed.
+       * @default true
+       */
+      success: boolean;
+    };
+    /**
+     * @description An internal error occurred that isn't handled by the API and doesn't have a more specific error
+     *     message defined.
+     * @enum {string}
+     */
+    InternalServerErrorEnum: InternalServerErrorEnum;
+    InternalServerErrorResponseDto: {
+      /** @description General description of the error class */
+      error: string;
+      /**
+       * @description An internal error occurred that isn't handled by the API and doesn't have a more specific error
+       *     message defined.
+       * @default internal-server-error
+       */
+      message: components['schemas']['InternalServerErrorEnum'][];
+      /**
+       * @description The success being "false" indicates that the request failed to complete.
+       * @default false
+       */
+      success: boolean;
+    };
+    LibraryAlbumDto: {
+      /** @description The artist for the album, which is all the album artists in a comma-delimited list */
+      artists: components['schemas']['LibraryArtistDto'][];
+      composers: components['schemas']['LibraryComposerDto'][];
+      /** @description A color detected in the cover art image */
+      coverImageDarkMuted?: string;
+      /** @description A color detected in the cover art image */
+      coverImageDarkVibrant?: string;
+      /** @description A color detected in the cover art image */
+      coverImageLightMuted?: string;
+      /** @description A color detected in the cover art image */
+      coverImageLightVibrant?: string;
+      /** @description A color detected in the cover art image */
+      coverImageMuted?: string;
+      /** @description A color detected in the cover art image */
+      coverImageVibrant?: string;
+      /**
+       * Format: date-time
+       * @description The date the album was added to the library
+       */
+      createdAt: string;
+      genres: components['schemas']['LibraryGenreDto'][];
+      /** @description The internally-generated unique ID of the album */
+      id: number;
+      /** @description The aggregate rating for the album, which is a value between 0 and 5 inclusive applied to tracks. */
+      rating: number;
+      /**
+       * @description The name or title of the album, this would usually come from an official source such as MusicBrainz
+       *     or Discogs.
+       */
+      title: string;
+      /** @description The year the album was released. */
+      year: number;
+    };
+    LibraryAlbumTrackDto: {
+      /** @description The list of artists for the track. */
+      artists: components['schemas']['LibraryArtistDto'][];
+      /** @description The comment or description associated with the track. */
+      comment: string;
+      /** @description The list of composers for the track. */
+      composers: components['schemas']['LibraryComposerDto'][];
+      /**
+       * @description The disc number of the track on the album or disc if there are multiple discs.  If this field is not
+       *     specified it is assumed to be a single-disc album.
+       */
+      discNumber: number;
+      /** @description The duration of the track in seconds. */
+      duration: number;
+      /** @description The bitrate of the audio file for the track, in Kb/s. */
+      fileBitRate: number;
+      /** @description The number of audio channels in the file for the track, such as 2 for stereo or 1 for mono. */
+      fileChannels: number;
+      /** @description The frequency or sample rate of the audio file for the track, in Hz. */
+      fileFrequency: number;
+      /** @description The file path of the file for the track. */
+      filePath: string;
+      /** @description The size of the file in bytes */
+      fileSize: number;
+      /**
+       * @description The type of the file for the track, such as MP3, FLAC, etc.
+       * @enum {string}
+       */
+      fileType: LibraryAlbumTrackDtoFileType;
+      /** @description The list of genres for the track. */
+      genres: components['schemas']['LibraryGenreDto'][];
+      /** @description The internally-generated unique ID of the track */
+      id: number;
+      /** @description The rating of the track which is a value between 0 and 5 inclusive applied to the track. */
+      rating: number;
+      /** @description The title of the track, which is usually the name of the song or piece of music. */
+      title: string;
+      /** @description The track number of the track on the album or disc if there are multiple discs. */
+      trackNumber: number;
+      /**
+       * @description The year of release of the track, often the same as the album except in "greatest hits"
+       *     and compilations.
+       */
+      year: number;
+    };
+    LibraryAlbumWithTracksDto: {
+      /** @description The artist for the album, which is all the album artists in a comma-delimited list */
+      artists: components['schemas']['LibraryArtistDto'][];
+      composers: components['schemas']['LibraryComposerDto'][];
+      /** @description A color detected in the cover art image */
+      coverImageDarkMuted?: string;
+      /** @description A color detected in the cover art image */
+      coverImageDarkVibrant?: string;
+      /** @description A color detected in the cover art image */
+      coverImageLightMuted?: string;
+      /** @description A color detected in the cover art image */
+      coverImageLightVibrant?: string;
+      /** @description A color detected in the cover art image */
+      coverImageMuted?: string;
+      /** @description A color detected in the cover art image */
+      coverImageVibrant?: string;
+      /**
+       * Format: date-time
+       * @description The date the album was added to the library
+       */
+      createdAt: string;
+      genres: components['schemas']['LibraryGenreDto'][];
+      /** @description The internally-generated unique ID of the album */
+      id: number;
+      /** @description The aggregate rating for the album, which is a value between 0 and 5 inclusive applied to tracks. */
+      rating: number;
+      /**
+       * @description The name or title of the album, this would usually come from an official source such as MusicBrainz
+       *     or Discogs.
+       */
+      title: string;
+      /** @description The list of tracks for the album */
+      tracks: components['schemas']['LibraryAlbumTrackDto'][];
+      /** @description The year the album was released. */
+      year: number;
+    };
+    LibraryArtistDto: {
+      /**
+       * Format: date-time
+       * @description The date the artist was added to the library
+       */
+      createdAt: string;
+      /** @description The internally-generated unique ID of the artist */
+      id: number;
+      /** @description The name of the artist. */
+      name: string;
+    };
+    LibraryArtistWithTracksDto: {
+      /** @description The list of albums including tracks for the artist */
+      albums: components['schemas']['LibraryAlbumWithTracksDto'][];
+      /**
+       * Format: date-time
+       * @description The date the artist was added to the library
+       */
+      createdAt: string;
+      /** @description The internally-generated unique ID of the artist */
+      id: number;
+      /** @description The name of the artist. */
+      name: string;
+    };
+    LibraryComposerDto: {
+      /**
+       * Format: date-time
+       * @description The date the composer was added to the library
+       */
+      createdAt: string;
+      /** @description The internally-generated unique ID of the composer */
+      id: number;
+      /** @description The name of the composer. */
+      name: string;
+    };
+    LibraryComposerWithTracksDto: {
+      /** @description The list of albums including tracks for the composer */
+      albums: components['schemas']['LibraryAlbumWithTracksDto'][];
+      /**
+       * Format: date-time
+       * @description The date the composer was added to the library
+       */
+      createdAt: string;
+      /** @description The internally-generated unique ID of the composer */
+      id: number;
+      /** @description The name of the composer. */
+      name: string;
+    };
+    LibraryGenreDto: {
+      /** @description The internally-generated unique ID of the genre */
+      id: number;
+      /** @description The name of the genre. */
+      name: string;
+    };
+    LibraryGenreWithTracksDto: {
+      /** @description The list of albums including tracks for the genre */
+      albums: components['schemas']['LibraryAlbumWithTracksDto'][];
+      /** @description The internally-generated unique ID of the genre */
+      id: number;
+      /** @description The name of the genre. */
+      name: string;
+    };
+    LibraryTrackDto: {
+      /** @description The list of artists for the track. */
+      albumArtists: components['schemas']['LibraryArtistDto'][];
+      /** @description The title of the album to which the track belongs. */
+      albumId: number;
+      /** @description The title of the album to which the track belongs. */
+      albumTitle: string;
+      /** @description The list of artists for the track. */
+      artists: components['schemas']['LibraryArtistDto'][];
+      /** @description The comment or description associated with the track. */
+      comment: string;
+      /** @description The list of composers for the track. */
+      composers: components['schemas']['LibraryComposerDto'][];
+      /**
+       * @description The disc number of the track on the album or disc if there are multiple discs.  If this field is not
+       *     specified it is assumed to be a single-disc album.
+       */
+      discNumber: number;
+      /** @description The duration of the track in seconds. */
+      duration: number;
+      /** @description The bitrate of the audio file for the track, in Kb/s. */
+      fileBitRate: number;
+      /** @description The number of audio channels in the file for the track, such as 2 for stereo or 1 for mono. */
+      fileChannels: number;
+      /** @description The frequency or sample rate of the audio file for the track, in Hz. */
+      fileFrequency: number;
+      /** @description The file path of the file for the track. */
+      filePath: string;
+      /** @description The size of the file in bytes */
+      fileSize: number;
+      /**
+       * @description The type of the file for the track, such as MP3, FLAC, etc.
+       * @enum {string}
+       */
+      fileType: LibraryTrackDtoFileType;
+      /** @description The list of genres for the track. */
+      genres: components['schemas']['LibraryGenreDto'][];
+      /** @description The internally-generated unique ID of the track */
+      id: number;
+      /** @description The rating of the track which is a value between 0 and 5 inclusive applied to the track. */
+      rating: number;
+      /** @description The title of the track, which is usually the name of the song or piece of music. */
+      title: string;
+      /** @description The track number of the track on the album or disc if there are multiple discs. */
+      trackNumber: number;
+      /**
+       * @description The year of release of the track, often the same as the album except in "greatest hits"
+       *     and compilations.
+       */
+      year: number;
+    };
+    /** @enum {string} */
+    PlaylistTypeEnum: PlaylistTypeEnum;
+    /**
+     * @description The `type` value is expected to always be `container` for SHOUTcast genres, and
+     *     `radio` for actual stations.  Possibly other values for favorites and custom-added
+     *     stations.
+     * @enum {string}
+     */
+    ShoutcastItemTypeEnum: ShoutcastItemTypeEnum;
+    /** @enum {string} */
+    SmartPlaylistConjugalEnum: SmartPlaylistConjugalEnum;
+    /** @enum {string} */
+    SortDirectionEnum: SortDirectionEnum;
+    SuccessResponseDto: {
+      /**
+       * Format: constant
+       * @description The success being "true" indicates that the request completed.
+       * @default true
+       */
+      success: boolean;
+    };
+    SynologyAlbumAdditionalDto: {
+      avg_rating: components['schemas']['SynologyAlbumAverageRatingDto'];
+    };
+    SynologyAlbumAverageRatingDto: {
+      rating: number;
+    };
+    SynologyAlbumDataDto: {
+      /**
+       * @description The list of albums returned by the Synology AudioStation API.  The number of albums returned is
+       *     limited by the `limit` value in the request body and the `offset` value in the request body
+       *     determines which albums are returned.
+       */
+      albums: components['schemas']['SynologyAlbumDto'][];
+      /**
+       * @description Defines the pagination offset for the results.  If no value is specified a default of 0 is
+       *     used to start at the beginning of a result set.
+       */
+      offset: number;
+      /**
+       * @description The total number of results available for the request.  This is used to determine if there are
+       *     more results available for the request and if additional requests are needed to retrieve them.
+       */
+      total: number;
+    };
+    SynologyAlbumDto: {
+      /** @description Additional data for the album to return in the response data. */
+      additional: components['schemas']['SynologyAlbumAdditionalDto'];
+      /** @description The artist for the album, which is all the album artists in a comma-delimited list */
+      album_artist: string;
+      /** @description The artist for the album, which is all the album artists in a comma-delimited list */
+      artist: string;
+      /**
+       * @description The display name of the artist, which is used for sorting and display consistency when albums
+       *     have a different artist name than the album artist name.  For example, a compilation album may have
+       *     multiple artists but the album artist is "Various Artists" and the display artist is "Various".
+       */
+      display_artist: string;
+      /** @description The name or title of the album. */
+      name: string;
+      /** @description The year the album was released. */
+      year: number;
+    };
+    SynologyAlbumResponseDto: {
+      /**
+       * @description The data payload returned by the Synology AudioStation API.  This includes the list of albums
+       *     and pagination information.
+       */
+      data: components['schemas']['SynologyAlbumDataDto'];
+      /**
+       * @description Boolean flag for the request ending successfully.  There are scenarios where Synology could
+       *     return false instead but this server will return an HTTP error response.
+       */
+      success: boolean;
+    };
+    SynologyAlbumsBodyDto: {
+      /**
+       * @description Synology's API uses this value to route requests appropriately but this software has
+       *     direct endpoints for their relevant URL paths.  As such this value is ignored for now
+       *     but defined to match the Synology API.
+       *
+       *     This endpoint requires a value of `SYNO.AudioStation.Album` be provided for correctness.
+       * @example SYNO.AudioStation.Album
+       */
+      api: components['schemas']['SynologyApiEnum'];
+      /**
+       * @description Synology supports having personal and shared libraries but this software does not have a
+       *     direct equivalent, users can add the same root path to achieve it.  As such this value
+       *     is ignored but defined to match the Synology API.
+       *
+       *     This endpoint requires a value of `all` be provided for correctness.
+       * @example all
+       */
+      library: components['schemas']['SynologyLibraryEnum'];
+      /**
+       * @description Defines the number of results to return.  If no value is specified a default of 100,000
+       *     is used to practically-ensure all results are returned.  This is a change from Synology's
+       *     API which defaults to 100, but Synology's mobile clients will specify their limit.
+       */
+      limit: number;
+      /**
+       * @description Synology's API uses this value to route requests appropriately but for AudioStation the
+       *     endpoints have limited functionality, all music-related endpoints `list` except cover
+       *     images.  As such this value is ignored for now but defined to match the Synology API.
+       *
+       *     This endpoint requires a value of `list` be provided for correctness.
+       * @example list
+       */
+      method: components['schemas']['SynologyMethodEnum'];
+      /**
+       * @description Defines the pagination offset for the results.  If no value is specified a default of 0 is
+       *     used to start at the beginning of a result set.
+       */
+      offset: number;
+      /**
+       * @description Synology's API has versioned endpoints and some have at least 3 versions.  This software
+       *     currently only supports the latest version of the API for each endpoint and ignores this value
+       *     for now.  It's possible to build in support for prior versions of an endpoint but that would
+       *     require using the `debug-proxy` to capture the request and response payloads to understand the
+       *     differences between versions.  If you are running an older DSM NAS and wish to help then check
+       *     out the GitHub Issues page and submit a request to support your version of the API.
+       */
+      version: number;
+    };
+    SynologyAlbumsByArtistAndDefaultGenreBodyDto: {
+      /**
+       * @description Synology's API uses this value to route requests appropriately but this software has
+       *     direct endpoints for their relevant URL paths.  As such this value is ignored for now
+       *     but defined to match the Synology API.
+       *
+       *     This endpoint requires a value of `SYNO.AudioStation.Album` be provided for correctness.
+       * @example SYNO.AudioStation.Album
+       */
+      api: components['schemas']['SynologyApiEnum'];
+      artist: string;
+      genre_filter: string;
+      /**
+       * @description Synology supports having personal and shared libraries but this software does not have a
+       *     direct equivalent, users can add the same root path to achieve it.  As such this value
+       *     is ignored but defined to match the Synology API.
+       *
+       *     This endpoint requires a value of `all` be provided for correctness.
+       * @example all
+       */
+      library: components['schemas']['SynologyLibraryEnum'];
+      /**
+       * @description Defines the number of results to return.  If no value is specified a default of 100,000
+       *     is used to practically-ensure all results are returned.  This is a change from Synology's
+       *     API which defaults to 100, but Synology's mobile clients will specify their limit.
+       */
+      limit: number;
+      /**
+       * @description Synology's API uses this value to route requests appropriately but for AudioStation the
+       *     endpoints have limited functionality, all music-related endpoints `list` except cover
+       *     images.  As such this value is ignored for now but defined to match the Synology API.
+       *
+       *     This endpoint requires a value of `list` be provided for correctness.
+       * @example list
+       */
+      method: components['schemas']['SynologyMethodEnum'];
+      /**
+       * @description Defines the pagination offset for the results.  If no value is specified a default of 0 is
+       *     used to start at the beginning of a result set.
+       */
+      offset: number;
+      /**
+       * @description Synology's API has versioned endpoints and some have at least 3 versions.  This software
+       *     currently only supports the latest version of the API for each endpoint and ignores this value
+       *     for now.  It's possible to build in support for prior versions of an endpoint but that would
+       *     require using the `debug-proxy` to capture the request and response payloads to understand the
+       *     differences between versions.  If you are running an older DSM NAS and wish to help then check
+       *     out the GitHub Issues page and submit a request to support your version of the API.
+       */
+      version: number;
+    };
+    SynologyAlbumsByArtistAndGenreBodyDto: {
+      /**
+       * @description Synology's API uses this value to route requests appropriately but this software has
+       *     direct endpoints for their relevant URL paths.  As such this value is ignored for now
+       *     but defined to match the Synology API.
+       *
+       *     This endpoint requires a value of `SYNO.AudioStation.Album` be provided for correctness.
+       * @example SYNO.AudioStation.Album
+       */
+      api: components['schemas']['SynologyApiEnum'];
+      artist: string;
+      genre: string;
+      /**
+       * @description Synology supports having personal and shared libraries but this software does not have a
+       *     direct equivalent, users can add the same root path to achieve it.  As such this value
+       *     is ignored but defined to match the Synology API.
+       *
+       *     This endpoint requires a value of `all` be provided for correctness.
+       * @example all
+       */
+      library: components['schemas']['SynologyLibraryEnum'];
+      /**
+       * @description Defines the number of results to return.  If no value is specified a default of 100,000
+       *     is used to practically-ensure all results are returned.  This is a change from Synology's
+       *     API which defaults to 100, but Synology's mobile clients will specify their limit.
+       */
+      limit: number;
+      /**
+       * @description Synology's API uses this value to route requests appropriately but for AudioStation the
+       *     endpoints have limited functionality, all music-related endpoints `list` except cover
+       *     images.  As such this value is ignored for now but defined to match the Synology API.
+       *
+       *     This endpoint requires a value of `list` be provided for correctness.
+       * @example list
+       */
+      method: components['schemas']['SynologyMethodEnum'];
+      /**
+       * @description Defines the pagination offset for the results.  If no value is specified a default of 0 is
+       *     used to start at the beginning of a result set.
+       */
+      offset: number;
+      /**
+       * @description Synology's API has versioned endpoints and some have at least 3 versions.  This software
+       *     currently only supports the latest version of the API for each endpoint and ignores this value
+       *     for now.  It's possible to build in support for prior versions of an endpoint but that would
+       *     require using the `debug-proxy` to capture the request and response payloads to understand the
+       *     differences between versions.  If you are running an older DSM NAS and wish to help then check
+       *     out the GitHub Issues page and submit a request to support your version of the API.
+       */
+      version: number;
+    };
+    SynologyAlbumsByArtistBodyDto: {
+      /**
+       * @description Synology's API uses this value to route requests appropriately but this software has
+       *     direct endpoints for their relevant URL paths.  As such this value is ignored for now
+       *     but defined to match the Synology API.
+       *
+       *     This endpoint requires a value of `SYNO.AudioStation.Album` be provided for correctness.
+       * @example SYNO.AudioStation.Album
+       */
+      api: components['schemas']['SynologyApiEnum'];
+      artist: string;
+      /**
+       * @description Synology supports having personal and shared libraries but this software does not have a
+       *     direct equivalent, users can add the same root path to achieve it.  As such this value
+       *     is ignored but defined to match the Synology API.
+       *
+       *     This endpoint requires a value of `all` be provided for correctness.
+       * @example all
+       */
+      library: components['schemas']['SynologyLibraryEnum'];
+      /**
+       * @description Defines the number of results to return.  If no value is specified a default of 100,000
+       *     is used to practically-ensure all results are returned.  This is a change from Synology's
+       *     API which defaults to 100, but Synology's mobile clients will specify their limit.
+       */
+      limit: number;
+      /**
+       * @description Synology's API uses this value to route requests appropriately but for AudioStation the
+       *     endpoints have limited functionality, all music-related endpoints `list` except cover
+       *     images.  As such this value is ignored for now but defined to match the Synology API.
+       *
+       *     This endpoint requires a value of `list` be provided for correctness.
+       * @example list
+       */
+      method: components['schemas']['SynologyMethodEnum'];
+      /**
+       * @description Defines the pagination offset for the results.  If no value is specified a default of 0 is
+       *     used to start at the beginning of a result set.
+       */
+      offset: number;
+      /**
+       * @description Synology's API has versioned endpoints and some have at least 3 versions.  This software
+       *     currently only supports the latest version of the API for each endpoint and ignores this value
+       *     for now.  It's possible to build in support for prior versions of an endpoint but that would
+       *     require using the `debug-proxy` to capture the request and response payloads to understand the
+       *     differences between versions.  If you are running an older DSM NAS and wish to help then check
+       *     out the GitHub Issues page and submit a request to support your version of the API.
+       */
+      version: number;
+    };
+    SynologyAlbumsByComposerBodyDto: {
+      /**
+       * @description Synology's API uses this value to route requests appropriately but this software has
+       *     direct endpoints for their relevant URL paths.  As such this value is ignored for now
+       *     but defined to match the Synology API.
+       *
+       *     This endpoint requires a value of `SYNO.AudioStation.Album` be provided for correctness.
+       * @example SYNO.AudioStation.Album
+       */
+      api: components['schemas']['SynologyApiEnum'];
+      /** @description The name of the composer */
+      composer: string;
+      /**
+       * @description Synology supports having personal and shared libraries but this software does not have a
+       *     direct equivalent, users can add the same root path to achieve it.  As such this value
+       *     is ignored but defined to match the Synology API.
+       *
+       *     This endpoint requires a value of `all` be provided for correctness.
+       * @example all
+       */
+      library: components['schemas']['SynologyLibraryEnum'];
+      /**
+       * @description Defines the number of results to return.  If no value is specified a default of 100,000
+       *     is used to practically-ensure all results are returned.  This is a change from Synology's
+       *     API which defaults to 100, but Synology's mobile clients will specify their limit.
+       */
+      limit: number;
+      /**
+       * @description Synology's API uses this value to route requests appropriately but for AudioStation the
+       *     endpoints have limited functionality, all music-related endpoints `list` except cover
+       *     images.  As such this value is ignored for now but defined to match the Synology API.
+       *
+       *     This endpoint requires a value of `list` be provided for correctness.
+       * @example list
+       */
+      method: components['schemas']['SynologyMethodEnum'];
+      /**
+       * @description Defines the pagination offset for the results.  If no value is specified a default of 0 is
+       *     used to start at the beginning of a result set.
+       */
+      offset: number;
+      /**
+       * @description Synology's API has versioned endpoints and some have at least 3 versions.  This software
+       *     currently only supports the latest version of the API for each endpoint and ignores this value
+       *     for now.  It's possible to build in support for prior versions of an endpoint but that would
+       *     require using the `debug-proxy` to capture the request and response payloads to understand the
+       *     differences between versions.  If you are running an older DSM NAS and wish to help then check
+       *     out the GitHub Issues page and submit a request to support your version of the API.
+       */
+      version: number;
+    };
+    SynologyAlbumsByDefaultGenreBodyDto: {
+      /**
+       * @description Synology's API uses this value to route requests appropriately but this software has
+       *     direct endpoints for their relevant URL paths.  As such this value is ignored for now
+       *     but defined to match the Synology API.
+       *
+       *     This endpoint requires a value of `SYNO.AudioStation.Album` be provided for correctness.
+       * @example SYNO.AudioStation.Album
+       */
+      api: components['schemas']['SynologyApiEnum'];
+      /** @description The name of the genre */
+      genre_filter: string;
+      /**
+       * @description Synology supports having personal and shared libraries but this software does not have a
+       *     direct equivalent, users can add the same root path to achieve it.  As such this value
+       *     is ignored but defined to match the Synology API.
+       *
+       *     This endpoint requires a value of `all` be provided for correctness.
+       * @example all
+       */
+      library: components['schemas']['SynologyLibraryEnum'];
+      /**
+       * @description Defines the number of results to return.  If no value is specified a default of 100,000
+       *     is used to practically-ensure all results are returned.  This is a change from Synology's
+       *     API which defaults to 100, but Synology's mobile clients will specify their limit.
+       */
+      limit: number;
+      /**
+       * @description Synology's API uses this value to route requests appropriately but for AudioStation the
+       *     endpoints have limited functionality, all music-related endpoints `list` except cover
+       *     images.  As such this value is ignored for now but defined to match the Synology API.
+       *
+       *     This endpoint requires a value of `list` be provided for correctness.
+       * @example list
+       */
+      method: components['schemas']['SynologyMethodEnum'];
+      /**
+       * @description Defines the pagination offset for the results.  If no value is specified a default of 0 is
+       *     used to start at the beginning of a result set.
+       */
+      offset: number;
+      /**
+       * @description Synology's API has versioned endpoints and some have at least 3 versions.  This software
+       *     currently only supports the latest version of the API for each endpoint and ignores this value
+       *     for now.  It's possible to build in support for prior versions of an endpoint but that would
+       *     require using the `debug-proxy` to capture the request and response payloads to understand the
+       *     differences between versions.  If you are running an older DSM NAS and wish to help then check
+       *     out the GitHub Issues page and submit a request to support your version of the API.
+       */
+      version: number;
+    };
+    SynologyAlbumsByGenreBodyDto: {
+      /**
+       * @description Synology's API uses this value to route requests appropriately but this software has
+       *     direct endpoints for their relevant URL paths.  As such this value is ignored for now
+       *     but defined to match the Synology API.
+       *
+       *     This endpoint requires a value of `SYNO.AudioStation.Album` be provided for correctness.
+       * @example SYNO.AudioStation.Album
+       */
+      api: components['schemas']['SynologyApiEnum'];
+      /** @description The name of the genre */
+      genre: string;
+      /**
+       * @description Synology supports having personal and shared libraries but this software does not have a
+       *     direct equivalent, users can add the same root path to achieve it.  As such this value
+       *     is ignored but defined to match the Synology API.
+       *
+       *     This endpoint requires a value of `all` be provided for correctness.
+       * @example all
+       */
+      library: components['schemas']['SynologyLibraryEnum'];
+      /**
+       * @description Defines the number of results to return.  If no value is specified a default of 100,000
+       *     is used to practically-ensure all results are returned.  This is a change from Synology's
+       *     API which defaults to 100, but Synology's mobile clients will specify their limit.
+       */
+      limit: number;
+      /**
+       * @description Synology's API uses this value to route requests appropriately but for AudioStation the
+       *     endpoints have limited functionality, all music-related endpoints `list` except cover
+       *     images.  As such this value is ignored for now but defined to match the Synology API.
+       *
+       *     This endpoint requires a value of `list` be provided for correctness.
+       * @example list
+       */
+      method: components['schemas']['SynologyMethodEnum'];
+      /**
+       * @description Defines the pagination offset for the results.  If no value is specified a default of 0 is
+       *     used to start at the beginning of a result set.
+       */
+      offset: number;
+      /**
+       * @description Synology's API has versioned endpoints and some have at least 3 versions.  This software
+       *     currently only supports the latest version of the API for each endpoint and ignores this value
+       *     for now.  It's possible to build in support for prior versions of an endpoint but that would
+       *     require using the `debug-proxy` to capture the request and response payloads to understand the
+       *     differences between versions.  If you are running an older DSM NAS and wish to help then check
+       *     out the GitHub Issues page and submit a request to support your version of the API.
+       */
+      version: number;
+    };
+    /**
+     * @description Synology's API uses this value to route requests appropriately but this software has
+     *     direct endpoints for their relevant URL paths.  As such this value is ignored for now
+     *     but defined to match the Synology API.
+     *
+     *     This endpoint requires a value of `SYNO.AudioStation.Album` be provided for correctness.
+     * @enum {string}
+     */
+    SynologyApiEnum: SynologyApiEnum;
+    SynologyArtistDataDto: {
+      artists: components['schemas']['SynologyArtistDto'][];
+      /**
+       * @description Defines the pagination offset for the results.  If no value is specified a default of 0 is
+       *     used to start at the beginning of a result set.
+       */
+      offset: number;
+      /**
+       * @description The total number of results available for the request.  This is used to determine if there are
+       *     more results available for the request and if additional requests are needed to retrieve them.
+       */
+      total: number;
+    };
+    SynologyArtistDto: {
+      additional: components['schemas']['SynologyAlbumAdditionalDto'];
+      id: string;
+      name: string;
+    };
+    SynologyArtistResponseDto: {
+      data: components['schemas']['SynologyArtistDataDto'];
+      /**
+       * @description Boolean flag for the request ending successfully.  There are scenarios where Synology could
+       *     return false instead but this server will return an HTTP error response.
+       */
+      success: boolean;
+    };
+    SynologyArtistsBodyDto: {
+      /**
+       * @description Synology's API uses this value to route requests appropriately but this software has
+       *     direct endpoints for their relevant URL paths.  As such this value is ignored for now
+       *     but defined to match the Synology API.
+       *
+       *     This endpoint requires a value of `SYNO.AudioStation.Artist` be provided for correctness.
+       * @example SYNO.AudioStation.Artist
+       */
+      api: components['schemas']['SynologyApiEnum'];
+      /**
+       * @description Synology supports having personal and shared libraries but this software does not have a
+       *     direct equivalent, users can add the same root path to achieve it.  As such this value
+       *     is ignored but defined to match the Synology API.
+       *
+       *     This endpoint requires a value of `all` be provided for correctness.
+       * @example all
+       */
+      library: components['schemas']['SynologyLibraryEnum'];
+      /**
+       * @description Defines the number of results to return.  If no value is specified a default of 100,000
+       *     is used to practically-ensure all results are returned.  This is a change from Synology's
+       *     API which defaults to 100, but Synology's mobile clients will specify their limit.
+       */
+      limit: number;
+      /**
+       * @description Synology's API uses this value to route requests appropriately but for AudioStation the
+       *     endpoints have limited functionality, all music-related endpoints `list` except cover
+       *     images.  As such this value is ignored for now but defined to match the Synology API.
+       *
+       *     This endpoint requires a value of `list` be provided for correctness.
+       * @example list
+       */
+      method: components['schemas']['SynologyMethodEnum'];
+      /**
+       * @description Defines the pagination offset for the results.  If no value is specified a default of 0 is
+       *     used to start at the beginning of a result set.
+       */
+      offset: number;
+      /**
+       * @description Synology's API has versioned endpoints and some have at least 3 versions.  This software
+       *     currently only supports the latest version of the API for each endpoint and ignores this value
+       *     for now.  It's possible to build in support for prior versions of an endpoint but that would
+       *     require using the `debug-proxy` to capture the request and response payloads to understand the
+       *     differences between versions.  If you are running an older DSM NAS and wish to help then check
+       *     out the GitHub Issues page and submit a request to support your version of the API.
+       */
+      version: number;
+    };
+    SynologyArtistsByDefaultGenreBodyDto: {
+      /**
+       * @description Synology's API uses this value to route requests appropriately but this software has
+       *     direct endpoints for their relevant URL paths.  As such this value is ignored for now
+       *     but defined to match the Synology API.
+       *
+       *     This endpoint requires a value of `SYNO.AudioStation.Artist` be provided for correctness.
+       * @example SYNO.AudioStation.Artist
+       */
+      api: components['schemas']['SynologyApiEnum'];
+      genre_filter: string;
+      /**
+       * @description Synology supports having personal and shared libraries but this software does not have a
+       *     direct equivalent, users can add the same root path to achieve it.  As such this value
+       *     is ignored but defined to match the Synology API.
+       *
+       *     This endpoint requires a value of `all` be provided for correctness.
+       * @example all
+       */
+      library: components['schemas']['SynologyLibraryEnum'];
+      /**
+       * @description Defines the number of results to return.  If no value is specified a default of 100,000
+       *     is used to practically-ensure all results are returned.  This is a change from Synology's
+       *     API which defaults to 100, but Synology's mobile clients will specify their limit.
+       */
+      limit: number;
+      /**
+       * @description Synology's API uses this value to route requests appropriately but for AudioStation the
+       *     endpoints have limited functionality, all music-related endpoints `list` except cover
+       *     images.  As such this value is ignored for now but defined to match the Synology API.
+       *
+       *     This endpoint requires a value of `list` be provided for correctness.
+       * @example list
+       */
+      method: components['schemas']['SynologyMethodEnum'];
+      /**
+       * @description Defines the pagination offset for the results.  If no value is specified a default of 0 is
+       *     used to start at the beginning of a result set.
+       */
+      offset: number;
+      /**
+       * @description Synology's API has versioned endpoints and some have at least 3 versions.  This software
+       *     currently only supports the latest version of the API for each endpoint and ignores this value
+       *     for now.  It's possible to build in support for prior versions of an endpoint but that would
+       *     require using the `debug-proxy` to capture the request and response payloads to understand the
+       *     differences between versions.  If you are running an older DSM NAS and wish to help then check
+       *     out the GitHub Issues page and submit a request to support your version of the API.
+       */
+      version: number;
+    };
+    SynologyArtistsByGenreBodyDto: {
+      /**
+       * @description Synology's API uses this value to route requests appropriately but this software has
+       *     direct endpoints for their relevant URL paths.  As such this value is ignored for now
+       *     but defined to match the Synology API.
+       *
+       *     This endpoint requires a value of `SYNO.AudioStation.Artist` be provided for correctness.
+       * @example SYNO.AudioStation.Artist
+       */
+      api: components['schemas']['SynologyApiEnum'];
+      genre: string;
+      /**
+       * @description Synology supports having personal and shared libraries but this software does not have a
+       *     direct equivalent, users can add the same root path to achieve it.  As such this value
+       *     is ignored but defined to match the Synology API.
+       *
+       *     This endpoint requires a value of `all` be provided for correctness.
+       * @example all
+       */
+      library: components['schemas']['SynologyLibraryEnum'];
+      /**
+       * @description Defines the number of results to return.  If no value is specified a default of 100,000
+       *     is used to practically-ensure all results are returned.  This is a change from Synology's
+       *     API which defaults to 100, but Synology's mobile clients will specify their limit.
+       */
+      limit: number;
+      /**
+       * @description Synology's API uses this value to route requests appropriately but for AudioStation the
+       *     endpoints have limited functionality, all music-related endpoints `list` except cover
+       *     images.  As such this value is ignored for now but defined to match the Synology API.
+       *
+       *     This endpoint requires a value of `list` be provided for correctness.
+       * @example list
+       */
+      method: components['schemas']['SynologyMethodEnum'];
+      /**
+       * @description Defines the pagination offset for the results.  If no value is specified a default of 0 is
+       *     used to start at the beginning of a result set.
+       */
+      offset: number;
+      /**
+       * @description Synology's API has versioned endpoints and some have at least 3 versions.  This software
+       *     currently only supports the latest version of the API for each endpoint and ignores this value
+       *     for now.  It's possible to build in support for prior versions of an endpoint but that would
+       *     require using the `debug-proxy` to capture the request and response payloads to understand the
+       *     differences between versions.  If you are running an older DSM NAS and wish to help then check
+       *     out the GitHub Issues page and submit a request to support your version of the API.
+       */
+      version: number;
+    };
+    SynologyComposerBodyDto: {
+      /**
+       * @description Synology's API uses this value to route requests appropriately but this software has
+       *     direct endpoints for their relevant URL paths.  As such this value is ignored for now
+       *     but defined to match the Synology API.
+       *
+       *     This endpoint requires a value of `SYNO.AudioStation.Composer` be provided for correctness.
+       * @example SYNO.AudioStation.Composer
+       */
+      api: components['schemas']['SynologyApiEnum'];
+      /**
+       * @description Synology supports having personal and shared libraries but this software does not have a
+       *     direct equivalent, users can add the same root path to achieve it.  As such this value
+       *     is ignored but defined to match the Synology API.
+       *
+       *     This endpoint requires a value of `all` be provided for correctness.
+       * @example all
+       */
+      library: components['schemas']['SynologyLibraryEnum'];
+      /**
+       * @description Defines the number of results to return.  If no value is specified a default of 100,000
+       *     is used to practically-ensure all results are returned.  This is a change from Synology's
+       *     API which defaults to 100, but Synology's mobile clients will specify their limit.
+       */
+      limit: number;
+      /**
+       * @description Synology's API uses this value to route requests appropriately but for AudioStation the
+       *     endpoints have limited functionality, all music-related endpoints `list` except cover
+       *     images.  As such this value is ignored for now but defined to match the Synology API.
+       *
+       *     This endpoint requires a value of `list` be provided for correctness.
+       * @example list
+       */
+      method: components['schemas']['SynologyMethodEnum'];
+      /**
+       * @description Defines the pagination offset for the results.  If no value is specified a default of 0 is
+       *     used to start at the beginning of a result set.
+       */
+      offset: number;
+      /**
+       * @description Synology's API has versioned endpoints and some have at least 3 versions.  This software
+       *     currently only supports the latest version of the API for each endpoint and ignores this value
+       *     for now.  It's possible to build in support for prior versions of an endpoint but that would
+       *     require using the `debug-proxy` to capture the request and response payloads to understand the
+       *     differences between versions.  If you are running an older DSM NAS and wish to help then check
+       *     out the GitHub Issues page and submit a request to support your version of the API.
+       */
+      version: number;
+    };
+    SynologyComposerDataDto: {
+      composers: components['schemas']['SynologyComposerDto'][];
+      /**
+       * @description Defines the pagination offset for the results.  If no value is specified a default of 0 is
+       *     used to start at the beginning of a result set.
+       */
+      offset: number;
+      /**
+       * @description The total number of results available for the request.  This is used to determine if there are
+       *     more results available for the request and if additional requests are needed to retrieve them.
+       */
+      total: number;
+    };
+    SynologyComposerDto: {
+      additional: components['schemas']['SynologyAlbumAdditionalDto'];
+      id: string;
+      name: string;
+    };
+    SynologyComposerResponseDto: {
+      data: components['schemas']['SynologyComposerDataDto'];
+      /**
+       * @description Boolean flag for the request ending successfully.  There are scenarios where Synology could
+       *     return false instead but this server will return an HTTP error response.
+       */
+      success: boolean;
+    };
+    SynologyDefaultGenreDataDto: {
+      default_genres: components['schemas']['SynologyDefaultGenreDto'][];
+      total: number;
+    };
+    SynologyDefaultGenreDto: {
+      name: string;
+    };
+    SynologyDefaultGenreResponseDto: {
+      data: components['schemas']['SynologyDefaultGenreDataDto'];
+      /**
+       * @description Boolean flag for the request ending successfully.  There are scenarios where Synology could
+       *     return false instead but this server will return an HTTP error response.
+       */
+      success: boolean;
+    };
+    SynologyEntryCertificateBodyDto: {
+      /**
+       * @description Synology's API uses this value to route requests appropriately but this software has
+       *     direct endpoints for their relevant URL paths.  As such this value is ignored for now
+       *     but defined to match the Synology API.
+       *
+       *     This endpoint requires a value of `SYNO.AudioStation.Encryption` be provided for correctness.
+       * @example SYNO.API.Encryption
+       */
+      api: components['schemas']['SynologyApiEnum'];
+      /**
+       * @description Synology's API uses this value to route requests appropriately but NestJS controllers
+       *     handle the routing between URL paths so this value is ignored for now but defined to
+       *     match the Synology API.
+       *
+       *     This endpoint requires a value of `getinfo` for the `method` value for correctness.
+       * @example getinfo
+       */
+      method: components['schemas']['SynologyMethodEnum'];
+      /**
+       * @description Synology's API has versioned endpoints and some have at least 3 versions.  This software
+       *     currently only supports the latest version of the API for each endpoint and ignores this value
+       *     for now.  It's possible to build in support for prior versions of an endpoint but that would
+       *     require using the `debug-proxy` to capture the request and response payloads to understand the
+       *     differences between versions.  If you are running an older DSM NAS and wish to help then check
+       *     out the GitHub Issues page and submit a request to support your version of the API.
+       */
+      version: number;
+    };
+    SynologyEntryCertificateDataDto: {
+      /** @example __cIpHeRtExT */
+      cipherkey: string;
+      /** @example __cIpHeRtOkEn */
+      ciphertoken: string;
+      /** @description RSA-4096 public key */
+      public_key: string;
+      /** @description UNIX-timestamp in seconds */
+      server_time: number;
+    };
+    SynologyEntryCertificateResponseDto: {
+      data: components['schemas']['SynologyEntryCertificateDataDto'];
+      /**
+       * @description Boolean flag for the request ending successfully.  There are scenarios where Synology could
+       *     return false instead but this server will return an HTTP error response.
+       */
+      success: boolean;
+    };
+    SynologyEntryCreatePinBodyDto: {
+      /**
+       * @description Synology's API uses this value to route requests appropriately but this software has
+       *     direct endpoints for their relevant URL paths.  As such this value is ignored for now
+       *     but defined to match the Synology API.
+       *
+       *     This endpoint requires a value of `SYNO.AudioStation.Pin` for correctness.
+       * @example SYNO.AudioStation.Pin
+       */
+      api: components['schemas']['SynologyApiEnum'];
+      /** @description List of item details to pin */
+      items: components['schemas']['SynologyEntryNewPinItemDto'][];
+      /**
+       * @description Synology's API uses this value to route requests appropriately but NestJS controllers
+       *     handle the routing between URL paths so this value is ignored for now but defined to
+       *     match the Synology API.
+       *
+       *     This endpoint requires a value of `pin` be provided for correctness.
+       * @example pin
+       */
+      method: components['schemas']['SynologyMethodEnum'];
+      /**
+       * @description Synology's API has versioned endpoints and some have at least 3 versions.  This software
+       *     currently only supports the latest version of the API for each endpoint and ignores this value
+       *     for now.  It's possible to build in support for prior versions of an endpoint but that would
+       *     require using the `debug-proxy` to capture the request and response payloads to understand the
+       *     differences between versions.  If you are running an older DSM NAS and wish to help then check
+       *     out the GitHub Issues page and submit a request to support your version of the API.
+       */
+      version: number;
+    };
+    SynologyEntryDeletePinBodyDto: {
+      /**
+       * @description Synology's API uses this value to route requests appropriately but this software has
+       *     direct endpoints for their relevant URL paths.  As such this value is ignored for now
+       *     but defined to match the Synology API.
+       *
+       *     This endpoint requires a value of `SYNO.AudioStation.Pin` for correctness.
+       * @example SYNO.AudioStation.Pin
+       */
+      api: components['schemas']['SynologyApiEnum'];
+      items: number[][];
+      /**
+       * @description Synology's API uses this value to route requests appropriately but NestJS controllers
+       *     handle the routing between URL paths so this value is ignored for now but defined to
+       *     match the Synology API.
+       *
+       *     This endpoint requires a value of `unpin` be provided for correctness.
+       * @example unpin
+       */
+      method: components['schemas']['SynologyMethodEnum'];
+      /**
+       * @description Synology's API has versioned endpoints and some have at least 3 versions.  This software
+       *     currently only supports the latest version of the API for each endpoint and ignores this value
+       *     for now.  It's possible to build in support for prior versions of an endpoint but that would
+       *     require using the `debug-proxy` to capture the request and response payloads to understand the
+       *     differences between versions.  If you are running an older DSM NAS and wish to help then check
+       *     out the GitHub Issues page and submit a request to support your version of the API.
+       */
+      version: number;
+    };
+    SynologyEntryListPinsBodyDto: {
+      /**
+       * @description Synology's API uses this value to route requests appropriately but this software has
+       *     direct endpoints for their relevant URL paths.  As such this value is ignored for now
+       *     but defined to match the Synology API.
+       *
+       *     This endpoint requires a value of `SYNO.AudioStation.Pin` for correctness.
+       * @example SYNO.AudioStation.Pin
+       */
+      api: components['schemas']['SynologyApiEnum'];
+      /**
+       * @description Defines the number of results to return.  If no value is specified a default of 100,000
+       *     is used to practically-ensure all results are returned.  This is a change from Synology's
+       *     API which defaults to 100, but Synology's mobile clients will specify their limit.
+       */
+      limit: number;
+      /**
+       * @description Synology's API uses this value to route requests appropriately but NestJS controllers
+       *     handle the routing between URL paths so this value is ignored for now but defined to
+       *     match the Synology API.
+       *
+       *     This endpoint requires a value of `list` be provided for correctness.
+       * @example list
+       */
+      method: components['schemas']['SynologyMethodEnum'];
+      /**
+       * @description Defines the pagination offset for the results.  If no value is specified a default of 0 is
+       *     used to start at the beginning of a result set.
+       */
+      offset: number;
+      /**
+       * @description Synology's API has versioned endpoints and some have at least 3 versions.  This software
+       *     currently only supports the latest version of the API for each endpoint and ignores this value
+       *     for now.  It's possible to build in support for prior versions of an endpoint but that would
+       *     require using the `debug-proxy` to capture the request and response payloads to understand the
+       *     differences between versions.  If you are running an older DSM NAS and wish to help then check
+       *     out the GitHub Issues page and submit a request to support your version of the API.
+       */
+      version: number;
+    };
+    SynologyEntryListPinsResponseDto: {
+      data: components['schemas']['SynologyEntryPinsDataDto'];
+      /**
+       * @description Boolean flag for the request ending successfully.  There are scenarios where Synology could
+       *     return false instead but this server will return an HTTP error response.
+       */
+      success: boolean;
+    };
+    SynologyEntryLogoutBodyDto: {
+      /** @description The session ID to terminate. */
+      _sid: string;
+      /**
+       * @description Synology's API uses this value to route requests appropriately but this software has
+       *     direct endpoints for their relevant URL paths.  As such this value is ignored for now
+       *     but defined to match the Synology API.
+       *
+       *     This endpoint requires a value of `SYNO.API.Auth` be provided for correctness.
+       * @example SYNO.API.Auth
+       */
+      api: components['schemas']['SynologyApiEnum'];
+      /**
+       * @description Synology's API uses this value to route requests appropriately but NestJS controllers
+       *     handle the routing between URL paths so this value is ignored for now but defined to
+       *     match the Synology API.
+       *
+       *     This endpoint requires a value of `clearSessionToken` for the `method` value for correctness.
+       * @example clearSessionToken
+       */
+      method: components['schemas']['SynologyMethodEnum'];
+      /**
+       * @description Synology's API has versioned endpoints and some have at least 3 versions.  This software
+       *     currently only supports the latest version of the API for each endpoint and ignores this value
+       *     for now.  It's possible to build in support for prior versions of an endpoint but that would
+       *     require using the `debug-proxy` to capture the request and response payloads to understand the
+       *     differences between versions.  If you are running an older DSM NAS and wish to help then check
+       *     out the GitHub Issues page and submit a request to support your version of the API.
+       */
+      version: number;
+    };
+    SynologyEntryLogoutResponseDto: {
+      /**
+       * @description Boolean flag for the request ending successfully.  There are scenarios where Synology could
+       *     return false instead but this server will return an HTTP error response.
+       */
+      success: boolean;
+    };
+    SynologyEntryNewPinItemDto: {
+      criteria: components['schemas']['SynologyEntryPinItemCriteriaDto'];
+      name: string;
+      type: components['schemas']['SynologyPinTypeEnum'];
+    };
+    SynologyEntryPinItemCriteriaDto: {
+      album?: string;
+      album_artist?: string;
+      artist?: string;
+      composer?: string;
+      folder?: string;
+      genre?: string;
+      playlist?: string;
+    };
+    SynologyEntryPinItemDto: {
+      criteria: components['schemas']['SynologyEntryPinItemCriteriaDto'];
+      id: string;
+      name: string;
+      type: components['schemas']['SynologyPinTypeEnum'];
+    };
+    SynologyEntryPinsDataDto: {
+      items: components['schemas']['SynologyEntryPinItemDto'][];
+      /**
+       * @description Defines the pagination offset for the results.  If no value is specified a default of 0 is
+       *     used to start at the beginning of a result set.
+       */
+      offset: number;
+      /**
+       * @description The total number of results available for the request.  This is used to determine if there are
+       *     more results available for the request and if additional requests are needed to retrieve them.
+       */
+      total: number;
+    };
+    SynologyEntryPlaylistAddAlbumBodyDto: {
+      album: string;
+      album_artist: string;
+      /**
+       * @description Synology's API uses this value to route requests appropriately but this software has
+       *     direct endpoints for their relevant URL paths.  As such this value is ignored for now
+       *     but defined to match the Synology API.
+       *
+       *     This endpoint requires a value of `SYNO.AudioStation.Playlist` for correctness.
+       * @example SYNO.AudioStation.Playlist
+       */
+      api: components['schemas']['SynologyApiEnum'];
+      /**
+       * @description The ID of the playlist comes in the format
+       *     `playlist_<personal|shared>_<normal|smart>/<name>`
+       *     eg `playlist_personal_normal/playlistname` or `playlist_shared_smart/playlistname`
+       */
+      id: string;
+      /**
+       * @description Synology's API uses this value to route requests appropriately but NestJS controllers
+       *     handle the routing between URL paths so this value is ignored for now but defined to
+       *     match the Synology API.
+       *
+       *     This endpoint requires a value of `add_track` be provided for correctness.
+       * @example add_track
+       */
+      method: components['schemas']['SynologyMethodEnum'];
+      /**
+       * @description Synology's API has versioned endpoints and some have at least 3 versions.  This software
+       *     currently only supports the latest version of the API for each endpoint and ignores this value
+       *     for now.  It's possible to build in support for prior versions of an endpoint but that would
+       *     require using the `debug-proxy` to capture the request and response payloads to understand the
+       *     differences between versions.  If you are running an older DSM NAS and wish to help then check
+       *     out the GitHub Issues page and submit a request to support your version of the API.
+       */
+      version: number;
+    };
+    SynologyEntryPlaylistAddArtistBodyDto: {
+      /**
+       * @description Synology's API uses this value to route requests appropriately but this software has
+       *     direct endpoints for their relevant URL paths.  As such this value is ignored for now
+       *     but defined to match the Synology API.
+       *
+       *     This endpoint requires a value of `SYNO.AudioStation.Playlist` for correctness.
+       * @example SYNO.AudioStation.Playlist
+       */
+      api: components['schemas']['SynologyApiEnum'];
+      artist: string;
+      /**
+       * @description The ID of the playlist comes in the format
+       *     `playlist_<personal|shared>_<normal|smart>/<name>`
+       *     eg `playlist_personal_normal/playlistname` or `playlist_shared_smart/playlistname`
+       */
+      id: string;
+      /**
+       * @description Synology's API uses this value to route requests appropriately but NestJS controllers
+       *     handle the routing between URL paths so this value is ignored for now but defined to
+       *     match the Synology API.
+       *
+       *     This endpoint requires a value of `add_track` be provided for correctness.
+       * @example add_track
+       */
+      method: components['schemas']['SynologyMethodEnum'];
+      /**
+       * @description Synology's API has versioned endpoints and some have at least 3 versions.  This software
+       *     currently only supports the latest version of the API for each endpoint and ignores this value
+       *     for now.  It's possible to build in support for prior versions of an endpoint but that would
+       *     require using the `debug-proxy` to capture the request and response payloads to understand the
+       *     differences between versions.  If you are running an older DSM NAS and wish to help then check
+       *     out the GitHub Issues page and submit a request to support your version of the API.
+       */
+      version: number;
+    };
+    SynologyEntryPlaylistAddComposerBodyDto: {
+      /**
+       * @description Synology's API uses this value to route requests appropriately but this software has
+       *     direct endpoints for their relevant URL paths.  As such this value is ignored for now
+       *     but defined to match the Synology API.
+       *
+       *     This endpoint requires a value of `SYNO.AudioStation.Playlist` for correctness.
+       * @example SYNO.AudioStation.Playlist
+       */
+      api: components['schemas']['SynologyApiEnum'];
+      composer: string;
+      /**
+       * @description The ID of the playlist comes in the format
+       *     `playlist_<personal|shared>_<normal|smart>/<name>`
+       *     eg `playlist_personal_normal/playlistname` or `playlist_shared_smart/playlistname`
+       */
+      id: string;
+      /**
+       * @description Synology's API uses this value to route requests appropriately but NestJS controllers
+       *     handle the routing between URL paths so this value is ignored for now but defined to
+       *     match the Synology API.
+       *
+       *     This endpoint requires a value of `add_track` be provided for correctness.
+       * @example add_track
+       */
+      method: components['schemas']['SynologyMethodEnum'];
+      /**
+       * @description Synology's API has versioned endpoints and some have at least 3 versions.  This software
+       *     currently only supports the latest version of the API for each endpoint and ignores this value
+       *     for now.  It's possible to build in support for prior versions of an endpoint but that would
+       *     require using the `debug-proxy` to capture the request and response payloads to understand the
+       *     differences between versions.  If you are running an older DSM NAS and wish to help then check
+       *     out the GitHub Issues page and submit a request to support your version of the API.
+       */
+      version: number;
+    };
+    SynologyEntryPlaylistAddGenreBodyDto: {
+      /**
+       * @description Synology's API uses this value to route requests appropriately but this software has
+       *     direct endpoints for their relevant URL paths.  As such this value is ignored for now
+       *     but defined to match the Synology API.
+       *
+       *     This endpoint requires a value of `SYNO.AudioStation.Playlist` for correctness.
+       * @example SYNO.AudioStation.Playlist
+       */
+      api: components['schemas']['SynologyApiEnum'];
+      genre: string;
+      /**
+       * @description The ID of the playlist comes in the format
+       *     `playlist_<personal|shared>_<normal|smart>/<name>`
+       *     eg `playlist_personal_normal/playlistname` or `playlist_shared_smart/playlistname`
+       */
+      id: string;
+      /**
+       * @description Synology's API uses this value to route requests appropriately but NestJS controllers
+       *     handle the routing between URL paths so this value is ignored for now but defined to
+       *     match the Synology API.
+       *
+       *     This endpoint requires a value of `add_track` be provided for correctness.
+       * @example add_track
+       */
+      method: components['schemas']['SynologyMethodEnum'];
+      /**
+       * @description Synology's API has versioned endpoints and some have at least 3 versions.  This software
+       *     currently only supports the latest version of the API for each endpoint and ignores this value
+       *     for now.  It's possible to build in support for prior versions of an endpoint but that would
+       *     require using the `debug-proxy` to capture the request and response payloads to understand the
+       *     differences between versions.  If you are running an older DSM NAS and wish to help then check
+       *     out the GitHub Issues page and submit a request to support your version of the API.
+       */
+      version: number;
+    };
+    SynologyEntrySignInBodyDto: {
+      __cIpHeRtExT: string;
+      client_time: number;
+    };
+    SynologyEntrySignInDataDto: {
+      /**
+       * @description The device ID generated by the Synology NAS for the client application.  For this server this
+       *     is a bcrypt hash of the user agent string and session master key.
+       */
+      did: string;
+      /**
+       * @description Flag for whether the client application is a portal application or not.  It is not clear what the
+       *     ramifications of this are.  This value is currently ignored.
+       */
+      is_portal_port: boolean;
+      /**
+       * @description The session ID generated by the Synology NAS for the client application.  For this server this
+       *     is a bcrypt hash of the session master key, account session key, and session GUID.
+       */
+      sid: string;
+    };
+    SynologyEntrySignInResponseDto: {
+      data: components['schemas']['SynologyEntrySignInDataDto'];
+      /**
+       * @description Boolean flag for the request ending successfully.  There are scenarios where Synology could
+       *     return false instead but this server will return an HTTP error response.
+       */
+      success: boolean;
+    };
+    SynologyFolderBodyDto: {
+      additional: string;
+      /**
+       * @description Synology's API uses this value to route requests appropriately but this software has
+       *     direct endpoints for their relevant URL paths.  As such this value is ignored for now
+       *     but defined to match the Synology API.
+       *
+       *     This endpoint requires a value of `SYNO.AudioStation.Folder` be provided for correctness.
+       * @example SYNO.AudioStation.Folder
+       */
+      api: components['schemas']['SynologyApiEnum'];
+      /**
+       * @description The ID of the folder.  Synology uses a string with a prefix and the numeric ID, this software
+       *     only uses the path so an ID will arrive like `/music/artist/album/cd1`
+       */
+      id: number;
+      /**
+       * @description Synology supports having personal and shared libraries but this software does not have a
+       *     direct equivalent, users can add the same root path to achieve it.  As such this value
+       *     is ignored but defined to match the Synology API.
+       *
+       *     This endpoint requires a value of `all` be provided for correctness.
+       * @example all
+       */
+      library: components['schemas']['SynologyLibraryEnum'];
+      /**
+       * @description Defines the number of results to return.  If no value is specified a default of 100,000
+       *     is used to practically-ensure all results are returned.  This is a change from Synology's
+       *     API which defaults to 100, but Synology's mobile clients will specify their limit.
+       */
+      limit: number;
+      /**
+       * @description Synology's API uses this value to route requests appropriately but for AudioStation the
+       *     endpoints have limited functionality, all music-related endpoints `list` except cover
+       *     images.  As such this value is ignored for now but defined to match the Synology API.
+       *
+       *     This endpoint requires a value of `list` be provided for correctness.
+       * @example list
+       */
+      method: components['schemas']['SynologyMethodEnum'];
+      /**
+       * @description Defines the pagination offset for the results.  If no value is specified a default of 0 is
+       *     used to start at the beginning of a result set.
+       */
+      offset: number;
+      recursive: boolean;
+      /**
+       * @description Synology's API has versioned endpoints and some have at least 3 versions.  This software
+       *     currently only supports the latest version of the API for each endpoint and ignores this value
+       *     for now.  It's possible to build in support for prior versions of an endpoint but that would
+       *     require using the `debug-proxy` to capture the request and response payloads to understand the
+       *     differences between versions.  If you are running an older DSM NAS and wish to help then check
+       *     out the GitHub Issues page and submit a request to support your version of the API.
+       */
+      version: number;
+    };
+    SynologyFolderDataDto: {
+      /**
+       * @description The number of folders included in the response, this may be less than the total number if there is
+       *     a combination of folders and files in the directory.
+       */
+      folder_total: number;
+      /**
+       * @description The ID of the folder currently in scope.  Synology uses a string with a prefix and the numeric ID, this
+       *     software only uses the path since folders are not tracked separately they are derived from the file paths.
+       */
+      id?: string;
+      items: (components['schemas']['SynologyFolderDto'] | components['schemas']['SynologySongDto'])[];
+      /**
+       * @description Defines the pagination offset for the results.  If no value is specified a default of 0 is
+       *     used to start at the beginning of a result set.
+       */
+      offset: number;
+      /**
+       * @description The total number of results available for the request.  This is used to determine if there are
+       *     more results available for the request and if additional requests are needed to retrieve them.
+       */
+      total: number;
+    };
+    SynologyFolderDto: {
+      /**
+       * @description The ID value for the folder, for a root path this will be `root_n` otherwise `dir_n` where `n`
+       *     is the numeric ID of the folder.
+       */
+      id: string;
+      /**
+       * @description Indicates whether the folder is a personal folder or a shared folder, however there is no
+       *     shared folder equivalent in this software so this value is ignored for now but defined to
+       *     match the Synology API.
+       */
+      is_personal: boolean;
+      /** @description The fully-qualified path to the file */
+      path: string;
+      /** @description The final segment of the folder path */
+      title: string;
+      /** @description The content type, folder or file */
+      type: components['schemas']['ContentTypeEnum'];
+    };
+    SynologyFolderResponseDto: {
+      data: components['schemas']['SynologyFolderDataDto'];
+      /**
+       * @description Boolean flag for the request ending successfully.  There are scenarios where Synology could
+       *     return false instead but this server will return an HTTP error response.
+       */
+      success: boolean;
+    };
+    SynologyGenreBodyDto: {
+      /**
+       * @description Synology's API uses this value to route requests appropriately but this software has
+       *     direct endpoints for their relevant URL paths.  As such this value is ignored for now
+       *     but defined to match the Synology API.
+       *
+       *     This endpoint requires a value of `SYNO.AudioStation.Genre` be provided for correctness.
+       * @example SYNO.AudioStation.Genre
+       */
+      api: components['schemas']['SynologyApiEnum'];
+      /**
+       * @description Synology supports having personal and shared libraries but this software does not have a
+       *     direct equivalent, users can add the same root path to achieve it.  As such this value
+       *     is ignored but defined to match the Synology API.
+       *
+       *     This endpoint requires a value of `all` be provided for correctness.
+       * @example all
+       */
+      library: components['schemas']['SynologyLibraryEnum'];
+      /**
+       * @description Defines the number of results to return.  If no value is specified a default of 100,000
+       *     is used to practically-ensure all results are returned.  This is a change from Synology's
+       *     API which defaults to 100, but Synology's mobile clients will specify their limit.
+       */
+      limit: number;
+      /**
+       * @description Synology's API uses this value to route requests appropriately but for AudioStation the
+       *     endpoints have limited functionality, all music-related endpoints `list` except cover
+       *     images.  As such this value is ignored for now but defined to match the Synology API.
+       *
+       *     This endpoint requires a value of `list` or `list_default_genre` be provided for correctness.
+       * @example list
+       */
+      method: components['schemas']['SynologyMethodEnum'];
+      /**
+       * @description Defines the pagination offset for the results.  If no value is specified a default of 0 is
+       *     used to start at the beginning of a result set.
+       */
+      offset: number;
+      /**
+       * @description Synology's API has versioned endpoints and some have at least 3 versions.  This software
+       *     currently only supports the latest version of the API for each endpoint and ignores this value
+       *     for now.  It's possible to build in support for prior versions of an endpoint but that would
+       *     require using the `debug-proxy` to capture the request and response payloads to understand the
+       *     differences between versions.  If you are running an older DSM NAS and wish to help then check
+       *     out the GitHub Issues page and submit a request to support your version of the API.
+       */
+      version: number;
+    };
+    SynologyGenreDataDto: {
+      genres: components['schemas']['SynologyGenreDto'][];
+      /**
+       * @description Defines the pagination offset for the results.  If no value is specified a default of 0 is
+       *     used to start at the beginning of a result set.
+       */
+      offset: number;
+      /**
+       * @description The total number of results available for the request.  This is used to determine if there are
+       *     more results available for the request and if additional requests are needed to retrieve them.
+       */
+      total: number;
+    };
+    SynologyGenreDto: {
+      additional: components['schemas']['SynologyAlbumAdditionalDto'];
+      id: string;
+      name: string;
+    };
+    SynologyGenreResponseDto: {
+      data: components['schemas']['SynologyGenreDataDto'];
+      /**
+       * @description Boolean flag for the request ending successfully.  There are scenarios where Synology could
+       *     return false instead but this server will return an HTTP error response.
+       */
+      success: boolean;
+    };
+    SynologyInfoAmeStatus: {
+      ame_major_version: number;
+      has_aac: boolean;
+      has_license: boolean;
+      is_aac_activated: boolean;
+      is_ame_broken: boolean;
+      is_ame_install: boolean;
+      need_aac_transcoding: boolean;
+    };
+    SynologyInfoBodyDto: {
+      /**
+       * @description Synology's API uses this value to route requests appropriately but this software has
+       *     direct endpoints for their relevant URL paths.  As such this value is ignored for now
+       *     but defined to match the Synology API.
+       *
+       *     This endpoint requires a value of `SYNO.AudioStation.Composer` be provided for correctness.
+       * @example SYNO.AudioStation.Info
+       */
+      api: components['schemas']['SynologyApiEnum'];
+      /**
+       * @description Synology's API uses this value to route requests appropriately but for AudioStation the
+       *     endpoints have limited functionality, all music-related endpoints `list` except cover
+       *     images.  As such this value is ignored for now but defined to match the Synology API.
+       *
+       *     This endpoint requires a value of `list` be provided for correctness.
+       * @example getinfo
+       */
+      method: components['schemas']['SynologyMethodEnum'];
+      /**
+       * @description Synology's API has versioned endpoints and some have at least 3 versions.  This software
+       *     currently only supports the latest version of the API for each endpoint and ignores this value
+       *     for now.  It's possible to build in support for prior versions of an endpoint but that would
+       *     require using the `debug-proxy` to capture the request and response payloads to understand the
+       *     differences between versions.  If you are running an older DSM NAS and wish to help then check
+       *     out the GitHub Issues page and submit a request to support your version of the API.
+       */
+      version: number;
+    };
+    SynologyInfoDataDto: {
+      ame_status: components['schemas']['SynologyInfoAmeStatus'];
+      /** @enum {string} */
+      browse_personal_library: SynologyInfoDataDtoBrowse_personal_library;
+      dsd_decode_capability: boolean;
+      enable_equalizer: boolean;
+      enable_personal_library: boolean;
+      enable_user_home: boolean;
+      has_music_share: boolean;
+      is_manager: boolean;
+      playing_queue_max: number;
+      privilege: components['schemas']['SynologyInfoPrivilege'];
+      remote_controller: boolean;
+      same_subnet: boolean;
+      serial_number: string;
+      settings: components['schemas']['SynologyInfoSettings'];
+      sid: string;
+      support_bluetooth: boolean;
+      support_usb: boolean;
+      support_virtual_library: boolean;
+      transcode_capability: string[];
+      version: number;
+      version_string: string;
+    };
+    SynologyInfoPrivilege: {
+      playlist_edit: boolean;
+      remote_player: boolean;
+      sharing: boolean;
+      tag_edit: boolean;
+      upnp_browse: boolean;
+    };
+    SynologyInfoResponseDto: {
+      data: components['schemas']['SynologyInfoDataDto'];
+      /**
+       * @description Boolean flag for the request ending successfully.  There are scenarios where Synology could
+       *     return false instead but this server will return an HTTP error response.
+       */
+      success: boolean;
+    };
+    SynologyInfoSettings: {
+      audio_show_virtual_library: boolean;
+      disable_upnp: boolean;
+      enable_download: boolean;
+      prefer_using_html5: boolean;
+      transcode_to_mp3: boolean;
+    };
+    /**
+     * @description Synology supports having personal and shared libraries but this software does not have a
+     *     direct equivalent, users can add the same root path to achieve it.  As such this value
+     *     is ignored but defined to match the Synology API.
+     *
+     *     This endpoint requires a value of `all` be provided for correctness.
+     * @enum {string}
+     */
+    SynologyLibraryEnum: SynologyLibraryEnum;
+    /**
+     * @description Synology's API uses this value to route requests appropriately but for AudioStation the
+     *     endpoints have limited functionality, all music-related endpoints `list` except cover
+     *     images.  As such this value is ignored for now but defined to match the Synology API.
+     *
+     *     This endpoint requires a value of `list` be provided for correctness.
+     * @enum {string}
+     */
+    SynologyMethodEnum: SynologyMethodEnum;
+    /** @enum {string} */
+    SynologyPinTypeEnum: SynologyPinTypeEnum;
+    SynologyPlaylistAdditionalDto: {
+      rules?: components['schemas']['SynologyPlaylistRuleDto'][];
+      /** @example and */
+      rules_conjunction?: components['schemas']['SmartPlaylistConjugalEnum'];
+      sharing_info: components['schemas']['SynologyPlaylistSharingInfoDto'];
+    };
+    SynologyPlaylistAdditionalWithItemsDto: {
+      rules?: components['schemas']['SynologyPlaylistRuleDto'][];
+      /** @example and */
+      rules_conjunction?: components['schemas']['SmartPlaylistConjugalEnum'];
+      sharing_info: components['schemas']['SynologyPlaylistSharingInfoDto'];
+      songs: components['schemas']['SynologyPlaylistSongDto'][];
+      songs_offset: number;
+      songs_total: number;
+    };
+    SynologyPlaylistAddOrRemoveItemBodyDto: {
+      /**
+       * @description Synology's API uses this value to route requests appropriately but this software has
+       *     direct endpoints for their relevant URL paths.  As such this value is ignored for now
+       *     but defined to match the Synology API.
+       *
+       *     This endpoint requires a value of `SYNO.AudioStation.Proxy` be provided for correctness.
+       * @example SYNO.AudioStation.Playlist
+       */
+      api: components['schemas']['SynologyApiEnum'];
+      /**
+       * @description The ID of the playlist comes in the format
+       *     `playlist_<personal|shared>_<normal|smart>/<name>`
+       *     eg `playlist_personal_normal/playlistname` or `playlist_shared_smart/playlistname`
+       */
+      id: string;
+      /**
+       * @description Synology supports having personal and shared libraries but this software does not have a
+       *     direct equivalent, users can add the same root path to achieve it.  As such this value
+       *     is ignored but defined to match the Synology API.
+       *
+       *     This endpoint requires a value of `all` or `personal` be provided for correctness.
+       * @example all
+       */
+      library: components['schemas']['SynologyLibraryEnum'];
+      /** @description The number of items to remove. */
+      limit: number;
+      /**
+       * @description Synology's API uses this value to route requests appropriately but NestJS controllers
+       *     handle the routing between URL paths so this value is ignored for now but defined to
+       *     match the Synology API.
+       *
+       *     This endpoint requires a value of `updatesongs` be provided for correctness.
+       * @example updatesongs
+       */
+      method: components['schemas']['SynologyMethodEnum'];
+      /**
+       * @description The position of the item(s) in the playlist, if `-1` then it is a new item otherwise
+       *     the list-index for the item.
+       */
+      offset: number;
+      /**
+       * @description The ID of the song comes in a `music_<id>,music_<id>` format or for radio stations it
+       *     can be `radio_<title>_<url>` or when deleting, an empty value.
+       *
+       *     eg adding song(s): `music_1234,music_5678`
+       *     eg adding radio(s) `radio_The Best Radio Station Ever https://example.com/stream`
+       *     eg adding both: `music_1234,music_5678,radio_The Best Radio Station Ever https://example.com/stream`
+       *
+       *     The posted value is transformed to an array of song IDs as numbers or radio station IDs
+       *     as strings.
+       */
+      songs: Record<string, never>[];
+      /**
+       * @description Synology's API has versioned endpoints and some have at least 3 versions.  This software
+       *     currently only supports the latest version of the API for each endpoint and ignores this value
+       *     for now.  It's possible to build in support for prior versions of an endpoint but that would
+       *     require using the `debug-proxy` to capture the request and response payloads to understand the
+       *     differences between versions.  If you are running an older DSM NAS and wish to help then check
+       *     out the GitHub Issues page and submit a request to support your version of the API.
+       */
+      version: number;
+    };
+    SynologyPlaylistCreateNormalBodyDto: {
+      /**
+       * @description Synology's API uses this value to route requests appropriately but this software has
+       *     direct endpoints for their relevant URL paths.  As such this value is ignored for now
+       *     but defined to match the Synology API.
+       *
+       *     This endpoint requires a value of `SYNO.AudioStation.Proxy` be provided for correctness.
+       * @example SYNO.AudioStation.Playlist
+       */
+      api: components['schemas']['SynologyApiEnum'];
+      /**
+       * @description Synology supports having personal and shared libraries but this software does not have a
+       *     direct equivalent, users can add the same root path to achieve it.  As such this value
+       *     is ignored but defined to match the Synology API.
+       *
+       *     This endpoint requires a value of `all` or `personal` be provided for correctness.
+       * @example all
+       */
+      library: components['schemas']['SynologyLibraryEnum'];
+      /**
+       * @description Synology's API uses this value to route requests appropriately but NestJS controllers
+       *     handle the routing between URL paths so this value is ignored for now but defined to
+       *     match the Synology API.
+       *
+       *     This endpoint requires a value of `create` be provided for correctness.
+       * @example create
+       */
+      method: components['schemas']['SynologyMethodEnum'];
+      /** @description The name of the playlist to create. */
+      name: string;
+      /**
+       * @description Synology's API has versioned endpoints and some have at least 3 versions.  This software
+       *     currently only supports the latest version of the API for each endpoint and ignores this value
+       *     for now.  It's possible to build in support for prior versions of an endpoint but that would
+       *     require using the `debug-proxy` to capture the request and response payloads to understand the
+       *     differences between versions.  If you are running an older DSM NAS and wish to help then check
+       *     out the GitHub Issues page and submit a request to support your version of the API.
+       */
+      version: number;
+    };
+    SynologyPlaylistCreateSmartBodyDto: {
+      /**
+       * @description Synology's API uses this value to route requests appropriately but this software has
+       *     direct endpoints for their relevant URL paths.  As such this value is ignored for now
+       *     but defined to match the Synology API.
+       *
+       *     This endpoint requires a value of `SYNO.AudioStation.Proxy` be provided for correctness.
+       * @example SYNO.AudioStation.Playlist
+       */
+      api: components['schemas']['SynologyApiEnum'];
+      /** @example and */
+      conj_rule: components['schemas']['SmartPlaylistConjugalEnum'];
+      /**
+       * @description Synology supports having personal and shared libraries but this software does not have a
+       *     direct equivalent, users can add the same root path to achieve it.  As such this value
+       *     is ignored but defined to match the Synology API.
+       *
+       *     This endpoint requires a value of `all` or `personal` be provided for correctness.
+       * @example all
+       */
+      library: components['schemas']['SynologyLibraryEnum'];
+      /**
+       * @description Synology's API uses this value to route requests appropriately but NestJS controllers
+       *     handle the routing between URL paths so this value is ignored for now but defined to
+       *     match the Synology API.
+       *
+       *     This endpoint requires a value of `create` be provided for correctness.
+       * @example createsmart
+       */
+      method: components['schemas']['SynologyMethodEnum'];
+      /** @description The name of the playlist to create. */
+      name: string;
+      rules_json: components['schemas']['SynologySmartListRule'][];
+      /**
+       * @description Synology's API has versioned endpoints and some have at least 3 versions.  This software
+       *     currently only supports the latest version of the API for each endpoint and ignores this value
+       *     for now.  It's possible to build in support for prior versions of an endpoint but that would
+       *     require using the `debug-proxy` to capture the request and response payloads to understand the
+       *     differences between versions.  If you are running an older DSM NAS and wish to help then check
+       *     out the GitHub Issues page and submit a request to support your version of the API.
+       */
+      version: number;
+    };
+    SynologyPlaylistDataDto: {
+      playlists: components['schemas']['SynologyPlaylistDto'][];
+    };
+    SynologyPlaylistDeleteBodyDto: {
+      /**
+       * @description Synology's API uses this value to route requests appropriately but this software has
+       *     direct endpoints for their relevant URL paths.  As such this value is ignored for now
+       *     but defined to match the Synology API.
+       *
+       *     This endpoint requires a value of `SYNO.AudioStation.Proxy` be provided for correctness.
+       * @example SYNO.AudioStation.Playlist
+       */
+      api: components['schemas']['SynologyApiEnum'];
+      /**
+       * @description The ID of the playlist comes in the format
+       *     `playlist_<personal|shared>_<normal|smart>/<name>`
+       *     eg `playlist_personal_normal/playlistname` or `playlist_shared_smart/playlistname`
+       */
+      id: string;
+      /**
+       * @description Synology supports having personal and shared libraries but this software does not have a
+       *     direct equivalent, users can add the same root path to achieve it.  As such this value
+       *     is ignored but defined to match the Synology API.
+       *
+       *     This endpoint requires a value of `all` or `personal` be provided for correctness.
+       * @example all
+       */
+      library: components['schemas']['SynologyLibraryEnum'];
+      /**
+       * @description Synology's API uses this value to route requests appropriately but NestJS controllers
+       *     handle the routing between URL paths so this value is ignored for now but defined to
+       *     match the Synology API.
+       *
+       *     This endpoint requires a value of `delete` be provided for correctness.
+       * @example delete
+       */
+      method: components['schemas']['SynologyMethodEnum'];
+      /** @enum {string} */
+      type: SynologyPlaylistDeleteBodyDtoType;
+      /**
+       * @description Synology's API has versioned endpoints and some have at least 3 versions.  This software
+       *     currently only supports the latest version of the API for each endpoint and ignores this value
+       *     for now.  It's possible to build in support for prior versions of an endpoint but that would
+       *     require using the `debug-proxy` to capture the request and response payloads to understand the
+       *     differences between versions.  If you are running an older DSM NAS and wish to help then check
+       *     out the GitHub Issues page and submit a request to support your version of the API.
+       */
+      version: number;
+    };
+    SynologyPlaylistDto: {
+      additional: components['schemas']['SynologyPlaylistAdditionalDto'];
+      id: string;
+      library: string;
+      name: string;
+      sharing_status: string;
+      /** @example normal */
+      type: components['schemas']['PlaylistTypeEnum'];
+    };
+    SynologyPlaylistIdDataDto: {
+      id: string;
+    };
+    SynologyPlaylistIdResponseDto: {
+      data: components['schemas']['SynologyPlaylistIdDataDto'];
+      /**
+       * @description Boolean flag for the request ending successfully.  There are scenarios where Synology could
+       *     return false instead but this server will return an HTTP error response.
+       */
+      success: boolean;
+    };
+    SynologyPlaylistListBodyDto: {
+      /**
+       * @description Synology's API uses this value to route requests appropriately but this software has
+       *     direct endpoints for their relevant URL paths.  As such this value is ignored for now
+       *     but defined to match the Synology API.
+       *
+       *     This endpoint requires a value of `SYNO.AudioStation.Proxy` be provided for correctness.
+       * @example SYNO.AudioStation.Playlist
+       */
+      api: components['schemas']['SynologyApiEnum'];
+      /**
+       * @description Synology supports having personal and shared libraries but this software does not have a
+       *     direct equivalent, users can add the same root path to achieve it.  As such this value
+       *     is ignored but defined to match the Synology API.
+       *
+       *     This endpoint requires a value of `all` or `personal` be provided for correctness.
+       * @example all
+       */
+      library: components['schemas']['SynologyLibraryEnum'];
+      /**
+       * @description Synology's API uses this value to route requests appropriately but NestJS controllers
+       *     handle the routing between URL paths so this value is ignored for now but defined to
+       *     match the Synology API.
+       *
+       *     This endpoint requires a value of `list` be provided for correctness.
+       * @example list
+       */
+      method: components['schemas']['SynologyMethodEnum'];
+      /**
+       * @description Synology's API has versioned endpoints and some have at least 3 versions.  This software
+       *     currently only supports the latest version of the API for each endpoint and ignores this value
+       *     for now.  It's possible to build in support for prior versions of an endpoint but that would
+       *     require using the `debug-proxy` to capture the request and response payloads to understand the
+       *     differences between versions.  If you are running an older DSM NAS and wish to help then check
+       *     out the GitHub Issues page and submit a request to support your version of the API.
+       */
+      version: number;
+    };
+    SynologyPlaylistMoveItemsBodyDto: {
+      /**
+       * @description Synology's API uses this value to route requests appropriately but this software has
+       *     direct endpoints for their relevant URL paths.  As such this value is ignored for now
+       *     but defined to match the Synology API.
+       *
+       *     This endpoint requires a value of `SYNO.AudioStation.Proxy` be provided for correctness.
+       * @example SYNO.AudioStation.Playlist
+       */
+      api: components['schemas']['SynologyApiEnum'];
+      /**
+       * @description The ID of the playlist comes in the format
+       *     `playlist_<personal|shared>_<normal|smart>/<name>`
+       *     eg `playlist_personal_normal/playlistname` or `playlist_shared_smart/playlistname`
+       */
+      id: string;
+      /**
+       * @description Synology supports having personal and shared libraries but this software does not have a
+       *     direct equivalent, users can add the same root path to achieve it.  As such this value
+       *     is ignored but defined to match the Synology API.
+       *
+       *     This endpoint requires a value of `all` or `personal` be provided for correctness.
+       * @example all
+       */
+      library: components['schemas']['SynologyLibraryEnum'];
+      /** @description The number of items being moved */
+      limit: number;
+      /**
+       * @description Synology's API uses this value to route requests appropriately but NestJS controllers
+       *     handle the routing between URL paths so this value is ignored for now but defined to
+       *     match the Synology API.
+       *
+       *     This endpoint requires a value of `updatesongs` be provided for correctness.
+       * @example updatesongs
+       */
+      method: components['schemas']['SynologyMethodEnum'];
+      /**
+       * @description The position of the item(s) in the playlist, if `-1` then it is a new item otherwise
+       *     the list-index for the item.
+       */
+      offset: number;
+      /**
+       * @description The ID of the song comes in a `music_<id>,music_<id>` format, eg `music_1234,music_5678`
+       *     or when deleting, an empty value.
+       */
+      songs: number[];
+      /**
+       * @description Synology's API has versioned endpoints and some have at least 3 versions.  This software
+       *     currently only supports the latest version of the API for each endpoint and ignores this value
+       *     for now.  It's possible to build in support for prior versions of an endpoint but that would
+       *     require using the `debug-proxy` to capture the request and response payloads to understand the
+       *     differences between versions.  If you are running an older DSM NAS and wish to help then check
+       *     out the GitHub Issues page and submit a request to support your version of the API.
+       */
+      version: number;
+    };
+    SynologyPlaylistRemoveMissingBodyDto: {
+      /**
+       * @description Synology's API uses this value to route requests appropriately but this software has
+       *     direct endpoints for their relevant URL paths.  As such this value is ignored for now
+       *     but defined to match the Synology API.
+       *
+       *     This endpoint requires a value of `SYNO.AudioStation.Proxy` be provided for correctness.
+       * @example SYNO.AudioStation.Playlist
+       */
+      api: components['schemas']['SynologyApiEnum'];
+      /**
+       * @description The ID of the playlist comes in the format
+       *     `playlist_<personal|shared>_<normal|smart>/<name>`
+       *     eg `playlist_personal_normal/playlistname` or `playlist_shared_smart/playlistname`
+       */
+      id: string;
+      /**
+       * @description Synology supports having personal and shared libraries but this software does not have a
+       *     direct equivalent, users can add the same root path to achieve it.  As such this value
+       *     is ignored but defined to match the Synology API.
+       *
+       *     This endpoint requires a value of `all` or `personal` be provided for correctness.
+       * @example all
+       */
+      library: components['schemas']['SynologyLibraryEnum'];
+      /**
+       * @description Synology's API uses this value to route requests appropriately but NestJS controllers
+       *     handle the routing between URL paths so this value is ignored for now but defined to
+       *     match the Synology API.
+       *
+       *     This endpoint requires a value of `removemissing` be provided for correctness.
+       * @example removemissing
+       */
+      method: components['schemas']['SynologyMethodEnum'];
+      /**
+       * @description Synology's API has versioned endpoints and some have at least 3 versions.  This software
+       *     currently only supports the latest version of the API for each endpoint and ignores this value
+       *     for now.  It's possible to build in support for prior versions of an endpoint but that would
+       *     require using the `debug-proxy` to capture the request and response payloads to understand the
+       *     differences between versions.  If you are running an older DSM NAS and wish to help then check
+       *     out the GitHub Issues page and submit a request to support your version of the API.
+       */
+      version: number;
+    };
+    SynologyPlaylistRenameBodyDto: {
+      /**
+       * @description Synology's API uses this value to route requests appropriately but this software has
+       *     direct endpoints for their relevant URL paths.  As such this value is ignored for now
+       *     but defined to match the Synology API.
+       *
+       *     This endpoint requires a value of `SYNO.AudioStation.Proxy` be provided for correctness.
+       * @example SYNO.AudioStation.Playlist
+       */
+      api: components['schemas']['SynologyApiEnum'];
+      /**
+       * @description The ID of the playlist comes in the format
+       *     `playlist_<personal|shared>_<normal|smart>/<name>`
+       *     eg `playlist_personal_normal/playlistname` or `playlist_shared_smart/playlistname`
+       */
+      id: string;
+      /**
+       * @description Synology supports having personal and shared libraries but this software does not have a
+       *     direct equivalent, users can add the same root path to achieve it.  As such this value
+       *     is ignored but defined to match the Synology API.
+       *
+       *     This endpoint requires a value of `all` or `personal` be provided for correctness.
+       * @example all
+       */
+      library: components['schemas']['SynologyLibraryEnum'];
+      /**
+       * @description Synology's API uses this value to route requests appropriately but NestJS controllers
+       *     handle the routing between URL paths so this value is ignored for now but defined to
+       *     match the Synology API.
+       *
+       *     This endpoint requires a value of `rename` be provided for correctness.
+       * @example rename
+       */
+      method: components['schemas']['SynologyMethodEnum'];
+      /** @description The name of the playlist to create. */
+      new_name: string;
+      /**
+       * @description Synology's API has versioned endpoints and some have at least 3 versions.  This software
+       *     currently only supports the latest version of the API for each endpoint and ignores this value
+       *     for now.  It's possible to build in support for prior versions of an endpoint but that would
+       *     require using the `debug-proxy` to capture the request and response payloads to understand the
+       *     differences between versions.  If you are running an older DSM NAS and wish to help then check
+       *     out the GitHub Issues page and submit a request to support your version of the API.
+       */
+      version: number;
+    };
+    SynologyPlaylistResponseDto: {
+      data: components['schemas']['SynologyPlaylistDataDto'];
+      /**
+       * @description Boolean flag for the request ending successfully.  There are scenarios where Synology could
+       *     return false instead but this server will return an HTTP error response.
+       */
+      success: boolean;
+    };
+    SynologyPlaylistRetrieveBodyDto: {
+      /**
+       * @description Synology's API uses this value to route requests appropriately but this software has
+       *     direct endpoints for their relevant URL paths.  As such this value is ignored for now
+       *     but defined to match the Synology API.
+       *
+       *     This endpoint requires a value of `SYNO.AudioStation.Proxy` be provided for correctness.
+       * @example SYNO.AudioStation.Playlist
+       */
+      api: components['schemas']['SynologyApiEnum'];
+      /**
+       * @description The ID of the playlist comes in the format
+       *     `playlist_<personal|shared>_<normal|smart>/<name>`
+       *     eg `playlist_personal_normal/playlistname` or `playlist_shared_smart/playlistname`
+       */
+      id: string;
+      /**
+       * @description Synology supports having personal and shared libraries but this software does not have a
+       *     direct equivalent, users can add the same root path to achieve it.  As such this value
+       *     is ignored but defined to match the Synology API.
+       *
+       *     This endpoint requires a value of `all` or `personal` be provided for correctness.
+       * @example all
+       */
+      library: components['schemas']['SynologyLibraryEnum'];
+      /**
+       * @description Synology's API uses this value to route requests appropriately but NestJS controllers
+       *     handle the routing between URL paths so this value is ignored for now but defined to
+       *     match the Synology API.
+       *
+       *     This endpoint requires a value of `getinfo` be provided for correctness.
+       * @example getinfo
+       */
+      method: components['schemas']['SynologyMethodEnum'];
+      /**
+       * @description Synology's API has versioned endpoints and some have at least 3 versions.  This software
+       *     currently only supports the latest version of the API for each endpoint and ignores this value
+       *     for now.  It's possible to build in support for prior versions of an endpoint but that would
+       *     require using the `debug-proxy` to capture the request and response payloads to understand the
+       *     differences between versions.  If you are running an older DSM NAS and wish to help then check
+       *     out the GitHub Issues page and submit a request to support your version of the API.
+       */
+      version: number;
+    };
+    SynologyPlaylistRuleDto: {
+      interval: number;
+      op: number;
+      tag: number;
+      tagval: string;
+    };
+    SynologyPlaylistSharingInfoDto: {
+      date_available: number;
+      date_expired: number;
+      id: string;
+      status: string;
+      url: string;
+    };
+    SynologyPlaylistSongDto: {
+      additional: components['schemas']['SynologySongAdditionalDto'];
+      id: string;
+      path: string;
+      position: number;
+      title: string;
+      type: components['schemas']['ContentTypeEnum'];
+    };
+    SynologyPlaylistTrackListBodyDto: {
+      /**
+       * @description Additional data to include in the response.  This field is ignored by the backend for now
+       *     and a fixed-payload response is returned.
+       */
+      additional: string;
+      /**
+       * @description The ID of the playlist comes in the format
+       *     `playlist_<personal|shared>_<normal|smart>/<name>`
+       *     eg `playlist_personal_normal/playlistname` or `playlist_shared_smart/playlistname`
+       */
+      id: string;
+      /**
+       * @description Defines the number of results to return.  If no value is specified a default of 100,000
+       *     is used to practically-ensure all results are returned.  This is a change from Synology's
+       *     API which defaults to 100, but Synology's mobile clients will specify their limit.
+       */
+      limit: number;
+      /**
+       * @description Synology's API uses this value to route requests appropriately but NestJS controllers
+       *     handle the routing between URL paths so this value is ignored for now but defined to
+       *     match the Synology API.
+       *
+       *     This endpoint requires a value of `list` be provided for correctness.
+       * @example list
+       */
+      method: components['schemas']['SynologyMethodEnum'];
+      /**
+       * @description Defines the pagination offset for the results.  If no value is specified a default of 0 is
+       *     used to start at the beginning of a result set.
+       */
+      offset: number;
+    };
+    SynologyPlaylistUpdateSmartBodyDto: {
+      /**
+       * @description Synology's API uses this value to route requests appropriately but this software has
+       *     direct endpoints for their relevant URL paths.  As such this value is ignored for now
+       *     but defined to match the Synology API.
+       *
+       *     This endpoint requires a value of `SYNO.AudioStation.Proxy` be provided for correctness.
+       * @example SYNO.AudioStation.Playlist
+       */
+      api: components['schemas']['SynologyApiEnum'];
+      /** @example and */
+      conj_rule: components['schemas']['SmartPlaylistConjugalEnum'];
+      /**
+       * @description The ID of the playlist comes in the format
+       *     `playlist_<personal|shared>_<normal|smart>/<name>`
+       *     eg `playlist_personal_normal/playlistname` or `playlist_shared_smart/playlistname`
+       */
+      id: string;
+      /**
+       * @description Synology supports having personal and shared libraries but this software does not have a
+       *     direct equivalent, users can add the same root path to achieve it.  As such this value
+       *     is ignored but defined to match the Synology API.
+       *
+       *     This endpoint requires a value of `all` or `personal` be provided for correctness.
+       * @example all
+       */
+      library: components['schemas']['SynologyLibraryEnum'];
+      /**
+       * @description Synology's API uses this value to route requests appropriately but NestJS controllers
+       *     handle the routing between URL paths so this value is ignored for now but defined to
+       *     match the Synology API.
+       *
+       *     This endpoint requires a value of `update` be provided for correctness.
+       * @example updatesmart
+       */
+      method: components['schemas']['SynologyMethodEnum'];
+      /** @description The name of the playlist to create. */
+      name: string;
+      rules_json: components['schemas']['SynologySmartListRule'][];
+      /**
+       * @description Synology's API has versioned endpoints and some have at least 3 versions.  This software
+       *     currently only supports the latest version of the API for each endpoint and ignores this value
+       *     for now.  It's possible to build in support for prior versions of an endpoint but that would
+       *     require using the `debug-proxy` to capture the request and response payloads to understand the
+       *     differences between versions.  If you are running an older DSM NAS and wish to help then check
+       *     out the GitHub Issues page and submit a request to support your version of the API.
+       */
+      version: number;
+    };
+    SynologyPlaylistWithItemsDataDto: {
+      playlists: components['schemas']['SynologyPlaylistWithItemsDto'][];
+    };
+    SynologyPlaylistWithItemsDto: {
+      additional: components['schemas']['SynologyPlaylistAdditionalWithItemsDto'];
+      id: string;
+      library: string;
+      name: string;
+      sharing_status: string;
+      /** @example normal */
+      type: components['schemas']['PlaylistTypeEnum'];
+    };
+    SynologyPlaylistWithItemsResponseDto: {
+      data: components['schemas']['SynologyPlaylistWithItemsDataDto'];
+      /**
+       * @description Boolean flag for the request ending successfully.  There are scenarios where Synology could
+       *     return false instead but this server will return an HTTP error response.
+       */
+      success: boolean;
+    };
+    SynologyProxyDeleteSongInfoBodyDto: {
+      /**
+       * @description Synology's API uses this value to route requests appropriately but this software has
+       *     direct endpoints for their relevant URL paths.  As such this value is ignored for now
+       *     but defined to match the Synology API.
+       *
+       *     This endpoint requires a value of `SYNO.AudioStation.Proxy` be provided for correctness.
+       * @example SYNO.AudioStation.Proxy
+       */
+      api: components['schemas']['SynologyApiEnum'];
+      /**
+       * @description Synology's API uses this value to route requests appropriately but for AudioStation the
+       *     endpoints have limited functionality, all music-related endpoints `list` except cover
+       *     images.  As such this value is ignored for now but defined to match the Synology API.
+       *
+       *     This endpoint requires a value of `deletesonginfo` be provided for correctness.
+       * @example deletesonginfo
+       */
+      method: components['schemas']['SynologyMethodEnum'];
+      /** @description The array index of the song to delete from the SHOUTcast radio station */
+      stream_id: number;
+      /**
+       * @description Synology's API has versioned endpoints and some have at least 3 versions.  This software
+       *     currently only supports the latest version of the API for each endpoint and ignores this value
+       *     for now.  It's possible to build in support for prior versions of an endpoint but that would
+       *     require using the `debug-proxy` to capture the request and response payloads to understand the
+       *     differences between versions.  If you are running an older DSM NAS and wish to help then check
+       *     out the GitHub Issues page and submit a request to support your version of the API.
+       */
+      version: number;
+    };
+    SynologyProxySongInfoBodyDto: {
+      /**
+       * @description Synology's API uses this value to route requests appropriately but this software has
+       *     direct endpoints for their relevant URL paths.  As such this value is ignored for now
+       *     but defined to match the Synology API.
+       *
+       *     This endpoint requires a value of `SYNO.AudioStation.Proxy` be provided for correctness.
+       * @example SYNO.AudioStation.Proxy
+       */
+      api: components['schemas']['SynologyApiEnum'];
+      /**
+       * @description Synology's API uses this value to route requests appropriately but for AudioStation the
+       *     endpoints have limited functionality, all music-related endpoints `list` except cover
+       *     images.  As such this value is ignored for now but defined to match the Synology API.
+       *
+       *     This endpoint requires a value of `getsonginfo` be provided for correctness.
+       * @example getsonginfo
+       */
+      method: components['schemas']['SynologyMethodEnum'];
+      /** @description The SHOUTcast stream ID */
+      stream_id: number;
+      /**
+       * @description Synology's API has versioned endpoints and some have at least 3 versions.  This software
+       *     currently only supports the latest version of the API for each endpoint and ignores this value
+       *     for now.  It's possible to build in support for prior versions of an endpoint but that would
+       *     require using the `debug-proxy` to capture the request and response payloads to understand the
+       *     differences between versions.  If you are running an older DSM NAS and wish to help then check
+       *     out the GitHub Issues page and submit a request to support your version of the API.
+       */
+      version: number;
+    };
+    SynologyProxySongInfoResponseDto: {
+      data: {
+        title: string;
+      };
+      /**
+       * @description Boolean flag for the request ending successfully.  There are scenarios where Synology could
+       *     return false instead but this server will return an HTTP error response.
+       */
+      success: boolean;
+    };
+    SynologyProxyStreamInfoBodyDto: {
+      /**
+       * @description Synology's API uses this value to route requests appropriately but this software has
+       *     direct endpoints for their relevant URL paths.  As such this value is ignored for now
+       *     but defined to match the Synology API.
+       *
+       *     This endpoint requires a value of `SYNO.AudioStation.Proxy` be provided for correctness.
+       * @example SYNO.AudioStation.Proxy
+       */
+      api: components['schemas']['SynologyApiEnum'];
+      /** @description The title of the SHOUTcast radio station */
+      id: string;
+      /**
+       * @description Synology's API uses this value to route requests appropriately but for AudioStation the
+       *     endpoints have limited functionality, all music-related endpoints `list` except cover
+       *     images.  As such this value is ignored for now but defined to match the Synology API.
+       *
+       *     This endpoint requires a value of `getstreamid` be provided for correctness.
+       * @example getstreamid
+       */
+      method: components['schemas']['SynologyMethodEnum'];
+      /**
+       * @description Synology's API has versioned endpoints and some have at least 3 versions.  This software
+       *     currently only supports the latest version of the API for each endpoint and ignores this value
+       *     for now.  It's possible to build in support for prior versions of an endpoint but that would
+       *     require using the `debug-proxy` to capture the request and response payloads to understand the
+       *     differences between versions.  If you are running an older DSM NAS and wish to help then check
+       *     out the GitHub Issues page and submit a request to support your version of the API.
+       */
+      version: number;
+    };
+    SynologyProxyStreamInfoResponseDto: {
+      data: {
+        format: string;
+        stream_id: string;
+      };
+      /**
+       * @description Boolean flag for the request ending successfully.  There are scenarios where Synology could
+       *     return false instead but this server will return an HTTP error response.
+       */
+      success: boolean;
+    };
+    SynologyRadioAddOrUpdateItemBodyDto: {
+      /**
+       * @description Synology's API uses this value to route requests appropriately but this software has
+       *     direct endpoints for their relevant URL paths.  As such this value is ignored for now
+       *     but defined to match the Synology API.
+       *
+       *     This endpoint requires a value of `SYNO.AudioStation.Radio` be provided for correctness.
+       * @example SYNO.AudioStation.Radio
+       */
+      api: components['schemas']['SynologyApiEnum'];
+      /** @description The name of the container the favorite is in. */
+      container: string;
+      /**
+       * @description Synology's API uses this value to route requests appropriately but for AudioStation the
+       *     endpoints have limited functionality, all music-related endpoints `list` except cover
+       *     images.  As such this value is ignored for now but defined to match the Synology API.
+       *
+       *     This endpoint requires a value of `updateradios` be provided for correctness.
+       * @example updateradios
+       */
+      method: components['schemas']['SynologyMethodEnum'];
+      /**
+       * @description Refers to the position in the existing data, a value of `-1` indicates a new item.  This
+       *     is not the pagination offset.
+       */
+      offset: number;
+      radios_json: components['schemas']['SynologyRadioFavoriteItemDto'][];
+      /**
+       * @description Synology's API has versioned endpoints and some have at least 3 versions.  This software
+       *     currently only supports the latest version of the API for each endpoint and ignores this value
+       *     for now.  It's possible to build in support for prior versions of an endpoint but that would
+       *     require using the `debug-proxy` to capture the request and response payloads to understand the
+       *     differences between versions.  If you are running an older DSM NAS and wish to help then check
+       *     out the GitHub Issues page and submit a request to support your version of the API.
+       */
+      version: number;
+    };
+    SynologyRadioAddUserStationBodyDto: {
+      /**
+       * @description Synology's API uses this value to route requests appropriately but this software has
+       *     direct endpoints for their relevant URL paths.  As such this value is ignored for now
+       *     but defined to match the Synology API.
+       *
+       *     This endpoint requires a value of `SYNO.AudioStation.Radio` be provided for correctness.
+       * @example SYNO.AudioStation.Radio
+       */
+      api: components['schemas']['SynologyApiEnum'];
+      /** @description The name of the container the user-defined station is in. */
+      container: string;
+      desc: string;
+      /**
+       * @description Synology's API uses this value to route requests appropriately but for AudioStation the
+       *     endpoints have limited functionality, all music-related endpoints `list` except cover
+       *     images.  As such this value is ignored for now but defined to match the Synology API.
+       *
+       *     This endpoint requires a value of `add` be provided for correctness.
+       * @example add
+       */
+      method: components['schemas']['SynologyMethodEnum'];
+      /**
+       * @description Refers to the position in the existing data, a value of `-1` indicates a new item.  This
+       *     is not the pagination offset.
+       */
+      offset: number;
+      title: string;
+      /** Format: uri */
+      url: string;
+      /**
+       * @description Synology's API has versioned endpoints and some have at least 3 versions.  This software
+       *     currently only supports the latest version of the API for each endpoint and ignores this value
+       *     for now.  It's possible to build in support for prior versions of an endpoint but that would
+       *     require using the `debug-proxy` to capture the request and response payloads to understand the
+       *     differences between versions.  If you are running an older DSM NAS and wish to help then check
+       *     out the GitHub Issues page and submit a request to support your version of the API.
+       */
+      version: number;
+    };
+    SynologyRadioContainerListBodyDto: {
+      /**
+       * @description Synology's API uses this value to route requests appropriately but this software has
+       *     direct endpoints for their relevant URL paths.  As such this value is ignored for now
+       *     but defined to match the Synology API.
+       *
+       *     This endpoint requires a value of `SYNO.AudioStation.Radio` be provided for correctness.
+       * @example SYNO.AudioStation.Radio
+       */
+      api: components['schemas']['SynologyApiEnum'];
+      /**
+       * @description Synology's API uses this value to route requests appropriately but for AudioStation the
+       *     endpoints have limited functionality, all music-related endpoints `list` except cover
+       *     images.  As such this value is ignored for now but defined to match the Synology API.
+       *
+       *     This endpoint requires a value of `list` be provided for correctness.
+       * @example list
+       */
+      method: components['schemas']['SynologyMethodEnum'];
+      /**
+       * @description Refers to the position in the existing data, a value of `-1` indicates a new item.  This
+       *     is not the pagination offset.
+       */
+      offset: number;
+      /**
+       * @description Synology's API has versioned endpoints and some have at least 3 versions.  This software
+       *     currently only supports the latest version of the API for each endpoint and ignores this value
+       *     for now.  It's possible to build in support for prior versions of an endpoint but that would
+       *     require using the `debug-proxy` to capture the request and response payloads to understand the
+       *     differences between versions.  If you are running an older DSM NAS and wish to help then check
+       *     out the GitHub Issues page and submit a request to support your version of the API.
+       */
+      version: number;
+    };
+    SynologyRadioFavoriteItemDto: {
+      desc: string;
+      title: string;
+      /** Format: uri */
+      url: string;
+    };
+    SynologyRadioItemDataDto: {
+      /**
+       * @description Defines the pagination offset for the results.  If no value is specified a default of 0 is
+       *     used to start at the beginning of a result set.
+       */
+      offset: number;
+      radios: components['schemas']['SynologyRadioItemDto'][];
+      /**
+       * @description The total number of results available for the request.  This is used to determine if there are
+       *     more results available for the request and if additional requests are needed to retrieve them.
+       */
+      total: number;
+    };
+    SynologyRadioItemDto: {
+      /** @description The `desc` value is used for custom-added stations/favorites. */
+      desc: string;
+      id: string;
+      title: string;
+      /**
+       * @description The `type` value is expected to always be `container` for SHOUTcast genres, and
+       *     `radio` for actual stations.  Possibly other values for favorites and custom-added
+       *     stations.
+       */
+      type: components['schemas']['ShoutcastItemTypeEnum'];
+      /**
+       * Format: uri
+       * @description The `url` value is expected to always be an empty string for SHOUTcast genres.
+       */
+      url: string;
+    };
+    SynologyRadioItemListBodyDto: {
+      /**
+       * @description Synology's API uses this value to route requests appropriately but this software has
+       *     direct endpoints for their relevant URL paths.  As such this value is ignored for now
+       *     but defined to match the Synology API.
+       *
+       *     This endpoint requires a value of `SYNO.AudioStation.Radio` be provided for correctness.
+       * @example SYNO.AudioStation.Radio
+       */
+      api: components['schemas']['SynologyApiEnum'];
+      /** @description The name of the container */
+      container: string;
+      /**
+       * @description Synology's API uses this value to route requests appropriately but for AudioStation the
+       *     endpoints have limited functionality, all music-related endpoints `list` except cover
+       *     images.  As such this value is ignored for now but defined to match the Synology API.
+       *
+       *     This endpoint requires a value of `list` be provided for correctness.
+       * @example list
+       */
+      method: components['schemas']['SynologyMethodEnum'];
+      /**
+       * @description Refers to the position in the existing data, a value of `-1` indicates a new item.  This
+       *     is not the pagination offset.
+       */
+      offset: number;
+      /**
+       * @description Synology's API has versioned endpoints and some have at least 3 versions.  This software
+       *     currently only supports the latest version of the API for each endpoint and ignores this value
+       *     for now.  It's possible to build in support for prior versions of an endpoint but that would
+       *     require using the `debug-proxy` to capture the request and response payloads to understand the
+       *     differences between versions.  If you are running an older DSM NAS and wish to help then check
+       *     out the GitHub Issues page and submit a request to support your version of the API.
+       */
+      version: number;
+    };
+    SynologyRadioItemResponseDto: {
+      data: components['schemas']['SynologyRadioItemDataDto'];
+      /**
+       * @description Boolean flag for the request ending successfully.  There are scenarios where Synology could
+       *     return false instead but this server will return an HTTP error response.
+       */
+      success: boolean;
+    };
+    SynologyRootFolderBodyDto: {
+      /**
+       * @description Synology's API uses this value to route requests appropriately but this software has
+       *     direct endpoints for their relevant URL paths.  As such this value is ignored for now
+       *     but defined to match the Synology API.
+       *
+       *     This endpoint requires a value of `SYNO.AudioStation.Folder` be provided for correctness.
+       * @example SYNO.AudioStation.Folder
+       */
+      api: components['schemas']['SynologyApiEnum'];
+      /**
+       * @description Synology supports having personal and shared libraries but this software does not have a
+       *     direct equivalent, users can add the same root path to achieve it.  As such this value
+       *     is ignored but defined to match the Synology API.
+       *
+       *     This endpoint requires a value of `all` be provided for correctness.
+       * @example all
+       */
+      library: components['schemas']['SynologyLibraryEnum'];
+      /**
+       * @description Defines the number of results to return.  If no value is specified a default of 100,000
+       *     is used to practically-ensure all results are returned.  This is a change from Synology's
+       *     API which defaults to 100, but Synology's mobile clients will specify their limit.
+       */
+      limit: number;
+      /**
+       * @description Synology's API uses this value to route requests appropriately but for AudioStation the
+       *     endpoints have limited functionality, all music-related endpoints `list` except cover
+       *     images.  As such this value is ignored for now but defined to match the Synology API.
+       *
+       *     This endpoint requires a value of `list` be provided for correctness.
+       * @example list
+       */
+      method: components['schemas']['SynologyMethodEnum'];
+      /**
+       * @description Defines the pagination offset for the results.  If no value is specified a default of 0 is
+       *     used to start at the beginning of a result set.
+       */
+      offset: number;
+      /**
+       * @description Synology's API has versioned endpoints and some have at least 3 versions.  This software
+       *     currently only supports the latest version of the API for each endpoint and ignores this value
+       *     for now.  It's possible to build in support for prior versions of an endpoint but that would
+       *     require using the `debug-proxy` to capture the request and response payloads to understand the
+       *     differences between versions.  If you are running an older DSM NAS and wish to help then check
+       *     out the GitHub Issues page and submit a request to support your version of the API.
+       */
+      version: number;
+    };
+    SynologySearchAlbumDto: {
+      album_artist: string;
+      artist: string;
+      display_artist: string;
+      name: string;
+      year: number;
+    };
+    SynologySearchArtistDto: {
+      name: string;
+    };
+    SynologySearchBodyDto: {
+      /**
+       * @description Synology's API uses this value to route requests appropriately but this software has
+       *     direct endpoints for their relevant URL paths.  As such this value is ignored for now
+       *     but defined to match the Synology API.
+       *
+       *     This endpoint requires a value of `SYNO.AudioStation.Search` be provided for correctness.
+       * @example SYNO.AudioStation.Search
+       */
+      api: components['schemas']['SynologyApiEnum'];
+      /** @description The search phrase to find in the library artists, tracks and albums */
+      keyword: string;
+      /**
+       * @description Synology supports having personal and shared libraries but this software does not have a
+       *     direct equivalent, users can add the same root path to achieve it.  As such this value
+       *     is ignored but defined to match the Synology API.
+       *
+       *     This endpoint requires a value of `all` be provided for correctness.
+       * @example all
+       */
+      library: components['schemas']['SynologyLibraryEnum'];
+      /**
+       * @description Synology's API uses this value to route requests appropriately but for AudioStation the
+       *     endpoints have limited functionality, all music-related endpoints `list` except cover
+       *     images.  As such this value is ignored for now but defined to match the Synology API.
+       *
+       *     This endpoint requires a value of `list` be provided for correctness.
+       * @example list
+       */
+      method: components['schemas']['SynologyMethodEnum'];
+      /**
+       * @description Synology's API has versioned endpoints and some have at least 3 versions.  This software
+       *     currently only supports the latest version of the API for each endpoint and ignores this value
+       *     for now.  It's possible to build in support for prior versions of an endpoint but that would
+       *     require using the `debug-proxy` to capture the request and response payloads to understand the
+       *     differences between versions.  If you are running an older DSM NAS and wish to help then check
+       *     out the GitHub Issues page and submit a request to support your version of the API.
+       */
+      version: number;
+    };
+    SynologySearchDataDto: {
+      albums: components['schemas']['SynologySearchAlbumDto'][];
+      /** @description The number of albums found matching the keyword search. */
+      albumTotal: number;
+      artists: components['schemas']['SynologySearchArtistDto'][];
+      /** @description The number of artists found matching the keyword search. */
+      artistTotal: number;
+      songs: components['schemas']['SynologySongDto'][];
+      /** @description The number of songs found matching the keyword search. */
+      songTotal: number;
+    };
+    SynologySearchResponseDto: {
+      data: components['schemas']['SynologySearchDataDto'];
+      /**
+       * @description Boolean flag for the request ending successfully.  There are scenarios where Synology could
+       *     return false instead but this server will return an HTTP error response.
+       */
+      success: boolean;
+    };
+    SynologySmartListRule: {
+      interval: number;
+      op: number;
+      tag: number;
+      tagval: string;
+    };
+    SynologySongAdditionalDto: {
+      song_audio: components['schemas']['SynologySongAudioDto'];
+      song_rating: components['schemas']['SynologySongRatingDto'];
+      song_tag: components['schemas']['SynologySongTagDto'];
+    };
+    SynologySongAudioDto: {
+      bitrate: number;
+      channel: number;
+      /** @example flac */
+      codec: components['schemas']['FileTypeEnum'];
+      /** @example flac */
+      container: components['schemas']['FileTypeEnum'];
+      duration: number;
+      filesize: number;
+      frequency: number;
+    };
+    SynologySongDataDto: {
+      /**
+       * @description Defines the pagination offset for the results.  If no value is specified a default of 0 is
+       *     used to start at the beginning of a result set.
+       */
+      offset: number;
+      songs: components['schemas']['SynologySongDto'][];
+      /**
+       * @description The total number of results available for the request.  This is used to determine if there are
+       *     more results available for the request and if additional requests are needed to retrieve them.
+       */
+      total: number;
+    };
+    SynologySongDto: {
+      additional: components['schemas']['SynologySongAdditionalDto'];
+      id: string;
+      path: string;
+      title: string;
+      type: components['schemas']['ContentTypeEnum'];
+    };
+    SynologySongRatingDto: {
+      rating: number;
+    };
+    SynologySongResponseDto: {
+      data: components['schemas']['SynologySongDataDto'];
+      /**
+       * @description Boolean flag for the request ending successfully.  There are scenarios where Synology could
+       *     return false instead but this server will return an HTTP error response.
+       */
+      success: boolean;
+    };
+    SynologySongsBodyDto: {
+      additional: string;
+      /**
+       * @description Synology's API uses this value to route requests appropriately but this software has
+       *     direct endpoints for their relevant URL paths.  As such this value is ignored for now
+       *     but defined to match the Synology API.
+       *
+       *     This endpoint requires a value of `SYNO.AudioStation.Song` be provided for correctness.
+       * @example SYNO.AudioStation.Song
+       */
+      api: components['schemas']['SynologyApiEnum'];
+      /**
+       * @description Synology supports having personal and shared libraries but this software does not have a
+       *     direct equivalent, users can add the same root path to achieve it.  As such this value
+       *     is ignored for now but defined to match the Synology API.
+       *
+       *     This endpoint requires a value of `all` be provided for correctness.
+       * @example all
+       */
+      library: components['schemas']['SynologyLibraryEnum'];
+      /**
+       * @description Defines the number of results to return.  If no value is specified a default of 100,000
+       *     is used to practically-ensure all results are returned.  This is a change from Synology's
+       *     API which defaults to 100, but Synology's mobile clients will specify their limit.
+       */
+      limit: number;
+      /**
+       * @description Synology's API uses this value to route requests appropriately but for AudioStation the
+       *     endpoints have limited functionality, all music-related endpoints `list` except cover
+       *     images.  As such this value is ignored for now but defined to match the Synology API.
+       *
+       *     This endpoint requires a value of `list` be provided for correctness.
+       * @example list
+       */
+      method: components['schemas']['SynologyMethodEnum'];
+      /**
+       * @description Defines the pagination offset for the results.  If no value is specified a default of 0 is
+       *     used to start at the beginning of a result set.
+       */
+      offset: number;
+      /**
+       * @description Synology's API has versioned endpoints and some have at least 3 versions.  This software
+       *     currently only supports the latest version of the API for each endpoint and ignores this value
+       *     for now.  It's possible to build in support for prior versions of an endpoint but that would
+       *     require using the `debug-proxy` to capture the request and response payloads to understand the
+       *     differences between versions.  If you are running an older DSM NAS and wish to help then check
+       *     out the GitHub Issues page and submit a request to support your version of the API.
+       */
+      version: number;
+    };
+    SynologySongsByAlbumArtistBodyDto: {
+      additional: string;
+      album: string;
+      album_artist: string;
+      /**
+       * @description Synology's API uses this value to route requests appropriately but this software has
+       *     direct endpoints for their relevant URL paths.  As such this value is ignored for now
+       *     but defined to match the Synology API.
+       *
+       *     This endpoint requires a value of `SYNO.AudioStation.Song` be provided for correctness.
+       * @example SYNO.AudioStation.Song
+       */
+      api: components['schemas']['SynologyApiEnum'];
+      artist: string;
+      /**
+       * @description Synology supports having personal and shared libraries but this software does not have a
+       *     direct equivalent, users can add the same root path to achieve it.  As such this value
+       *     is ignored for now but defined to match the Synology API.
+       *
+       *     This endpoint requires a value of `all` be provided for correctness.
+       * @example all
+       */
+      library: components['schemas']['SynologyLibraryEnum'];
+      /**
+       * @description Defines the number of results to return.  If no value is specified a default of 100,000
+       *     is used to practically-ensure all results are returned.  This is a change from Synology's
+       *     API which defaults to 100, but Synology's mobile clients will specify their limit.
+       */
+      limit: number;
+      /**
+       * @description Synology's API uses this value to route requests appropriately but for AudioStation the
+       *     endpoints have limited functionality, all music-related endpoints `list` except cover
+       *     images.  As such this value is ignored for now but defined to match the Synology API.
+       *
+       *     This endpoint requires a value of `list` be provided for correctness.
+       * @example list
+       */
+      method: components['schemas']['SynologyMethodEnum'];
+      /**
+       * @description Defines the pagination offset for the results.  If no value is specified a default of 0 is
+       *     used to start at the beginning of a result set.
+       */
+      offset: number;
+      /**
+       * @description Synology's API has versioned endpoints and some have at least 3 versions.  This software
+       *     currently only supports the latest version of the API for each endpoint and ignores this value
+       *     for now.  It's possible to build in support for prior versions of an endpoint but that would
+       *     require using the `debug-proxy` to capture the request and response payloads to understand the
+       *     differences between versions.  If you are running an older DSM NAS and wish to help then check
+       *     out the GitHub Issues page and submit a request to support your version of the API.
+       */
+      version: number;
+    };
+    SynologySongsByAlbumBodyDto: {
+      additional: string;
+      album: string;
+      album_artist: string;
+      /**
+       * @description Synology's API uses this value to route requests appropriately but this software has
+       *     direct endpoints for their relevant URL paths.  As such this value is ignored for now
+       *     but defined to match the Synology API.
+       *
+       *     This endpoint requires a value of `SYNO.AudioStation.Song` be provided for correctness.
+       * @example SYNO.AudioStation.Song
+       */
+      api: components['schemas']['SynologyApiEnum'];
+      /**
+       * @description Synology supports having personal and shared libraries but this software does not have a
+       *     direct equivalent, users can add the same root path to achieve it.  As such this value
+       *     is ignored for now but defined to match the Synology API.
+       *
+       *     This endpoint requires a value of `all` be provided for correctness.
+       * @example all
+       */
+      library: components['schemas']['SynologyLibraryEnum'];
+      /**
+       * @description Defines the number of results to return.  If no value is specified a default of 100,000
+       *     is used to practically-ensure all results are returned.  This is a change from Synology's
+       *     API which defaults to 100, but Synology's mobile clients will specify their limit.
+       */
+      limit: number;
+      /**
+       * @description Synology's API uses this value to route requests appropriately but for AudioStation the
+       *     endpoints have limited functionality, all music-related endpoints `list` except cover
+       *     images.  As such this value is ignored for now but defined to match the Synology API.
+       *
+       *     This endpoint requires a value of `list` be provided for correctness.
+       * @example list
+       */
+      method: components['schemas']['SynologyMethodEnum'];
+      /**
+       * @description Defines the pagination offset for the results.  If no value is specified a default of 0 is
+       *     used to start at the beginning of a result set.
+       */
+      offset: number;
+      /**
+       * @description Synology's API has versioned endpoints and some have at least 3 versions.  This software
+       *     currently only supports the latest version of the API for each endpoint and ignores this value
+       *     for now.  It's possible to build in support for prior versions of an endpoint but that would
+       *     require using the `debug-proxy` to capture the request and response payloads to understand the
+       *     differences between versions.  If you are running an older DSM NAS and wish to help then check
+       *     out the GitHub Issues page and submit a request to support your version of the API.
+       */
+      version: number;
+    };
+    SynologySongsByAlbumComposerBodyDto: {
+      additional: string;
+      album: string;
+      album_artist: string;
+      /**
+       * @description Synology's API uses this value to route requests appropriately but this software has
+       *     direct endpoints for their relevant URL paths.  As such this value is ignored for now
+       *     but defined to match the Synology API.
+       *
+       *     This endpoint requires a value of `SYNO.AudioStation.Song` be provided for correctness.
+       * @example SYNO.AudioStation.Song
+       */
+      api: components['schemas']['SynologyApiEnum'];
+      /** @description The name of the composer */
+      composer: string;
+      /**
+       * @description Synology supports having personal and shared libraries but this software does not have a
+       *     direct equivalent, users can add the same root path to achieve it.  As such this value
+       *     is ignored for now but defined to match the Synology API.
+       *
+       *     This endpoint requires a value of `all` be provided for correctness.
+       * @example all
+       */
+      library: components['schemas']['SynologyLibraryEnum'];
+      /**
+       * @description Defines the number of results to return.  If no value is specified a default of 100,000
+       *     is used to practically-ensure all results are returned.  This is a change from Synology's
+       *     API which defaults to 100, but Synology's mobile clients will specify their limit.
+       */
+      limit: number;
+      /**
+       * @description Synology's API uses this value to route requests appropriately but for AudioStation the
+       *     endpoints have limited functionality, all music-related endpoints `list` except cover
+       *     images.  As such this value is ignored for now but defined to match the Synology API.
+       *
+       *     This endpoint requires a value of `list` be provided for correctness.
+       * @example list
+       */
+      method: components['schemas']['SynologyMethodEnum'];
+      /**
+       * @description Defines the pagination offset for the results.  If no value is specified a default of 0 is
+       *     used to start at the beginning of a result set.
+       */
+      offset: number;
+      /**
+       * @description Synology's API has versioned endpoints and some have at least 3 versions.  This software
+       *     currently only supports the latest version of the API for each endpoint and ignores this value
+       *     for now.  It's possible to build in support for prior versions of an endpoint but that would
+       *     require using the `debug-proxy` to capture the request and response payloads to understand the
+       *     differences between versions.  If you are running an older DSM NAS and wish to help then check
+       *     out the GitHub Issues page and submit a request to support your version of the API.
+       */
+      version: number;
+    };
+    SynologySongsByAlbumDefaultGenreBodyDto: {
+      additional: string;
+      album: string;
+      album_artist: string;
+      /**
+       * @description Synology's API uses this value to route requests appropriately but this software has
+       *     direct endpoints for their relevant URL paths.  As such this value is ignored for now
+       *     but defined to match the Synology API.
+       *
+       *     This endpoint requires a value of `SYNO.AudioStation.Song` be provided for correctness.
+       * @example SYNO.AudioStation.Song
+       */
+      api: components['schemas']['SynologyApiEnum'];
+      /** @description The name of the genre */
+      genre_filter: string;
+      /**
+       * @description Synology supports having personal and shared libraries but this software does not have a
+       *     direct equivalent, users can add the same root path to achieve it.  As such this value
+       *     is ignored for now but defined to match the Synology API.
+       *
+       *     This endpoint requires a value of `all` be provided for correctness.
+       * @example all
+       */
+      library: components['schemas']['SynologyLibraryEnum'];
+      /**
+       * @description Defines the number of results to return.  If no value is specified a default of 100,000
+       *     is used to practically-ensure all results are returned.  This is a change from Synology's
+       *     API which defaults to 100, but Synology's mobile clients will specify their limit.
+       */
+      limit: number;
+      /**
+       * @description Synology's API uses this value to route requests appropriately but for AudioStation the
+       *     endpoints have limited functionality, all music-related endpoints `list` except cover
+       *     images.  As such this value is ignored for now but defined to match the Synology API.
+       *
+       *     This endpoint requires a value of `list` be provided for correctness.
+       * @example list
+       */
+      method: components['schemas']['SynologyMethodEnum'];
+      /**
+       * @description Defines the pagination offset for the results.  If no value is specified a default of 0 is
+       *     used to start at the beginning of a result set.
+       */
+      offset: number;
+      /**
+       * @description Synology's API has versioned endpoints and some have at least 3 versions.  This software
+       *     currently only supports the latest version of the API for each endpoint and ignores this value
+       *     for now.  It's possible to build in support for prior versions of an endpoint but that would
+       *     require using the `debug-proxy` to capture the request and response payloads to understand the
+       *     differences between versions.  If you are running an older DSM NAS and wish to help then check
+       *     out the GitHub Issues page and submit a request to support your version of the API.
+       */
+      version: number;
+    };
+    SynologySongsByAlbumGenreBodyDto: {
+      additional: string;
+      album: string;
+      album_artist: string;
+      /**
+       * @description Synology's API uses this value to route requests appropriately but this software has
+       *     direct endpoints for their relevant URL paths.  As such this value is ignored for now
+       *     but defined to match the Synology API.
+       *
+       *     This endpoint requires a value of `SYNO.AudioStation.Song` be provided for correctness.
+       * @example SYNO.AudioStation.Song
+       */
+      api: components['schemas']['SynologyApiEnum'];
+      /** @description The name of the genre */
+      genre: string;
+      /**
+       * @description Synology supports having personal and shared libraries but this software does not have a
+       *     direct equivalent, users can add the same root path to achieve it.  As such this value
+       *     is ignored for now but defined to match the Synology API.
+       *
+       *     This endpoint requires a value of `all` be provided for correctness.
+       * @example all
+       */
+      library: components['schemas']['SynologyLibraryEnum'];
+      /**
+       * @description Defines the number of results to return.  If no value is specified a default of 100,000
+       *     is used to practically-ensure all results are returned.  This is a change from Synology's
+       *     API which defaults to 100, but Synology's mobile clients will specify their limit.
+       */
+      limit: number;
+      /**
+       * @description Synology's API uses this value to route requests appropriately but for AudioStation the
+       *     endpoints have limited functionality, all music-related endpoints `list` except cover
+       *     images.  As such this value is ignored for now but defined to match the Synology API.
+       *
+       *     This endpoint requires a value of `list` be provided for correctness.
+       * @example list
+       */
+      method: components['schemas']['SynologyMethodEnum'];
+      /**
+       * @description Defines the pagination offset for the results.  If no value is specified a default of 0 is
+       *     used to start at the beginning of a result set.
+       */
+      offset: number;
+      /**
+       * @description Synology's API has versioned endpoints and some have at least 3 versions.  This software
+       *     currently only supports the latest version of the API for each endpoint and ignores this value
+       *     for now.  It's possible to build in support for prior versions of an endpoint but that would
+       *     require using the `debug-proxy` to capture the request and response payloads to understand the
+       *     differences between versions.  If you are running an older DSM NAS and wish to help then check
+       *     out the GitHub Issues page and submit a request to support your version of the API.
+       */
+      version: number;
+    };
+    SynologySongsByArtistBodyDto: {
+      additional: string;
+      /**
+       * @description Synology's API uses this value to route requests appropriately but this software has
+       *     direct endpoints for their relevant URL paths.  As such this value is ignored for now
+       *     but defined to match the Synology API.
+       *
+       *     This endpoint requires a value of `SYNO.AudioStation.Song` be provided for correctness.
+       * @example SYNO.AudioStation.Song
+       */
+      api: components['schemas']['SynologyApiEnum'];
+      artist: string;
+      /**
+       * @description Synology supports having personal and shared libraries but this software does not have a
+       *     direct equivalent, users can add the same root path to achieve it.  As such this value
+       *     is ignored for now but defined to match the Synology API.
+       *
+       *     This endpoint requires a value of `all` be provided for correctness.
+       * @example all
+       */
+      library: components['schemas']['SynologyLibraryEnum'];
+      /**
+       * @description Defines the number of results to return.  If no value is specified a default of 100,000
+       *     is used to practically-ensure all results are returned.  This is a change from Synology's
+       *     API which defaults to 100, but Synology's mobile clients will specify their limit.
+       */
+      limit: number;
+      /**
+       * @description Synology's API uses this value to route requests appropriately but for AudioStation the
+       *     endpoints have limited functionality, all music-related endpoints `list` except cover
+       *     images.  As such this value is ignored for now but defined to match the Synology API.
+       *
+       *     This endpoint requires a value of `list` be provided for correctness.
+       * @example list
+       */
+      method: components['schemas']['SynologyMethodEnum'];
+      /**
+       * @description Defines the pagination offset for the results.  If no value is specified a default of 0 is
+       *     used to start at the beginning of a result set.
+       */
+      offset: number;
+      /**
+       * @description Synology's API has versioned endpoints and some have at least 3 versions.  This software
+       *     currently only supports the latest version of the API for each endpoint and ignores this value
+       *     for now.  It's possible to build in support for prior versions of an endpoint but that would
+       *     require using the `debug-proxy` to capture the request and response payloads to understand the
+       *     differences between versions.  If you are running an older DSM NAS and wish to help then check
+       *     out the GitHub Issues page and submit a request to support your version of the API.
+       */
+      version: number;
+    };
+    SynologySongsByComposerBodyDto: {
+      additional: string;
+      /**
+       * @description Synology's API uses this value to route requests appropriately but this software has
+       *     direct endpoints for their relevant URL paths.  As such this value is ignored for now
+       *     but defined to match the Synology API.
+       *
+       *     This endpoint requires a value of `SYNO.AudioStation.Song` be provided for correctness.
+       * @example SYNO.AudioStation.Song
+       */
+      api: components['schemas']['SynologyApiEnum'];
+      /** @description The name of the composer */
+      composer: string;
+      /**
+       * @description Synology supports having personal and shared libraries but this software does not have a
+       *     direct equivalent, users can add the same root path to achieve it.  As such this value
+       *     is ignored for now but defined to match the Synology API.
+       *
+       *     This endpoint requires a value of `all` be provided for correctness.
+       * @example all
+       */
+      library: components['schemas']['SynologyLibraryEnum'];
+      /**
+       * @description Defines the number of results to return.  If no value is specified a default of 100,000
+       *     is used to practically-ensure all results are returned.  This is a change from Synology's
+       *     API which defaults to 100, but Synology's mobile clients will specify their limit.
+       */
+      limit: number;
+      /**
+       * @description Synology's API uses this value to route requests appropriately but for AudioStation the
+       *     endpoints have limited functionality, all music-related endpoints `list` except cover
+       *     images.  As such this value is ignored for now but defined to match the Synology API.
+       *
+       *     This endpoint requires a value of `list` be provided for correctness.
+       * @example list
+       */
+      method: components['schemas']['SynologyMethodEnum'];
+      /**
+       * @description Defines the pagination offset for the results.  If no value is specified a default of 0 is
+       *     used to start at the beginning of a result set.
+       */
+      offset: number;
+      /**
+       * @description Synology's API has versioned endpoints and some have at least 3 versions.  This software
+       *     currently only supports the latest version of the API for each endpoint and ignores this value
+       *     for now.  It's possible to build in support for prior versions of an endpoint but that would
+       *     require using the `debug-proxy` to capture the request and response payloads to understand the
+       *     differences between versions.  If you are running an older DSM NAS and wish to help then check
+       *     out the GitHub Issues page and submit a request to support your version of the API.
+       */
+      version: number;
+    };
+    SynologySongsByDefaultGenreBodyDto: {
+      additional: string;
+      /**
+       * @description Synology's API uses this value to route requests appropriately but this software has
+       *     direct endpoints for their relevant URL paths.  As such this value is ignored for now
+       *     but defined to match the Synology API.
+       *
+       *     This endpoint requires a value of `SYNO.AudioStation.Song` be provided for correctness.
+       * @example SYNO.AudioStation.Song
+       */
+      api: components['schemas']['SynologyApiEnum'];
+      /** @description The name of the genre */
+      genre_filter: string;
+      /**
+       * @description Synology supports having personal and shared libraries but this software does not have a
+       *     direct equivalent, users can add the same root path to achieve it.  As such this value
+       *     is ignored for now but defined to match the Synology API.
+       *
+       *     This endpoint requires a value of `all` be provided for correctness.
+       * @example all
+       */
+      library: components['schemas']['SynologyLibraryEnum'];
+      /**
+       * @description Defines the number of results to return.  If no value is specified a default of 100,000
+       *     is used to practically-ensure all results are returned.  This is a change from Synology's
+       *     API which defaults to 100, but Synology's mobile clients will specify their limit.
+       */
+      limit: number;
+      /**
+       * @description Synology's API uses this value to route requests appropriately but for AudioStation the
+       *     endpoints have limited functionality, all music-related endpoints `list` except cover
+       *     images.  As such this value is ignored for now but defined to match the Synology API.
+       *
+       *     This endpoint requires a value of `list` be provided for correctness.
+       * @example list
+       */
+      method: components['schemas']['SynologyMethodEnum'];
+      /**
+       * @description Defines the pagination offset for the results.  If no value is specified a default of 0 is
+       *     used to start at the beginning of a result set.
+       */
+      offset: number;
+      /**
+       * @description Synology's API has versioned endpoints and some have at least 3 versions.  This software
+       *     currently only supports the latest version of the API for each endpoint and ignores this value
+       *     for now.  It's possible to build in support for prior versions of an endpoint but that would
+       *     require using the `debug-proxy` to capture the request and response payloads to understand the
+       *     differences between versions.  If you are running an older DSM NAS and wish to help then check
+       *     out the GitHub Issues page and submit a request to support your version of the API.
+       */
+      version: number;
+    };
+    SynologySongsByGenreBodyDto: {
+      additional: string;
+      /**
+       * @description Synology's API uses this value to route requests appropriately but this software has
+       *     direct endpoints for their relevant URL paths.  As such this value is ignored for now
+       *     but defined to match the Synology API.
+       *
+       *     This endpoint requires a value of `SYNO.AudioStation.Song` be provided for correctness.
+       * @example SYNO.AudioStation.Song
+       */
+      api: components['schemas']['SynologyApiEnum'];
+      /** @description The name of the genre */
+      genre: string;
+      /**
+       * @description Synology supports having personal and shared libraries but this software does not have a
+       *     direct equivalent, users can add the same root path to achieve it.  As such this value
+       *     is ignored for now but defined to match the Synology API.
+       *
+       *     This endpoint requires a value of `all` be provided for correctness.
+       * @example all
+       */
+      library: components['schemas']['SynologyLibraryEnum'];
+      /**
+       * @description Defines the number of results to return.  If no value is specified a default of 100,000
+       *     is used to practically-ensure all results are returned.  This is a change from Synology's
+       *     API which defaults to 100, but Synology's mobile clients will specify their limit.
+       */
+      limit: number;
+      /**
+       * @description Synology's API uses this value to route requests appropriately but for AudioStation the
+       *     endpoints have limited functionality, all music-related endpoints `list` except cover
+       *     images.  As such this value is ignored for now but defined to match the Synology API.
+       *
+       *     This endpoint requires a value of `list` be provided for correctness.
+       * @example list
+       */
+      method: components['schemas']['SynologyMethodEnum'];
+      /**
+       * @description Defines the pagination offset for the results.  If no value is specified a default of 0 is
+       *     used to start at the beginning of a result set.
+       */
+      offset: number;
+      /**
+       * @description Synology's API has versioned endpoints and some have at least 3 versions.  This software
+       *     currently only supports the latest version of the API for each endpoint and ignores this value
+       *     for now.  It's possible to build in support for prior versions of an endpoint but that would
+       *     require using the `debug-proxy` to capture the request and response payloads to understand the
+       *     differences between versions.  If you are running an older DSM NAS and wish to help then check
+       *     out the GitHub Issues page and submit a request to support your version of the API.
+       */
+      version: number;
+    };
+    SynologySongTagDto: {
+      album: string;
+      album_artist: string;
+      artist: string;
+      comment: string;
+      composer: string;
+      disc: number;
+      genre: string;
+      track: number;
+      year: number;
+    };
+    SynologySuccessResponseDto: {
+      /**
+       * @description Boolean flag for the request ending successfully.  There are scenarios where Synology could
+       *     return false instead but this server will return an HTTP error response.
+       */
+      success: boolean;
+    };
+    /** @enum {string} */
+    TrackSortFieldEnum: TrackSortFieldEnum;
+    /**
+     * @description The error message(s) that occurred during the validation of the request data or additional requirements
+     *     applied during the execution of the request
+     * @enum {string}
+     */
+    UserCreateRootPathBadRequestErrorMessageEnum: UserCreateRootPathBadRequestErrorMessageEnum;
+    UserCreateRootPathBadRequestResponseDto: {
+      /** @description General description of the error class */
+      error: string;
+      /**
+       * @description The error message(s) that occurred during the validation of the request data or additional requirements
+       *     applied during the execution of the request
+       * @default root-path-does-not-exist-error
+       */
+      message: components['schemas']['UserCreateRootPathBadRequestErrorMessageEnum'][];
+      /**
+       * @description The success being "false" indicates that the request failed to complete.
+       * @default false
+       */
+      success: boolean;
+    };
+    UserCreateRootPathBodyDto: {
+      /** @description The fully-qualified path to set for the root path */
+      rootPath: string;
+    };
+    UserCreateRootPathResponseDto: {
+      /**
+       * Format: constant
+       * @description The success being "true" indicates that the request completed.
+       * @default true
+       */
+      success: boolean;
+    };
+    /**
+     * @description The error message(s) that occurred during the validation of the request data or additional requirements
+     *     applied during the execution of the request
+     * @enum {string}
+     */
+    UserDeleteRootPathNotFoundErrorMessageEnum: UserDeleteRootPathNotFoundErrorMessageEnum;
+    UserDeleteRootPathNotFoundResponseDto: {
+      /** @description General description of the error class */
+      error: string;
+      /**
+       * @description The error message(s) that occurred during the validation of the request data or additional requirements
+       *     applied during the execution of the request
+       * @default root-path-not-found-error
+       */
+      message: components['schemas']['UserDeleteRootPathNotFoundErrorMessageEnum'][];
+      /**
+       * @description The success being "false" indicates that the request failed to complete.
+       * @default false
+       */
+      success: boolean;
+    };
+    UserDeleteRootPathResponseDto: {
+      /**
+       * Format: constant
+       * @description The success being "true" indicates that the request completed.
+       * @default true
+       */
+      success: boolean;
+    };
+    UserFolderStructureResponseDto: {
+      items: components['schemas']['UserTreeItemDto'][];
+      /**
+       * Format: constant
+       * @description The success being "true" indicates that the request completed.
+       * @default true
+       */
+      success: boolean;
+    };
+    UserListAlbumArtistsBadRequestResponseDto: {
+      /** @description General description of the error class */
+      error: string;
+      /**
+       * @description The error message(s) that occurred during the validation of the request data or additional requirements
+       *     applied during the execution of the request
+       * @default invalid-added-after-error
+       */
+      message: components['schemas']['UserListTrackArtistsBadRequestErrorMessage'][];
+      /**
+       * @description The success being "false" indicates that the request failed to complete.
+       * @default false
+       */
+      success: boolean;
+    };
+    UserListAlbumArtistsResponseDto: {
+      /** @description The list of artists that match the query parameters, which may be limited by pagination. */
+      artists: components['schemas']['LibraryArtistDto'][];
+      /**
+       * @description The offset of the first artist in the artists array, which may be greater than 0 if
+       *     pagination is applied.
+       */
+      offset: number;
+      /**
+       * Format: constant
+       * @description The success being "true" indicates that the request completed.
+       * @default true
+       */
+      success: boolean;
+      /**
+       * @description The total number of artists that match the query parameters, which may be greater
+       *     than the number of artists returned in the artists array if pagination is applied.
+       */
+      total: number;
+    };
+    UserListAlbumArtistsWithTracksBadRequestResponseDto: {
+      /** @description General description of the error class */
+      error: string;
+      /**
+       * @description The error message(s) that occurred during the validation of the request data or additional requirements
+       *     applied during the execution of the request
+       * @default invalid-added-after-error
+       */
+      message: components['schemas']['UserListTrackArtistsBadRequestErrorMessage'][];
+      /**
+       * @description The success being "false" indicates that the request failed to complete.
+       * @default false
+       */
+      success: boolean;
+    };
+    UserListAlbumArtistsWithTracksResponseDto: {
+      /** @description The list of artists that match the query parameters, which may be limited by pagination. */
+      artists: components['schemas']['LibraryArtistWithTracksDto'][];
+      /**
+       * @description The offset of the first artist in the artists array, which may be greater than 0 if
+       *     pagination is applied.
+       */
+      offset: number;
+      /**
+       * Format: constant
+       * @description The success being "true" indicates that the request completed.
+       * @default true
+       */
+      success: boolean;
+      /**
+       * @description The total number of artists that match the query parameters, which may be greater
+       *     than the number of artists returned in the artists array if pagination is applied.
+       */
+      total: number;
+    };
+    /**
+     * @description The error message(s) that occurred during the validation of the request data or additional requirements
+     *     applied during the execution of the request.
+     * @enum {string}
+     */
+    UserListAlbumsBadRequestErrorMessages: UserListAlbumsBadRequestErrorMessages;
+    UserListAlbumsBadRequestResponseDto: {
+      /** @description General description of the error class */
+      error: string;
+      /**
+       * @description The error message(s) that occurred during the validation of the request data or additional requirements
+       *     applied during the execution of the request.
+       * @default invalid-added-after-error
+       */
+      message: components['schemas']['UserListAlbumsBadRequestErrorMessages'][];
+      /**
+       * @description The success being "false" indicates that the request failed to complete.
+       * @default false
+       */
+      success: boolean;
+    };
+    UserListAlbumsResponseDto: {
+      /** @description The list of albums that match the query parameters, which may be limited by pagination. */
+      albums: components['schemas']['LibraryAlbumDto'][];
+      /**
+       * @description The offset of the first album in the albums array, which may be greater than 0 if
+       *     pagination is applied.
+       */
+      offset: number;
+      /**
+       * Format: constant
+       * @description The success being "true" indicates that the request completed.
+       * @default true
+       */
+      success: boolean;
+      /**
+       * @description The total number of albums that match the query parameters, which may be greater
+       *     than the number of albums returned in the albums array if pagination is applied.
+       */
+      total: number;
+    };
+    /**
+     * @description The error message(s) that occurred during the validation of the request data or additional requirements
+     *     applied during the execution of the request.
+     * @enum {string}
+     */
+    UserListAlbumsWithTracksBadRequestErrorMessages: UserListAlbumsWithTracksBadRequestErrorMessages;
+    UserListAlbumsWithTracksBadRequestResponseDto: {
+      /** @description General description of the error class */
+      error: string;
+      /**
+       * @description The error message(s) that occurred during the validation of the request data or additional requirements
+       *     applied during the execution of the request.
+       * @default invalid-added-after-error
+       */
+      message: components['schemas']['UserListAlbumsWithTracksBadRequestErrorMessages'][];
+      /**
+       * @description The success being "false" indicates that the request failed to complete.
+       * @default false
+       */
+      success: boolean;
+    };
+    UserListAlbumsWithTracksResponseDto: {
+      /** @description The list of albums that match the query parameters, which may be limited by pagination. */
+      albums: components['schemas']['LibraryAlbumWithTracksDto'][];
+      /**
+       * @description The offset of the first album in the albums array, which may be greater than 0 if
+       *     pagination is applied.
+       */
+      offset: number;
+      /**
+       * Format: constant
+       * @description The success being "true" indicates that the request completed.
+       * @default true
+       */
+      success: boolean;
+      /**
+       * @description The total number of albums that match the query parameters, which may be greater
+       *     than the number of albums returned in the albums array if pagination is applied.
+       */
+      total: number;
+    };
+    /**
+     * @description The error message(s) that occurred during the validation of the request data or additional requirements
+     *     applied during the execution of the request
+     * @enum {string}
+     */
+    UserListIndexerLogsBadRequestErrorMessageEnum: UserListIndexerLogsBadRequestErrorMessageEnum;
+    UserListIndexerLogsBadRequestResponseDto: {
+      /** @description General description of the error class */
+      error: string;
+      /**
+       * @description The error message(s) that occurred during the validation of the request data or additional requirements
+       *     applied during the execution of the request
+       * @default invalid-account-id-error
+       */
+      message: components['schemas']['UserListIndexerLogsBadRequestErrorMessageEnum'][];
+      /**
+       * @description The success being "false" indicates that the request failed to complete.
+       * @default false
+       */
+      success: boolean;
+    };
+    /**
+     * @description The error message(s) that occurred during the validation of the request data or additional requirements
+     *     applied during the execution of the request
+     * @enum {string}
+     */
+    UserListIndexerLogsNotFoundErrorMessageEnum: UserListIndexerLogsNotFoundErrorMessageEnum;
+    UserListIndexerLogsNotFoundResponseDto: {
+      /** @description General description of the error class */
+      error: string;
+      /**
+       * @description The error message(s) that occurred during the validation of the request data or additional requirements
+       *     applied during the execution of the request
+       * @default invalid-account-id-error
+       */
+      message: components['schemas']['UserListIndexerLogsNotFoundErrorMessageEnum'][];
+      /**
+       * @description The success being "false" indicates that the request failed to complete.
+       * @default false
+       */
+      success: boolean;
+    };
+    UserListIndexerLogsResponseDto: {
+      logs: components['schemas']['UserLogEntryDto'][];
+      /**
+       * Format: constant
+       * @description The success being "true" indicates that the request completed.
+       * @default true
+       */
+      success: boolean;
+    };
+    UserListRootPathsResponseDto: {
+      /** @description The list of root paths with associated account owner information */
+      rootPaths: components['schemas']['UserRootPathDto'][];
+      /**
+       * Format: constant
+       * @description The success being "true" indicates that the request completed.
+       * @default true
+       */
+      success: boolean;
+    };
+    /**
+     * @description The error message(s) that occurred during the validation of the request data or additional requirements
+     *     applied during the execution of the request
+     * @enum {string}
+     */
+    UserListTrackArtistsBadRequestErrorMessage: UserListTrackArtistsBadRequestErrorMessage;
+    UserListTrackArtistsBadRequestResponseDto: {
+      /** @description General description of the error class */
+      error: string;
+      /**
+       * @description The error message(s) that occurred during the validation of the request data or additional requirements
+       *     applied during the execution of the request
+       * @default invalid-added-after-error
+       */
+      message: components['schemas']['UserListTrackArtistsBadRequestErrorMessage'][];
+      /**
+       * @description The success being "false" indicates that the request failed to complete.
+       * @default false
+       */
+      success: boolean;
+    };
+    UserListTrackArtistsResponseDto: {
+      /** @description The list of artists that match the query parameters, which may be limited by pagination. */
+      artists: components['schemas']['LibraryArtistDto'][];
+      /**
+       * @description The offset of the first artist in the artists array, which may be greater than 0 if
+       *     pagination is applied.
+       */
+      offset: number;
+      /**
+       * Format: constant
+       * @description The success being "true" indicates that the request completed.
+       * @default true
+       */
+      success: boolean;
+      /**
+       * @description The total number of artists that match the query parameters, which may be greater
+       *     than the number of artists returned in the artists array if pagination is applied.
+       */
+      total: number;
+    };
+    UserListTrackArtistsWithTracksBadRequestResponseDto: {
+      /** @description General description of the error class */
+      error: string;
+      /**
+       * @description The error message(s) that occurred during the validation of the request data or additional requirements
+       *     applied during the execution of the request
+       * @default invalid-added-after-error
+       */
+      message: components['schemas']['UserListTrackArtistsBadRequestErrorMessage'][];
+      /**
+       * @description The success being "false" indicates that the request failed to complete.
+       * @default false
+       */
+      success: boolean;
+    };
+    UserListTrackArtistsWithTracksResponseDto: {
+      /** @description The list of artists that match the query parameters, which may be limited by pagination. */
+      artists: components['schemas']['LibraryArtistWithTracksDto'][];
+      /**
+       * @description The offset of the first artist in the artists array, which may be greater than 0 if
+       *     pagination is applied.
+       */
+      offset: number;
+      /**
+       * Format: constant
+       * @description The success being "true" indicates that the request completed.
+       * @default true
+       */
+      success: boolean;
+      /**
+       * @description The total number of artists that match the query parameters, which may be greater
+       *     than the number of artists returned in the artists array if pagination is applied.
+       */
+      total: number;
+    };
+    /**
+     * @description The error message(s) that occurred during the validation of the request data or additional requirements
+     *     applied during the execution of the request
+     * @enum {string}
+     */
+    UserListTrackComposersBadRequestErrorMessages: UserListTrackComposersBadRequestErrorMessages;
+    UserListTrackComposersBadRequestResponseDto: {
+      /** @description General description of the error class */
+      error: string;
+      /**
+       * @description The error message(s) that occurred during the validation of the request data or additional requirements
+       *     applied during the execution of the request
+       * @default invalid-added-after-error
+       */
+      message: components['schemas']['UserListTrackComposersBadRequestErrorMessages'][];
+      /**
+       * @description The success being "false" indicates that the request failed to complete.
+       * @default false
+       */
+      success: boolean;
+    };
+    UserListTrackComposersResponseDto: {
+      /** @description The list of composers that match the query parameters, which may be limited by pagination. */
+      composers: components['schemas']['LibraryComposerDto'][];
+      /**
+       * @description The offset of the first composer in the composers array, which may be greater than 0 if
+       *     pagination is applied.
+       */
+      offset: number;
+      /**
+       * Format: constant
+       * @description The success being "true" indicates that the request completed.
+       * @default true
+       */
+      success: boolean;
+      /**
+       * @description The total number of composers that match the query parameters, which may be greater
+       *     than the number of composers returned in the composers array if pagination is applied.
+       */
+      total: number;
+    };
+    UserListTrackComposersWithTracksBadRequestResponseDto: {
+      /** @description General description of the error class */
+      error: string;
+      /**
+       * @description The error message(s) that occurred during the validation of the request data or additional requirements
+       *     applied during the execution of the request
+       * @default invalid-added-after-error
+       */
+      message: components['schemas']['UserListTrackComposersBadRequestErrorMessages'][];
+      /**
+       * @description The success being "false" indicates that the request failed to complete.
+       * @default false
+       */
+      success: boolean;
+    };
+    UserListTrackComposersWithTracksResponseDto: {
+      /** @description The list of composers that match the query parameters, which may be limited by pagination. */
+      composers: components['schemas']['LibraryComposerWithTracksDto'][];
+      /**
+       * @description The offset of the first composer in the composers array, which may be greater than 0 if
+       *     pagination is applied.
+       */
+      offset: number;
+      /**
+       * Format: constant
+       * @description The success being "true" indicates that the request completed.
+       * @default true
+       */
+      success: boolean;
+      /**
+       * @description The total number of composers that match the query parameters, which may be greater
+       *     than the number of composers returned in the composers array if pagination is applied.
+       */
+      total: number;
+    };
+    /**
+     * @description The error message(s) that occurred during the validation of the request data or additional requirements
+     *     applied during the execution of the request
+     * @enum {string}
+     */
+    UserListTrackGenresBadRequestErrorMessages: UserListTrackGenresBadRequestErrorMessages;
+    UserListTrackGenresBadRequestResponseDto: {
+      /** @description General description of the error class */
+      error: string;
+      /**
+       * @description The error message(s) that occurred during the validation of the request data or additional requirements
+       *     applied during the execution of the request
+       * @default invalid-limit-error
+       */
+      message: components['schemas']['UserListTrackGenresBadRequestErrorMessages'][];
+      /**
+       * @description The success being "false" indicates that the request failed to complete.
+       * @default false
+       */
+      success: boolean;
+    };
+    UserListTrackGenresResponseDto: {
+      /** @description The list of genres that match the query parameters, which may be limited by pagination. */
+      genres: components['schemas']['LibraryGenreDto'][];
+      /**
+       * @description The offset of the first genre in the genres array, which may be greater than 0 if
+       *     pagination is applied.
+       */
+      offset: number;
+      /**
+       * Format: constant
+       * @description The success being "true" indicates that the request completed.
+       * @default true
+       */
+      success: boolean;
+      /**
+       * @description The total number of genres that match the query parameters, which may be greater
+       *     than the number of genres returned in the genres array if pagination is applied.
+       */
+      total: number;
+    };
+    /**
+     * @description The error message(s) that occurred during the validation of the request data or additional requirements
+     *     applied during the execution of the request
+     * @enum {string}
+     */
+    UserListTrackGenresWithTracksBadRequestErrorMessages: UserListTrackGenresWithTracksBadRequestErrorMessages;
+    UserListTrackGenresWithTracksBadRequestResponseDto: {
+      /** @description General description of the error class */
+      error: string;
+      /**
+       * @description The error message(s) that occurred during the validation of the request data or additional requirements
+       *     applied during the execution of the request
+       * @default invalid-limit-error
+       */
+      message: components['schemas']['UserListTrackGenresWithTracksBadRequestErrorMessages'][];
+      /**
+       * @description The success being "false" indicates that the request failed to complete.
+       * @default false
+       */
+      success: boolean;
+    };
+    UserListTrackGenresWithTracksResponseDto: {
+      /** @description The list of genres that match the query parameters, which may be limited by pagination. */
+      genres: components['schemas']['LibraryGenreWithTracksDto'][];
+      /**
+       * @description The offset of the first genre in the genres array, which may be greater than 0 if
+       *     pagination is applied.
+       */
+      offset: number;
+      /**
+       * Format: constant
+       * @description The success being "true" indicates that the request completed.
+       * @default true
+       */
+      success: boolean;
+      /**
+       * @description The total number of genres that match the query parameters, which may be greater
+       *     than the number of genres returned in the genres array if pagination is applied.
+       */
+      total: number;
+    };
+    /**
+     * @description The error message(s) that occurred during the validation of the request data or additional requirements
+     *     applied during the execution of the request
+     * @enum {string}
+     */
+    UserListTracksBadRequestErrorMessages: UserListTracksBadRequestErrorMessages;
+    UserListTracksBadRequestResponseDto: {
+      /** @description General description of the error class */
+      error: string;
+      /**
+       * @description The error message(s) that occurred during the validation of the request data or additional requirements
+       *     applied during the execution of the request
+       * @default invalid-added-after-error
+       */
+      message: components['schemas']['UserListTracksBadRequestErrorMessages'][];
+      /**
+       * @description The success being "false" indicates that the request failed to complete.
+       * @default false
+       */
+      success: boolean;
+    };
+    UserListTracksResponseDto: {
+      /**
+       * @description The offset of the first track in the tracks array, which may be greater than 0 if
+       *     pagination is applied.
+       */
+      offset: number;
+      /**
+       * Format: constant
+       * @description The success being "true" indicates that the request completed.
+       * @default true
+       */
+      success: boolean;
+      /**
+       * @description The total number of tracks that match the query parameters, which may be greater
+       *     than the number of tracks returned in the tracks array if pagination is applied.
+       */
+      total: number;
+      /** @description The list of tracks that match the query parameters, which may be limited by pagination. */
+      tracks: components['schemas']['LibraryTrackDto'][];
+    };
+    UserLogEntryDto: {
+      /** Format: date-time */
+      date: string;
+      message: string;
+      rootPath: string;
+      rootPathId: number;
+    };
+    UserRegenerateSessionKeyResponseDto: {
+      /**
+       * Format: constant
+       * @description The success being "true" indicates that the request completed.
+       * @default true
+       */
+      success: boolean;
+    };
+    /**
+     * @description The error message(s) that occurred during the validation of the request data or additional requirements
+     *     applied during the execution of the request
+     * @enum {string}
+     */
+    UserRetrieveAlbumNotFoundErrorMessage: UserRetrieveAlbumNotFoundErrorMessage;
+    UserRetrieveAlbumNotFoundResponseDto: {
+      /** @description General description of the error class */
+      error: string;
+      /**
+       * @description The error message(s) that occurred during the validation of the request data or additional requirements
+       *     applied during the execution of the request
+       * @default album-not-found-error
+       */
+      message: components['schemas']['UserRetrieveAlbumNotFoundErrorMessage'][];
+      /**
+       * @description The success being "false" indicates that the request failed to complete.
+       * @default false
+       */
+      success: boolean;
+    };
+    UserRetrieveAlbumResponseDto: {
+      /** @description The list of albums that match the query parameters, which may be limited by pagination. */
+      album: components['schemas']['LibraryAlbumWithTracksDto'];
+      /**
+       * Format: constant
+       * @description The success being "true" indicates that the request completed.
+       * @default true
+       */
+      success: boolean;
+    };
+    /** @enum {string} */
+    UserRoleEnum: UserRoleEnum;
+    UserRootPathDto: {
+      /**
+       * Format: date-time
+       * @description The date and time the row was created
+       */
+      createdAt: string;
+      /**
+       * @description The number of files or songs that have been found in this root path, this excludes
+       *     anything that is not a music track.
+       */
+      fileCount: number;
+      /** @description The ID of the root path row in the database */
+      id: number;
+      /** @description The fully-qualified path of the root path, this is the base path where music is stored for a user */
+      rootPath: string;
+      /** @description The total size of all the files in this root path contained in the `fileCount` field */
+      totalSize: number;
+      /**
+       * Format: date-time
+       * @description The date and time the row was last updated, this field is optional and may not be present
+       *     if the row has never been updated
+       */
+      updatedAt?: string;
+    };
+    UserTreeItemDto: {
+      children?: components['schemas']['UserTreeItemDto'][];
+      file?: string;
+      folder?: string;
+      fullPath: string;
+      id: number;
+    };
+    /**
+     * @description The error message(s) that occurred during the validation of the request data or additional requirements
+     *     applied during the execution of the request
+     * @enum {string}
+     */
+    UserUpdatePasswordBadRequestErrorMessageEnum: UserUpdatePasswordBadRequestErrorMessageEnum;
+    UserUpdatePasswordBadRequestResponseDto: {
+      /** @description General description of the error class */
+      error: string;
+      /**
+       * @description The error message(s) that occurred during the validation of the request data or additional requirements
+       *     applied during the execution of the request
+       * @default invalid-password-error
+       */
+      message: components['schemas']['UserUpdatePasswordBadRequestErrorMessageEnum'][];
+      /**
+       * @description The success being "false" indicates that the request failed to complete.
+       * @default false
+       */
+      success: boolean;
+    };
+    UserUpdatePasswordBodyDto: {
+      newPassword: string;
+    };
+    UserUpdatePasswordResponseDto: {
+      /**
+       * Format: constant
+       * @description The success being "true" indicates that the request completed.
+       * @default true
+       */
+      success: boolean;
+    };
+  };
+  responses: never;
+  parameters: never;
+  requestBodies: never;
+  headers: never;
+  pathItems: never;
+};
+export type $defs = Record<string, never>;
+export interface operations {
+  AdminCreateAccountController_post: {
+    parameters: {
+      query?: never;
+      header: {
+        /** @description Bearer token for authentication */
+        Authorization: string;
+      };
+      path?: never;
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['AdminCreateAccountBodyDto'];
+      };
+    };
+    responses: {
+      201: {
+        headers: {
+          [name: string]: unknown;
         };
+        content: {
+          'application/json': components['schemas']['AdminCreateAccountResponseDto'];
+        };
+      };
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['AdminCreateAccountBadRequestResponseDto'];
+        };
+      };
+    };
+  };
+  AdminCreateRootPathController_post: {
+    parameters: {
+      query: {
+        /** @description The ID of the account to create the root path for. */
+        id: number;
+      };
+      header: {
+        /** @description Bearer token for authentication */
+        Authorization: string;
+      };
+      path?: never;
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['AdminCreateRootPathBodyDto'];
+      };
+    };
+    responses: {
+      /** @description Root path created successfully */
+      201: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['AdminCreateRootPathResponseDto'];
+        };
+      };
+      /** @description Invalid request data */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['AdminCreateRootPathBadRequestResponseDto'];
+        };
+      };
+      /** @description Account not found */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['AdminCreateRootPathNotFoundResponseDto'];
+        };
+      };
+    };
+  };
+  AdminDeleteAccountController_delete: {
+    parameters: {
+      query: {
+        /** @description The ID of the account to be deleted. */
+        id: number;
+      };
+      header: {
+        /** @description Bearer token for authentication */
+        Authorization: string;
+      };
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description Account deleted successfully */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['AdminDeleteAccountResponseDto'];
+        };
+      };
+      /** @description Invalid account ID or account does not exist */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['AdminDeleteAccountBadRequestResponseDto'];
+        };
+      };
+      /** @description Account not found */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['AdminDeleteAccountNotFoundResponseDto'];
+        };
+      };
+    };
+  };
+  AdminDeleteRootPathController_delete: {
+    parameters: {
+      query: {
+        /** @description The ID of the root path to delete */
+        id: number;
+      };
+      header: {
+        /** @description Bearer token for authentication */
+        Authorization: string;
+      };
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description Root path deleted successfully */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['AdminDeleteRootPathResponseDto'];
+        };
+      };
+      /** @description Root path not found */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['AdminDeleteRootPathNotFoundResponseDto'];
+        };
+      };
+    };
+  };
+  AdminIndexerConfigurationController_get: {
+    parameters: {
+      query?: never;
+      header: {
+        /** @description Bearer token for authentication */
+        Authorization: string;
+      };
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['AdminIndexerConfigurationResponseDto'];
+        };
+      };
+    };
+  };
+  AdminListAccountsController_get: {
+    parameters: {
+      query?: never;
+      header: {
+        /** @description Bearer token for authentication */
+        Authorization: string;
+      };
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description Accounts listed successfully */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['AdminListAccountsResponseDto'];
+        };
+      };
+    };
+  };
+  AdminListIndexerLogsController_get: {
+    parameters: {
+      query?: {
+        accountId?: number;
+        rootPathId?: number;
+        search?: string;
+      };
+      header: {
+        /** @description Bearer token for authentication */
+        Authorization: string;
+      };
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['AdminListIndexerLogsResponseDto'];
+        };
+      };
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['AdminListIndexerLogsBadRequestResponseDto'];
+        };
+      };
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['AdminListIndexerLogsNotFoundResponseDto'];
+        };
+      };
+    };
+  };
+  AdminListRootPathsController_get: {
+    parameters: {
+      query?: never;
+      header: {
+        /** @description Bearer token for authentication */
+        Authorization: string;
+      };
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['AdminListRootPathsResponseDto'];
+        };
+      };
+    };
+  };
+  AdminRegenerateMasterSessionKeyController_post: {
+    parameters: {
+      query?: never;
+      header: {
+        /** @description Bearer token for authentication */
+        Authorization: string;
+      };
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description Master session key regenerated successfully */
+      201: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['AdminRegenerateMasterSessionKeyResponseDto'];
+        };
+      };
+    };
+  };
+  AdminRegenerateUserSessionKeyController_post: {
+    parameters: {
+      query: {
+        /** @description The ID of the account to regenerate the session key for. */
+        id: number;
+      };
+      header: {
+        /** @description Bearer token for authentication */
+        Authorization: string;
+      };
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description Session key regenerated successfully */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['AdminRegenerateUserSessionKeyResponseDto'];
+        };
+      };
+      201: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['AdminRegenerateUserSessionKeyResponseDto'];
+        };
+      };
+      /** @description Account not found */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['AdminRegenerateUserSessionKeyNotFoundResponseDto'];
+        };
+      };
+    };
+  };
+  AdminResetUserPasswordController_post: {
+    parameters: {
+      query: {
+        /** @description The ID of the account whose password is to be reset. */
+        id: number;
+      };
+      header: {
+        /** @description Bearer token for authentication */
+        Authorization: string;
+      };
+      path?: never;
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['AdminResetUserPasswordBodyDto'];
+      };
+    };
+    responses: {
+      /** @description Password reset successfully */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['AdminResetUserPasswordResponseDto'];
+        };
+      };
+      201: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['AdminResetUserPasswordResponseDto'];
+        };
+      };
+      /** @description Invalid request data or additional requirements not met */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['AdminResetUserPasswordBadRequestResponseDto'];
+        };
+      };
+      /** @description Account not found */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['AdminResetUserPasswordNotFoundResponseDto'];
+        };
+      };
+    };
+  };
+  AdminSetIndexerStatusController_patch: {
+    parameters: {
+      query?: never;
+      header: {
+        /** @description Bearer token for authentication */
+        Authorization: string;
+      };
+      path?: never;
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['AdminSetIndexerStatusBodyDto'];
+      };
+    };
+    responses: {
+      /** @description Scanner status updated successfully */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['AdminSetIndexerStatusResponseDto'];
+        };
+      };
+    };
+  };
+  AdminUpdateRootPathController_patch: {
+    parameters: {
+      query: {
+        /** @description The ID of the root path to update */
+        id: number;
+      };
+      header: {
+        /** @description Bearer token for authentication */
+        Authorization: string;
+      };
+      path?: never;
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['AdminUpdateRootPathBodyDto'];
+      };
+    };
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['AdminUpdateRootPathResponseDto'];
+        };
+      };
+      /** @description Invalid root path, either malformed or nonexistent */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['AdminUpdateRootPathBadRequestResponseDto'];
+        };
+      };
+      /** @description Root path not found */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['AdminUpdateRootPathNotFoundResponseDto'];
+        };
+      };
+    };
+  };
+  AdminUpdateUserRolesController_patch: {
+    parameters: {
+      query: {
+        /** @description The ID of the account whose roles are changing. */
+        id: number;
+      };
+      header: {
+        /** @description Bearer token for authentication */
+        Authorization: string;
+      };
+      path?: never;
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['AdminUpdateUserRolesBodyDto'];
+      };
+    };
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['AdminUpdateUserRolesResponseDto'];
+        };
+      };
+      /** @description Invalid user role or account only admin error */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['AdminUpdateUserRolesBadRequestResponseDto'];
+        };
+      };
+      /** @description Account not found */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['AdminUpdateUserRolesNotFoundResponseDto'];
+        };
+      };
+    };
+  };
+  GuestCreateSessionController_post: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['GuestCreateSessionBodyDto'];
+      };
+    };
+    responses: {
+      201: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['GuestCreateSessionResponseDto'];
+        };
+      };
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['GuestCreateSessionBadRequestResponseDto'];
+        };
+      };
+      500: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['InternalServerErrorResponseDto'];
+        };
+      };
+    };
+  };
+  GuestHealthcheckController_healthcheck: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+    };
+  };
+  UserAlbumCoverController_get: {
+    parameters: {
+      query: {
+        /** @description The ID of the album */
+        id: number;
+        /** @description The width/height size of the image in pixels */
+        size: number;
+      };
+      header: {
+        Authorization: string;
+      };
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'image/jpeg': string;
+          'image/png': string;
+          'image/webp': string;
+        };
+      };
+    };
+  };
+  UserArtistCoverController_get: {
+    parameters: {
+      query: {
+        /** @description The ID of the artist */
+        id: number;
+        /** @description The width/height size of the image in pixels */
+        size: number;
+      };
+      header: {
+        Authorization: string;
+      };
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'image/jpeg': string;
+          'image/png': string;
+          'image/webp': string;
+        };
+      };
+    };
+  };
+  UserComposerCoverController_get: {
+    parameters: {
+      query: {
+        /** @description The ID of the composer */
+        id: number;
+        /** @description The width/height size of the image in pixels */
+        size: number;
+      };
+      header: {
+        Authorization: string;
+      };
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'image/jpeg': string;
+          'image/png': string;
+          'image/webp': string;
+        };
+      };
+    };
+  };
+  UserCreateRootPathController_post: {
+    parameters: {
+      query?: never;
+      header: {
+        /** @description Bearer token for authentication */
+        Authorization: string;
+      };
+      path?: never;
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['UserCreateRootPathBodyDto'];
+      };
+    };
+    responses: {
+      /** @description Root path created successfully */
+      201: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['UserCreateRootPathResponseDto'];
+        };
+      };
+      /** @description Invalid request data */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['UserCreateRootPathBadRequestResponseDto'];
+        };
+      };
+    };
+  };
+  UserDeleteRootPathController_delete: {
+    parameters: {
+      query: {
+        /** @description The ID of the root path to delete */
+        id: number;
+      };
+      header: {
+        /** @description Bearer token for authentication */
+        Authorization: string;
+      };
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description Root path deleted successfully */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['UserDeleteRootPathResponseDto'];
+        };
+      };
+      /** @description Root path not found */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['UserDeleteRootPathNotFoundResponseDto'];
+        };
+      };
+    };
+  };
+  UserEndSessionController_delete: {
+    parameters: {
+      query?: never;
+      header: {
+        /** @description Bearer token for authentication */
+        Authorization: string;
+      };
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['SuccessResponseDto'];
+        };
+      };
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['BadRequestResponseDto'];
+        };
+      };
+      500: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['InternalServerErrorResponseDto'];
+        };
+      };
+      default: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['SuccessResponseDto'];
+        };
+      };
+    };
+  };
+  UserFolderStructureController_get: {
+    parameters: {
+      query?: never;
+      header: {
+        /** @description Bearer token for authentication */
+        Authorization: string;
+      };
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description Successfully retrieved the tree of folders and file contents. */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['UserFolderStructureResponseDto'];
+        };
+      };
+    };
+  };
+  UserGenreCoverController_get: {
+    parameters: {
+      query: {
+        /** @description The ID of the genre */
+        id: number;
+        /** @description The width/height size of the image in pixels */
+        size: number;
+      };
+      header: {
+        Authorization: string;
+      };
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'image/jpeg': string;
+          'image/png': string;
+          'image/webp': string;
+        };
+      };
+    };
+  };
+  UserListAlbumArtistsController_get: {
+    parameters: {
+      query?: {
         /**
-         * @description The error message(s) that occurred during the validation of the request data or additional requirements
-         *     applied during the execution of the request
-         * @enum {string}
+         * @description Optional filter for the date the album was added to the library, which will do an exact match against
+         *     the date the album was added to the library.  The date must be in ISO 8601 format (YYYY-MM-DD).
          */
-        AdminCreateAccountBadRequestErrorMessageEnum: AdminCreateAccountBadRequestErrorMessageEnum;
-        AdminCreateAccountBadRequestResponseDto: {
-            /** @description General description of the error class */
-            error: string;
-            /**
-             * @description The error message(s) that occurred during the validation of the request data or additional requirements
-             *     applied during the execution of the request
-             * @default bad-request-error
-             */
-            message: components["schemas"]["AdminCreateAccountBadRequestErrorMessageEnum"][];
-            /**
-             * @description The success being "false" indicates that the request failed to complete.
-             * @default false
-             */
-            success: boolean;
-        };
-        AdminCreateAccountBodyDto: {
-            /** @description The plain-text password the user will enter to sign in.  It will be hashed and securely-stored in the database. */
-            password: string;
-            roles: components["schemas"]["UserRoleEnum"][];
-            /** @description The username for signing in */
-            username: string;
-        };
-        AdminCreateAccountResponseDto: {
-            /**
-             * Format: constant
-             * @description The success being "true" indicates that the request completed.
-             * @default true
-             */
-            success: boolean;
-        };
+        addedAfter?: string;
         /**
-         * @description The error message(s) that occurred during the validation of the request data or additional requirements
-         *     applied during the execution of the request
-         * @enum {string}
+         * @description Optional filter for the date the artist was added to the library, which will do an exact match against
+         *     the date the artist was added to the library.  The date must be in ISO 8601 format (YYYY-MM-DD).
          */
-        AdminCreateRootPathBadRequestErrorMessageEnum: AdminCreateRootPathBadRequestErrorMessageEnum;
-        AdminCreateRootPathBadRequestResponseDto: {
-            /** @description General description of the error class */
-            error: string;
-            /**
-             * @description The error message(s) that occurred during the validation of the request data or additional requirements
-             *     applied during the execution of the request
-             * @default root-path-does-not-exist-error
-             */
-            message: components["schemas"]["AdminCreateRootPathBadRequestErrorMessageEnum"][];
-            /**
-             * @description The success being "false" indicates that the request failed to complete.
-             * @default false
-             */
-            success: boolean;
-        };
-        AdminCreateRootPathBodyDto: {
-            /** @description The fully-qualified path to set for the root path */
-            rootPath: string;
-        };
+        addedBefore?: string;
         /**
-         * @description The error message(s) that occurred during the validation of the request data or additional requirements
-         *     applied during the execution of the request
-         * @enum {string}
+         * @description Optional search filter that will do a case-insensitive partial-match against the artist
+         *     name, album name, composer name, or genre.
          */
-        AdminCreateRootPathNotFoundErrorMessageEnum: AdminCreateRootPathNotFoundErrorMessageEnum;
-        AdminCreateRootPathNotFoundResponseDto: {
-            /** @description General description of the error class */
-            error: string;
-            /**
-             * @description The error message(s) that occurred during the validation of the request data or additional requirements
-             *     applied during the execution of the request
-             * @default account-not-found-error
-             */
-            message: components["schemas"]["AdminCreateRootPathNotFoundErrorMessageEnum"][];
-            /**
-             * @description The success being "false" indicates that the request failed to complete.
-             * @default false
-             */
-            success: boolean;
-        };
-        AdminCreateRootPathResponseDto: {
-            /**
-             * Format: constant
-             * @description The success being "true" indicates that the request completed.
-             * @default true
-             */
-            success: boolean;
-        };
+        filter?: string;
         /**
-         * @description The error message(s) that occurred during the validation of the request data or additional requirements
-         *     applied during the execution of the request
-         * @enum {string}
+         * @description Optional filter for the genre name, which will do a case-insensitive partial-match against the
+         *     genres associated with an artist.
          */
-        AdminDeleteAccountBadRequestErrorMessageEnum: AdminDeleteAccountBadRequestErrorMessageEnum;
-        AdminDeleteAccountBadRequestResponseDto: {
-            /** @description General description of the error class */
-            error: string;
-            /**
-             * @description The error message(s) that occurred during the validation of the request data or additional requirements
-             *     applied during the execution of the request
-             * @default invalid-account-id-error
-             */
-            message: components["schemas"]["AdminDeleteAccountBadRequestErrorMessageEnum"][];
-            /**
-             * @description The success being "false" indicates that the request failed to complete.
-             * @default false
-             */
-            success: boolean;
+        genre?: string[];
+        limit?: number;
+        offset?: number;
+        /** @description Optional filter for the direction to sort the results by. */
+        sortDirection?: components['schemas']['SortDirectionEnum'];
+        /** @description Optional filter for the field to sort results by. */
+        sortField?: components['schemas']['ArtistSortFieldEnum'];
+      };
+      header: {
+        /** @description Bearer token for authentication */
+        Authorization: string;
+      };
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description Successfully retrieved the list of album artists for the user. */
+      200: {
+        headers: {
+          [name: string]: unknown;
         };
+        content: {
+          'application/json': components['schemas']['UserListAlbumArtistsResponseDto'];
+        };
+      };
+      /** @description The request was invalid or missing required parameters. */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['UserListAlbumArtistsBadRequestResponseDto'];
+        };
+      };
+    };
+  };
+  UserListAlbumArtistsWithTracksController_get: {
+    parameters: {
+      query?: {
         /**
-         * @description The error message(s) that occurred during the validation of the request data or additional requirements
-         *     applied during the execution of the request
-         * @enum {string}
+         * @description Optional filter for the date the album was added to the library, which will do an exact match against
+         *     the date the album was added to the library.  The date must be in ISO 8601 format (YYYY-MM-DD).
          */
-        AdminDeleteAccountNotFoundErrorMessageEnum: AdminDeleteAccountNotFoundErrorMessageEnum;
-        AdminDeleteAccountNotFoundResponseDto: {
-            /** @description General description of the error class */
-            error: string;
-            /**
-             * @description The error message(s) that occurred during the validation of the request data or additional requirements
-             *     applied during the execution of the request
-             * @default invalid-account-id-error
-             */
-            message: components["schemas"]["AdminDeleteAccountNotFoundErrorMessageEnum"][];
-            /**
-             * @description The success being "false" indicates that the request failed to complete.
-             * @default false
-             */
-            success: boolean;
-        };
-        AdminDeleteAccountResponseDto: {
-            /**
-             * Format: constant
-             * @description The success being "true" indicates that the request completed.
-             * @default true
-             */
-            success: boolean;
-        };
+        addedAfter?: string;
         /**
-         * @description The error message(s) that occurred during the validation of the request data or additional requirements
-         *     applied during the execution of the request
-         * @enum {string}
+         * @description Optional filter for the date the artist was added to the library, which will do an exact match against
+         *     the date the artist was added to the library.  The date must be in ISO 8601 format (YYYY-MM-DD).
          */
-        AdminDeleteRootPathNotFoundErrorMessageEnum: AdminDeleteRootPathNotFoundErrorMessageEnum;
-        AdminDeleteRootPathNotFoundResponseDto: {
-            /** @description General description of the error class */
-            error: string;
-            /**
-             * @description The error message(s) that occurred during the validation of the request data or additional requirements
-             *     applied during the execution of the request
-             * @default root-path-not-found-error
-             */
-            message: components["schemas"]["AdminDeleteRootPathNotFoundErrorMessageEnum"][];
-            /**
-             * @description The success being "false" indicates that the request failed to complete.
-             * @default false
-             */
-            success: boolean;
-        };
-        AdminDeleteRootPathResponseDto: {
-            /**
-             * Format: constant
-             * @description The success being "true" indicates that the request completed.
-             * @default true
-             */
-            success: boolean;
-        };
-        AdminIndexerConfigurationDto: {
-            /** Format: date-time */
-            createdAt: string;
-            createdByAccountId: number;
-            createdByUsername: string;
-            id: number;
-            isEnabled: boolean;
-        };
-        AdminIndexerConfigurationResponseDto: {
-            configuration: components["schemas"]["AdminIndexerConfigurationDto"];
-            /**
-             * Format: constant
-             * @description The success being "true" indicates that the request completed.
-             * @default true
-             */
-            success: boolean;
-        };
-        AdminListAccountsResponseDto: {
-            accounts: components["schemas"]["AdminAccountDto"][];
-            /**
-             * Format: constant
-             * @description The success being "true" indicates that the request completed.
-             * @default true
-             */
-            success: boolean;
-        };
+        addedBefore?: string;
         /**
-         * @description The error message(s) that occurred during the validation of the request data or additional requirements
-         *     applied during the execution of the request
-         * @enum {string}
+         * @description Optional search filter that will do a case-insensitive partial-match against the artist
+         *     name, album name, composer name, or genre.
          */
-        AdminListIndexerLogsBadRequestErrorMessageEnum: AdminListIndexerLogsBadRequestErrorMessageEnum;
-        AdminListIndexerLogsBadRequestResponseDto: {
-            /** @description General description of the error class */
-            error: string;
-            /**
-             * @description The error message(s) that occurred during the validation of the request data or additional requirements
-             *     applied during the execution of the request
-             * @default invalid-account-id-error
-             */
-            message: components["schemas"]["AdminListIndexerLogsBadRequestErrorMessageEnum"][];
-            /**
-             * @description The success being "false" indicates that the request failed to complete.
-             * @default false
-             */
-            success: boolean;
-        };
+        filter?: string;
         /**
-         * @description The error message(s) that occurred during the validation of the request data or additional requirements
-         *     applied during the execution of the request
-         * @enum {string}
+         * @description Optional filter for the genre name, which will do a case-insensitive partial-match against the
+         *     genres associated with an artist.
          */
-        AdminListIndexerLogsNotFoundErrorMessageEnum: AdminListIndexerLogsNotFoundErrorMessageEnum;
-        AdminListIndexerLogsNotFoundResponseDto: {
-            /** @description General description of the error class */
-            error: string;
-            /**
-             * @description The error message(s) that occurred during the validation of the request data or additional requirements
-             *     applied during the execution of the request
-             * @default invalid-account-id-error
-             */
-            message: components["schemas"]["AdminListIndexerLogsNotFoundErrorMessageEnum"][];
-            /**
-             * @description The success being "false" indicates that the request failed to complete.
-             * @default false
-             */
-            success: boolean;
+        genre?: string[];
+        limit?: number;
+        offset?: number;
+        /** @description Optional filter for the direction to sort the results by. */
+        sortDirection?: components['schemas']['SortDirectionEnum'];
+        /** @description Optional filter for the field to sort results by. */
+        sortField?: components['schemas']['ArtistSortFieldEnum'];
+      };
+      header: {
+        /** @description Bearer token for authentication */
+        Authorization: string;
+      };
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description Successfully retrieved the list of album artists with tracks for the user. */
+      200: {
+        headers: {
+          [name: string]: unknown;
         };
-        AdminListIndexerLogsResponseDto: {
-            logs: components["schemas"]["AdminLogEntryDto"][];
-            /**
-             * Format: constant
-             * @description The success being "true" indicates that the request completed.
-             * @default true
-             */
-            success: boolean;
+        content: {
+          'application/json': components['schemas']['UserListAlbumArtistsWithTracksResponseDto'];
         };
-        AdminListRootPathsResponseDto: {
-            /** @description The list of root paths with associated account owner information */
-            rootPaths: components["schemas"]["AdminRootPathDto"][];
-            /**
-             * Format: constant
-             * @description The success being "true" indicates that the request completed.
-             * @default true
-             */
-            success: boolean;
+      };
+      /** @description The request was invalid or missing required parameters. */
+      400: {
+        headers: {
+          [name: string]: unknown;
         };
-        AdminLogEntryDto: {
-            accountId: number;
-            /** Format: date-time */
-            date: string;
-            message: string;
-            rootPath: string;
-            rootPathId: number;
-            username: string;
+        content: {
+          'application/json': components['schemas']['UserListAlbumArtistsWithTracksBadRequestResponseDto'];
         };
-        AdminRegenerateMasterSessionKeyResponseDto: {
-            /**
-             * Format: constant
-             * @description The success being "true" indicates that the request completed.
-             * @default true
-             */
-            success: boolean;
-        };
+      };
+    };
+  };
+  UserListAlbumsController_get: {
+    parameters: {
+      query?: {
         /**
-         * @description The error message(s) that occurred during the validation of the request data or additional requirements
-         *     applied during the execution of the request
-         * @enum {string}
+         * @description Optional filter for the date the album was added to the library, which will do an exact match against
+         *     the date the album was added to the library.  The date must be in ISO 8601 format (YYYY-MM-DD).
          */
-        AdminRegenerateUserSessionKeyNotFoundErrorMessageEnum: AdminRegenerateUserSessionKeyNotFoundErrorMessageEnum;
-        AdminRegenerateUserSessionKeyNotFoundResponseDto: {
-            /** @description General description of the error class */
-            error: string;
-            /**
-             * @description The error message(s) that occurred during the validation of the request data or additional requirements
-             *     applied during the execution of the request
-             * @default account-not-found-error
-             */
-            message: components["schemas"]["AdminRegenerateUserSessionKeyNotFoundErrorMessageEnum"][];
-            /**
-             * @description The success being "false" indicates that the request failed to complete.
-             * @default false
-             */
-            success: boolean;
-        };
-        AdminRegenerateUserSessionKeyResponseDto: {
-            /**
-             * Format: constant
-             * @description The success being "true" indicates that the request completed.
-             * @default true
-             */
-            success: boolean;
-        };
+        addedAfter?: string;
         /**
-         * @description The error message(s) that occurred during the validation of the request data or additional requirements
-         *     applied during the execution of the request
-         * @enum {string}
+         * @description Optional filter for the date the album was added to the library, which will do an exact match against
+         *     the date the album was added to the library.  The date must be in ISO 8601 format (YYYY-MM-DD).
          */
-        AdminResetUserPasswordBadRequestErrorMessageEnum: AdminResetUserPasswordBadRequestErrorMessageEnum;
-        AdminResetUserPasswordBadRequestResponseDto: {
-            /** @description General description of the error class */
-            error: string;
-            /**
-             * @description The error message(s) that occurred during the validation of the request data or additional requirements
-             *     applied during the execution of the request
-             * @default invalid-password-error
-             */
-            message: components["schemas"]["AdminResetUserPasswordBadRequestErrorMessageEnum"][];
-            /**
-             * @description The success being "false" indicates that the request failed to complete.
-             * @default false
-             */
-            success: boolean;
-        };
-        AdminResetUserPasswordBodyDto: {
-            newPassword: string;
-        };
+        addedBefore?: string;
         /**
-         * @description The error message(s) that occurred during the validation of the request data or additional requirements
-         *     applied during the execution of the request
-         * @enum {string}
+         * @description Optional filter for the artist name, which will do a case-insensitive partial-match against the
+         *     artists associated with an album.
          */
-        AdminResetUserPasswordNotFoundErrorMessageEnum: AdminResetUserPasswordNotFoundErrorMessageEnum;
-        AdminResetUserPasswordNotFoundResponseDto: {
-            /** @description General description of the error class */
-            error: string;
-            /**
-             * @description The error message(s) that occurred during the validation of the request data or additional requirements
-             *     applied during the execution of the request
-             * @default account-not-found-error
-             */
-            message: components["schemas"]["AdminResetUserPasswordNotFoundErrorMessageEnum"][];
-            /**
-             * @description The success being "false" indicates that the request failed to complete.
-             * @default false
-             */
-            success: boolean;
-        };
-        AdminResetUserPasswordResponseDto: {
-            /**
-             * Format: constant
-             * @description The success being "true" indicates that the request completed.
-             * @default true
-             */
-            success: boolean;
-        };
-        AdminRootPathDto: {
-            /** @description The ID of the account that owns this root path */
-            accountId: number;
-            /**
-             * Format: date-time
-             * @description The date and time the row was created
-             */
-            createdAt: string;
-            /**
-             * @description The number of files or songs that have been found in this root path, this excludes
-             *     anything that is not a music track.
-             */
-            fileCount: number;
-            /** @description The ID of the root path row in the database */
-            id: number;
-            /** @description The fully-qualified path of the root path, this is the base path where music is stored for a user */
-            rootPath: string;
-            /** @description The total size of all the files in this root path contained in the `fileCount` field */
-            totalSize: number;
-            /**
-             * Format: date-time
-             * @description The date and time the row was last updated, this field is optional and may not be present
-             *     if the row has never been updated
-             */
-            updatedAt?: string;
-            /** @description The username of the account that owns this root path */
-            username: string;
-        };
-        AdminSetIndexerStatusBodyDto: {
-            /** @description Whether the scanner should be enabled or disabled */
-            enabled: boolean;
-        };
-        AdminSetIndexerStatusResponseDto: {
-            /**
-             * Format: constant
-             * @description The success being "true" indicates that the request completed.
-             * @default true
-             */
-            success: boolean;
-        };
+        artist?: string[];
         /**
-         * @description The error message(s) that occurred during the validation of the request data or additional requirements
-         *     applied during the execution of the request
-         * @enum {string}
+         * @description Optional filter for the composer name, which will do a case-insensitive partial-match against the
+         *     composers associated with an album.
          */
-        AdminUpdateRootPathBadRequestErrorMessageEnum: AdminUpdateRootPathBadRequestErrorMessageEnum;
-        AdminUpdateRootPathBadRequestResponseDto: {
-            /** @description General description of the error class */
-            error: string;
-            /**
-             * @description The error message(s) that occurred during the validation of the request data or additional requirements
-             *     applied during the execution of the request
-             * @default root-path-does-not-exist-error
-             */
-            message: components["schemas"]["AdminUpdateRootPathBadRequestErrorMessageEnum"][];
-            /**
-             * @description The success being "false" indicates that the request failed to complete.
-             * @default false
-             */
-            success: boolean;
-        };
-        AdminUpdateRootPathBodyDto: {
-            /** @description The new path to set for the root path */
-            newPath: string;
-        };
+        composer?: string[];
         /**
-         * @description The error message(s) that occurred during the validation of the request data or additional requirements
-         *     applied during the execution of the request
-         * @enum {string}
+         * @description Optional search filter that will do a case-insensitive partial-match against the album
+         *     name, artist name, composer name, or genre.
          */
-        AdminUpdateRootPathNotFoundErrorMessageEnum: AdminUpdateRootPathNotFoundErrorMessageEnum;
-        AdminUpdateRootPathNotFoundResponseDto: {
-            /** @description General description of the error class */
-            error: string;
-            /**
-             * @description The error message(s) that occurred during the validation of the request data or additional requirements
-             *     applied during the execution of the request
-             * @default root-path-not-found-error
-             */
-            message: components["schemas"]["AdminUpdateRootPathNotFoundErrorMessageEnum"][];
-            /**
-             * @description The success being "false" indicates that the request failed to complete.
-             * @default false
-             */
-            success: boolean;
-        };
-        AdminUpdateRootPathResponseDto: {
-            /**
-             * Format: constant
-             * @description The success being "true" indicates that the request completed.
-             * @default true
-             */
-            success: boolean;
-        };
+        filter?: string;
         /**
-         * @description The error message(s) that occurred during the validation of the request data or additional requirements
-         *     applied during the execution of the request
-         * @enum {string}
+         * @description Optional filter for the genre name, which will do a case-insensitive partial-match against the
+         *     genres associated with an album.
          */
-        AdminUpdateUserRolesBadRequestErrorMessageEnum: AdminUpdateUserRolesBadRequestErrorMessageEnum;
-        AdminUpdateUserRolesBadRequestResponseDto: {
-            /** @description General description of the error class */
-            error: string;
-            /**
-             * @description The error message(s) that occurred during the validation of the request data or additional requirements
-             *     applied during the execution of the request
-             * @default invalid-user-role-error
-             */
-            message: components["schemas"]["AdminUpdateUserRolesBadRequestErrorMessageEnum"][];
-            /**
-             * @description The success being "false" indicates that the request failed to complete.
-             * @default false
-             */
-            success: boolean;
-        };
-        AdminUpdateUserRolesBodyDto: {
-            roles: components["schemas"]["UserRoleEnum"][];
-        };
+        genre?: string[];
+        limit?: number;
         /**
-         * @description The error message(s) that occurred during the validation of the request data or additional requirements
-         *     applied during the execution of the request
-         * @enum {string}
+         * @description Maximum rating value, which will do an exact match against the rating associated with an album.  The
+         *     rating is a value between 0 and 5, inclusive.
          */
-        AdminUpdateUserRolesNotFoundErrorMessageEnum: AdminUpdateUserRolesNotFoundErrorMessageEnum;
-        AdminUpdateUserRolesNotFoundResponseDto: {
-            /** @description General description of the error class */
-            error: string;
-            /**
-             * @description The error message(s) that occurred during the validation of the request data or additional requirements
-             *     applied during the execution of the request
-             * @default account-not-found-error
-             */
-            message: components["schemas"]["AdminUpdateUserRolesNotFoundErrorMessageEnum"][];
-            /**
-             * @description The success being "false" indicates that the request failed to complete.
-             * @default false
-             */
-            success: boolean;
-        };
-        AdminUpdateUserRolesResponseDto: {
-            /**
-             * Format: constant
-             * @description The success being "true" indicates that the request completed.
-             * @default true
-             */
-            success: boolean;
-        };
-        /** @enum {string} */
-        AlbumSortFieldEnum: AlbumSortFieldEnum;
-        /** @enum {string} */
-        ArtistSortFieldEnum: ArtistSortFieldEnum;
+        maxRating?: number;
         /**
-         * @description A bad request occurred due to validation or other issues with the submitted data.
-         * @enum {string}
+         * @description Minimum rating value, which will do an exact match against the rating associated with an album.  The
+         *     rating is a value between 0 and 5, inclusive.
          */
-        BadRequestErrorEnum: BadRequestErrorEnum;
-        BadRequestResponseDto: {
-            /** @description General description of the error class */
-            error: string;
-            /**
-             * @description A bad request occurred due to validation or other issues with the submitted data.
-             * @default bad-request-error
-             */
-            message: components["schemas"]["BadRequestErrorEnum"][];
-            /**
-             * @description The success being "false" indicates that the request failed to complete.
-             * @default false
-             */
-            success: boolean;
-        };
-        Buffer: Record<string, never>;
-        /** @enum {string} */
-        ComposerSortFieldEnum: ComposerSortFieldEnum;
+        minRating?: number;
+        offset?: number;
         /**
-         * @description The content type, folder or file
-         * @enum {string}
+         * @description Optional filter for the date the album was released, which will do an exact match against
+         *     the date of release.  The date must be in ISO 8601 format (YYYY-MM-DD).
          */
-        ContentTypeEnum: ContentTypeEnum;
-        /** @enum {string} */
-        FileTypeEnum: FileTypeEnum;
-        /** @enum {string} */
-        GenreSortFieldEnum: GenreSortFieldEnum;
+        releasedAfter?: string;
         /**
-         * @description The error message(s) that occurred during the validation of the request data or additional requirements
-         *     applied during the execution of the request
-         * @enum {string}
+         * @description Optional filter for the date the album was released, which will do an exact match against
+         *     the date of release.  The date must be in ISO 8601 format (YYYY-MM-DD).
          */
-        GuestCreateSessionBadRequestErrorMessageEnum: GuestCreateSessionBadRequestErrorMessageEnum;
-        GuestCreateSessionBadRequestResponseDto: {
-            /** @description General description of the error class */
-            error: string;
-            /**
-             * @description The error message(s) that occurred during the validation of the request data or additional requirements
-             *     applied during the execution of the request
-             * @default bad-request-error
-             */
-            message: components["schemas"]["GuestCreateSessionBadRequestErrorMessageEnum"][];
-            /**
-             * @description The success being "false" indicates that the request failed to complete.
-             * @default false
-             */
-            success: boolean;
-        };
-        GuestCreateSessionBodyDto: {
-            /** @description The number of days until the session expires */
-            expiresDays?: number;
-            /** @description The password for the account */
-            password: string;
-            /** @description The username for the account */
-            username: string;
-        };
-        GuestCreateSessionResponseDto: {
-            /** @description The JWT session token that can be attached to requests to authenticate against the API */
-            jwtToken: string;
-            /**
-             * Format: constant
-             * @description The success being "true" indicates that the request completed.
-             * @default true
-             */
-            success: boolean;
-        };
+        releasedBefore?: string;
+        /** @description Optional filter for the direction to sort the results by. */
+        sortDirection?: components['schemas']['SortDirectionEnum'];
+        /** @description Optional filter for the field to sort results by. */
+        sortField?: components['schemas']['AlbumSortFieldEnum'];
         /**
-         * @description An internal error occurred that isn't handled by the API and doesn't have a more specific error
-         *     message defined.
-         * @enum {string}
+         * @description Optional filter for the year of the album, which will do an exact match against the year associated
+         *     with an album's release date.
          */
-        InternalServerErrorEnum: InternalServerErrorEnum;
-        InternalServerErrorResponseDto: {
-            /** @description General description of the error class */
-            error: string;
-            /**
-             * @description An internal error occurred that isn't handled by the API and doesn't have a more specific error
-             *     message defined.
-             * @default internal-server-error
-             */
-            message: components["schemas"]["InternalServerErrorEnum"][];
-            /**
-             * @description The success being "false" indicates that the request failed to complete.
-             * @default false
-             */
-            success: boolean;
+        year?: number;
+      };
+      header: {
+        /** @description Bearer token for authentication */
+        Authorization: string;
+      };
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description Successfully retrieved the list of albums for the user. */
+      200: {
+        headers: {
+          [name: string]: unknown;
         };
-        LibraryAlbumDto: {
-            /** @description The artist for the album, which is all the album artists in a comma-delimited list */
-            albumArtists: string[];
-            albumComposers: string[];
-            albumGenres: string[];
-            /** @description A color detected in the cover art image */
-            coverImageDarkMuted?: string;
-            /** @description A color detected in the cover art image */
-            coverImageDarkVibrant?: string;
-            /** @description A color detected in the cover art image */
-            coverImageLightMuted?: string;
-            /** @description A color detected in the cover art image */
-            coverImageLightVibrant?: string;
-            /** @description A color detected in the cover art image */
-            coverImageMuted?: string;
-            /** @description A color detected in the cover art image */
-            coverImageVibrant?: string;
-            /**
-             * Format: date-time
-             * @description The date the album was added to the library
-             */
-            createdAt: string;
-            /**
-             * @description The display name of the artist, which is used for sorting and display consistency when albums
-             *     have a different artist name than the album artist name.  For example, a compilation album may have
-             *     multiple artists but the album artist is "Various Artists" and the display artist is "Various".
-             */
-            displayArtist: string[];
-            /**
-             * @description The name or title of the album, this would usually come from an official source such as MusicBrainz
-             *     or Discogs.
-             */
-            displayName: string;
-            /** @description The internally-generated unique ID of the album */
-            id: number;
-            /** @description The aggregate rating for the album, which is a value between 0 and 5 inclusive applied to tracks. */
-            rating: number;
-            /**
-             * @description The name of the album used for sorting and display consistency, eg "Greatest Hits" but the display
-             *     name is "Greatest Hits (Remastered)".
-             */
-            sortName: string;
-            /** @description The year the album was released. */
-            year: number;
+        content: {
+          'application/json': components['schemas']['UserListAlbumsResponseDto'];
         };
-        LibraryAlbumWithTracksDto: {
-            /** @description The artist for the album, which is all the album artists in a comma-delimited list */
-            albumArtists: string[];
-            albumComposers: string[];
-            albumGenres: string[];
-            /** @description A color detected in the cover art image */
-            coverImageDarkMuted?: string;
-            /** @description A color detected in the cover art image */
-            coverImageDarkVibrant?: string;
-            /** @description A color detected in the cover art image */
-            coverImageLightMuted?: string;
-            /** @description A color detected in the cover art image */
-            coverImageLightVibrant?: string;
-            /** @description A color detected in the cover art image */
-            coverImageMuted?: string;
-            /** @description A color detected in the cover art image */
-            coverImageVibrant?: string;
-            /**
-             * Format: date-time
-             * @description The date the album was added to the library
-             */
-            createdAt: string;
-            /**
-             * @description The display name of the artist, which is used for sorting and display consistency when albums
-             *     have a different artist name than the album artist name.  For example, a compilation album may have
-             *     multiple artists but the album artist is "Various Artists" and the display artist is "Various".
-             */
-            displayArtist: string[];
-            /**
-             * @description The name or title of the album, this would usually come from an official source such as MusicBrainz
-             *     or Discogs.
-             */
-            displayName: string;
-            /** @description The internally-generated unique ID of the album */
-            id: number;
-            /** @description The aggregate rating for the album, which is a value between 0 and 5 inclusive applied to tracks. */
-            rating: number;
-            /**
-             * @description The name of the album used for sorting and display consistency, eg "Greatest Hits" but the display
-             *     name is "Greatest Hits (Remastered)".
-             */
-            sortName: string;
-            /** @description The list of tracks for the album */
-            tracks: components["schemas"]["LibraryTrackDto"][];
-            /** @description The year the album was released. */
-            year: number;
+      };
+      /** @description The request was invalid or missing required parameters. */
+      400: {
+        headers: {
+          [name: string]: unknown;
         };
-        LibraryArtistDto: {
-            /**
-             * Format: date-time
-             * @description The date the artist was added to the library
-             */
-            createdAt: string;
-            /** @description The internally-generated unique ID of the artist */
-            id: number;
-            /** @description The name of the artist. */
-            name: string;
+        content: {
+          'application/json': components['schemas']['UserListAlbumsBadRequestResponseDto'];
         };
-        LibraryArtistWithTracksDto: {
-            /** @description The list of albums including tracks for the artist */
-            albums: components["schemas"]["LibraryAlbumWithTracksDto"][];
-            /**
-             * Format: date-time
-             * @description The date the artist was added to the library
-             */
-            createdAt: string;
-            /** @description The internally-generated unique ID of the artist */
-            id: number;
-            /** @description The name of the artist. */
-            name: string;
-        };
-        LibraryComposerDto: {
-            /**
-             * Format: date-time
-             * @description The date the composer was added to the library
-             */
-            createdAt: string;
-            /** @description The internally-generated unique ID of the composer */
-            id: number;
-            /** @description The name of the composer. */
-            name: string;
-        };
-        LibraryComposerWithTracksDto: {
-            /** @description The list of albums including tracks for the composer */
-            albums: components["schemas"]["LibraryAlbumWithTracksDto"][];
-            /**
-             * Format: date-time
-             * @description The date the composer was added to the library
-             */
-            createdAt: string;
-            /** @description The internally-generated unique ID of the composer */
-            id: number;
-            /** @description The name of the composer. */
-            name: string;
-        };
-        LibraryGenreDto: {
-            /** @description The internally-generated unique ID of the genre */
-            id: number;
-            /** @description The name of the genre. */
-            name: string;
-        };
-        LibraryGenreWithTracksDto: {
-            albums: components["schemas"]["LibraryAlbumWithTracksDto"][][];
-            /** @description The internally-generated unique ID of the genre */
-            id: number;
-            /** @description The name of the genre. */
-            name: string;
-        };
-        LibraryTrackDto: {
-            /**
-             * @description The list of artists for the track, if it is a comma-delimited string then it will be parsed into
-             *     an array each containing one name.  This data is very inconsistently-formatted even in official-ish
-             *     sources like MusicBrainz so it may end up with multiple artists in a single string.
-             */
-            artists: string[];
-            /**
-             * @description The list of composers for the track, if it is a comma-delimited string then it will be parsed into
-             *     an array each containing one name.  This data is very inconsistently-formatted even in official-ish
-             *     sources like MusicBrainz so it may end up with multiple composers in a single string.
-             */
-            composers: string[];
-            /**
-             * @description The disc number of the track on the album or disc if there are multiple discs.  If this field is not
-             *     specified it is assumed to be a single-disc album.
-             */
-            discNumber: number;
-            /** @description The duration of the track in seconds. */
-            duration: number;
-            /**
-             * @description The list of genres for the track, if it is a comma-delimited string then it will be parsed into
-             *     an array each containing one name.
-             */
-            genres: string[];
-            /** @description The internally-generated unique ID of the track */
-            id: number;
-            /** @description The rating of the track which is a value between 0 and 5 inclusive applied to the track. */
-            rating: number;
-            /** @description The title of the track, which is usually the name of the song or piece of music. */
-            title: string;
-            /** @description The track number of the track on the album or disc if there are multiple discs. */
-            trackNumber: number;
-            /**
-             * @description The year of release of the track, often the same as the album except in "greatest hits"
-             *     and compilations.
-             */
-            year: number;
-        };
-        LibraryTrackExtendedDto: {
-            /** @description The list of artists for the album to which the track belongs. */
-            albumArtists: components["schemas"]["LibraryArtistDto"][];
-            /** @description The unique ID of the album to which the track belongs. */
-            albumId: number;
-            /** @description The title of the album to which the track belongs. */
-            albumTitle: string;
-            /** @description The list of artists for the track. */
-            artists: components["schemas"]["LibraryArtistDto"][];
-            /** @description The comment or description associated with the track. */
-            comment: string;
-            /** @description The list of composers for the track. */
-            composers: components["schemas"]["LibraryComposerDto"][];
-            /**
-             * @description The disc number of the track on the album or disc if there are multiple discs.  If this field is not
-             *     specified it is assumed to be a single-disc album.
-             */
-            discNumber: number;
-            /** @description The duration of the track in seconds. */
-            duration: number;
-            /** @description The bitrate of the audio file for the track, in kbps. */
-            fileBitRate: number;
-            /** @description The number of audio channels in the file for the track, such as 2 for stereo or 1 for mono. */
-            fileChannels: number;
-            /** @description The frequency or sample rate of the audio file for the track, in Hz. */
-            fileFrequency: number;
-            /** @description The file path of the file for the track. */
-            filePath: string;
-            /** @description The size of the file in bytes */
-            fileSize: number;
-            /**
-             * @description The type of the file for the track, such as MP3, FLAC, etc.
-             * @enum {string}
-             */
-            fileType: LibraryTrackExtendedDtoFileType;
-            /** @description The list of genres for the track. */
-            genres: components["schemas"]["LibraryGenreDto"][];
-            /** @description The internally-generated unique ID of the track */
-            id: number;
-            /** @description The rating of the track which is a value between 0 and 5 inclusive applied to the track. */
-            rating: number;
-            /** @description The title of the track, which is usually the name of the song or piece of music. */
-            title: string;
-            /** @description The track number of the track on the album or disc if there are multiple discs. */
-            trackNumber: number;
-            /**
-             * @description The year of release of the track, often the same as the album except in "greatest hits"
-             *     and compilations.
-             */
-            year: number;
-        };
-        /** @enum {string} */
-        PlaylistTypeEnum: PlaylistTypeEnum;
+      };
+    };
+  };
+  UserListAlbumsWithTracksController_get: {
+    parameters: {
+      query?: {
         /**
-         * @description The `type` value is expected to always be `container` for SHOUTcast genres, and
-         *     `radio` for actual stations.  Possibly other values for favorites and custom-added
-         *     stations.
-         * @enum {string}
+         * @description Optional filter for the date the album was added to the library, which will do an exact match against
+         *     the date the album was added to the library.  The date must be in ISO 8601 format (YYYY-MM-DD).
          */
-        ShoutcastItemTypeEnum: ShoutcastItemTypeEnum;
-        /** @enum {string} */
-        SmartPlaylistConjugalEnum: SmartPlaylistConjugalEnum;
-        /** @enum {string} */
-        SortDirectionEnum: SortDirectionEnum;
-        SuccessResponseDto: {
-            /**
-             * Format: constant
-             * @description The success being "true" indicates that the request completed.
-             * @default true
-             */
-            success: boolean;
+        addedAfter?: string;
+        /**
+         * @description Optional filter for the date the album was added to the library, which will do an exact match against
+         *     the date the album was added to the library.  The date must be in ISO 8601 format (YYYY-MM-DD).
+         */
+        addedBefore?: string;
+        /**
+         * @description Optional filter for the artist name, which will do a case-insensitive partial-match against the
+         *     artists associated with an album.
+         */
+        artist?: string[];
+        /**
+         * @description Optional filter for the composer name, which will do a case-insensitive partial-match against the
+         *     composers associated with an album.
+         */
+        composer?: string[];
+        /**
+         * @description Optional search filter that will do a case-insensitive partial-match against the album
+         *     name, artist name, composer name, or genre.
+         */
+        filter?: string;
+        /**
+         * @description Optional filter for the genre name, which will do a case-insensitive partial-match against the
+         *     genres associated with an album.
+         */
+        genre?: string[];
+        limit?: number;
+        /**
+         * @description Maximum rating value, which will do an exact match against the rating associated with an album.  The
+         *     rating is a value between 0 and 5, inclusive.
+         */
+        maxRating?: number;
+        /**
+         * @description Minimum rating value, which will do an exact match against the rating associated with an album.  The
+         *     rating is a value between 0 and 5, inclusive.
+         */
+        minRating?: number;
+        offset?: number;
+        /**
+         * @description Optional filter for the date the album was released, which will do an exact match against
+         *     the date of release.  The date must be in ISO 8601 format (YYYY-MM-DD).
+         */
+        releasedAfter?: string;
+        /**
+         * @description Optional filter for the date the album was released, which will do an exact match against
+         *     the date of release.  The date must be in ISO 8601 format (YYYY-MM-DD).
+         */
+        releasedBefore?: string;
+        /** @description Optional filter for the direction to sort the results by. */
+        sortDirection?: components['schemas']['SortDirectionEnum'];
+        /** @description Optional filter for the field to sort results by. */
+        sortField?: components['schemas']['AlbumSortFieldEnum'];
+        /**
+         * @description Optional filter for the year of the album, which will do an exact match against the year associated
+         *     with an album's release date.
+         */
+        year?: number;
+      };
+      header: {
+        /** @description Bearer token for authentication */
+        Authorization: string;
+      };
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description Successfully retrieved the list of albums with their tracks for the user. */
+      200: {
+        headers: {
+          [name: string]: unknown;
         };
-        SynologyAlbumAdditionalDto: {
-            avg_rating: components["schemas"]["SynologyAlbumAverageRatingDto"];
+        content: {
+          'application/json': components['schemas']['UserListAlbumsWithTracksResponseDto'];
         };
-        SynologyAlbumAverageRatingDto: {
-            rating: number;
+      };
+      /** @description The request was invalid or missing required parameters. */
+      400: {
+        headers: {
+          [name: string]: unknown;
         };
-        SynologyAlbumDataDto: {
-            /**
-             * @description The list of albums returned by the Synology AudioStation API.  The number of albums returned is
-             *     limited by the `limit` value in the request body and the `offset` value in the request body
-             *     determines which albums are returned.
-             */
-            albums: components["schemas"]["SynologyAlbumDto"][];
-            /**
-             * @description Defines the pagination offset for the results.  If no value is specified a default of 0 is
-             *     used to start at the beginning of a result set.
-             */
-            offset: number;
-            /**
-             * @description The total number of results available for the request.  This is used to determine if there are
-             *     more results available for the request and if additional requests are needed to retrieve them.
-             */
-            total: number;
+        content: {
+          'application/json': components['schemas']['UserListAlbumsWithTracksBadRequestResponseDto'];
         };
-        SynologyAlbumDto: {
-            /** @description Additional data for the album to return in the response data. */
-            additional: components["schemas"]["SynologyAlbumAdditionalDto"];
-            /** @description The artist for the album, which is all the album artists in a comma-delimited list */
-            album_artist: string;
-            /** @description The artist for the album, which is all the album artists in a comma-delimited list */
-            artist: string;
-            /**
-             * @description The display name of the artist, which is used for sorting and display consistency when albums
-             *     have a different artist name than the album artist name.  For example, a compilation album may have
-             *     multiple artists but the album artist is "Various Artists" and the display artist is "Various".
-             */
-            display_artist: string;
-            /** @description The name or title of the album. */
-            name: string;
-            /** @description The year the album was released. */
-            year: number;
+      };
+    };
+  };
+  UserListIndexerLogsController_get: {
+    parameters: {
+      query?: {
+        rootPathId?: number;
+        search?: string;
+      };
+      header: {
+        /** @description Bearer token for authentication */
+        Authorization: string;
+      };
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
         };
-        SynologyAlbumResponseDto: {
-            /**
-             * @description The data payload returned by the Synology AudioStation API.  This includes the list of albums
-             *     and pagination information.
-             */
-            data: components["schemas"]["SynologyAlbumDataDto"];
-            /**
-             * @description Boolean flag for the request ending successfully.  There are scenarios where Synology could
-             *     return false instead but this server will return an HTTP error response.
-             */
-            success: boolean;
+        content: {
+          'application/json': components['schemas']['UserListIndexerLogsResponseDto'];
         };
-        SynologyAlbumsBodyDto: {
-            /**
-             * @description Synology's API uses this value to route requests appropriately but this software has
-             *     direct endpoints for their relevant URL paths.  As such this value is ignored for now
-             *     but defined to match the Synology API.
-             *
-             *     This endpoint requires a value of `SYNO.AudioStation.Album` be provided for correctness.
-             * @example SYNO.AudioStation.Album
-             */
-            api: components["schemas"]["SynologyApiEnum"];
-            /**
-             * @description Synology supports having personal and shared libraries but this software does not have a
-             *     direct equivalent, users can add the same root path to achieve it.  As such this value
-             *     is ignored but defined to match the Synology API.
-             *
-             *     This endpoint requires a value of `all` be provided for correctness.
-             * @example all
-             */
-            library: components["schemas"]["SynologyLibraryEnum"];
-            /**
-             * @description Defines the number of results to return.  If no value is specified a default of 100,000
-             *     is used to practically-ensure all results are returned.  This is a change from Synology's
-             *     API which defaults to 100, but Synology's mobile clients will specify their limit.
-             */
-            limit: number;
-            /**
-             * @description Synology's API uses this value to route requests appropriately but for AudioStation the
-             *     endpoints have limited functionality, all music-related endpoints `list` except cover
-             *     images.  As such this value is ignored for now but defined to match the Synology API.
-             *
-             *     This endpoint requires a value of `list` be provided for correctness.
-             * @example list
-             */
-            method: components["schemas"]["SynologyMethodEnum"];
-            /**
-             * @description Defines the pagination offset for the results.  If no value is specified a default of 0 is
-             *     used to start at the beginning of a result set.
-             */
-            offset: number;
-            /**
-             * @description Synology's API has versioned endpoints and some have at least 3 versions.  This software
-             *     currently only supports the latest version of the API for each endpoint and ignores this value
-             *     for now.  It's possible to build in support for prior versions of an endpoint but that would
-             *     require using the `debug-proxy` to capture the request and response payloads to understand the
-             *     differences between versions.  If you are running an older DSM NAS and wish to help then check
-             *     out the GitHub Issues page and submit a request to support your version of the API.
-             */
-            version: number;
+      };
+      400: {
+        headers: {
+          [name: string]: unknown;
         };
-        SynologyAlbumsByArtistAndDefaultGenreBodyDto: {
-            /**
-             * @description Synology's API uses this value to route requests appropriately but this software has
-             *     direct endpoints for their relevant URL paths.  As such this value is ignored for now
-             *     but defined to match the Synology API.
-             *
-             *     This endpoint requires a value of `SYNO.AudioStation.Album` be provided for correctness.
-             * @example SYNO.AudioStation.Album
-             */
-            api: components["schemas"]["SynologyApiEnum"];
-            artist: string;
-            genre_filter: string;
-            /**
-             * @description Synology supports having personal and shared libraries but this software does not have a
-             *     direct equivalent, users can add the same root path to achieve it.  As such this value
-             *     is ignored but defined to match the Synology API.
-             *
-             *     This endpoint requires a value of `all` be provided for correctness.
-             * @example all
-             */
-            library: components["schemas"]["SynologyLibraryEnum"];
-            /**
-             * @description Defines the number of results to return.  If no value is specified a default of 100,000
-             *     is used to practically-ensure all results are returned.  This is a change from Synology's
-             *     API which defaults to 100, but Synology's mobile clients will specify their limit.
-             */
-            limit: number;
-            /**
-             * @description Synology's API uses this value to route requests appropriately but for AudioStation the
-             *     endpoints have limited functionality, all music-related endpoints `list` except cover
-             *     images.  As such this value is ignored for now but defined to match the Synology API.
-             *
-             *     This endpoint requires a value of `list` be provided for correctness.
-             * @example list
-             */
-            method: components["schemas"]["SynologyMethodEnum"];
-            /**
-             * @description Defines the pagination offset for the results.  If no value is specified a default of 0 is
-             *     used to start at the beginning of a result set.
-             */
-            offset: number;
-            /**
-             * @description Synology's API has versioned endpoints and some have at least 3 versions.  This software
-             *     currently only supports the latest version of the API for each endpoint and ignores this value
-             *     for now.  It's possible to build in support for prior versions of an endpoint but that would
-             *     require using the `debug-proxy` to capture the request and response payloads to understand the
-             *     differences between versions.  If you are running an older DSM NAS and wish to help then check
-             *     out the GitHub Issues page and submit a request to support your version of the API.
-             */
-            version: number;
+        content: {
+          'application/json': components['schemas']['UserListIndexerLogsBadRequestResponseDto'];
         };
-        SynologyAlbumsByArtistAndGenreBodyDto: {
-            /**
-             * @description Synology's API uses this value to route requests appropriately but this software has
-             *     direct endpoints for their relevant URL paths.  As such this value is ignored for now
-             *     but defined to match the Synology API.
-             *
-             *     This endpoint requires a value of `SYNO.AudioStation.Album` be provided for correctness.
-             * @example SYNO.AudioStation.Album
-             */
-            api: components["schemas"]["SynologyApiEnum"];
-            artist: string;
-            genre: string;
-            /**
-             * @description Synology supports having personal and shared libraries but this software does not have a
-             *     direct equivalent, users can add the same root path to achieve it.  As such this value
-             *     is ignored but defined to match the Synology API.
-             *
-             *     This endpoint requires a value of `all` be provided for correctness.
-             * @example all
-             */
-            library: components["schemas"]["SynologyLibraryEnum"];
-            /**
-             * @description Defines the number of results to return.  If no value is specified a default of 100,000
-             *     is used to practically-ensure all results are returned.  This is a change from Synology's
-             *     API which defaults to 100, but Synology's mobile clients will specify their limit.
-             */
-            limit: number;
-            /**
-             * @description Synology's API uses this value to route requests appropriately but for AudioStation the
-             *     endpoints have limited functionality, all music-related endpoints `list` except cover
-             *     images.  As such this value is ignored for now but defined to match the Synology API.
-             *
-             *     This endpoint requires a value of `list` be provided for correctness.
-             * @example list
-             */
-            method: components["schemas"]["SynologyMethodEnum"];
-            /**
-             * @description Defines the pagination offset for the results.  If no value is specified a default of 0 is
-             *     used to start at the beginning of a result set.
-             */
-            offset: number;
-            /**
-             * @description Synology's API has versioned endpoints and some have at least 3 versions.  This software
-             *     currently only supports the latest version of the API for each endpoint and ignores this value
-             *     for now.  It's possible to build in support for prior versions of an endpoint but that would
-             *     require using the `debug-proxy` to capture the request and response payloads to understand the
-             *     differences between versions.  If you are running an older DSM NAS and wish to help then check
-             *     out the GitHub Issues page and submit a request to support your version of the API.
-             */
-            version: number;
+      };
+      404: {
+        headers: {
+          [name: string]: unknown;
         };
-        SynologyAlbumsByArtistBodyDto: {
-            /**
-             * @description Synology's API uses this value to route requests appropriately but this software has
-             *     direct endpoints for their relevant URL paths.  As such this value is ignored for now
-             *     but defined to match the Synology API.
-             *
-             *     This endpoint requires a value of `SYNO.AudioStation.Album` be provided for correctness.
-             * @example SYNO.AudioStation.Album
-             */
-            api: components["schemas"]["SynologyApiEnum"];
-            artist: string;
-            /**
-             * @description Synology supports having personal and shared libraries but this software does not have a
-             *     direct equivalent, users can add the same root path to achieve it.  As such this value
-             *     is ignored but defined to match the Synology API.
-             *
-             *     This endpoint requires a value of `all` be provided for correctness.
-             * @example all
-             */
-            library: components["schemas"]["SynologyLibraryEnum"];
-            /**
-             * @description Defines the number of results to return.  If no value is specified a default of 100,000
-             *     is used to practically-ensure all results are returned.  This is a change from Synology's
-             *     API which defaults to 100, but Synology's mobile clients will specify their limit.
-             */
-            limit: number;
-            /**
-             * @description Synology's API uses this value to route requests appropriately but for AudioStation the
-             *     endpoints have limited functionality, all music-related endpoints `list` except cover
-             *     images.  As such this value is ignored for now but defined to match the Synology API.
-             *
-             *     This endpoint requires a value of `list` be provided for correctness.
-             * @example list
-             */
-            method: components["schemas"]["SynologyMethodEnum"];
-            /**
-             * @description Defines the pagination offset for the results.  If no value is specified a default of 0 is
-             *     used to start at the beginning of a result set.
-             */
-            offset: number;
-            /**
-             * @description Synology's API has versioned endpoints and some have at least 3 versions.  This software
-             *     currently only supports the latest version of the API for each endpoint and ignores this value
-             *     for now.  It's possible to build in support for prior versions of an endpoint but that would
-             *     require using the `debug-proxy` to capture the request and response payloads to understand the
-             *     differences between versions.  If you are running an older DSM NAS and wish to help then check
-             *     out the GitHub Issues page and submit a request to support your version of the API.
-             */
-            version: number;
+        content: {
+          'application/json': components['schemas']['UserListIndexerLogsNotFoundResponseDto'];
         };
-        SynologyAlbumsByComposerBodyDto: {
-            /**
-             * @description Synology's API uses this value to route requests appropriately but this software has
-             *     direct endpoints for their relevant URL paths.  As such this value is ignored for now
-             *     but defined to match the Synology API.
-             *
-             *     This endpoint requires a value of `SYNO.AudioStation.Album` be provided for correctness.
-             * @example SYNO.AudioStation.Album
-             */
-            api: components["schemas"]["SynologyApiEnum"];
-            /** @description The name of the composer */
-            composer: string;
-            /**
-             * @description Synology supports having personal and shared libraries but this software does not have a
-             *     direct equivalent, users can add the same root path to achieve it.  As such this value
-             *     is ignored but defined to match the Synology API.
-             *
-             *     This endpoint requires a value of `all` be provided for correctness.
-             * @example all
-             */
-            library: components["schemas"]["SynologyLibraryEnum"];
-            /**
-             * @description Defines the number of results to return.  If no value is specified a default of 100,000
-             *     is used to practically-ensure all results are returned.  This is a change from Synology's
-             *     API which defaults to 100, but Synology's mobile clients will specify their limit.
-             */
-            limit: number;
-            /**
-             * @description Synology's API uses this value to route requests appropriately but for AudioStation the
-             *     endpoints have limited functionality, all music-related endpoints `list` except cover
-             *     images.  As such this value is ignored for now but defined to match the Synology API.
-             *
-             *     This endpoint requires a value of `list` be provided for correctness.
-             * @example list
-             */
-            method: components["schemas"]["SynologyMethodEnum"];
-            /**
-             * @description Defines the pagination offset for the results.  If no value is specified a default of 0 is
-             *     used to start at the beginning of a result set.
-             */
-            offset: number;
-            /**
-             * @description Synology's API has versioned endpoints and some have at least 3 versions.  This software
-             *     currently only supports the latest version of the API for each endpoint and ignores this value
-             *     for now.  It's possible to build in support for prior versions of an endpoint but that would
-             *     require using the `debug-proxy` to capture the request and response payloads to understand the
-             *     differences between versions.  If you are running an older DSM NAS and wish to help then check
-             *     out the GitHub Issues page and submit a request to support your version of the API.
-             */
-            version: number;
+      };
+    };
+  };
+  UserListRootPathsController_get: {
+    parameters: {
+      query?: never;
+      header: {
+        /** @description Bearer token for authentication */
+        Authorization: string;
+      };
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
         };
-        SynologyAlbumsByDefaultGenreBodyDto: {
-            /**
-             * @description Synology's API uses this value to route requests appropriately but this software has
-             *     direct endpoints for their relevant URL paths.  As such this value is ignored for now
-             *     but defined to match the Synology API.
-             *
-             *     This endpoint requires a value of `SYNO.AudioStation.Album` be provided for correctness.
-             * @example SYNO.AudioStation.Album
-             */
-            api: components["schemas"]["SynologyApiEnum"];
-            /** @description The name of the genre */
-            genre_filter: string;
-            /**
-             * @description Synology supports having personal and shared libraries but this software does not have a
-             *     direct equivalent, users can add the same root path to achieve it.  As such this value
-             *     is ignored but defined to match the Synology API.
-             *
-             *     This endpoint requires a value of `all` be provided for correctness.
-             * @example all
-             */
-            library: components["schemas"]["SynologyLibraryEnum"];
-            /**
-             * @description Defines the number of results to return.  If no value is specified a default of 100,000
-             *     is used to practically-ensure all results are returned.  This is a change from Synology's
-             *     API which defaults to 100, but Synology's mobile clients will specify their limit.
-             */
-            limit: number;
-            /**
-             * @description Synology's API uses this value to route requests appropriately but for AudioStation the
-             *     endpoints have limited functionality, all music-related endpoints `list` except cover
-             *     images.  As such this value is ignored for now but defined to match the Synology API.
-             *
-             *     This endpoint requires a value of `list` be provided for correctness.
-             * @example list
-             */
-            method: components["schemas"]["SynologyMethodEnum"];
-            /**
-             * @description Defines the pagination offset for the results.  If no value is specified a default of 0 is
-             *     used to start at the beginning of a result set.
-             */
-            offset: number;
-            /**
-             * @description Synology's API has versioned endpoints and some have at least 3 versions.  This software
-             *     currently only supports the latest version of the API for each endpoint and ignores this value
-             *     for now.  It's possible to build in support for prior versions of an endpoint but that would
-             *     require using the `debug-proxy` to capture the request and response payloads to understand the
-             *     differences between versions.  If you are running an older DSM NAS and wish to help then check
-             *     out the GitHub Issues page and submit a request to support your version of the API.
-             */
-            version: number;
+        content: {
+          'application/json': components['schemas']['UserListRootPathsResponseDto'];
         };
-        SynologyAlbumsByGenreBodyDto: {
-            /**
-             * @description Synology's API uses this value to route requests appropriately but this software has
-             *     direct endpoints for their relevant URL paths.  As such this value is ignored for now
-             *     but defined to match the Synology API.
-             *
-             *     This endpoint requires a value of `SYNO.AudioStation.Album` be provided for correctness.
-             * @example SYNO.AudioStation.Album
-             */
-            api: components["schemas"]["SynologyApiEnum"];
-            /** @description The name of the genre */
-            genre: string;
-            /**
-             * @description Synology supports having personal and shared libraries but this software does not have a
-             *     direct equivalent, users can add the same root path to achieve it.  As such this value
-             *     is ignored but defined to match the Synology API.
-             *
-             *     This endpoint requires a value of `all` be provided for correctness.
-             * @example all
-             */
-            library: components["schemas"]["SynologyLibraryEnum"];
-            /**
-             * @description Defines the number of results to return.  If no value is specified a default of 100,000
-             *     is used to practically-ensure all results are returned.  This is a change from Synology's
-             *     API which defaults to 100, but Synology's mobile clients will specify their limit.
-             */
-            limit: number;
-            /**
-             * @description Synology's API uses this value to route requests appropriately but for AudioStation the
-             *     endpoints have limited functionality, all music-related endpoints `list` except cover
-             *     images.  As such this value is ignored for now but defined to match the Synology API.
-             *
-             *     This endpoint requires a value of `list` be provided for correctness.
-             * @example list
-             */
-            method: components["schemas"]["SynologyMethodEnum"];
-            /**
-             * @description Defines the pagination offset for the results.  If no value is specified a default of 0 is
-             *     used to start at the beginning of a result set.
-             */
-            offset: number;
-            /**
-             * @description Synology's API has versioned endpoints and some have at least 3 versions.  This software
-             *     currently only supports the latest version of the API for each endpoint and ignores this value
-             *     for now.  It's possible to build in support for prior versions of an endpoint but that would
-             *     require using the `debug-proxy` to capture the request and response payloads to understand the
-             *     differences between versions.  If you are running an older DSM NAS and wish to help then check
-             *     out the GitHub Issues page and submit a request to support your version of the API.
-             */
-            version: number;
+      };
+    };
+  };
+  UserListTrackArtistsController_get: {
+    parameters: {
+      query?: {
+        /**
+         * @description Optional filter for the date the album was added to the library, which will do an exact match against
+         *     the date the album was added to the library.  The date must be in ISO 8601 format (YYYY-MM-DD).
+         */
+        addedAfter?: string;
+        /**
+         * @description Optional filter for the date the artist was added to the library, which will do an exact match against
+         *     the date the artist was added to the library.  The date must be in ISO 8601 format (YYYY-MM-DD).
+         */
+        addedBefore?: string;
+        /**
+         * @description Optional search filter that will do a case-insensitive partial-match against the artist
+         *     name, album name, composer name, or genre.
+         */
+        filter?: string;
+        /**
+         * @description Optional filter for the genre name, which will do a case-insensitive partial-match against the
+         *     genres associated with an artist.
+         */
+        genre?: string[];
+        limit?: number;
+        offset?: number;
+        /** @description Optional filter for the direction to sort the results by. */
+        sortDirection?: components['schemas']['SortDirectionEnum'];
+        /** @description Optional filter for the field to sort results by. */
+        sortField?: components['schemas']['ArtistSortFieldEnum'];
+      };
+      header: {
+        /** @description Bearer token for authentication */
+        Authorization: string;
+      };
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description Successfully retrieved the list of artists for the user. */
+      200: {
+        headers: {
+          [name: string]: unknown;
         };
+        content: {
+          'application/json': components['schemas']['UserListTrackArtistsResponseDto'];
+        };
+      };
+      /** @description The request was invalid or missing required parameters. */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['UserListTrackArtistsBadRequestResponseDto'];
+        };
+      };
+    };
+  };
+  UserListTrackArtistsWithTracksController_get: {
+    parameters: {
+      query?: {
+        /**
+         * @description Optional filter for the date the album was added to the library, which will do an exact match against
+         *     the date the album was added to the library.  The date must be in ISO 8601 format (YYYY-MM-DD).
+         */
+        addedAfter?: string;
+        /**
+         * @description Optional filter for the date the artist was added to the library, which will do an exact match against
+         *     the date the artist was added to the library.  The date must be in ISO 8601 format (YYYY-MM-DD).
+         */
+        addedBefore?: string;
+        /**
+         * @description Optional search filter that will do a case-insensitive partial-match against the artist
+         *     name, album name, composer name, or genre.
+         */
+        filter?: string;
+        /**
+         * @description Optional filter for the genre name, which will do a case-insensitive partial-match against the
+         *     genres associated with an artist.
+         */
+        genre?: string[];
+        limit?: number;
+        offset?: number;
+        /** @description Optional filter for the direction to sort the results by. */
+        sortDirection?: components['schemas']['SortDirectionEnum'];
+        /** @description Optional filter for the field to sort results by. */
+        sortField?: components['schemas']['ArtistSortFieldEnum'];
+      };
+      header: {
+        /** @description Bearer token for authentication */
+        Authorization: string;
+      };
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description Successfully retrieved the list of artists along with their tracks for the user. */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['UserListTrackArtistsWithTracksResponseDto'];
+        };
+      };
+      /** @description The request was invalid or missing required parameters. */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['UserListTrackArtistsWithTracksBadRequestResponseDto'];
+        };
+      };
+    };
+  };
+  UserListTrackComposersController_get: {
+    parameters: {
+      query?: {
+        /**
+         * @description Optional filter for the date the album was added to the library, which will do an exact match against
+         *     the date the album was added to the library.  The date must be in ISO 8601 format (YYYY-MM-DD).
+         */
+        addedAfter?: string;
+        /**
+         * @description Optional filter for the date the composer was added to the library, which will do an exact match against
+         *     the date the composer was added to the library.  The date must be in ISO 8601 format (YYYY-MM-DD).
+         */
+        addedBefore?: string;
+        /**
+         * @description Optional search filter that will do a case-insensitive partial-match against the composer
+         *     name, artist name, album name, or genre.
+         */
+        filter?: string;
+        /**
+         * @description Optional filter for the genre name, which will do a case-insensitive partial-match against the
+         *     genres associated with a composer.
+         */
+        genre?: string[];
+        limit?: number;
+        offset?: number;
+        /** @description Optional filter for the direction to sort the results by. */
+        sortDirection?: components['schemas']['SortDirectionEnum'];
+        /** @description Optional filter for the field to sort results by. */
+        sortField?: components['schemas']['ComposerSortFieldEnum'];
+      };
+      header: {
+        /** @description Bearer token for authentication */
+        Authorization: string;
+      };
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description Successfully retrieved the list of composers for the user. */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['UserListTrackComposersResponseDto'];
+        };
+      };
+      /** @description The request was invalid or missing required parameters. */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['UserListTrackComposersBadRequestResponseDto'];
+        };
+      };
+    };
+  };
+  UserListTrackComposersWithTracksController_get: {
+    parameters: {
+      query?: {
+        /**
+         * @description Optional filter for the date the album was added to the library, which will do an exact match against
+         *     the date the album was added to the library.  The date must be in ISO 8601 format (YYYY-MM-DD).
+         */
+        addedAfter?: string;
+        /**
+         * @description Optional filter for the date the composer was added to the library, which will do an exact match against
+         *     the date the composer was added to the library.  The date must be in ISO 8601 format (YYYY-MM-DD).
+         */
+        addedBefore?: string;
+        /**
+         * @description Optional search filter that will do a case-insensitive partial-match against the composer
+         *     name, artist name, album name, or genre.
+         */
+        filter?: string;
+        /**
+         * @description Optional filter for the genre name, which will do a case-insensitive partial-match against the
+         *     genres associated with a composer.
+         */
+        genre?: string[];
+        limit?: number;
+        offset?: number;
+        /** @description Optional filter for the direction to sort the results by. */
+        sortDirection?: components['schemas']['SortDirectionEnum'];
+        /** @description Optional filter for the field to sort results by. */
+        sortField?: components['schemas']['ComposerSortFieldEnum'];
+      };
+      header: {
+        /** @description Bearer token for authentication */
+        Authorization: string;
+      };
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description Successfully retrieved the list of composers for the user. */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['UserListTrackComposersWithTracksResponseDto'];
+        };
+      };
+      /** @description The request was invalid or missing required parameters. */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['UserListTrackComposersWithTracksBadRequestResponseDto'];
+        };
+      };
+    };
+  };
+  UserListTrackGenresController_get: {
+    parameters: {
+      query?: {
+        limit?: number;
+        offset?: number;
+        /** @description Optional filter for the direction to sort the results by. */
+        sortDirection?: components['schemas']['SortDirectionEnum'];
+        /** @description Optional filter for the field to sort results by. */
+        sortField?: components['schemas']['GenreSortFieldEnum'];
+      };
+      header: {
+        /** @description Bearer token for authentication */
+        Authorization: string;
+      };
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description Successfully retrieved the list of genres for the user. */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['UserListTrackGenresResponseDto'];
+        };
+      };
+      /** @description The request was invalid or missing required parameters. */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['UserListTrackGenresBadRequestResponseDto'];
+        };
+      };
+    };
+  };
+  UserListTrackGenresWithTracksController_get: {
+    parameters: {
+      query?: {
+        limit?: number;
+        offset?: number;
+        /** @description Optional filter for the direction to sort the results by. */
+        sortDirection?: components['schemas']['SortDirectionEnum'];
+        /** @description Optional filter for the field to sort results by. */
+        sortField?: components['schemas']['GenreSortFieldEnum'];
+      };
+      header: {
+        /** @description Bearer token for authentication */
+        Authorization: string;
+      };
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description Successfully retrieved the list of genres for the user. */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['UserListTrackGenresWithTracksResponseDto'];
+        };
+      };
+      /** @description The request was invalid or missing required parameters. */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['UserListTrackGenresWithTracksBadRequestResponseDto'];
+        };
+      };
+    };
+  };
+  UserListTracksController_get: {
+    parameters: {
+      query?: {
+        /**
+         * @description Optional filter for the date the album was added to the library, which will do an exact match against
+         *     the date the album was added to the library.  The date must be in ISO 8601 format (YYYY-MM-DD).
+         */
+        addedAfter?: string;
+        /**
+         * @description Optional filter for the date the album was added to the library, which will do an exact match against
+         *     the date the album was added to the library.  The date must be in ISO 8601 format (YYYY-MM-DD).
+         */
+        addedBefore?: string;
+        /**
+         * @description Optional filter for the album name, which will do a case-insensitive partial-match against the
+         *     name of the album.
+         */
+        album?: string;
+        /**
+         * @description Optional filter for the album artist name, which will do a case-insensitive partial-match against the
+         *     artists associated with an album.
+         */
+        albumArtists?: string[];
+        /**
+         * @description Optional filter for the artist name, which will do a case-insensitive partial-match against the
+         *     artists associated with tracks.
+         */
+        artist?: string[];
+        /**
+         * @description Optional filter for the composer name, which will do a case-insensitive partial-match against the
+         *     composers associated with an album.
+         */
+        composer?: string[];
+        /**
+         * @description Optional search filter that will do a case-insensitive partial-match against the album
+         *     name, artist name, composer name, or genre.
+         */
+        filter?: string;
+        /**
+         * @description Optional filter for the genre name, which will do a case-insensitive partial-match against the
+         *     genres associated with an album.
+         */
+        genre?: string[];
+        limit?: number;
+        /**
+         * @description Maximum rating value, which will do an exact match against the rating associated with an album.  The
+         *     rating is a value between 0 and 5, inclusive.
+         */
+        maxRating?: number;
+        /**
+         * @description Minimum rating value, which will do an exact match against the rating associated with an album.  The
+         *     rating is a value between 0 and 5, inclusive.
+         */
+        minRating?: number;
+        offset?: number;
+        /** @description Optional filter for the direction to sort the results by. */
+        sortDirection?: components['schemas']['SortDirectionEnum'];
+        /** @description Optional filter for the field to sort results by. */
+        sortField?: components['schemas']['TrackSortFieldEnum'];
+        /**
+         * @description Optional filter for the year of the album, which will do an exact match against the year associated
+         *     with an album's release date.
+         */
+        year?: number;
+      };
+      header: {
+        /** @description Bearer token for authentication */
+        Authorization: string;
+      };
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description Successfully retrieved the list of tracks for the user. */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['UserListTracksResponseDto'];
+        };
+      };
+      /** @description The request was invalid or missing required parameters. */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['UserListTracksBadRequestResponseDto'];
+        };
+      };
+    };
+  };
+  UserRegenerateSessionKeyController_post: {
+    parameters: {
+      query?: never;
+      header: {
+        /** @description Bearer token for authentication */
+        Authorization: string;
+      };
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description Session key regenerated successfully */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['UserRegenerateSessionKeyResponseDto'];
+        };
+      };
+    };
+  };
+  UserRetrieveAlbumController_get: {
+    parameters: {
+      query: {
+        /** @description The ID of the album */
+        id: number;
+      };
+      header: {
+        /** @description Bearer token for authentication */
+        Authorization: string;
+      };
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description Successfully retrieved the album data for the user. */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['UserRetrieveAlbumResponseDto'];
+        };
+      };
+      /** @description Album not found */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['UserRetrieveAlbumNotFoundResponseDto'];
+        };
+      };
+    };
+  };
+  UserUpdatePasswordController_post: {
+    parameters: {
+      query?: never;
+      header: {
+        /** @description Bearer token for authentication */
+        Authorization: string;
+      };
+      path?: never;
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['UserUpdatePasswordBodyDto'];
+      };
+    };
+    responses: {
+      /** @description Password reset successfully */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['UserUpdatePasswordResponseDto'];
+        };
+      };
+      201: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['UserUpdatePasswordResponseDto'];
+        };
+      };
+      /** @description Invalid request data or additional requirements not met */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['UserUpdatePasswordBadRequestResponseDto'];
+        };
+      };
+    };
+  };
+  SynologyAlbumController_route: {
+    parameters: {
+      query?: never;
+      header?: {
+        /** @description The session ID and device ID cookies for the user `id={sessionId}; did={deviceId}` */
+        cookie?: string;
+      };
+      path?: never;
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json':
+          | components['schemas']['SynologyAlbumsBodyDto']
+          | components['schemas']['SynologyAlbumsByArtistBodyDto']
+          | components['schemas']['SynologyAlbumsByArtistAndGenreBodyDto']
+          | components['schemas']['SynologyAlbumsByComposerBodyDto']
+          | components['schemas']['SynologyAlbumsByGenreBodyDto']
+          | components['schemas']['SynologyAlbumsByDefaultGenreBodyDto']
+          | components['schemas']['SynologyAlbumsByArtistAndDefaultGenreBodyDto'];
+      };
+    };
+    responses: {
+      /** @description Returns a list of albums */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['SynologyAlbumResponseDto'];
+        };
+      };
+    };
+  };
+  SynologyArtistController_route: {
+    parameters: {
+      query?: never;
+      header?: {
+        /** @description The session ID and device ID cookies for the user `id={sessionId}; did={deviceId}` */
+        cookie?: string;
+      };
+      path?: never;
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json':
+          | components['schemas']['SynologyArtistsBodyDto']
+          | components['schemas']['SynologyArtistsByGenreBodyDto']
+          | components['schemas']['SynologyArtistsByDefaultGenreBodyDto'];
+      };
+    };
+    responses: {
+      /** @description Returns a list of artists */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['SynologyArtistResponseDto'];
+        };
+      };
+    };
+  };
+  SynologyComposerController_route: {
+    parameters: {
+      query?: never;
+      header?: {
+        /** @description The session ID and device ID cookies for the user `id={sessionId}; did={deviceId}` */
+        cookie?: string;
+      };
+      path?: never;
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['SynologyComposerBodyDto'];
+      };
+    };
+    responses: {
+      /** @description Returns a list of composers */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['SynologyComposerResponseDto'];
+        };
+      };
+    };
+  };
+  SynologyCoverImageController_route: {
+    parameters: {
+      query?: never;
+      header?: {
+        /** @description The session ID and device ID cookies for the user `id={sessionId}; did={deviceId}` */
+        cookie?: string;
+      };
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description The image blob */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/octet-stream': components['schemas']['Buffer'];
+        };
+      };
+    };
+  };
+  SynologyFolderController_route: {
+    parameters: {
+      query?: never;
+      header?: {
+        /** @description The session ID and device ID cookies for the user `id={sessionId}; did={deviceId}` */
+        cookie?: string;
+      };
+      path?: never;
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json':
+          | components['schemas']['SynologyRootFolderBodyDto']
+          | components['schemas']['SynologyFolderBodyDto'];
+      };
+    };
+    responses: {
+      /** @description Returns a list of folders starting from the root paths and then traversing down their folder trees */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['SynologyFolderResponseDto'];
+        };
+      };
+    };
+  };
+  SynologyGenreController_route: {
+    parameters: {
+      query?: never;
+      header?: {
+        /** @description The session ID and device ID cookies for the user `id={sessionId}; did={deviceId}` */
+        cookie?: string;
+      };
+      path?: never;
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['SynologyGenreBodyDto'];
+      };
+    };
+    responses: {
+      /** @description Returns a list of genres found in the music library, or a hard-coded list of default genres */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json':
+            | components['schemas']['SynologyGenreResponseDto']
+            | components['schemas']['SynologyDefaultGenreResponseDto'];
+        };
+      };
+    };
+  };
+  SynologyInfoController_route: {
+    parameters: {
+      query?: never;
+      header: {
+        /** @description The session ID and device ID cookies for the user `id={sessionId}; did={deviceId}` */
+        cookie?: string;
+        id: string;
+      };
+      path?: never;
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['SynologyInfoBodyDto'];
+      };
+    };
+    responses: {
+      /** @description Returns configuration information for the Synology AudioStation API and client capabilities */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['SynologyInfoResponseDto'];
+        };
+      };
+    };
+  };
+  SynologyPlaylistController_routeRequest: {
+    parameters: {
+      query?: never;
+      header?: {
+        /** @description The session ID and device ID cookies for the user `id={sessionId}; did={deviceId}` */
+        cookie?: string;
+      };
+      path?: never;
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json':
+          | components['schemas']['SynologyPlaylistAddOrRemoveItemBodyDto']
+          | components['schemas']['SynologyPlaylistCreateNormalBodyDto']
+          | components['schemas']['SynologyPlaylistCreateSmartBodyDto']
+          | components['schemas']['SynologyPlaylistDeleteBodyDto']
+          | components['schemas']['SynologyPlaylistMoveItemsBodyDto']
+          | components['schemas']['SynologyPlaylistRemoveMissingBodyDto']
+          | components['schemas']['SynologyPlaylistRenameBodyDto']
+          | components['schemas']['SynologyPlaylistTrackListBodyDto']
+          | components['schemas']['SynologyPlaylistUpdateSmartBodyDto']
+          | components['schemas']['SynologyPlaylistRetrieveBodyDto']
+          | components['schemas']['SynologyPlaylistListBodyDto'];
+      };
+    };
+    responses: {
+      /** @description Endpoints for creating and managing playlists */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json':
+            | components['schemas']['SynologySuccessResponseDto']
+            | components['schemas']['SynologyPlaylistResponseDto']
+            | components['schemas']['SynologyPlaylistIdResponseDto']
+            | components['schemas']['SynologyPlaylistWithItemsResponseDto'];
+        };
+      };
+    };
+  };
+  SynologyProxyController_getProxyCgi: {
+    parameters: {
+      query: {
         /**
          * @description Synology's API uses this value to route requests appropriately but this software has
          *     direct endpoints for their relevant URL paths.  As such this value is ignored for now
          *     but defined to match the Synology API.
          *
-         *     This endpoint requires a value of `SYNO.AudioStation.Album` be provided for correctness.
-         * @enum {string}
+         *     This endpoint requires a value of `SYNO.AudioStation.Proxy` be provided for correctness.
          */
-        SynologyApiEnum: SynologyApiEnum;
-        SynologyArtistDataDto: {
-            artists: components["schemas"]["SynologyArtistDto"][];
-            /**
-             * @description Defines the pagination offset for the results.  If no value is specified a default of 0 is
-             *     used to start at the beginning of a result set.
-             */
-            offset: number;
-            /**
-             * @description The total number of results available for the request.  This is used to determine if there are
-             *     more results available for the request and if additional requests are needed to retrieve them.
-             */
-            total: number;
-        };
-        SynologyArtistDto: {
-            additional: components["schemas"]["SynologyAlbumAdditionalDto"];
-            id: string;
-            name: string;
-        };
-        SynologyArtistResponseDto: {
-            data: components["schemas"]["SynologyArtistDataDto"];
-            /**
-             * @description Boolean flag for the request ending successfully.  There are scenarios where Synology could
-             *     return false instead but this server will return an HTTP error response.
-             */
-            success: boolean;
-        };
-        SynologyArtistsBodyDto: {
-            /**
-             * @description Synology's API uses this value to route requests appropriately but this software has
-             *     direct endpoints for their relevant URL paths.  As such this value is ignored for now
-             *     but defined to match the Synology API.
-             *
-             *     This endpoint requires a value of `SYNO.AudioStation.Artist` be provided for correctness.
-             * @example SYNO.AudioStation.Artist
-             */
-            api: components["schemas"]["SynologyApiEnum"];
-            /**
-             * @description Synology supports having personal and shared libraries but this software does not have a
-             *     direct equivalent, users can add the same root path to achieve it.  As such this value
-             *     is ignored but defined to match the Synology API.
-             *
-             *     This endpoint requires a value of `all` be provided for correctness.
-             * @example all
-             */
-            library: components["schemas"]["SynologyLibraryEnum"];
-            /**
-             * @description Defines the number of results to return.  If no value is specified a default of 100,000
-             *     is used to practically-ensure all results are returned.  This is a change from Synology's
-             *     API which defaults to 100, but Synology's mobile clients will specify their limit.
-             */
-            limit: number;
-            /**
-             * @description Synology's API uses this value to route requests appropriately but for AudioStation the
-             *     endpoints have limited functionality, all music-related endpoints `list` except cover
-             *     images.  As such this value is ignored for now but defined to match the Synology API.
-             *
-             *     This endpoint requires a value of `list` be provided for correctness.
-             * @example list
-             */
-            method: components["schemas"]["SynologyMethodEnum"];
-            /**
-             * @description Defines the pagination offset for the results.  If no value is specified a default of 0 is
-             *     used to start at the beginning of a result set.
-             */
-            offset: number;
-            /**
-             * @description Synology's API has versioned endpoints and some have at least 3 versions.  This software
-             *     currently only supports the latest version of the API for each endpoint and ignores this value
-             *     for now.  It's possible to build in support for prior versions of an endpoint but that would
-             *     require using the `debug-proxy` to capture the request and response payloads to understand the
-             *     differences between versions.  If you are running an older DSM NAS and wish to help then check
-             *     out the GitHub Issues page and submit a request to support your version of the API.
-             */
-            version: number;
-        };
-        SynologyArtistsByDefaultGenreBodyDto: {
-            /**
-             * @description Synology's API uses this value to route requests appropriately but this software has
-             *     direct endpoints for their relevant URL paths.  As such this value is ignored for now
-             *     but defined to match the Synology API.
-             *
-             *     This endpoint requires a value of `SYNO.AudioStation.Artist` be provided for correctness.
-             * @example SYNO.AudioStation.Artist
-             */
-            api: components["schemas"]["SynologyApiEnum"];
-            genre_filter: string;
-            /**
-             * @description Synology supports having personal and shared libraries but this software does not have a
-             *     direct equivalent, users can add the same root path to achieve it.  As such this value
-             *     is ignored but defined to match the Synology API.
-             *
-             *     This endpoint requires a value of `all` be provided for correctness.
-             * @example all
-             */
-            library: components["schemas"]["SynologyLibraryEnum"];
-            /**
-             * @description Defines the number of results to return.  If no value is specified a default of 100,000
-             *     is used to practically-ensure all results are returned.  This is a change from Synology's
-             *     API which defaults to 100, but Synology's mobile clients will specify their limit.
-             */
-            limit: number;
-            /**
-             * @description Synology's API uses this value to route requests appropriately but for AudioStation the
-             *     endpoints have limited functionality, all music-related endpoints `list` except cover
-             *     images.  As such this value is ignored for now but defined to match the Synology API.
-             *
-             *     This endpoint requires a value of `list` be provided for correctness.
-             * @example list
-             */
-            method: components["schemas"]["SynologyMethodEnum"];
-            /**
-             * @description Defines the pagination offset for the results.  If no value is specified a default of 0 is
-             *     used to start at the beginning of a result set.
-             */
-            offset: number;
-            /**
-             * @description Synology's API has versioned endpoints and some have at least 3 versions.  This software
-             *     currently only supports the latest version of the API for each endpoint and ignores this value
-             *     for now.  It's possible to build in support for prior versions of an endpoint but that would
-             *     require using the `debug-proxy` to capture the request and response payloads to understand the
-             *     differences between versions.  If you are running an older DSM NAS and wish to help then check
-             *     out the GitHub Issues page and submit a request to support your version of the API.
-             */
-            version: number;
-        };
-        SynologyArtistsByGenreBodyDto: {
-            /**
-             * @description Synology's API uses this value to route requests appropriately but this software has
-             *     direct endpoints for their relevant URL paths.  As such this value is ignored for now
-             *     but defined to match the Synology API.
-             *
-             *     This endpoint requires a value of `SYNO.AudioStation.Artist` be provided for correctness.
-             * @example SYNO.AudioStation.Artist
-             */
-            api: components["schemas"]["SynologyApiEnum"];
-            genre: string;
-            /**
-             * @description Synology supports having personal and shared libraries but this software does not have a
-             *     direct equivalent, users can add the same root path to achieve it.  As such this value
-             *     is ignored but defined to match the Synology API.
-             *
-             *     This endpoint requires a value of `all` be provided for correctness.
-             * @example all
-             */
-            library: components["schemas"]["SynologyLibraryEnum"];
-            /**
-             * @description Defines the number of results to return.  If no value is specified a default of 100,000
-             *     is used to practically-ensure all results are returned.  This is a change from Synology's
-             *     API which defaults to 100, but Synology's mobile clients will specify their limit.
-             */
-            limit: number;
-            /**
-             * @description Synology's API uses this value to route requests appropriately but for AudioStation the
-             *     endpoints have limited functionality, all music-related endpoints `list` except cover
-             *     images.  As such this value is ignored for now but defined to match the Synology API.
-             *
-             *     This endpoint requires a value of `list` be provided for correctness.
-             * @example list
-             */
-            method: components["schemas"]["SynologyMethodEnum"];
-            /**
-             * @description Defines the pagination offset for the results.  If no value is specified a default of 0 is
-             *     used to start at the beginning of a result set.
-             */
-            offset: number;
-            /**
-             * @description Synology's API has versioned endpoints and some have at least 3 versions.  This software
-             *     currently only supports the latest version of the API for each endpoint and ignores this value
-             *     for now.  It's possible to build in support for prior versions of an endpoint but that would
-             *     require using the `debug-proxy` to capture the request and response payloads to understand the
-             *     differences between versions.  If you are running an older DSM NAS and wish to help then check
-             *     out the GitHub Issues page and submit a request to support your version of the API.
-             */
-            version: number;
-        };
-        SynologyComposerBodyDto: {
-            /**
-             * @description Synology's API uses this value to route requests appropriately but this software has
-             *     direct endpoints for their relevant URL paths.  As such this value is ignored for now
-             *     but defined to match the Synology API.
-             *
-             *     This endpoint requires a value of `SYNO.AudioStation.Composer` be provided for correctness.
-             * @example SYNO.AudioStation.Composer
-             */
-            api: components["schemas"]["SynologyApiEnum"];
-            /**
-             * @description Synology supports having personal and shared libraries but this software does not have a
-             *     direct equivalent, users can add the same root path to achieve it.  As such this value
-             *     is ignored but defined to match the Synology API.
-             *
-             *     This endpoint requires a value of `all` be provided for correctness.
-             * @example all
-             */
-            library: components["schemas"]["SynologyLibraryEnum"];
-            /**
-             * @description Defines the number of results to return.  If no value is specified a default of 100,000
-             *     is used to practically-ensure all results are returned.  This is a change from Synology's
-             *     API which defaults to 100, but Synology's mobile clients will specify their limit.
-             */
-            limit: number;
-            /**
-             * @description Synology's API uses this value to route requests appropriately but for AudioStation the
-             *     endpoints have limited functionality, all music-related endpoints `list` except cover
-             *     images.  As such this value is ignored for now but defined to match the Synology API.
-             *
-             *     This endpoint requires a value of `list` be provided for correctness.
-             * @example list
-             */
-            method: components["schemas"]["SynologyMethodEnum"];
-            /**
-             * @description Defines the pagination offset for the results.  If no value is specified a default of 0 is
-             *     used to start at the beginning of a result set.
-             */
-            offset: number;
-            /**
-             * @description Synology's API has versioned endpoints and some have at least 3 versions.  This software
-             *     currently only supports the latest version of the API for each endpoint and ignores this value
-             *     for now.  It's possible to build in support for prior versions of an endpoint but that would
-             *     require using the `debug-proxy` to capture the request and response payloads to understand the
-             *     differences between versions.  If you are running an older DSM NAS and wish to help then check
-             *     out the GitHub Issues page and submit a request to support your version of the API.
-             */
-            version: number;
-        };
-        SynologyComposerDataDto: {
-            composers: components["schemas"]["SynologyComposerDto"][];
-            /**
-             * @description Defines the pagination offset for the results.  If no value is specified a default of 0 is
-             *     used to start at the beginning of a result set.
-             */
-            offset: number;
-            /**
-             * @description The total number of results available for the request.  This is used to determine if there are
-             *     more results available for the request and if additional requests are needed to retrieve them.
-             */
-            total: number;
-        };
-        SynologyComposerDto: {
-            additional: components["schemas"]["SynologyAlbumAdditionalDto"];
-            id: string;
-            name: string;
-        };
-        SynologyComposerResponseDto: {
-            data: components["schemas"]["SynologyComposerDataDto"];
-            /**
-             * @description Boolean flag for the request ending successfully.  There are scenarios where Synology could
-             *     return false instead but this server will return an HTTP error response.
-             */
-            success: boolean;
-        };
-        SynologyDefaultGenreDataDto: {
-            default_genres: components["schemas"]["SynologyDefaultGenreDto"][];
-            total: number;
-        };
-        SynologyDefaultGenreDto: {
-            name: string;
-        };
-        SynologyDefaultGenreResponseDto: {
-            data: components["schemas"]["SynologyDefaultGenreDataDto"];
-            /**
-             * @description Boolean flag for the request ending successfully.  There are scenarios where Synology could
-             *     return false instead but this server will return an HTTP error response.
-             */
-            success: boolean;
-        };
-        SynologyEntryCertificateBodyDto: {
-            /**
-             * @description Synology's API uses this value to route requests appropriately but this software has
-             *     direct endpoints for their relevant URL paths.  As such this value is ignored for now
-             *     but defined to match the Synology API.
-             *
-             *     This endpoint requires a value of `SYNO.AudioStation.Encryption` be provided for correctness.
-             * @example SYNO.API.Encryption
-             */
-            api: components["schemas"]["SynologyApiEnum"];
-            /**
-             * @description Synology's API uses this value to route requests appropriately but NestJS controllers
-             *     handle the routing between URL paths so this value is ignored for now but defined to
-             *     match the Synology API.
-             *
-             *     This endpoint requires a value of `getinfo` for the `method` value for correctness.
-             * @example getinfo
-             */
-            method: components["schemas"]["SynologyMethodEnum"];
-            /**
-             * @description Synology's API has versioned endpoints and some have at least 3 versions.  This software
-             *     currently only supports the latest version of the API for each endpoint and ignores this value
-             *     for now.  It's possible to build in support for prior versions of an endpoint but that would
-             *     require using the `debug-proxy` to capture the request and response payloads to understand the
-             *     differences between versions.  If you are running an older DSM NAS and wish to help then check
-             *     out the GitHub Issues page and submit a request to support your version of the API.
-             */
-            version: number;
-        };
-        SynologyEntryCertificateDataDto: {
-            /** @example __cIpHeRtExT */
-            cipherkey: string;
-            /** @example __cIpHeRtOkEn */
-            ciphertoken: string;
-            /** @description RSA-4096 public key */
-            public_key: string;
-            /** @description UNIX-timestamp in seconds */
-            server_time: number;
-        };
-        SynologyEntryCertificateResponseDto: {
-            data: components["schemas"]["SynologyEntryCertificateDataDto"];
-            /**
-             * @description Boolean flag for the request ending successfully.  There are scenarios where Synology could
-             *     return false instead but this server will return an HTTP error response.
-             */
-            success: boolean;
-        };
-        SynologyEntryCreatePinBodyDto: {
-            /**
-             * @description Synology's API uses this value to route requests appropriately but this software has
-             *     direct endpoints for their relevant URL paths.  As such this value is ignored for now
-             *     but defined to match the Synology API.
-             *
-             *     This endpoint requires a value of `SYNO.AudioStation.Pin` for correctness.
-             * @example SYNO.AudioStation.Pin
-             */
-            api: components["schemas"]["SynologyApiEnum"];
-            /** @description List of item details to pin */
-            items: components["schemas"]["SynologyEntryNewPinItemDto"][];
-            /**
-             * @description Synology's API uses this value to route requests appropriately but NestJS controllers
-             *     handle the routing between URL paths so this value is ignored for now but defined to
-             *     match the Synology API.
-             *
-             *     This endpoint requires a value of `pin` be provided for correctness.
-             * @example pin
-             */
-            method: components["schemas"]["SynologyMethodEnum"];
-            /**
-             * @description Synology's API has versioned endpoints and some have at least 3 versions.  This software
-             *     currently only supports the latest version of the API for each endpoint and ignores this value
-             *     for now.  It's possible to build in support for prior versions of an endpoint but that would
-             *     require using the `debug-proxy` to capture the request and response payloads to understand the
-             *     differences between versions.  If you are running an older DSM NAS and wish to help then check
-             *     out the GitHub Issues page and submit a request to support your version of the API.
-             */
-            version: number;
-        };
-        SynologyEntryDeletePinBodyDto: {
-            /**
-             * @description Synology's API uses this value to route requests appropriately but this software has
-             *     direct endpoints for their relevant URL paths.  As such this value is ignored for now
-             *     but defined to match the Synology API.
-             *
-             *     This endpoint requires a value of `SYNO.AudioStation.Pin` for correctness.
-             * @example SYNO.AudioStation.Pin
-             */
-            api: components["schemas"]["SynologyApiEnum"];
-            items: number[][];
-            /**
-             * @description Synology's API uses this value to route requests appropriately but NestJS controllers
-             *     handle the routing between URL paths so this value is ignored for now but defined to
-             *     match the Synology API.
-             *
-             *     This endpoint requires a value of `unpin` be provided for correctness.
-             * @example unpin
-             */
-            method: components["schemas"]["SynologyMethodEnum"];
-            /**
-             * @description Synology's API has versioned endpoints and some have at least 3 versions.  This software
-             *     currently only supports the latest version of the API for each endpoint and ignores this value
-             *     for now.  It's possible to build in support for prior versions of an endpoint but that would
-             *     require using the `debug-proxy` to capture the request and response payloads to understand the
-             *     differences between versions.  If you are running an older DSM NAS and wish to help then check
-             *     out the GitHub Issues page and submit a request to support your version of the API.
-             */
-            version: number;
-        };
-        SynologyEntryListPinsBodyDto: {
-            /**
-             * @description Synology's API uses this value to route requests appropriately but this software has
-             *     direct endpoints for their relevant URL paths.  As such this value is ignored for now
-             *     but defined to match the Synology API.
-             *
-             *     This endpoint requires a value of `SYNO.AudioStation.Pin` for correctness.
-             * @example SYNO.AudioStation.Pin
-             */
-            api: components["schemas"]["SynologyApiEnum"];
-            /**
-             * @description Defines the number of results to return.  If no value is specified a default of 100,000
-             *     is used to practically-ensure all results are returned.  This is a change from Synology's
-             *     API which defaults to 100, but Synology's mobile clients will specify their limit.
-             */
-            limit: number;
-            /**
-             * @description Synology's API uses this value to route requests appropriately but NestJS controllers
-             *     handle the routing between URL paths so this value is ignored for now but defined to
-             *     match the Synology API.
-             *
-             *     This endpoint requires a value of `list` be provided for correctness.
-             * @example list
-             */
-            method: components["schemas"]["SynologyMethodEnum"];
-            /**
-             * @description Defines the pagination offset for the results.  If no value is specified a default of 0 is
-             *     used to start at the beginning of a result set.
-             */
-            offset: number;
-            /**
-             * @description Synology's API has versioned endpoints and some have at least 3 versions.  This software
-             *     currently only supports the latest version of the API for each endpoint and ignores this value
-             *     for now.  It's possible to build in support for prior versions of an endpoint but that would
-             *     require using the `debug-proxy` to capture the request and response payloads to understand the
-             *     differences between versions.  If you are running an older DSM NAS and wish to help then check
-             *     out the GitHub Issues page and submit a request to support your version of the API.
-             */
-            version: number;
-        };
-        SynologyEntryListPinsResponseDto: {
-            data: components["schemas"]["SynologyEntryPinsDataDto"];
-            /**
-             * @description Boolean flag for the request ending successfully.  There are scenarios where Synology could
-             *     return false instead but this server will return an HTTP error response.
-             */
-            success: boolean;
-        };
-        SynologyEntryLogoutBodyDto: {
-            /** @description The session ID to terminate. */
-            _sid: string;
-            /**
-             * @description Synology's API uses this value to route requests appropriately but this software has
-             *     direct endpoints for their relevant URL paths.  As such this value is ignored for now
-             *     but defined to match the Synology API.
-             *
-             *     This endpoint requires a value of `SYNO.API.Auth` be provided for correctness.
-             * @example SYNO.API.Auth
-             */
-            api: components["schemas"]["SynologyApiEnum"];
-            /**
-             * @description Synology's API uses this value to route requests appropriately but NestJS controllers
-             *     handle the routing between URL paths so this value is ignored for now but defined to
-             *     match the Synology API.
-             *
-             *     This endpoint requires a value of `clearSessionToken` for the `method` value for correctness.
-             * @example clearSessionToken
-             */
-            method: components["schemas"]["SynologyMethodEnum"];
-            /**
-             * @description Synology's API has versioned endpoints and some have at least 3 versions.  This software
-             *     currently only supports the latest version of the API for each endpoint and ignores this value
-             *     for now.  It's possible to build in support for prior versions of an endpoint but that would
-             *     require using the `debug-proxy` to capture the request and response payloads to understand the
-             *     differences between versions.  If you are running an older DSM NAS and wish to help then check
-             *     out the GitHub Issues page and submit a request to support your version of the API.
-             */
-            version: number;
-        };
-        SynologyEntryLogoutResponseDto: {
-            /**
-             * @description Boolean flag for the request ending successfully.  There are scenarios where Synology could
-             *     return false instead but this server will return an HTTP error response.
-             */
-            success: boolean;
-        };
-        SynologyEntryNewPinItemDto: {
-            criteria: components["schemas"]["SynologyEntryPinItemCriteriaDto"];
-            name: string;
-            type: components["schemas"]["SynologyPinTypeEnum"];
-        };
-        SynologyEntryPinItemCriteriaDto: {
-            album?: string;
-            album_artist?: string;
-            artist?: string;
-            composer?: string;
-            folder?: string;
-            genre?: string;
-            playlist?: string;
-        };
-        SynologyEntryPinItemDto: {
-            criteria: components["schemas"]["SynologyEntryPinItemCriteriaDto"];
-            id: string;
-            name: string;
-            type: components["schemas"]["SynologyPinTypeEnum"];
-        };
-        SynologyEntryPinsDataDto: {
-            items: components["schemas"]["SynologyEntryPinItemDto"][];
-            /**
-             * @description Defines the pagination offset for the results.  If no value is specified a default of 0 is
-             *     used to start at the beginning of a result set.
-             */
-            offset: number;
-            /**
-             * @description The total number of results available for the request.  This is used to determine if there are
-             *     more results available for the request and if additional requests are needed to retrieve them.
-             */
-            total: number;
-        };
-        SynologyEntryPlaylistAddAlbumBodyDto: {
-            album: string;
-            album_artist: string;
-            /**
-             * @description Synology's API uses this value to route requests appropriately but this software has
-             *     direct endpoints for their relevant URL paths.  As such this value is ignored for now
-             *     but defined to match the Synology API.
-             *
-             *     This endpoint requires a value of `SYNO.AudioStation.Playlist` for correctness.
-             * @example SYNO.AudioStation.Playlist
-             */
-            api: components["schemas"]["SynologyApiEnum"];
-            /**
-             * @description The ID of the playlist comes in the format
-             *     `playlist_<personal|shared>_<normal|smart>/<name>`
-             *     eg `playlist_personal_normal/playlistname` or `playlist_shared_smart/playlistname`
-             */
-            id: string;
-            /**
-             * @description Synology's API uses this value to route requests appropriately but NestJS controllers
-             *     handle the routing between URL paths so this value is ignored for now but defined to
-             *     match the Synology API.
-             *
-             *     This endpoint requires a value of `add_track` be provided for correctness.
-             * @example add_track
-             */
-            method: components["schemas"]["SynologyMethodEnum"];
-            /**
-             * @description Synology's API has versioned endpoints and some have at least 3 versions.  This software
-             *     currently only supports the latest version of the API for each endpoint and ignores this value
-             *     for now.  It's possible to build in support for prior versions of an endpoint but that would
-             *     require using the `debug-proxy` to capture the request and response payloads to understand the
-             *     differences between versions.  If you are running an older DSM NAS and wish to help then check
-             *     out the GitHub Issues page and submit a request to support your version of the API.
-             */
-            version: number;
-        };
-        SynologyEntryPlaylistAddArtistBodyDto: {
-            /**
-             * @description Synology's API uses this value to route requests appropriately but this software has
-             *     direct endpoints for their relevant URL paths.  As such this value is ignored for now
-             *     but defined to match the Synology API.
-             *
-             *     This endpoint requires a value of `SYNO.AudioStation.Playlist` for correctness.
-             * @example SYNO.AudioStation.Playlist
-             */
-            api: components["schemas"]["SynologyApiEnum"];
-            artist: string;
-            /**
-             * @description The ID of the playlist comes in the format
-             *     `playlist_<personal|shared>_<normal|smart>/<name>`
-             *     eg `playlist_personal_normal/playlistname` or `playlist_shared_smart/playlistname`
-             */
-            id: string;
-            /**
-             * @description Synology's API uses this value to route requests appropriately but NestJS controllers
-             *     handle the routing between URL paths so this value is ignored for now but defined to
-             *     match the Synology API.
-             *
-             *     This endpoint requires a value of `add_track` be provided for correctness.
-             * @example add_track
-             */
-            method: components["schemas"]["SynologyMethodEnum"];
-            /**
-             * @description Synology's API has versioned endpoints and some have at least 3 versions.  This software
-             *     currently only supports the latest version of the API for each endpoint and ignores this value
-             *     for now.  It's possible to build in support for prior versions of an endpoint but that would
-             *     require using the `debug-proxy` to capture the request and response payloads to understand the
-             *     differences between versions.  If you are running an older DSM NAS and wish to help then check
-             *     out the GitHub Issues page and submit a request to support your version of the API.
-             */
-            version: number;
-        };
-        SynologyEntryPlaylistAddComposerBodyDto: {
-            /**
-             * @description Synology's API uses this value to route requests appropriately but this software has
-             *     direct endpoints for their relevant URL paths.  As such this value is ignored for now
-             *     but defined to match the Synology API.
-             *
-             *     This endpoint requires a value of `SYNO.AudioStation.Playlist` for correctness.
-             * @example SYNO.AudioStation.Playlist
-             */
-            api: components["schemas"]["SynologyApiEnum"];
-            composer: string;
-            /**
-             * @description The ID of the playlist comes in the format
-             *     `playlist_<personal|shared>_<normal|smart>/<name>`
-             *     eg `playlist_personal_normal/playlistname` or `playlist_shared_smart/playlistname`
-             */
-            id: string;
-            /**
-             * @description Synology's API uses this value to route requests appropriately but NestJS controllers
-             *     handle the routing between URL paths so this value is ignored for now but defined to
-             *     match the Synology API.
-             *
-             *     This endpoint requires a value of `add_track` be provided for correctness.
-             * @example add_track
-             */
-            method: components["schemas"]["SynologyMethodEnum"];
-            /**
-             * @description Synology's API has versioned endpoints and some have at least 3 versions.  This software
-             *     currently only supports the latest version of the API for each endpoint and ignores this value
-             *     for now.  It's possible to build in support for prior versions of an endpoint but that would
-             *     require using the `debug-proxy` to capture the request and response payloads to understand the
-             *     differences between versions.  If you are running an older DSM NAS and wish to help then check
-             *     out the GitHub Issues page and submit a request to support your version of the API.
-             */
-            version: number;
-        };
-        SynologyEntryPlaylistAddGenreBodyDto: {
-            /**
-             * @description Synology's API uses this value to route requests appropriately but this software has
-             *     direct endpoints for their relevant URL paths.  As such this value is ignored for now
-             *     but defined to match the Synology API.
-             *
-             *     This endpoint requires a value of `SYNO.AudioStation.Playlist` for correctness.
-             * @example SYNO.AudioStation.Playlist
-             */
-            api: components["schemas"]["SynologyApiEnum"];
-            genre: string;
-            /**
-             * @description The ID of the playlist comes in the format
-             *     `playlist_<personal|shared>_<normal|smart>/<name>`
-             *     eg `playlist_personal_normal/playlistname` or `playlist_shared_smart/playlistname`
-             */
-            id: string;
-            /**
-             * @description Synology's API uses this value to route requests appropriately but NestJS controllers
-             *     handle the routing between URL paths so this value is ignored for now but defined to
-             *     match the Synology API.
-             *
-             *     This endpoint requires a value of `add_track` be provided for correctness.
-             * @example add_track
-             */
-            method: components["schemas"]["SynologyMethodEnum"];
-            /**
-             * @description Synology's API has versioned endpoints and some have at least 3 versions.  This software
-             *     currently only supports the latest version of the API for each endpoint and ignores this value
-             *     for now.  It's possible to build in support for prior versions of an endpoint but that would
-             *     require using the `debug-proxy` to capture the request and response payloads to understand the
-             *     differences between versions.  If you are running an older DSM NAS and wish to help then check
-             *     out the GitHub Issues page and submit a request to support your version of the API.
-             */
-            version: number;
-        };
-        SynologyEntrySignInBodyDto: {
-            __cIpHeRtExT: string;
-            client_time: number;
-        };
-        SynologyEntrySignInDataDto: {
-            /**
-             * @description The device ID generated by the Synology NAS for the client application.  For this server this
-             *     is a bcrypt hash of the user agent string and session master key.
-             */
-            did: string;
-            /**
-             * @description Flag for whether the client application is a portal application or not.  It is not clear what the
-             *     ramifications of this are.  This value is currently ignored.
-             */
-            is_portal_port: boolean;
-            /**
-             * @description The session ID generated by the Synology NAS for the client application.  For this server this
-             *     is a bcrypt hash of the session master key, account session key, and session GUID.
-             */
-            sid: string;
-        };
-        SynologyEntrySignInResponseDto: {
-            data: components["schemas"]["SynologyEntrySignInDataDto"];
-            /**
-             * @description Boolean flag for the request ending successfully.  There are scenarios where Synology could
-             *     return false instead but this server will return an HTTP error response.
-             */
-            success: boolean;
-        };
-        SynologyFolderBodyDto: {
-            additional: string;
-            /**
-             * @description Synology's API uses this value to route requests appropriately but this software has
-             *     direct endpoints for their relevant URL paths.  As such this value is ignored for now
-             *     but defined to match the Synology API.
-             *
-             *     This endpoint requires a value of `SYNO.AudioStation.Folder` be provided for correctness.
-             * @example SYNO.AudioStation.Folder
-             */
-            api: components["schemas"]["SynologyApiEnum"];
-            /**
-             * @description The ID of the folder.  Synology uses a string with a prefix and the numeric ID, this software
-             *     only uses the path so an ID will arrive like `/music/artist/album/cd1`
-             */
-            id: number;
-            /**
-             * @description Synology supports having personal and shared libraries but this software does not have a
-             *     direct equivalent, users can add the same root path to achieve it.  As such this value
-             *     is ignored but defined to match the Synology API.
-             *
-             *     This endpoint requires a value of `all` be provided for correctness.
-             * @example all
-             */
-            library: components["schemas"]["SynologyLibraryEnum"];
-            /**
-             * @description Defines the number of results to return.  If no value is specified a default of 100,000
-             *     is used to practically-ensure all results are returned.  This is a change from Synology's
-             *     API which defaults to 100, but Synology's mobile clients will specify their limit.
-             */
-            limit: number;
-            /**
-             * @description Synology's API uses this value to route requests appropriately but for AudioStation the
-             *     endpoints have limited functionality, all music-related endpoints `list` except cover
-             *     images.  As such this value is ignored for now but defined to match the Synology API.
-             *
-             *     This endpoint requires a value of `list` be provided for correctness.
-             * @example list
-             */
-            method: components["schemas"]["SynologyMethodEnum"];
-            /**
-             * @description Defines the pagination offset for the results.  If no value is specified a default of 0 is
-             *     used to start at the beginning of a result set.
-             */
-            offset: number;
-            recursive: boolean;
-            /**
-             * @description Synology's API has versioned endpoints and some have at least 3 versions.  This software
-             *     currently only supports the latest version of the API for each endpoint and ignores this value
-             *     for now.  It's possible to build in support for prior versions of an endpoint but that would
-             *     require using the `debug-proxy` to capture the request and response payloads to understand the
-             *     differences between versions.  If you are running an older DSM NAS and wish to help then check
-             *     out the GitHub Issues page and submit a request to support your version of the API.
-             */
-            version: number;
-        };
-        SynologyFolderDataDto: {
-            /**
-             * @description The number of folders included in the response, this may be less than the total number if there is
-             *     a combination of folders and files in the directory.
-             */
-            folder_total: number;
-            /**
-             * @description The ID of the folder currently in scope.  Synology uses a string with a prefix and the numeric ID, this
-             *     software only uses the path since folders are not tracked separately they are derived from the file paths.
-             */
-            id?: string;
-            items: (components["schemas"]["SynologyFolderDto"] | components["schemas"]["SynologySongDto"])[];
-            /**
-             * @description Defines the pagination offset for the results.  If no value is specified a default of 0 is
-             *     used to start at the beginning of a result set.
-             */
-            offset: number;
-            /**
-             * @description The total number of results available for the request.  This is used to determine if there are
-             *     more results available for the request and if additional requests are needed to retrieve them.
-             */
-            total: number;
-        };
-        SynologyFolderDto: {
-            /**
-             * @description The ID value for the folder, for a root path this will be `root_n` otherwise `dir_n` where `n`
-             *     is the numeric ID of the folder.
-             */
-            id: string;
-            /**
-             * @description Indicates whether the folder is a personal folder or a shared folder, however there is no
-             *     shared folder equivalent in this software so this value is ignored for now but defined to
-             *     match the Synology API.
-             */
-            is_personal: boolean;
-            /** @description The fully-qualified path to the file */
-            path: string;
-            /** @description The final segment of the folder path */
-            title: string;
-            /** @description The content type, folder or file */
-            type: components["schemas"]["ContentTypeEnum"];
-        };
-        SynologyFolderResponseDto: {
-            data: components["schemas"]["SynologyFolderDataDto"];
-            /**
-             * @description Boolean flag for the request ending successfully.  There are scenarios where Synology could
-             *     return false instead but this server will return an HTTP error response.
-             */
-            success: boolean;
-        };
-        SynologyGenreBodyDto: {
-            /**
-             * @description Synology's API uses this value to route requests appropriately but this software has
-             *     direct endpoints for their relevant URL paths.  As such this value is ignored for now
-             *     but defined to match the Synology API.
-             *
-             *     This endpoint requires a value of `SYNO.AudioStation.Genre` be provided for correctness.
-             * @example SYNO.AudioStation.Genre
-             */
-            api: components["schemas"]["SynologyApiEnum"];
-            /**
-             * @description Synology supports having personal and shared libraries but this software does not have a
-             *     direct equivalent, users can add the same root path to achieve it.  As such this value
-             *     is ignored but defined to match the Synology API.
-             *
-             *     This endpoint requires a value of `all` be provided for correctness.
-             * @example all
-             */
-            library: components["schemas"]["SynologyLibraryEnum"];
-            /**
-             * @description Defines the number of results to return.  If no value is specified a default of 100,000
-             *     is used to practically-ensure all results are returned.  This is a change from Synology's
-             *     API which defaults to 100, but Synology's mobile clients will specify their limit.
-             */
-            limit: number;
-            /**
-             * @description Synology's API uses this value to route requests appropriately but for AudioStation the
-             *     endpoints have limited functionality, all music-related endpoints `list` except cover
-             *     images.  As such this value is ignored for now but defined to match the Synology API.
-             *
-             *     This endpoint requires a value of `list` or `list_default_genre` be provided for correctness.
-             * @example list
-             */
-            method: components["schemas"]["SynologyMethodEnum"];
-            /**
-             * @description Defines the pagination offset for the results.  If no value is specified a default of 0 is
-             *     used to start at the beginning of a result set.
-             */
-            offset: number;
-            /**
-             * @description Synology's API has versioned endpoints and some have at least 3 versions.  This software
-             *     currently only supports the latest version of the API for each endpoint and ignores this value
-             *     for now.  It's possible to build in support for prior versions of an endpoint but that would
-             *     require using the `debug-proxy` to capture the request and response payloads to understand the
-             *     differences between versions.  If you are running an older DSM NAS and wish to help then check
-             *     out the GitHub Issues page and submit a request to support your version of the API.
-             */
-            version: number;
-        };
-        SynologyGenreDataDto: {
-            genres: components["schemas"]["SynologyGenreDto"][];
-            /**
-             * @description Defines the pagination offset for the results.  If no value is specified a default of 0 is
-             *     used to start at the beginning of a result set.
-             */
-            offset: number;
-            /**
-             * @description The total number of results available for the request.  This is used to determine if there are
-             *     more results available for the request and if additional requests are needed to retrieve them.
-             */
-            total: number;
-        };
-        SynologyGenreDto: {
-            additional: components["schemas"]["SynologyAlbumAdditionalDto"];
-            id: string;
-            name: string;
-        };
-        SynologyGenreResponseDto: {
-            data: components["schemas"]["SynologyGenreDataDto"];
-            /**
-             * @description Boolean flag for the request ending successfully.  There are scenarios where Synology could
-             *     return false instead but this server will return an HTTP error response.
-             */
-            success: boolean;
-        };
-        SynologyInfoAmeStatus: {
-            ame_major_version: number;
-            has_aac: boolean;
-            has_license: boolean;
-            is_aac_activated: boolean;
-            is_ame_broken: boolean;
-            is_ame_install: boolean;
-            need_aac_transcoding: boolean;
-        };
-        SynologyInfoBodyDto: {
-            /**
-             * @description Synology's API uses this value to route requests appropriately but this software has
-             *     direct endpoints for their relevant URL paths.  As such this value is ignored for now
-             *     but defined to match the Synology API.
-             *
-             *     This endpoint requires a value of `SYNO.AudioStation.Composer` be provided for correctness.
-             * @example SYNO.AudioStation.Info
-             */
-            api: components["schemas"]["SynologyApiEnum"];
-            /**
-             * @description Synology's API uses this value to route requests appropriately but for AudioStation the
-             *     endpoints have limited functionality, all music-related endpoints `list` except cover
-             *     images.  As such this value is ignored for now but defined to match the Synology API.
-             *
-             *     This endpoint requires a value of `list` be provided for correctness.
-             * @example getinfo
-             */
-            method: components["schemas"]["SynologyMethodEnum"];
-            /**
-             * @description Synology's API has versioned endpoints and some have at least 3 versions.  This software
-             *     currently only supports the latest version of the API for each endpoint and ignores this value
-             *     for now.  It's possible to build in support for prior versions of an endpoint but that would
-             *     require using the `debug-proxy` to capture the request and response payloads to understand the
-             *     differences between versions.  If you are running an older DSM NAS and wish to help then check
-             *     out the GitHub Issues page and submit a request to support your version of the API.
-             */
-            version: number;
-        };
-        SynologyInfoDataDto: {
-            ame_status: components["schemas"]["SynologyInfoAmeStatus"];
-            /** @enum {string} */
-            browse_personal_library: SynologyInfoDataDtoBrowse_personal_library;
-            dsd_decode_capability: boolean;
-            enable_equalizer: boolean;
-            enable_personal_library: boolean;
-            enable_user_home: boolean;
-            has_music_share: boolean;
-            is_manager: boolean;
-            playing_queue_max: number;
-            privilege: components["schemas"]["SynologyInfoPrivilege"];
-            remote_controller: boolean;
-            same_subnet: boolean;
-            serial_number: string;
-            settings: components["schemas"]["SynologyInfoSettings"];
-            sid: string;
-            support_bluetooth: boolean;
-            support_usb: boolean;
-            support_virtual_library: boolean;
-            transcode_capability: string[];
-            version: number;
-            version_string: string;
-        };
-        SynologyInfoPrivilege: {
-            playlist_edit: boolean;
-            remote_player: boolean;
-            sharing: boolean;
-            tag_edit: boolean;
-            upnp_browse: boolean;
-        };
-        SynologyInfoResponseDto: {
-            data: components["schemas"]["SynologyInfoDataDto"];
-            /**
-             * @description Boolean flag for the request ending successfully.  There are scenarios where Synology could
-             *     return false instead but this server will return an HTTP error response.
-             */
-            success: boolean;
-        };
-        SynologyInfoSettings: {
-            audio_show_virtual_library: boolean;
-            disable_upnp: boolean;
-            enable_download: boolean;
-            prefer_using_html5: boolean;
-            transcode_to_mp3: boolean;
-        };
-        /**
-         * @description Synology supports having personal and shared libraries but this software does not have a
-         *     direct equivalent, users can add the same root path to achieve it.  As such this value
-         *     is ignored but defined to match the Synology API.
-         *
-         *     This endpoint requires a value of `all` be provided for correctness.
-         * @enum {string}
-         */
-        SynologyLibraryEnum: SynologyLibraryEnum;
+        api: components['schemas']['SynologyApiEnum'];
         /**
          * @description Synology's API uses this value to route requests appropriately but for AudioStation the
          *     endpoints have limited functionality, all music-related endpoints `list` except cover
          *     images.  As such this value is ignored for now but defined to match the Synology API.
          *
-         *     This endpoint requires a value of `list` be provided for correctness.
-         * @enum {string}
+         *     This endpoint requires a value of `stream` be provided for correctness.
          */
-        SynologyMethodEnum: SynologyMethodEnum;
-        /** @enum {string} */
-        SynologyPinTypeEnum: SynologyPinTypeEnum;
-        SynologyPlaylistAdditionalDto: {
-            rules?: components["schemas"]["SynologyPlaylistRuleDto"][];
-            /** @example and */
-            rules_conjunction?: components["schemas"]["SmartPlaylistConjugalEnum"];
-            sharing_info: components["schemas"]["SynologyPlaylistSharingInfoDto"];
-        };
-        SynologyPlaylistAdditionalWithItemsDto: {
-            rules?: components["schemas"]["SynologyPlaylistRuleDto"][];
-            /** @example and */
-            rules_conjunction?: components["schemas"]["SmartPlaylistConjugalEnum"];
-            sharing_info: components["schemas"]["SynologyPlaylistSharingInfoDto"];
-            songs: components["schemas"]["SynologyPlaylistSongDto"][];
-            songs_offset: number;
-            songs_total: number;
-        };
-        SynologyPlaylistAddOrRemoveItemBodyDto: {
-            /**
-             * @description Synology's API uses this value to route requests appropriately but this software has
-             *     direct endpoints for their relevant URL paths.  As such this value is ignored for now
-             *     but defined to match the Synology API.
-             *
-             *     This endpoint requires a value of `SYNO.AudioStation.Proxy` be provided for correctness.
-             * @example SYNO.AudioStation.Playlist
-             */
-            api: components["schemas"]["SynologyApiEnum"];
-            /**
-             * @description The ID of the playlist comes in the format
-             *     `playlist_<personal|shared>_<normal|smart>/<name>`
-             *     eg `playlist_personal_normal/playlistname` or `playlist_shared_smart/playlistname`
-             */
-            id: string;
-            /**
-             * @description Synology supports having personal and shared libraries but this software does not have a
-             *     direct equivalent, users can add the same root path to achieve it.  As such this value
-             *     is ignored but defined to match the Synology API.
-             *
-             *     This endpoint requires a value of `all` or `personal` be provided for correctness.
-             * @example all
-             */
-            library: components["schemas"]["SynologyLibraryEnum"];
-            /** @description The number of items to remove. */
-            limit: number;
-            /**
-             * @description Synology's API uses this value to route requests appropriately but NestJS controllers
-             *     handle the routing between URL paths so this value is ignored for now but defined to
-             *     match the Synology API.
-             *
-             *     This endpoint requires a value of `updatesongs` be provided for correctness.
-             * @example updatesongs
-             */
-            method: components["schemas"]["SynologyMethodEnum"];
-            /**
-             * @description The position of the item(s) in the playlist, if `-1` then it is a new item otherwise
-             *     the list-index for the item.
-             */
-            offset: number;
-            /**
-             * @description The ID of the song comes in a `music_<id>,music_<id>` format or for radio stations it
-             *     can be `radio_<title>_<url>` or when deleting, an empty value.
-             *
-             *     eg adding song(s): `music_1234,music_5678`
-             *     eg adding radio(s) `radio_The Best Radio Station Ever https://example.com/stream`
-             *     eg adding both: `music_1234,music_5678,radio_The Best Radio Station Ever https://example.com/stream`
-             *
-             *     The posted value is transformed to an array of song IDs as numbers or radio station IDs
-             *     as strings.
-             */
-            songs: Record<string, never>[];
-            /**
-             * @description Synology's API has versioned endpoints and some have at least 3 versions.  This software
-             *     currently only supports the latest version of the API for each endpoint and ignores this value
-             *     for now.  It's possible to build in support for prior versions of an endpoint but that would
-             *     require using the `debug-proxy` to capture the request and response payloads to understand the
-             *     differences between versions.  If you are running an older DSM NAS and wish to help then check
-             *     out the GitHub Issues page and submit a request to support your version of the API.
-             */
-            version: number;
-        };
-        SynologyPlaylistCreateNormalBodyDto: {
-            /**
-             * @description Synology's API uses this value to route requests appropriately but this software has
-             *     direct endpoints for their relevant URL paths.  As such this value is ignored for now
-             *     but defined to match the Synology API.
-             *
-             *     This endpoint requires a value of `SYNO.AudioStation.Proxy` be provided for correctness.
-             * @example SYNO.AudioStation.Playlist
-             */
-            api: components["schemas"]["SynologyApiEnum"];
-            /**
-             * @description Synology supports having personal and shared libraries but this software does not have a
-             *     direct equivalent, users can add the same root path to achieve it.  As such this value
-             *     is ignored but defined to match the Synology API.
-             *
-             *     This endpoint requires a value of `all` or `personal` be provided for correctness.
-             * @example all
-             */
-            library: components["schemas"]["SynologyLibraryEnum"];
-            /**
-             * @description Synology's API uses this value to route requests appropriately but NestJS controllers
-             *     handle the routing between URL paths so this value is ignored for now but defined to
-             *     match the Synology API.
-             *
-             *     This endpoint requires a value of `create` be provided for correctness.
-             * @example create
-             */
-            method: components["schemas"]["SynologyMethodEnum"];
-            /** @description The name of the playlist to create. */
-            name: string;
-            /**
-             * @description Synology's API has versioned endpoints and some have at least 3 versions.  This software
-             *     currently only supports the latest version of the API for each endpoint and ignores this value
-             *     for now.  It's possible to build in support for prior versions of an endpoint but that would
-             *     require using the `debug-proxy` to capture the request and response payloads to understand the
-             *     differences between versions.  If you are running an older DSM NAS and wish to help then check
-             *     out the GitHub Issues page and submit a request to support your version of the API.
-             */
-            version: number;
-        };
-        SynologyPlaylistCreateSmartBodyDto: {
-            /**
-             * @description Synology's API uses this value to route requests appropriately but this software has
-             *     direct endpoints for their relevant URL paths.  As such this value is ignored for now
-             *     but defined to match the Synology API.
-             *
-             *     This endpoint requires a value of `SYNO.AudioStation.Proxy` be provided for correctness.
-             * @example SYNO.AudioStation.Playlist
-             */
-            api: components["schemas"]["SynologyApiEnum"];
-            /** @example and */
-            conj_rule: components["schemas"]["SmartPlaylistConjugalEnum"];
-            /**
-             * @description Synology supports having personal and shared libraries but this software does not have a
-             *     direct equivalent, users can add the same root path to achieve it.  As such this value
-             *     is ignored but defined to match the Synology API.
-             *
-             *     This endpoint requires a value of `all` or `personal` be provided for correctness.
-             * @example all
-             */
-            library: components["schemas"]["SynologyLibraryEnum"];
-            /**
-             * @description Synology's API uses this value to route requests appropriately but NestJS controllers
-             *     handle the routing between URL paths so this value is ignored for now but defined to
-             *     match the Synology API.
-             *
-             *     This endpoint requires a value of `create` be provided for correctness.
-             * @example createsmart
-             */
-            method: components["schemas"]["SynologyMethodEnum"];
-            /** @description The name of the playlist to create. */
-            name: string;
-            rules_json: components["schemas"]["SynologySmartListRule"][];
-            /**
-             * @description Synology's API has versioned endpoints and some have at least 3 versions.  This software
-             *     currently only supports the latest version of the API for each endpoint and ignores this value
-             *     for now.  It's possible to build in support for prior versions of an endpoint but that would
-             *     require using the `debug-proxy` to capture the request and response payloads to understand the
-             *     differences between versions.  If you are running an older DSM NAS and wish to help then check
-             *     out the GitHub Issues page and submit a request to support your version of the API.
-             */
-            version: number;
-        };
-        SynologyPlaylistDataDto: {
-            playlists: components["schemas"]["SynologyPlaylistDto"][];
-        };
-        SynologyPlaylistDeleteBodyDto: {
-            /**
-             * @description Synology's API uses this value to route requests appropriately but this software has
-             *     direct endpoints for their relevant URL paths.  As such this value is ignored for now
-             *     but defined to match the Synology API.
-             *
-             *     This endpoint requires a value of `SYNO.AudioStation.Proxy` be provided for correctness.
-             * @example SYNO.AudioStation.Playlist
-             */
-            api: components["schemas"]["SynologyApiEnum"];
-            /**
-             * @description The ID of the playlist comes in the format
-             *     `playlist_<personal|shared>_<normal|smart>/<name>`
-             *     eg `playlist_personal_normal/playlistname` or `playlist_shared_smart/playlistname`
-             */
-            id: string;
-            /**
-             * @description Synology supports having personal and shared libraries but this software does not have a
-             *     direct equivalent, users can add the same root path to achieve it.  As such this value
-             *     is ignored but defined to match the Synology API.
-             *
-             *     This endpoint requires a value of `all` or `personal` be provided for correctness.
-             * @example all
-             */
-            library: components["schemas"]["SynologyLibraryEnum"];
-            /**
-             * @description Synology's API uses this value to route requests appropriately but NestJS controllers
-             *     handle the routing between URL paths so this value is ignored for now but defined to
-             *     match the Synology API.
-             *
-             *     This endpoint requires a value of `delete` be provided for correctness.
-             * @example delete
-             */
-            method: components["schemas"]["SynologyMethodEnum"];
-            /** @enum {string} */
-            type: SynologyPlaylistDeleteBodyDtoType;
-            /**
-             * @description Synology's API has versioned endpoints and some have at least 3 versions.  This software
-             *     currently only supports the latest version of the API for each endpoint and ignores this value
-             *     for now.  It's possible to build in support for prior versions of an endpoint but that would
-             *     require using the `debug-proxy` to capture the request and response payloads to understand the
-             *     differences between versions.  If you are running an older DSM NAS and wish to help then check
-             *     out the GitHub Issues page and submit a request to support your version of the API.
-             */
-            version: number;
-        };
-        SynologyPlaylistDto: {
-            additional: components["schemas"]["SynologyPlaylistAdditionalDto"];
-            id: string;
-            library: string;
-            name: string;
-            sharing_status: string;
-            /** @example normal */
-            type: components["schemas"]["PlaylistTypeEnum"];
-        };
-        SynologyPlaylistIdDataDto: {
-            id: string;
-        };
-        SynologyPlaylistIdResponseDto: {
-            data: components["schemas"]["SynologyPlaylistIdDataDto"];
-            /**
-             * @description Boolean flag for the request ending successfully.  There are scenarios where Synology could
-             *     return false instead but this server will return an HTTP error response.
-             */
-            success: boolean;
-        };
-        SynologyPlaylistListBodyDto: {
-            /**
-             * @description Synology's API uses this value to route requests appropriately but this software has
-             *     direct endpoints for their relevant URL paths.  As such this value is ignored for now
-             *     but defined to match the Synology API.
-             *
-             *     This endpoint requires a value of `SYNO.AudioStation.Proxy` be provided for correctness.
-             * @example SYNO.AudioStation.Playlist
-             */
-            api: components["schemas"]["SynologyApiEnum"];
-            /**
-             * @description Synology supports having personal and shared libraries but this software does not have a
-             *     direct equivalent, users can add the same root path to achieve it.  As such this value
-             *     is ignored but defined to match the Synology API.
-             *
-             *     This endpoint requires a value of `all` or `personal` be provided for correctness.
-             * @example all
-             */
-            library: components["schemas"]["SynologyLibraryEnum"];
-            /**
-             * @description Synology's API uses this value to route requests appropriately but NestJS controllers
-             *     handle the routing between URL paths so this value is ignored for now but defined to
-             *     match the Synology API.
-             *
-             *     This endpoint requires a value of `list` be provided for correctness.
-             * @example list
-             */
-            method: components["schemas"]["SynologyMethodEnum"];
-            /**
-             * @description Synology's API has versioned endpoints and some have at least 3 versions.  This software
-             *     currently only supports the latest version of the API for each endpoint and ignores this value
-             *     for now.  It's possible to build in support for prior versions of an endpoint but that would
-             *     require using the `debug-proxy` to capture the request and response payloads to understand the
-             *     differences between versions.  If you are running an older DSM NAS and wish to help then check
-             *     out the GitHub Issues page and submit a request to support your version of the API.
-             */
-            version: number;
-        };
-        SynologyPlaylistMoveItemsBodyDto: {
-            /**
-             * @description Synology's API uses this value to route requests appropriately but this software has
-             *     direct endpoints for their relevant URL paths.  As such this value is ignored for now
-             *     but defined to match the Synology API.
-             *
-             *     This endpoint requires a value of `SYNO.AudioStation.Proxy` be provided for correctness.
-             * @example SYNO.AudioStation.Playlist
-             */
-            api: components["schemas"]["SynologyApiEnum"];
-            /**
-             * @description The ID of the playlist comes in the format
-             *     `playlist_<personal|shared>_<normal|smart>/<name>`
-             *     eg `playlist_personal_normal/playlistname` or `playlist_shared_smart/playlistname`
-             */
-            id: string;
-            /**
-             * @description Synology supports having personal and shared libraries but this software does not have a
-             *     direct equivalent, users can add the same root path to achieve it.  As such this value
-             *     is ignored but defined to match the Synology API.
-             *
-             *     This endpoint requires a value of `all` or `personal` be provided for correctness.
-             * @example all
-             */
-            library: components["schemas"]["SynologyLibraryEnum"];
-            /** @description The number of items being moved */
-            limit: number;
-            /**
-             * @description Synology's API uses this value to route requests appropriately but NestJS controllers
-             *     handle the routing between URL paths so this value is ignored for now but defined to
-             *     match the Synology API.
-             *
-             *     This endpoint requires a value of `updatesongs` be provided for correctness.
-             * @example updatesongs
-             */
-            method: components["schemas"]["SynologyMethodEnum"];
-            /**
-             * @description The position of the item(s) in the playlist, if `-1` then it is a new item otherwise
-             *     the list-index for the item.
-             */
-            offset: number;
-            /**
-             * @description The ID of the song comes in a `music_<id>,music_<id>` format, eg `music_1234,music_5678`
-             *     or when deleting, an empty value.
-             */
-            songs: number[];
-            /**
-             * @description Synology's API has versioned endpoints and some have at least 3 versions.  This software
-             *     currently only supports the latest version of the API for each endpoint and ignores this value
-             *     for now.  It's possible to build in support for prior versions of an endpoint but that would
-             *     require using the `debug-proxy` to capture the request and response payloads to understand the
-             *     differences between versions.  If you are running an older DSM NAS and wish to help then check
-             *     out the GitHub Issues page and submit a request to support your version of the API.
-             */
-            version: number;
-        };
-        SynologyPlaylistRemoveMissingBodyDto: {
-            /**
-             * @description Synology's API uses this value to route requests appropriately but this software has
-             *     direct endpoints for their relevant URL paths.  As such this value is ignored for now
-             *     but defined to match the Synology API.
-             *
-             *     This endpoint requires a value of `SYNO.AudioStation.Proxy` be provided for correctness.
-             * @example SYNO.AudioStation.Playlist
-             */
-            api: components["schemas"]["SynologyApiEnum"];
-            /**
-             * @description The ID of the playlist comes in the format
-             *     `playlist_<personal|shared>_<normal|smart>/<name>`
-             *     eg `playlist_personal_normal/playlistname` or `playlist_shared_smart/playlistname`
-             */
-            id: string;
-            /**
-             * @description Synology supports having personal and shared libraries but this software does not have a
-             *     direct equivalent, users can add the same root path to achieve it.  As such this value
-             *     is ignored but defined to match the Synology API.
-             *
-             *     This endpoint requires a value of `all` or `personal` be provided for correctness.
-             * @example all
-             */
-            library: components["schemas"]["SynologyLibraryEnum"];
-            /**
-             * @description Synology's API uses this value to route requests appropriately but NestJS controllers
-             *     handle the routing between URL paths so this value is ignored for now but defined to
-             *     match the Synology API.
-             *
-             *     This endpoint requires a value of `removemissing` be provided for correctness.
-             * @example removemissing
-             */
-            method: components["schemas"]["SynologyMethodEnum"];
-            /**
-             * @description Synology's API has versioned endpoints and some have at least 3 versions.  This software
-             *     currently only supports the latest version of the API for each endpoint and ignores this value
-             *     for now.  It's possible to build in support for prior versions of an endpoint but that would
-             *     require using the `debug-proxy` to capture the request and response payloads to understand the
-             *     differences between versions.  If you are running an older DSM NAS and wish to help then check
-             *     out the GitHub Issues page and submit a request to support your version of the API.
-             */
-            version: number;
-        };
-        SynologyPlaylistRenameBodyDto: {
-            /**
-             * @description Synology's API uses this value to route requests appropriately but this software has
-             *     direct endpoints for their relevant URL paths.  As such this value is ignored for now
-             *     but defined to match the Synology API.
-             *
-             *     This endpoint requires a value of `SYNO.AudioStation.Proxy` be provided for correctness.
-             * @example SYNO.AudioStation.Playlist
-             */
-            api: components["schemas"]["SynologyApiEnum"];
-            /**
-             * @description The ID of the playlist comes in the format
-             *     `playlist_<personal|shared>_<normal|smart>/<name>`
-             *     eg `playlist_personal_normal/playlistname` or `playlist_shared_smart/playlistname`
-             */
-            id: string;
-            /**
-             * @description Synology supports having personal and shared libraries but this software does not have a
-             *     direct equivalent, users can add the same root path to achieve it.  As such this value
-             *     is ignored but defined to match the Synology API.
-             *
-             *     This endpoint requires a value of `all` or `personal` be provided for correctness.
-             * @example all
-             */
-            library: components["schemas"]["SynologyLibraryEnum"];
-            /**
-             * @description Synology's API uses this value to route requests appropriately but NestJS controllers
-             *     handle the routing between URL paths so this value is ignored for now but defined to
-             *     match the Synology API.
-             *
-             *     This endpoint requires a value of `rename` be provided for correctness.
-             * @example rename
-             */
-            method: components["schemas"]["SynologyMethodEnum"];
-            /** @description The name of the playlist to create. */
-            new_name: string;
-            /**
-             * @description Synology's API has versioned endpoints and some have at least 3 versions.  This software
-             *     currently only supports the latest version of the API for each endpoint and ignores this value
-             *     for now.  It's possible to build in support for prior versions of an endpoint but that would
-             *     require using the `debug-proxy` to capture the request and response payloads to understand the
-             *     differences between versions.  If you are running an older DSM NAS and wish to help then check
-             *     out the GitHub Issues page and submit a request to support your version of the API.
-             */
-            version: number;
-        };
-        SynologyPlaylistResponseDto: {
-            data: components["schemas"]["SynologyPlaylistDataDto"];
-            /**
-             * @description Boolean flag for the request ending successfully.  There are scenarios where Synology could
-             *     return false instead but this server will return an HTTP error response.
-             */
-            success: boolean;
-        };
-        SynologyPlaylistRetrieveBodyDto: {
-            /**
-             * @description Synology's API uses this value to route requests appropriately but this software has
-             *     direct endpoints for their relevant URL paths.  As such this value is ignored for now
-             *     but defined to match the Synology API.
-             *
-             *     This endpoint requires a value of `SYNO.AudioStation.Proxy` be provided for correctness.
-             * @example SYNO.AudioStation.Playlist
-             */
-            api: components["schemas"]["SynologyApiEnum"];
-            /**
-             * @description The ID of the playlist comes in the format
-             *     `playlist_<personal|shared>_<normal|smart>/<name>`
-             *     eg `playlist_personal_normal/playlistname` or `playlist_shared_smart/playlistname`
-             */
-            id: string;
-            /**
-             * @description Synology supports having personal and shared libraries but this software does not have a
-             *     direct equivalent, users can add the same root path to achieve it.  As such this value
-             *     is ignored but defined to match the Synology API.
-             *
-             *     This endpoint requires a value of `all` or `personal` be provided for correctness.
-             * @example all
-             */
-            library: components["schemas"]["SynologyLibraryEnum"];
-            /**
-             * @description Synology's API uses this value to route requests appropriately but NestJS controllers
-             *     handle the routing between URL paths so this value is ignored for now but defined to
-             *     match the Synology API.
-             *
-             *     This endpoint requires a value of `getinfo` be provided for correctness.
-             * @example getinfo
-             */
-            method: components["schemas"]["SynologyMethodEnum"];
-            /**
-             * @description Synology's API has versioned endpoints and some have at least 3 versions.  This software
-             *     currently only supports the latest version of the API for each endpoint and ignores this value
-             *     for now.  It's possible to build in support for prior versions of an endpoint but that would
-             *     require using the `debug-proxy` to capture the request and response payloads to understand the
-             *     differences between versions.  If you are running an older DSM NAS and wish to help then check
-             *     out the GitHub Issues page and submit a request to support your version of the API.
-             */
-            version: number;
-        };
-        SynologyPlaylistRuleDto: {
-            interval: number;
-            op: number;
-            tag: number;
-            tagval: string;
-        };
-        SynologyPlaylistSharingInfoDto: {
-            date_available: number;
-            date_expired: number;
-            id: string;
-            status: string;
-            url: string;
-        };
-        SynologyPlaylistSongDto: {
-            additional: components["schemas"]["SynologySongAdditionalDto"];
-            id: string;
-            path: string;
-            position: number;
-            title: string;
-            type: components["schemas"]["ContentTypeEnum"];
-        };
-        SynologyPlaylistTrackListBodyDto: {
-            /**
-             * @description Additional data to include in the response.  This field is ignored by the backend for now
-             *     and a fixed-payload response is returned.
-             */
-            additional: string;
-            /**
-             * @description The ID of the playlist comes in the format
-             *     `playlist_<personal|shared>_<normal|smart>/<name>`
-             *     eg `playlist_personal_normal/playlistname` or `playlist_shared_smart/playlistname`
-             */
-            id: string;
-            /**
-             * @description Defines the number of results to return.  If no value is specified a default of 100,000
-             *     is used to practically-ensure all results are returned.  This is a change from Synology's
-             *     API which defaults to 100, but Synology's mobile clients will specify their limit.
-             */
-            limit: number;
-            /**
-             * @description Synology's API uses this value to route requests appropriately but NestJS controllers
-             *     handle the routing between URL paths so this value is ignored for now but defined to
-             *     match the Synology API.
-             *
-             *     This endpoint requires a value of `list` be provided for correctness.
-             * @example list
-             */
-            method: components["schemas"]["SynologyMethodEnum"];
-            /**
-             * @description Defines the pagination offset for the results.  If no value is specified a default of 0 is
-             *     used to start at the beginning of a result set.
-             */
-            offset: number;
-        };
-        SynologyPlaylistUpdateSmartBodyDto: {
-            /**
-             * @description Synology's API uses this value to route requests appropriately but this software has
-             *     direct endpoints for their relevant URL paths.  As such this value is ignored for now
-             *     but defined to match the Synology API.
-             *
-             *     This endpoint requires a value of `SYNO.AudioStation.Proxy` be provided for correctness.
-             * @example SYNO.AudioStation.Playlist
-             */
-            api: components["schemas"]["SynologyApiEnum"];
-            /** @example and */
-            conj_rule: components["schemas"]["SmartPlaylistConjugalEnum"];
-            /**
-             * @description The ID of the playlist comes in the format
-             *     `playlist_<personal|shared>_<normal|smart>/<name>`
-             *     eg `playlist_personal_normal/playlistname` or `playlist_shared_smart/playlistname`
-             */
-            id: string;
-            /**
-             * @description Synology supports having personal and shared libraries but this software does not have a
-             *     direct equivalent, users can add the same root path to achieve it.  As such this value
-             *     is ignored but defined to match the Synology API.
-             *
-             *     This endpoint requires a value of `all` or `personal` be provided for correctness.
-             * @example all
-             */
-            library: components["schemas"]["SynologyLibraryEnum"];
-            /**
-             * @description Synology's API uses this value to route requests appropriately but NestJS controllers
-             *     handle the routing between URL paths so this value is ignored for now but defined to
-             *     match the Synology API.
-             *
-             *     This endpoint requires a value of `update` be provided for correctness.
-             * @example updatesmart
-             */
-            method: components["schemas"]["SynologyMethodEnum"];
-            /** @description The name of the playlist to create. */
-            name: string;
-            rules_json: components["schemas"]["SynologySmartListRule"][];
-            /**
-             * @description Synology's API has versioned endpoints and some have at least 3 versions.  This software
-             *     currently only supports the latest version of the API for each endpoint and ignores this value
-             *     for now.  It's possible to build in support for prior versions of an endpoint but that would
-             *     require using the `debug-proxy` to capture the request and response payloads to understand the
-             *     differences between versions.  If you are running an older DSM NAS and wish to help then check
-             *     out the GitHub Issues page and submit a request to support your version of the API.
-             */
-            version: number;
-        };
-        SynologyPlaylistWithItemsDataDto: {
-            playlists: components["schemas"]["SynologyPlaylistWithItemsDto"][];
-        };
-        SynologyPlaylistWithItemsDto: {
-            additional: components["schemas"]["SynologyPlaylistAdditionalWithItemsDto"];
-            id: string;
-            library: string;
-            name: string;
-            sharing_status: string;
-            /** @example normal */
-            type: components["schemas"]["PlaylistTypeEnum"];
-        };
-        SynologyPlaylistWithItemsResponseDto: {
-            data: components["schemas"]["SynologyPlaylistWithItemsDataDto"];
-            /**
-             * @description Boolean flag for the request ending successfully.  There are scenarios where Synology could
-             *     return false instead but this server will return an HTTP error response.
-             */
-            success: boolean;
-        };
-        SynologyProxyDeleteSongInfoBodyDto: {
-            /**
-             * @description Synology's API uses this value to route requests appropriately but this software has
-             *     direct endpoints for their relevant URL paths.  As such this value is ignored for now
-             *     but defined to match the Synology API.
-             *
-             *     This endpoint requires a value of `SYNO.AudioStation.Proxy` be provided for correctness.
-             * @example SYNO.AudioStation.Proxy
-             */
-            api: components["schemas"]["SynologyApiEnum"];
-            /**
-             * @description Synology's API uses this value to route requests appropriately but for AudioStation the
-             *     endpoints have limited functionality, all music-related endpoints `list` except cover
-             *     images.  As such this value is ignored for now but defined to match the Synology API.
-             *
-             *     This endpoint requires a value of `deletesonginfo` be provided for correctness.
-             * @example deletesonginfo
-             */
-            method: components["schemas"]["SynologyMethodEnum"];
-            /** @description The array index of the song to delete from the SHOUTcast radio station */
-            stream_id: number;
-            /**
-             * @description Synology's API has versioned endpoints and some have at least 3 versions.  This software
-             *     currently only supports the latest version of the API for each endpoint and ignores this value
-             *     for now.  It's possible to build in support for prior versions of an endpoint but that would
-             *     require using the `debug-proxy` to capture the request and response payloads to understand the
-             *     differences between versions.  If you are running an older DSM NAS and wish to help then check
-             *     out the GitHub Issues page and submit a request to support your version of the API.
-             */
-            version: number;
-        };
-        SynologyProxySongInfoBodyDto: {
-            /**
-             * @description Synology's API uses this value to route requests appropriately but this software has
-             *     direct endpoints for their relevant URL paths.  As such this value is ignored for now
-             *     but defined to match the Synology API.
-             *
-             *     This endpoint requires a value of `SYNO.AudioStation.Proxy` be provided for correctness.
-             * @example SYNO.AudioStation.Proxy
-             */
-            api: components["schemas"]["SynologyApiEnum"];
-            /**
-             * @description Synology's API uses this value to route requests appropriately but for AudioStation the
-             *     endpoints have limited functionality, all music-related endpoints `list` except cover
-             *     images.  As such this value is ignored for now but defined to match the Synology API.
-             *
-             *     This endpoint requires a value of `getsonginfo` be provided for correctness.
-             * @example getsonginfo
-             */
-            method: components["schemas"]["SynologyMethodEnum"];
-            /** @description The SHOUTcast stream ID */
-            stream_id: number;
-            /**
-             * @description Synology's API has versioned endpoints and some have at least 3 versions.  This software
-             *     currently only supports the latest version of the API for each endpoint and ignores this value
-             *     for now.  It's possible to build in support for prior versions of an endpoint but that would
-             *     require using the `debug-proxy` to capture the request and response payloads to understand the
-             *     differences between versions.  If you are running an older DSM NAS and wish to help then check
-             *     out the GitHub Issues page and submit a request to support your version of the API.
-             */
-            version: number;
-        };
-        SynologyProxySongInfoResponseDto: {
-            data: {
-                title: string;
-            };
-            /**
-             * @description Boolean flag for the request ending successfully.  There are scenarios where Synology could
-             *     return false instead but this server will return an HTTP error response.
-             */
-            success: boolean;
-        };
-        SynologyProxyStreamInfoBodyDto: {
-            /**
-             * @description Synology's API uses this value to route requests appropriately but this software has
-             *     direct endpoints for their relevant URL paths.  As such this value is ignored for now
-             *     but defined to match the Synology API.
-             *
-             *     This endpoint requires a value of `SYNO.AudioStation.Proxy` be provided for correctness.
-             * @example SYNO.AudioStation.Proxy
-             */
-            api: components["schemas"]["SynologyApiEnum"];
-            /** @description The title of the SHOUTcast radio station */
-            id: string;
-            /**
-             * @description Synology's API uses this value to route requests appropriately but for AudioStation the
-             *     endpoints have limited functionality, all music-related endpoints `list` except cover
-             *     images.  As such this value is ignored for now but defined to match the Synology API.
-             *
-             *     This endpoint requires a value of `getstreamid` be provided for correctness.
-             * @example getstreamid
-             */
-            method: components["schemas"]["SynologyMethodEnum"];
-            /**
-             * @description Synology's API has versioned endpoints and some have at least 3 versions.  This software
-             *     currently only supports the latest version of the API for each endpoint and ignores this value
-             *     for now.  It's possible to build in support for prior versions of an endpoint but that would
-             *     require using the `debug-proxy` to capture the request and response payloads to understand the
-             *     differences between versions.  If you are running an older DSM NAS and wish to help then check
-             *     out the GitHub Issues page and submit a request to support your version of the API.
-             */
-            version: number;
-        };
-        SynologyProxyStreamInfoResponseDto: {
-            data: {
-                format: string;
-                stream_id: string;
-            };
-            /**
-             * @description Boolean flag for the request ending successfully.  There are scenarios where Synology could
-             *     return false instead but this server will return an HTTP error response.
-             */
-            success: boolean;
-        };
-        SynologyRadioAddOrUpdateItemBodyDto: {
-            /**
-             * @description Synology's API uses this value to route requests appropriately but this software has
-             *     direct endpoints for their relevant URL paths.  As such this value is ignored for now
-             *     but defined to match the Synology API.
-             *
-             *     This endpoint requires a value of `SYNO.AudioStation.Radio` be provided for correctness.
-             * @example SYNO.AudioStation.Radio
-             */
-            api: components["schemas"]["SynologyApiEnum"];
-            /** @description The name of the container the favorite is in. */
-            container: string;
-            /**
-             * @description Synology's API uses this value to route requests appropriately but for AudioStation the
-             *     endpoints have limited functionality, all music-related endpoints `list` except cover
-             *     images.  As such this value is ignored for now but defined to match the Synology API.
-             *
-             *     This endpoint requires a value of `updateradios` be provided for correctness.
-             * @example updateradios
-             */
-            method: components["schemas"]["SynologyMethodEnum"];
-            /**
-             * @description Refers to the position in the existing data, a value of `-1` indicates a new item.  This
-             *     is not the pagination offset.
-             */
-            offset: number;
-            radios_json: components["schemas"]["SynologyRadioFavoriteItemDto"][];
-            /**
-             * @description Synology's API has versioned endpoints and some have at least 3 versions.  This software
-             *     currently only supports the latest version of the API for each endpoint and ignores this value
-             *     for now.  It's possible to build in support for prior versions of an endpoint but that would
-             *     require using the `debug-proxy` to capture the request and response payloads to understand the
-             *     differences between versions.  If you are running an older DSM NAS and wish to help then check
-             *     out the GitHub Issues page and submit a request to support your version of the API.
-             */
-            version: number;
-        };
-        SynologyRadioAddUserStationBodyDto: {
-            /**
-             * @description Synology's API uses this value to route requests appropriately but this software has
-             *     direct endpoints for their relevant URL paths.  As such this value is ignored for now
-             *     but defined to match the Synology API.
-             *
-             *     This endpoint requires a value of `SYNO.AudioStation.Radio` be provided for correctness.
-             * @example SYNO.AudioStation.Radio
-             */
-            api: components["schemas"]["SynologyApiEnum"];
-            /** @description The name of the container the user-defined station is in. */
-            container: string;
-            desc: string;
-            /**
-             * @description Synology's API uses this value to route requests appropriately but for AudioStation the
-             *     endpoints have limited functionality, all music-related endpoints `list` except cover
-             *     images.  As such this value is ignored for now but defined to match the Synology API.
-             *
-             *     This endpoint requires a value of `add` be provided for correctness.
-             * @example add
-             */
-            method: components["schemas"]["SynologyMethodEnum"];
-            /**
-             * @description Refers to the position in the existing data, a value of `-1` indicates a new item.  This
-             *     is not the pagination offset.
-             */
-            offset: number;
-            title: string;
-            /** Format: uri */
-            url: string;
-            /**
-             * @description Synology's API has versioned endpoints and some have at least 3 versions.  This software
-             *     currently only supports the latest version of the API for each endpoint and ignores this value
-             *     for now.  It's possible to build in support for prior versions of an endpoint but that would
-             *     require using the `debug-proxy` to capture the request and response payloads to understand the
-             *     differences between versions.  If you are running an older DSM NAS and wish to help then check
-             *     out the GitHub Issues page and submit a request to support your version of the API.
-             */
-            version: number;
-        };
-        SynologyRadioContainerListBodyDto: {
-            /**
-             * @description Synology's API uses this value to route requests appropriately but this software has
-             *     direct endpoints for their relevant URL paths.  As such this value is ignored for now
-             *     but defined to match the Synology API.
-             *
-             *     This endpoint requires a value of `SYNO.AudioStation.Radio` be provided for correctness.
-             * @example SYNO.AudioStation.Radio
-             */
-            api: components["schemas"]["SynologyApiEnum"];
-            /**
-             * @description Synology's API uses this value to route requests appropriately but for AudioStation the
-             *     endpoints have limited functionality, all music-related endpoints `list` except cover
-             *     images.  As such this value is ignored for now but defined to match the Synology API.
-             *
-             *     This endpoint requires a value of `list` be provided for correctness.
-             * @example list
-             */
-            method: components["schemas"]["SynologyMethodEnum"];
-            /**
-             * @description Refers to the position in the existing data, a value of `-1` indicates a new item.  This
-             *     is not the pagination offset.
-             */
-            offset: number;
-            /**
-             * @description Synology's API has versioned endpoints and some have at least 3 versions.  This software
-             *     currently only supports the latest version of the API for each endpoint and ignores this value
-             *     for now.  It's possible to build in support for prior versions of an endpoint but that would
-             *     require using the `debug-proxy` to capture the request and response payloads to understand the
-             *     differences between versions.  If you are running an older DSM NAS and wish to help then check
-             *     out the GitHub Issues page and submit a request to support your version of the API.
-             */
-            version: number;
-        };
-        SynologyRadioFavoriteItemDto: {
-            desc: string;
-            title: string;
-            /** Format: uri */
-            url: string;
-        };
-        SynologyRadioItemDataDto: {
-            /**
-             * @description Defines the pagination offset for the results.  If no value is specified a default of 0 is
-             *     used to start at the beginning of a result set.
-             */
-            offset: number;
-            radios: components["schemas"]["SynologyRadioItemDto"][];
-            /**
-             * @description The total number of results available for the request.  This is used to determine if there are
-             *     more results available for the request and if additional requests are needed to retrieve them.
-             */
-            total: number;
-        };
-        SynologyRadioItemDto: {
-            /** @description The `desc` value is used for custom-added stations/favorites. */
-            desc: string;
-            id: string;
-            title: string;
-            /**
-             * @description The `type` value is expected to always be `container` for SHOUTcast genres, and
-             *     `radio` for actual stations.  Possibly other values for favorites and custom-added
-             *     stations.
-             */
-            type: components["schemas"]["ShoutcastItemTypeEnum"];
-            /**
-             * Format: uri
-             * @description The `url` value is expected to always be an empty string for SHOUTcast genres.
-             */
-            url: string;
-        };
-        SynologyRadioItemListBodyDto: {
-            /**
-             * @description Synology's API uses this value to route requests appropriately but this software has
-             *     direct endpoints for their relevant URL paths.  As such this value is ignored for now
-             *     but defined to match the Synology API.
-             *
-             *     This endpoint requires a value of `SYNO.AudioStation.Radio` be provided for correctness.
-             * @example SYNO.AudioStation.Radio
-             */
-            api: components["schemas"]["SynologyApiEnum"];
-            /** @description The name of the container */
-            container: string;
-            /**
-             * @description Synology's API uses this value to route requests appropriately but for AudioStation the
-             *     endpoints have limited functionality, all music-related endpoints `list` except cover
-             *     images.  As such this value is ignored for now but defined to match the Synology API.
-             *
-             *     This endpoint requires a value of `list` be provided for correctness.
-             * @example list
-             */
-            method: components["schemas"]["SynologyMethodEnum"];
-            /**
-             * @description Refers to the position in the existing data, a value of `-1` indicates a new item.  This
-             *     is not the pagination offset.
-             */
-            offset: number;
-            /**
-             * @description Synology's API has versioned endpoints and some have at least 3 versions.  This software
-             *     currently only supports the latest version of the API for each endpoint and ignores this value
-             *     for now.  It's possible to build in support for prior versions of an endpoint but that would
-             *     require using the `debug-proxy` to capture the request and response payloads to understand the
-             *     differences between versions.  If you are running an older DSM NAS and wish to help then check
-             *     out the GitHub Issues page and submit a request to support your version of the API.
-             */
-            version: number;
-        };
-        SynologyRadioItemResponseDto: {
-            data: components["schemas"]["SynologyRadioItemDataDto"];
-            /**
-             * @description Boolean flag for the request ending successfully.  There are scenarios where Synology could
-             *     return false instead but this server will return an HTTP error response.
-             */
-            success: boolean;
-        };
-        SynologyRootFolderBodyDto: {
-            /**
-             * @description Synology's API uses this value to route requests appropriately but this software has
-             *     direct endpoints for their relevant URL paths.  As such this value is ignored for now
-             *     but defined to match the Synology API.
-             *
-             *     This endpoint requires a value of `SYNO.AudioStation.Folder` be provided for correctness.
-             * @example SYNO.AudioStation.Folder
-             */
-            api: components["schemas"]["SynologyApiEnum"];
-            /**
-             * @description Synology supports having personal and shared libraries but this software does not have a
-             *     direct equivalent, users can add the same root path to achieve it.  As such this value
-             *     is ignored but defined to match the Synology API.
-             *
-             *     This endpoint requires a value of `all` be provided for correctness.
-             * @example all
-             */
-            library: components["schemas"]["SynologyLibraryEnum"];
-            /**
-             * @description Defines the number of results to return.  If no value is specified a default of 100,000
-             *     is used to practically-ensure all results are returned.  This is a change from Synology's
-             *     API which defaults to 100, but Synology's mobile clients will specify their limit.
-             */
-            limit: number;
-            /**
-             * @description Synology's API uses this value to route requests appropriately but for AudioStation the
-             *     endpoints have limited functionality, all music-related endpoints `list` except cover
-             *     images.  As such this value is ignored for now but defined to match the Synology API.
-             *
-             *     This endpoint requires a value of `list` be provided for correctness.
-             * @example list
-             */
-            method: components["schemas"]["SynologyMethodEnum"];
-            /**
-             * @description Defines the pagination offset for the results.  If no value is specified a default of 0 is
-             *     used to start at the beginning of a result set.
-             */
-            offset: number;
-            /**
-             * @description Synology's API has versioned endpoints and some have at least 3 versions.  This software
-             *     currently only supports the latest version of the API for each endpoint and ignores this value
-             *     for now.  It's possible to build in support for prior versions of an endpoint but that would
-             *     require using the `debug-proxy` to capture the request and response payloads to understand the
-             *     differences between versions.  If you are running an older DSM NAS and wish to help then check
-             *     out the GitHub Issues page and submit a request to support your version of the API.
-             */
-            version: number;
-        };
-        SynologySearchAlbumDto: {
-            album_artist: string;
-            artist: string;
-            display_artist: string;
-            name: string;
-            year: number;
-        };
-        SynologySearchArtistDto: {
-            name: string;
-        };
-        SynologySearchBodyDto: {
-            /**
-             * @description Synology's API uses this value to route requests appropriately but this software has
-             *     direct endpoints for their relevant URL paths.  As such this value is ignored for now
-             *     but defined to match the Synology API.
-             *
-             *     This endpoint requires a value of `SYNO.AudioStation.Search` be provided for correctness.
-             * @example SYNO.AudioStation.Search
-             */
-            api: components["schemas"]["SynologyApiEnum"];
-            /** @description The search phrase to find in the library artists, tracks and albums */
-            keyword: string;
-            /**
-             * @description Synology supports having personal and shared libraries but this software does not have a
-             *     direct equivalent, users can add the same root path to achieve it.  As such this value
-             *     is ignored but defined to match the Synology API.
-             *
-             *     This endpoint requires a value of `all` be provided for correctness.
-             * @example all
-             */
-            library: components["schemas"]["SynologyLibraryEnum"];
-            /**
-             * @description Synology's API uses this value to route requests appropriately but for AudioStation the
-             *     endpoints have limited functionality, all music-related endpoints `list` except cover
-             *     images.  As such this value is ignored for now but defined to match the Synology API.
-             *
-             *     This endpoint requires a value of `list` be provided for correctness.
-             * @example list
-             */
-            method: components["schemas"]["SynologyMethodEnum"];
-            /**
-             * @description Synology's API has versioned endpoints and some have at least 3 versions.  This software
-             *     currently only supports the latest version of the API for each endpoint and ignores this value
-             *     for now.  It's possible to build in support for prior versions of an endpoint but that would
-             *     require using the `debug-proxy` to capture the request and response payloads to understand the
-             *     differences between versions.  If you are running an older DSM NAS and wish to help then check
-             *     out the GitHub Issues page and submit a request to support your version of the API.
-             */
-            version: number;
-        };
-        SynologySearchDataDto: {
-            albums: components["schemas"]["SynologySearchAlbumDto"][];
-            /** @description The number of albums found matching the keyword search. */
-            albumTotal: number;
-            artists: components["schemas"]["SynologySearchArtistDto"][];
-            /** @description The number of artists found matching the keyword search. */
-            artistTotal: number;
-            songs: components["schemas"]["SynologySongDto"][];
-            /** @description The number of songs found matching the keyword search. */
-            songTotal: number;
-        };
-        SynologySearchResponseDto: {
-            data: components["schemas"]["SynologySearchDataDto"];
-            /**
-             * @description Boolean flag for the request ending successfully.  There are scenarios where Synology could
-             *     return false instead but this server will return an HTTP error response.
-             */
-            success: boolean;
-        };
-        SynologySmartListRule: {
-            interval: number;
-            op: number;
-            tag: number;
-            tagval: string;
-        };
-        SynologySongAdditionalDto: {
-            song_audio: components["schemas"]["SynologySongAudioDto"];
-            song_rating: components["schemas"]["SynologySongRatingDto"];
-            song_tag: components["schemas"]["SynologySongTagDto"];
-        };
-        SynologySongAudioDto: {
-            bitrate: number;
-            channel: number;
-            /** @example flac */
-            codec: components["schemas"]["FileTypeEnum"];
-            /** @example flac */
-            container: components["schemas"]["FileTypeEnum"];
-            duration: number;
-            filesize: number;
-            frequency: number;
-        };
-        SynologySongDataDto: {
-            /**
-             * @description Defines the pagination offset for the results.  If no value is specified a default of 0 is
-             *     used to start at the beginning of a result set.
-             */
-            offset: number;
-            songs: components["schemas"]["SynologySongDto"][];
-            /**
-             * @description The total number of results available for the request.  This is used to determine if there are
-             *     more results available for the request and if additional requests are needed to retrieve them.
-             */
-            total: number;
-        };
-        SynologySongDto: {
-            additional: components["schemas"]["SynologySongAdditionalDto"];
-            id: string;
-            path: string;
-            title: string;
-            type: components["schemas"]["ContentTypeEnum"];
-        };
-        SynologySongRatingDto: {
-            rating: number;
-        };
-        SynologySongResponseDto: {
-            data: components["schemas"]["SynologySongDataDto"];
-            /**
-             * @description Boolean flag for the request ending successfully.  There are scenarios where Synology could
-             *     return false instead but this server will return an HTTP error response.
-             */
-            success: boolean;
-        };
-        SynologySongsBodyDto: {
-            additional: string;
-            /**
-             * @description Synology's API uses this value to route requests appropriately but this software has
-             *     direct endpoints for their relevant URL paths.  As such this value is ignored for now
-             *     but defined to match the Synology API.
-             *
-             *     This endpoint requires a value of `SYNO.AudioStation.Song` be provided for correctness.
-             * @example SYNO.AudioStation.Song
-             */
-            api: components["schemas"]["SynologyApiEnum"];
-            /**
-             * @description Synology supports having personal and shared libraries but this software does not have a
-             *     direct equivalent, users can add the same root path to achieve it.  As such this value
-             *     is ignored for now but defined to match the Synology API.
-             *
-             *     This endpoint requires a value of `all` be provided for correctness.
-             * @example all
-             */
-            library: components["schemas"]["SynologyLibraryEnum"];
-            /**
-             * @description Defines the number of results to return.  If no value is specified a default of 100,000
-             *     is used to practically-ensure all results are returned.  This is a change from Synology's
-             *     API which defaults to 100, but Synology's mobile clients will specify their limit.
-             */
-            limit: number;
-            /**
-             * @description Synology's API uses this value to route requests appropriately but for AudioStation the
-             *     endpoints have limited functionality, all music-related endpoints `list` except cover
-             *     images.  As such this value is ignored for now but defined to match the Synology API.
-             *
-             *     This endpoint requires a value of `list` be provided for correctness.
-             * @example list
-             */
-            method: components["schemas"]["SynologyMethodEnum"];
-            /**
-             * @description Defines the pagination offset for the results.  If no value is specified a default of 0 is
-             *     used to start at the beginning of a result set.
-             */
-            offset: number;
-            /**
-             * @description Synology's API has versioned endpoints and some have at least 3 versions.  This software
-             *     currently only supports the latest version of the API for each endpoint and ignores this value
-             *     for now.  It's possible to build in support for prior versions of an endpoint but that would
-             *     require using the `debug-proxy` to capture the request and response payloads to understand the
-             *     differences between versions.  If you are running an older DSM NAS and wish to help then check
-             *     out the GitHub Issues page and submit a request to support your version of the API.
-             */
-            version: number;
-        };
-        SynologySongsByAlbumArtistBodyDto: {
-            additional: string;
-            album: string;
-            album_artist: string;
-            /**
-             * @description Synology's API uses this value to route requests appropriately but this software has
-             *     direct endpoints for their relevant URL paths.  As such this value is ignored for now
-             *     but defined to match the Synology API.
-             *
-             *     This endpoint requires a value of `SYNO.AudioStation.Song` be provided for correctness.
-             * @example SYNO.AudioStation.Song
-             */
-            api: components["schemas"]["SynologyApiEnum"];
-            artist: string;
-            /**
-             * @description Synology supports having personal and shared libraries but this software does not have a
-             *     direct equivalent, users can add the same root path to achieve it.  As such this value
-             *     is ignored for now but defined to match the Synology API.
-             *
-             *     This endpoint requires a value of `all` be provided for correctness.
-             * @example all
-             */
-            library: components["schemas"]["SynologyLibraryEnum"];
-            /**
-             * @description Defines the number of results to return.  If no value is specified a default of 100,000
-             *     is used to practically-ensure all results are returned.  This is a change from Synology's
-             *     API which defaults to 100, but Synology's mobile clients will specify their limit.
-             */
-            limit: number;
-            /**
-             * @description Synology's API uses this value to route requests appropriately but for AudioStation the
-             *     endpoints have limited functionality, all music-related endpoints `list` except cover
-             *     images.  As such this value is ignored for now but defined to match the Synology API.
-             *
-             *     This endpoint requires a value of `list` be provided for correctness.
-             * @example list
-             */
-            method: components["schemas"]["SynologyMethodEnum"];
-            /**
-             * @description Defines the pagination offset for the results.  If no value is specified a default of 0 is
-             *     used to start at the beginning of a result set.
-             */
-            offset: number;
-            /**
-             * @description Synology's API has versioned endpoints and some have at least 3 versions.  This software
-             *     currently only supports the latest version of the API for each endpoint and ignores this value
-             *     for now.  It's possible to build in support for prior versions of an endpoint but that would
-             *     require using the `debug-proxy` to capture the request and response payloads to understand the
-             *     differences between versions.  If you are running an older DSM NAS and wish to help then check
-             *     out the GitHub Issues page and submit a request to support your version of the API.
-             */
-            version: number;
-        };
-        SynologySongsByAlbumBodyDto: {
-            additional: string;
-            album: string;
-            album_artist: string;
-            /**
-             * @description Synology's API uses this value to route requests appropriately but this software has
-             *     direct endpoints for their relevant URL paths.  As such this value is ignored for now
-             *     but defined to match the Synology API.
-             *
-             *     This endpoint requires a value of `SYNO.AudioStation.Song` be provided for correctness.
-             * @example SYNO.AudioStation.Song
-             */
-            api: components["schemas"]["SynologyApiEnum"];
-            /**
-             * @description Synology supports having personal and shared libraries but this software does not have a
-             *     direct equivalent, users can add the same root path to achieve it.  As such this value
-             *     is ignored for now but defined to match the Synology API.
-             *
-             *     This endpoint requires a value of `all` be provided for correctness.
-             * @example all
-             */
-            library: components["schemas"]["SynologyLibraryEnum"];
-            /**
-             * @description Defines the number of results to return.  If no value is specified a default of 100,000
-             *     is used to practically-ensure all results are returned.  This is a change from Synology's
-             *     API which defaults to 100, but Synology's mobile clients will specify their limit.
-             */
-            limit: number;
-            /**
-             * @description Synology's API uses this value to route requests appropriately but for AudioStation the
-             *     endpoints have limited functionality, all music-related endpoints `list` except cover
-             *     images.  As such this value is ignored for now but defined to match the Synology API.
-             *
-             *     This endpoint requires a value of `list` be provided for correctness.
-             * @example list
-             */
-            method: components["schemas"]["SynologyMethodEnum"];
-            /**
-             * @description Defines the pagination offset for the results.  If no value is specified a default of 0 is
-             *     used to start at the beginning of a result set.
-             */
-            offset: number;
-            /**
-             * @description Synology's API has versioned endpoints and some have at least 3 versions.  This software
-             *     currently only supports the latest version of the API for each endpoint and ignores this value
-             *     for now.  It's possible to build in support for prior versions of an endpoint but that would
-             *     require using the `debug-proxy` to capture the request and response payloads to understand the
-             *     differences between versions.  If you are running an older DSM NAS and wish to help then check
-             *     out the GitHub Issues page and submit a request to support your version of the API.
-             */
-            version: number;
-        };
-        SynologySongsByAlbumComposerBodyDto: {
-            additional: string;
-            album: string;
-            album_artist: string;
-            /**
-             * @description Synology's API uses this value to route requests appropriately but this software has
-             *     direct endpoints for their relevant URL paths.  As such this value is ignored for now
-             *     but defined to match the Synology API.
-             *
-             *     This endpoint requires a value of `SYNO.AudioStation.Song` be provided for correctness.
-             * @example SYNO.AudioStation.Song
-             */
-            api: components["schemas"]["SynologyApiEnum"];
-            /** @description The name of the composer */
-            composer: string;
-            /**
-             * @description Synology supports having personal and shared libraries but this software does not have a
-             *     direct equivalent, users can add the same root path to achieve it.  As such this value
-             *     is ignored for now but defined to match the Synology API.
-             *
-             *     This endpoint requires a value of `all` be provided for correctness.
-             * @example all
-             */
-            library: components["schemas"]["SynologyLibraryEnum"];
-            /**
-             * @description Defines the number of results to return.  If no value is specified a default of 100,000
-             *     is used to practically-ensure all results are returned.  This is a change from Synology's
-             *     API which defaults to 100, but Synology's mobile clients will specify their limit.
-             */
-            limit: number;
-            /**
-             * @description Synology's API uses this value to route requests appropriately but for AudioStation the
-             *     endpoints have limited functionality, all music-related endpoints `list` except cover
-             *     images.  As such this value is ignored for now but defined to match the Synology API.
-             *
-             *     This endpoint requires a value of `list` be provided for correctness.
-             * @example list
-             */
-            method: components["schemas"]["SynologyMethodEnum"];
-            /**
-             * @description Defines the pagination offset for the results.  If no value is specified a default of 0 is
-             *     used to start at the beginning of a result set.
-             */
-            offset: number;
-            /**
-             * @description Synology's API has versioned endpoints and some have at least 3 versions.  This software
-             *     currently only supports the latest version of the API for each endpoint and ignores this value
-             *     for now.  It's possible to build in support for prior versions of an endpoint but that would
-             *     require using the `debug-proxy` to capture the request and response payloads to understand the
-             *     differences between versions.  If you are running an older DSM NAS and wish to help then check
-             *     out the GitHub Issues page and submit a request to support your version of the API.
-             */
-            version: number;
-        };
-        SynologySongsByAlbumDefaultGenreBodyDto: {
-            additional: string;
-            album: string;
-            album_artist: string;
-            /**
-             * @description Synology's API uses this value to route requests appropriately but this software has
-             *     direct endpoints for their relevant URL paths.  As such this value is ignored for now
-             *     but defined to match the Synology API.
-             *
-             *     This endpoint requires a value of `SYNO.AudioStation.Song` be provided for correctness.
-             * @example SYNO.AudioStation.Song
-             */
-            api: components["schemas"]["SynologyApiEnum"];
-            /** @description The name of the genre */
-            genre_filter: string;
-            /**
-             * @description Synology supports having personal and shared libraries but this software does not have a
-             *     direct equivalent, users can add the same root path to achieve it.  As such this value
-             *     is ignored for now but defined to match the Synology API.
-             *
-             *     This endpoint requires a value of `all` be provided for correctness.
-             * @example all
-             */
-            library: components["schemas"]["SynologyLibraryEnum"];
-            /**
-             * @description Defines the number of results to return.  If no value is specified a default of 100,000
-             *     is used to practically-ensure all results are returned.  This is a change from Synology's
-             *     API which defaults to 100, but Synology's mobile clients will specify their limit.
-             */
-            limit: number;
-            /**
-             * @description Synology's API uses this value to route requests appropriately but for AudioStation the
-             *     endpoints have limited functionality, all music-related endpoints `list` except cover
-             *     images.  As such this value is ignored for now but defined to match the Synology API.
-             *
-             *     This endpoint requires a value of `list` be provided for correctness.
-             * @example list
-             */
-            method: components["schemas"]["SynologyMethodEnum"];
-            /**
-             * @description Defines the pagination offset for the results.  If no value is specified a default of 0 is
-             *     used to start at the beginning of a result set.
-             */
-            offset: number;
-            /**
-             * @description Synology's API has versioned endpoints and some have at least 3 versions.  This software
-             *     currently only supports the latest version of the API for each endpoint and ignores this value
-             *     for now.  It's possible to build in support for prior versions of an endpoint but that would
-             *     require using the `debug-proxy` to capture the request and response payloads to understand the
-             *     differences between versions.  If you are running an older DSM NAS and wish to help then check
-             *     out the GitHub Issues page and submit a request to support your version of the API.
-             */
-            version: number;
-        };
-        SynologySongsByAlbumGenreBodyDto: {
-            additional: string;
-            album: string;
-            album_artist: string;
-            /**
-             * @description Synology's API uses this value to route requests appropriately but this software has
-             *     direct endpoints for their relevant URL paths.  As such this value is ignored for now
-             *     but defined to match the Synology API.
-             *
-             *     This endpoint requires a value of `SYNO.AudioStation.Song` be provided for correctness.
-             * @example SYNO.AudioStation.Song
-             */
-            api: components["schemas"]["SynologyApiEnum"];
-            /** @description The name of the genre */
-            genre: string;
-            /**
-             * @description Synology supports having personal and shared libraries but this software does not have a
-             *     direct equivalent, users can add the same root path to achieve it.  As such this value
-             *     is ignored for now but defined to match the Synology API.
-             *
-             *     This endpoint requires a value of `all` be provided for correctness.
-             * @example all
-             */
-            library: components["schemas"]["SynologyLibraryEnum"];
-            /**
-             * @description Defines the number of results to return.  If no value is specified a default of 100,000
-             *     is used to practically-ensure all results are returned.  This is a change from Synology's
-             *     API which defaults to 100, but Synology's mobile clients will specify their limit.
-             */
-            limit: number;
-            /**
-             * @description Synology's API uses this value to route requests appropriately but for AudioStation the
-             *     endpoints have limited functionality, all music-related endpoints `list` except cover
-             *     images.  As such this value is ignored for now but defined to match the Synology API.
-             *
-             *     This endpoint requires a value of `list` be provided for correctness.
-             * @example list
-             */
-            method: components["schemas"]["SynologyMethodEnum"];
-            /**
-             * @description Defines the pagination offset for the results.  If no value is specified a default of 0 is
-             *     used to start at the beginning of a result set.
-             */
-            offset: number;
-            /**
-             * @description Synology's API has versioned endpoints and some have at least 3 versions.  This software
-             *     currently only supports the latest version of the API for each endpoint and ignores this value
-             *     for now.  It's possible to build in support for prior versions of an endpoint but that would
-             *     require using the `debug-proxy` to capture the request and response payloads to understand the
-             *     differences between versions.  If you are running an older DSM NAS and wish to help then check
-             *     out the GitHub Issues page and submit a request to support your version of the API.
-             */
-            version: number;
-        };
-        SynologySongsByArtistBodyDto: {
-            additional: string;
-            /**
-             * @description Synology's API uses this value to route requests appropriately but this software has
-             *     direct endpoints for their relevant URL paths.  As such this value is ignored for now
-             *     but defined to match the Synology API.
-             *
-             *     This endpoint requires a value of `SYNO.AudioStation.Song` be provided for correctness.
-             * @example SYNO.AudioStation.Song
-             */
-            api: components["schemas"]["SynologyApiEnum"];
-            artist: string;
-            /**
-             * @description Synology supports having personal and shared libraries but this software does not have a
-             *     direct equivalent, users can add the same root path to achieve it.  As such this value
-             *     is ignored for now but defined to match the Synology API.
-             *
-             *     This endpoint requires a value of `all` be provided for correctness.
-             * @example all
-             */
-            library: components["schemas"]["SynologyLibraryEnum"];
-            /**
-             * @description Defines the number of results to return.  If no value is specified a default of 100,000
-             *     is used to practically-ensure all results are returned.  This is a change from Synology's
-             *     API which defaults to 100, but Synology's mobile clients will specify their limit.
-             */
-            limit: number;
-            /**
-             * @description Synology's API uses this value to route requests appropriately but for AudioStation the
-             *     endpoints have limited functionality, all music-related endpoints `list` except cover
-             *     images.  As such this value is ignored for now but defined to match the Synology API.
-             *
-             *     This endpoint requires a value of `list` be provided for correctness.
-             * @example list
-             */
-            method: components["schemas"]["SynologyMethodEnum"];
-            /**
-             * @description Defines the pagination offset for the results.  If no value is specified a default of 0 is
-             *     used to start at the beginning of a result set.
-             */
-            offset: number;
-            /**
-             * @description Synology's API has versioned endpoints and some have at least 3 versions.  This software
-             *     currently only supports the latest version of the API for each endpoint and ignores this value
-             *     for now.  It's possible to build in support for prior versions of an endpoint but that would
-             *     require using the `debug-proxy` to capture the request and response payloads to understand the
-             *     differences between versions.  If you are running an older DSM NAS and wish to help then check
-             *     out the GitHub Issues page and submit a request to support your version of the API.
-             */
-            version: number;
-        };
-        SynologySongsByComposerBodyDto: {
-            additional: string;
-            /**
-             * @description Synology's API uses this value to route requests appropriately but this software has
-             *     direct endpoints for their relevant URL paths.  As such this value is ignored for now
-             *     but defined to match the Synology API.
-             *
-             *     This endpoint requires a value of `SYNO.AudioStation.Song` be provided for correctness.
-             * @example SYNO.AudioStation.Song
-             */
-            api: components["schemas"]["SynologyApiEnum"];
-            /** @description The name of the composer */
-            composer: string;
-            /**
-             * @description Synology supports having personal and shared libraries but this software does not have a
-             *     direct equivalent, users can add the same root path to achieve it.  As such this value
-             *     is ignored for now but defined to match the Synology API.
-             *
-             *     This endpoint requires a value of `all` be provided for correctness.
-             * @example all
-             */
-            library: components["schemas"]["SynologyLibraryEnum"];
-            /**
-             * @description Defines the number of results to return.  If no value is specified a default of 100,000
-             *     is used to practically-ensure all results are returned.  This is a change from Synology's
-             *     API which defaults to 100, but Synology's mobile clients will specify their limit.
-             */
-            limit: number;
-            /**
-             * @description Synology's API uses this value to route requests appropriately but for AudioStation the
-             *     endpoints have limited functionality, all music-related endpoints `list` except cover
-             *     images.  As such this value is ignored for now but defined to match the Synology API.
-             *
-             *     This endpoint requires a value of `list` be provided for correctness.
-             * @example list
-             */
-            method: components["schemas"]["SynologyMethodEnum"];
-            /**
-             * @description Defines the pagination offset for the results.  If no value is specified a default of 0 is
-             *     used to start at the beginning of a result set.
-             */
-            offset: number;
-            /**
-             * @description Synology's API has versioned endpoints and some have at least 3 versions.  This software
-             *     currently only supports the latest version of the API for each endpoint and ignores this value
-             *     for now.  It's possible to build in support for prior versions of an endpoint but that would
-             *     require using the `debug-proxy` to capture the request and response payloads to understand the
-             *     differences between versions.  If you are running an older DSM NAS and wish to help then check
-             *     out the GitHub Issues page and submit a request to support your version of the API.
-             */
-            version: number;
-        };
-        SynologySongsByDefaultGenreBodyDto: {
-            additional: string;
-            /**
-             * @description Synology's API uses this value to route requests appropriately but this software has
-             *     direct endpoints for their relevant URL paths.  As such this value is ignored for now
-             *     but defined to match the Synology API.
-             *
-             *     This endpoint requires a value of `SYNO.AudioStation.Song` be provided for correctness.
-             * @example SYNO.AudioStation.Song
-             */
-            api: components["schemas"]["SynologyApiEnum"];
-            /** @description The name of the genre */
-            genre_filter: string;
-            /**
-             * @description Synology supports having personal and shared libraries but this software does not have a
-             *     direct equivalent, users can add the same root path to achieve it.  As such this value
-             *     is ignored for now but defined to match the Synology API.
-             *
-             *     This endpoint requires a value of `all` be provided for correctness.
-             * @example all
-             */
-            library: components["schemas"]["SynologyLibraryEnum"];
-            /**
-             * @description Defines the number of results to return.  If no value is specified a default of 100,000
-             *     is used to practically-ensure all results are returned.  This is a change from Synology's
-             *     API which defaults to 100, but Synology's mobile clients will specify their limit.
-             */
-            limit: number;
-            /**
-             * @description Synology's API uses this value to route requests appropriately but for AudioStation the
-             *     endpoints have limited functionality, all music-related endpoints `list` except cover
-             *     images.  As such this value is ignored for now but defined to match the Synology API.
-             *
-             *     This endpoint requires a value of `list` be provided for correctness.
-             * @example list
-             */
-            method: components["schemas"]["SynologyMethodEnum"];
-            /**
-             * @description Defines the pagination offset for the results.  If no value is specified a default of 0 is
-             *     used to start at the beginning of a result set.
-             */
-            offset: number;
-            /**
-             * @description Synology's API has versioned endpoints and some have at least 3 versions.  This software
-             *     currently only supports the latest version of the API for each endpoint and ignores this value
-             *     for now.  It's possible to build in support for prior versions of an endpoint but that would
-             *     require using the `debug-proxy` to capture the request and response payloads to understand the
-             *     differences between versions.  If you are running an older DSM NAS and wish to help then check
-             *     out the GitHub Issues page and submit a request to support your version of the API.
-             */
-            version: number;
-        };
-        SynologySongsByGenreBodyDto: {
-            additional: string;
-            /**
-             * @description Synology's API uses this value to route requests appropriately but this software has
-             *     direct endpoints for their relevant URL paths.  As such this value is ignored for now
-             *     but defined to match the Synology API.
-             *
-             *     This endpoint requires a value of `SYNO.AudioStation.Song` be provided for correctness.
-             * @example SYNO.AudioStation.Song
-             */
-            api: components["schemas"]["SynologyApiEnum"];
-            /** @description The name of the genre */
-            genre: string;
-            /**
-             * @description Synology supports having personal and shared libraries but this software does not have a
-             *     direct equivalent, users can add the same root path to achieve it.  As such this value
-             *     is ignored for now but defined to match the Synology API.
-             *
-             *     This endpoint requires a value of `all` be provided for correctness.
-             * @example all
-             */
-            library: components["schemas"]["SynologyLibraryEnum"];
-            /**
-             * @description Defines the number of results to return.  If no value is specified a default of 100,000
-             *     is used to practically-ensure all results are returned.  This is a change from Synology's
-             *     API which defaults to 100, but Synology's mobile clients will specify their limit.
-             */
-            limit: number;
-            /**
-             * @description Synology's API uses this value to route requests appropriately but for AudioStation the
-             *     endpoints have limited functionality, all music-related endpoints `list` except cover
-             *     images.  As such this value is ignored for now but defined to match the Synology API.
-             *
-             *     This endpoint requires a value of `list` be provided for correctness.
-             * @example list
-             */
-            method: components["schemas"]["SynologyMethodEnum"];
-            /**
-             * @description Defines the pagination offset for the results.  If no value is specified a default of 0 is
-             *     used to start at the beginning of a result set.
-             */
-            offset: number;
-            /**
-             * @description Synology's API has versioned endpoints and some have at least 3 versions.  This software
-             *     currently only supports the latest version of the API for each endpoint and ignores this value
-             *     for now.  It's possible to build in support for prior versions of an endpoint but that would
-             *     require using the `debug-proxy` to capture the request and response payloads to understand the
-             *     differences between versions.  If you are running an older DSM NAS and wish to help then check
-             *     out the GitHub Issues page and submit a request to support your version of the API.
-             */
-            version: number;
-        };
-        SynologySongTagDto: {
-            album: string;
-            album_artist: string;
-            artist: string;
-            comment: string;
-            composer: string;
-            disc: number;
-            genre: string;
-            track: number;
-            year: number;
-        };
-        SynologySuccessResponseDto: {
-            /**
-             * @description Boolean flag for the request ending successfully.  There are scenarios where Synology could
-             *     return false instead but this server will return an HTTP error response.
-             */
-            success: boolean;
-        };
-        /** @enum {string} */
-        TrackSortFieldEnum: TrackSortFieldEnum;
+        method: components['schemas']['SynologyMethodEnum'];
+        /** @description The SHOUTcast stream ID */
+        stream_id: number;
         /**
-         * @description The error message(s) that occurred during the validation of the request data or additional requirements
-         *     applied during the execution of the request
-         * @enum {string}
+         * @description Synology's API has versioned endpoints and some have at least 3 versions.  This software
+         *     currently only supports the latest version of the API for each endpoint and ignores this value
+         *     for now.  It's possible to build in support for prior versions of an endpoint but that would
+         *     require using the `debug-proxy` to capture the request and response payloads to understand the
+         *     differences between versions.  If you are running an older DSM NAS and wish to help then check
+         *     out the GitHub Issues page and submit a request to support your version of the API.
          */
-        UserCreateRootPathBadRequestErrorMessageEnum: UserCreateRootPathBadRequestErrorMessageEnum;
-        UserCreateRootPathBadRequestResponseDto: {
-            /** @description General description of the error class */
-            error: string;
-            /**
-             * @description The error message(s) that occurred during the validation of the request data or additional requirements
-             *     applied during the execution of the request
-             * @default root-path-does-not-exist-error
-             */
-            message: components["schemas"]["UserCreateRootPathBadRequestErrorMessageEnum"][];
-            /**
-             * @description The success being "false" indicates that the request failed to complete.
-             * @default false
-             */
-            success: boolean;
+        version: number;
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
         };
-        UserCreateRootPathBodyDto: {
-            /** @description The fully-qualified path to set for the root path */
-            rootPath: string;
+        content?: never;
+      };
+    };
+  };
+  SynologyProxyController_route: {
+    parameters: {
+      query?: never;
+      header?: {
+        /** @description The session ID and device ID cookies for the user `id={sessionId}; did={deviceId}` */
+        cookie?: string;
+      };
+      path?: never;
+      cookie?: never;
+    };
+    /** @description Creates a new SHOUTcast radio stream */
+    requestBody: {
+      content: {
+        'application/json':
+          | components['schemas']['SynologyProxyStreamInfoBodyDto']
+          | components['schemas']['SynologyProxySongInfoBodyDto']
+          | components['schemas']['SynologyProxyDeleteSongInfoBodyDto'];
+      };
+    };
+    responses: {
+      /** @description Proxies a SHOUTcast radio stream */
+      200: {
+        headers: {
+          [name: string]: unknown;
         };
-        UserCreateRootPathResponseDto: {
-            /**
-             * Format: constant
-             * @description The success being "true" indicates that the request completed.
-             * @default true
-             */
-            success: boolean;
+        content: {
+          'application/json':
+            | components['schemas']['SynologyProxyStreamInfoResponseDto']
+            | components['schemas']['SynologyProxySongInfoResponseDto']
+            | components['schemas']['SynologySuccessResponseDto'];
         };
+      };
+    };
+  };
+  SynologyRadioController_routeRequests: {
+    parameters: {
+      query?: never;
+      header?: {
+        /** @description The session ID and device ID cookies for the user `id={sessionId}; did={deviceId}` */
+        cookie?: string;
+      };
+      path?: never;
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json':
+          | components['schemas']['SynologyRadioContainerListBodyDto']
+          | components['schemas']['SynologyRadioItemListBodyDto']
+          | components['schemas']['SynologyRadioAddOrUpdateItemBodyDto']
+          | components['schemas']['SynologyRadioAddUserStationBodyDto'];
+      };
+    };
+    responses: {
+      /** @description Returns a list of genres found in the music library, or a hard-coded list of default genres */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json':
+            | components['schemas']['SynologyRadioItemResponseDto']
+            | components['schemas']['SynologySuccessResponseDto'];
+        };
+      };
+    };
+  };
+  SynologySearchController_route: {
+    parameters: {
+      query?: never;
+      header?: {
+        /** @description The session ID and device ID cookies for the user `id={sessionId}; did={deviceId}` */
+        cookie?: string;
+      };
+      path?: never;
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['SynologySearchBodyDto'];
+      };
+    };
+    responses: {
+      /** @description Returns a list of artists, albums and songs matching a search query */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['SynologySearchResponseDto'];
+        };
+      };
+    };
+  };
+  SynologySongController_route: {
+    parameters: {
+      query?: never;
+      header?: {
+        /** @description The session ID and device ID cookies for the user `id={sessionId}; did={deviceId}` */
+        cookie?: string;
+      };
+      path?: never;
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json':
+          | components['schemas']['SynologySongsBodyDto']
+          | components['schemas']['SynologySongsByAlbumBodyDto']
+          | components['schemas']['SynologySongsByArtistBodyDto']
+          | components['schemas']['SynologySongsByAlbumArtistBodyDto']
+          | components['schemas']['SynologySongsByComposerBodyDto']
+          | components['schemas']['SynologySongsByAlbumComposerBodyDto']
+          | components['schemas']['SynologySongsByAlbumGenreBodyDto']
+          | components['schemas']['SynologySongsByGenreBodyDto']
+          | components['schemas']['SynologySongsByAlbumDefaultGenreBodyDto']
+          | components['schemas']['SynologySongsByDefaultGenreBodyDto'];
+      };
+    };
+    responses: {
+      /** @description Returns a list of songs */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['SynologySongResponseDto'];
+        };
+      };
+    };
+  };
+  SynologyStreamController_getStreamCgi: {
+    parameters: {
+      query: {
         /**
-         * @description The error message(s) that occurred during the validation of the request data or additional requirements
-         *     applied during the execution of the request
-         * @enum {string}
+         * @description Synology's API uses this value to route requests appropriately but this software has
+         *     direct endpoints for their relevant URL paths.  As such this value is ignored for now
+         *     but defined to match the Synology API.
+         *
+         *     This endpoint requires a value of `SYNO.AudioStation.Stream` be provided for correctness.
          */
-        UserDeleteRootPathNotFoundErrorMessageEnum: UserDeleteRootPathNotFoundErrorMessageEnum;
-        UserDeleteRootPathNotFoundResponseDto: {
-            /** @description General description of the error class */
-            error: string;
-            /**
-             * @description The error message(s) that occurred during the validation of the request data or additional requirements
-             *     applied during the execution of the request
-             * @default root-path-not-found-error
-             */
-            message: components["schemas"]["UserDeleteRootPathNotFoundErrorMessageEnum"][];
-            /**
-             * @description The success being "false" indicates that the request failed to complete.
-             * @default false
-             */
-            success: boolean;
-        };
-        UserDeleteRootPathResponseDto: {
-            /**
-             * Format: constant
-             * @description The success being "true" indicates that the request completed.
-             * @default true
-             */
-            success: boolean;
-        };
-        UserFolderStructureResponseDto: {
-            items: components["schemas"]["UserTreeItemDto"][];
-            /**
-             * Format: constant
-             * @description The success being "true" indicates that the request completed.
-             * @default true
-             */
-            success: boolean;
-        };
-        UserListAlbumArtistsBadRequestResponseDto: {
-            /** @description General description of the error class */
-            error: string;
-            /**
-             * @description The error message(s) that occurred during the validation of the request data or additional requirements
-             *     applied during the execution of the request
-             * @default invalid-added-after-error
-             */
-            message: components["schemas"]["UserListTrackArtistsBadRequestErrorMessage"][];
-            /**
-             * @description The success being "false" indicates that the request failed to complete.
-             * @default false
-             */
-            success: boolean;
-        };
-        UserListAlbumArtistsResponseDto: {
-            /** @description The list of artists that match the query parameters, which may be limited by pagination. */
-            artists: components["schemas"]["LibraryArtistDto"][];
-            /**
-             * @description The offset of the first artist in the artists array, which may be greater than 0 if
-             *     pagination is applied.
-             */
-            offset: number;
-            /**
-             * Format: constant
-             * @description The success being "true" indicates that the request completed.
-             * @default true
-             */
-            success: boolean;
-            /**
-             * @description The total number of artists that match the query parameters, which may be greater
-             *     than the number of artists returned in the artists array if pagination is applied.
-             */
-            total: number;
-        };
-        UserListAlbumArtistsWithTracksBadRequestResponseDto: {
-            /** @description General description of the error class */
-            error: string;
-            /**
-             * @description The error message(s) that occurred during the validation of the request data or additional requirements
-             *     applied during the execution of the request
-             * @default invalid-added-after-error
-             */
-            message: components["schemas"]["UserListTrackArtistsBadRequestErrorMessage"][];
-            /**
-             * @description The success being "false" indicates that the request failed to complete.
-             * @default false
-             */
-            success: boolean;
-        };
-        UserListAlbumArtistsWithTracksResponseDto: {
-            /** @description The list of artists that match the query parameters, which may be limited by pagination. */
-            artists: components["schemas"]["LibraryArtistWithTracksDto"][];
-            /**
-             * @description The offset of the first artist in the artists array, which may be greater than 0 if
-             *     pagination is applied.
-             */
-            offset: number;
-            /**
-             * Format: constant
-             * @description The success being "true" indicates that the request completed.
-             * @default true
-             */
-            success: boolean;
-            /**
-             * @description The total number of artists that match the query parameters, which may be greater
-             *     than the number of artists returned in the artists array if pagination is applied.
-             */
-            total: number;
-        };
+        api: components['schemas']['SynologyApiEnum'];
         /**
-         * @description The error message(s) that occurred during the validation of the request data or additional requirements
-         *     applied during the execution of the request.
-         * @enum {string}
+         * @description The ID of the song.  Synology uses a string with a prefix and the numeric ID, this software
+         *     only uses the numeric ID so a `music_` prefix is added for Synology, and then stripped off
+         *     by the `class-transformer` library.
          */
-        UserListAlbumsBadRequestErrorMessages: UserListAlbumsBadRequestErrorMessages;
-        UserListAlbumsBadRequestResponseDto: {
-            /** @description General description of the error class */
-            error: string;
-            /**
-             * @description The error message(s) that occurred during the validation of the request data or additional requirements
-             *     applied during the execution of the request.
-             * @default invalid-added-after-error
-             */
-            message: components["schemas"]["UserListAlbumsBadRequestErrorMessages"][];
-            /**
-             * @description The success being "false" indicates that the request failed to complete.
-             * @default false
-             */
-            success: boolean;
-        };
-        UserListAlbumsResponseDto: {
-            /** @description The list of albums that match the query parameters, which may be limited by pagination. */
-            albums: components["schemas"]["LibraryAlbumDto"][];
-            /**
-             * @description The offset of the first album in the albums array, which may be greater than 0 if
-             *     pagination is applied.
-             */
-            offset: number;
-            /**
-             * Format: constant
-             * @description The success being "true" indicates that the request completed.
-             * @default true
-             */
-            success: boolean;
-            /**
-             * @description The total number of albums that match the query parameters, which may be greater
-             *     than the number of albums returned in the albums array if pagination is applied.
-             */
-            total: number;
-        };
+        id: number;
         /**
-         * @description The error message(s) that occurred during the validation of the request data or additional requirements
-         *     applied during the execution of the request.
-         * @enum {string}
+         * @description Synology's API uses this value to route requests appropriately but NestJS controllers
+         *     handle the routing between URL paths so this value is ignored for now but defined to
+         *     match the Synology API.
+         *
+         *     This endpoint requires a value of `stream` be provided for correctness.
          */
-        UserListAlbumsWithTracksBadRequestErrorMessages: UserListAlbumsWithTracksBadRequestErrorMessages;
-        UserListAlbumsWithTracksBadRequestResponseDto: {
-            /** @description General description of the error class */
-            error: string;
-            /**
-             * @description The error message(s) that occurred during the validation of the request data or additional requirements
-             *     applied during the execution of the request.
-             * @default invalid-added-after-error
-             */
-            message: components["schemas"]["UserListAlbumsWithTracksBadRequestErrorMessages"][];
-            /**
-             * @description The success being "false" indicates that the request failed to complete.
-             * @default false
-             */
-            success: boolean;
-        };
-        UserListAlbumsWithTracksResponseDto: {
-            /** @description The list of albums that match the query parameters, which may be limited by pagination. */
-            albums: components["schemas"]["LibraryAlbumWithTracksDto"][];
-            /**
-             * @description The offset of the first album in the albums array, which may be greater than 0 if
-             *     pagination is applied.
-             */
-            offset: number;
-            /**
-             * Format: constant
-             * @description The success being "true" indicates that the request completed.
-             * @default true
-             */
-            success: boolean;
-            /**
-             * @description The total number of albums that match the query parameters, which may be greater
-             *     than the number of albums returned in the albums array if pagination is applied.
-             */
-            total: number;
-        };
+        method: components['schemas']['SynologyMethodEnum'];
         /**
-         * @description The error message(s) that occurred during the validation of the request data or additional requirements
-         *     applied during the execution of the request
-         * @enum {string}
+         * @description Synology's API has versioned endpoints and some have at least 3 versions.  This software
+         *     currently only supports the latest version of the API for each endpoint and ignores this value
+         *     for now.  It's possible to build in support for prior versions of an endpoint but that would
+         *     require using the `debug-proxy` to capture the request and response payloads to understand the
+         *     differences between versions.  If you are running an older DSM NAS and wish to help then check
+         *     out the GitHub Issues page and submit a request to support your version of the API.
          */
-        UserListIndexerLogsBadRequestErrorMessageEnum: UserListIndexerLogsBadRequestErrorMessageEnum;
-        UserListIndexerLogsBadRequestResponseDto: {
-            /** @description General description of the error class */
-            error: string;
-            /**
-             * @description The error message(s) that occurred during the validation of the request data or additional requirements
-             *     applied during the execution of the request
-             * @default invalid-account-id-error
-             */
-            message: components["schemas"]["UserListIndexerLogsBadRequestErrorMessageEnum"][];
-            /**
-             * @description The success being "false" indicates that the request failed to complete.
-             * @default false
-             */
-            success: boolean;
-        };
-        /**
-         * @description The error message(s) that occurred during the validation of the request data or additional requirements
-         *     applied during the execution of the request
-         * @enum {string}
-         */
-        UserListIndexerLogsNotFoundErrorMessageEnum: UserListIndexerLogsNotFoundErrorMessageEnum;
-        UserListIndexerLogsNotFoundResponseDto: {
-            /** @description General description of the error class */
-            error: string;
-            /**
-             * @description The error message(s) that occurred during the validation of the request data or additional requirements
-             *     applied during the execution of the request
-             * @default invalid-account-id-error
-             */
-            message: components["schemas"]["UserListIndexerLogsNotFoundErrorMessageEnum"][];
-            /**
-             * @description The success being "false" indicates that the request failed to complete.
-             * @default false
-             */
-            success: boolean;
-        };
-        UserListIndexerLogsResponseDto: {
-            logs: components["schemas"]["UserLogEntryDto"][];
-            /**
-             * Format: constant
-             * @description The success being "true" indicates that the request completed.
-             * @default true
-             */
-            success: boolean;
-        };
-        UserListRootPathsResponseDto: {
-            /** @description The list of root paths with associated account owner information */
-            rootPaths: components["schemas"]["UserRootPathDto"][];
-            /**
-             * Format: constant
-             * @description The success being "true" indicates that the request completed.
-             * @default true
-             */
-            success: boolean;
-        };
-        /**
-         * @description The error message(s) that occurred during the validation of the request data or additional requirements
-         *     applied during the execution of the request
-         * @enum {string}
-         */
-        UserListTrackArtistsBadRequestErrorMessage: UserListTrackArtistsBadRequestErrorMessage;
-        UserListTrackArtistsBadRequestResponseDto: {
-            /** @description General description of the error class */
-            error: string;
-            /**
-             * @description The error message(s) that occurred during the validation of the request data or additional requirements
-             *     applied during the execution of the request
-             * @default invalid-added-after-error
-             */
-            message: components["schemas"]["UserListTrackArtistsBadRequestErrorMessage"][];
-            /**
-             * @description The success being "false" indicates that the request failed to complete.
-             * @default false
-             */
-            success: boolean;
-        };
-        UserListTrackArtistsResponseDto: {
-            /** @description The list of artists that match the query parameters, which may be limited by pagination. */
-            artists: components["schemas"]["LibraryArtistDto"][];
-            /**
-             * @description The offset of the first artist in the artists array, which may be greater than 0 if
-             *     pagination is applied.
-             */
-            offset: number;
-            /**
-             * Format: constant
-             * @description The success being "true" indicates that the request completed.
-             * @default true
-             */
-            success: boolean;
-            /**
-             * @description The total number of artists that match the query parameters, which may be greater
-             *     than the number of artists returned in the artists array if pagination is applied.
-             */
-            total: number;
-        };
-        UserListTrackArtistsWithTracksBadRequestResponseDto: {
-            /** @description General description of the error class */
-            error: string;
-            /**
-             * @description The error message(s) that occurred during the validation of the request data or additional requirements
-             *     applied during the execution of the request
-             * @default invalid-added-after-error
-             */
-            message: components["schemas"]["UserListTrackArtistsBadRequestErrorMessage"][];
-            /**
-             * @description The success being "false" indicates that the request failed to complete.
-             * @default false
-             */
-            success: boolean;
-        };
-        UserListTrackArtistsWithTracksResponseDto: {
-            /** @description The list of artists that match the query parameters, which may be limited by pagination. */
-            artists: components["schemas"]["LibraryArtistWithTracksDto"][];
-            /**
-             * @description The offset of the first artist in the artists array, which may be greater than 0 if
-             *     pagination is applied.
-             */
-            offset: number;
-            /**
-             * Format: constant
-             * @description The success being "true" indicates that the request completed.
-             * @default true
-             */
-            success: boolean;
-            /**
-             * @description The total number of artists that match the query parameters, which may be greater
-             *     than the number of artists returned in the artists array if pagination is applied.
-             */
-            total: number;
-        };
-        /**
-         * @description The error message(s) that occurred during the validation of the request data or additional requirements
-         *     applied during the execution of the request
-         * @enum {string}
-         */
-        UserListTrackComposersBadRequestErrorMessages: UserListTrackComposersBadRequestErrorMessages;
-        UserListTrackComposersBadRequestResponseDto: {
-            /** @description General description of the error class */
-            error: string;
-            /**
-             * @description The error message(s) that occurred during the validation of the request data or additional requirements
-             *     applied during the execution of the request
-             * @default invalid-added-after-error
-             */
-            message: components["schemas"]["UserListTrackComposersBadRequestErrorMessages"][];
-            /**
-             * @description The success being "false" indicates that the request failed to complete.
-             * @default false
-             */
-            success: boolean;
-        };
-        UserListTrackComposersResponseDto: {
-            /** @description The list of composers that match the query parameters, which may be limited by pagination. */
-            composers: components["schemas"]["LibraryComposerDto"][];
-            /**
-             * @description The offset of the first composer in the composers array, which may be greater than 0 if
-             *     pagination is applied.
-             */
-            offset: number;
-            /**
-             * Format: constant
-             * @description The success being "true" indicates that the request completed.
-             * @default true
-             */
-            success: boolean;
-            /**
-             * @description The total number of composers that match the query parameters, which may be greater
-             *     than the number of composers returned in the composers array if pagination is applied.
-             */
-            total: number;
-        };
-        UserListTrackComposersWithTracksBadRequestResponseDto: {
-            /** @description General description of the error class */
-            error: string;
-            /**
-             * @description The error message(s) that occurred during the validation of the request data or additional requirements
-             *     applied during the execution of the request
-             * @default invalid-added-after-error
-             */
-            message: components["schemas"]["UserListTrackComposersBadRequestErrorMessages"][];
-            /**
-             * @description The success being "false" indicates that the request failed to complete.
-             * @default false
-             */
-            success: boolean;
-        };
-        UserListTrackComposersWithTracksResponseDto: {
-            /** @description The list of composers that match the query parameters, which may be limited by pagination. */
-            composers: components["schemas"]["LibraryComposerWithTracksDto"][];
-            /**
-             * @description The offset of the first composer in the composers array, which may be greater than 0 if
-             *     pagination is applied.
-             */
-            offset: number;
-            /**
-             * Format: constant
-             * @description The success being "true" indicates that the request completed.
-             * @default true
-             */
-            success: boolean;
-            /**
-             * @description The total number of composers that match the query parameters, which may be greater
-             *     than the number of composers returned in the composers array if pagination is applied.
-             */
-            total: number;
-        };
-        /**
-         * @description The error message(s) that occurred during the validation of the request data or additional requirements
-         *     applied during the execution of the request
-         * @enum {string}
-         */
-        UserListTrackGenresBadRequestErrorMessages: UserListTrackGenresBadRequestErrorMessages;
-        UserListTrackGenresBadRequestResponseDto: {
-            /** @description General description of the error class */
-            error: string;
-            /**
-             * @description The error message(s) that occurred during the validation of the request data or additional requirements
-             *     applied during the execution of the request
-             * @default invalid-limit-error
-             */
-            message: components["schemas"]["UserListTrackGenresBadRequestErrorMessages"][];
-            /**
-             * @description The success being "false" indicates that the request failed to complete.
-             * @default false
-             */
-            success: boolean;
-        };
-        UserListTrackGenresResponseDto: {
-            /** @description The list of genres that match the query parameters, which may be limited by pagination. */
-            genres: components["schemas"]["LibraryGenreDto"][];
-            /**
-             * @description The offset of the first genre in the genres array, which may be greater than 0 if
-             *     pagination is applied.
-             */
-            offset: number;
-            /**
-             * Format: constant
-             * @description The success being "true" indicates that the request completed.
-             * @default true
-             */
-            success: boolean;
-            /**
-             * @description The total number of genres that match the query parameters, which may be greater
-             *     than the number of genres returned in the genres array if pagination is applied.
-             */
-            total: number;
-        };
-        /**
-         * @description The error message(s) that occurred during the validation of the request data or additional requirements
-         *     applied during the execution of the request
-         * @enum {string}
-         */
-        UserListTrackGenresWithTracksBadRequestErrorMessages: UserListTrackGenresWithTracksBadRequestErrorMessages;
-        UserListTrackGenresWithTracksBadRequestResponseDto: {
-            /** @description General description of the error class */
-            error: string;
-            /**
-             * @description The error message(s) that occurred during the validation of the request data or additional requirements
-             *     applied during the execution of the request
-             * @default invalid-limit-error
-             */
-            message: components["schemas"]["UserListTrackGenresWithTracksBadRequestErrorMessages"][];
-            /**
-             * @description The success being "false" indicates that the request failed to complete.
-             * @default false
-             */
-            success: boolean;
-        };
-        UserListTrackGenresWithTracksResponseDto: {
-            /** @description The list of genres that match the query parameters, which may be limited by pagination. */
-            genres: components["schemas"]["LibraryGenreWithTracksDto"][];
-            /**
-             * @description The offset of the first genre in the genres array, which may be greater than 0 if
-             *     pagination is applied.
-             */
-            offset: number;
-            /**
-             * Format: constant
-             * @description The success being "true" indicates that the request completed.
-             * @default true
-             */
-            success: boolean;
-            /**
-             * @description The total number of genres that match the query parameters, which may be greater
-             *     than the number of genres returned in the genres array if pagination is applied.
-             */
-            total: number;
-        };
-        /**
-         * @description The error message(s) that occurred during the validation of the request data or additional requirements
-         *     applied during the execution of the request
-         * @enum {string}
-         */
-        UserListTracksBadRequestErrorMessages: UserListTracksBadRequestErrorMessages;
-        UserListTracksBadRequestResponseDto: {
-            /** @description General description of the error class */
-            error: string;
-            /**
-             * @description The error message(s) that occurred during the validation of the request data or additional requirements
-             *     applied during the execution of the request
-             * @default invalid-added-after-error
-             */
-            message: components["schemas"]["UserListTracksBadRequestErrorMessages"][];
-            /**
-             * @description The success being "false" indicates that the request failed to complete.
-             * @default false
-             */
-            success: boolean;
-        };
-        UserListTracksResponseDto: {
-            /**
-             * @description The offset of the first track in the tracks array, which may be greater than 0 if
-             *     pagination is applied.
-             */
-            offset: number;
-            /**
-             * Format: constant
-             * @description The success being "true" indicates that the request completed.
-             * @default true
-             */
-            success: boolean;
-            /**
-             * @description The total number of tracks that match the query parameters, which may be greater
-             *     than the number of tracks returned in the tracks array if pagination is applied.
-             */
-            total: number;
-            /** @description The list of tracks that match the query parameters, which may be limited by pagination. */
-            tracks: components["schemas"]["LibraryTrackExtendedDto"][];
-        };
-        UserLogEntryDto: {
-            /** Format: date-time */
-            date: string;
-            message: string;
-            rootPath: string;
-            rootPathId: number;
-        };
-        UserRegenerateSessionKeyResponseDto: {
-            /**
-             * Format: constant
-             * @description The success being "true" indicates that the request completed.
-             * @default true
-             */
-            success: boolean;
-        };
-        /**
-         * @description The error message(s) that occurred during the validation of the request data or additional requirements
-         *     applied during the execution of the request
-         * @enum {string}
-         */
-        UserRetrieveAlbumNotFoundErrorMessage: UserRetrieveAlbumNotFoundErrorMessage;
-        UserRetrieveAlbumNotFoundResponseDto: {
-            /** @description General description of the error class */
-            error: string;
-            /**
-             * @description The error message(s) that occurred during the validation of the request data or additional requirements
-             *     applied during the execution of the request
-             * @default album-not-found-error
-             */
-            message: components["schemas"]["UserRetrieveAlbumNotFoundErrorMessage"][];
-            /**
-             * @description The success being "false" indicates that the request failed to complete.
-             * @default false
-             */
-            success: boolean;
-        };
-        UserRetrieveAlbumResponseDto: {
-            /** @description The list of albums that match the query parameters, which may be limited by pagination. */
-            album: components["schemas"]["LibraryAlbumWithTracksDto"];
-            /**
-             * Format: constant
-             * @description The success being "true" indicates that the request completed.
-             * @default true
-             */
-            success: boolean;
-        };
-        /** @enum {string} */
-        UserRoleEnum: UserRoleEnum;
-        UserRootPathDto: {
-            /**
-             * Format: date-time
-             * @description The date and time the row was created
-             */
-            createdAt: string;
-            /**
-             * @description The number of files or songs that have been found in this root path, this excludes
-             *     anything that is not a music track.
-             */
-            fileCount: number;
-            /** @description The ID of the root path row in the database */
-            id: number;
-            /** @description The fully-qualified path of the root path, this is the base path where music is stored for a user */
-            rootPath: string;
-            /** @description The total size of all the files in this root path contained in the `fileCount` field */
-            totalSize: number;
-            /**
-             * Format: date-time
-             * @description The date and time the row was last updated, this field is optional and may not be present
-             *     if the row has never been updated
-             */
-            updatedAt?: string;
-        };
-        UserTreeItemDto: {
-            children?: components["schemas"]["UserTreeItemDto"][];
-            file?: string;
-            folder?: string;
-            fullPath: string;
-            id: number;
-        };
-        /**
-         * @description The error message(s) that occurred during the validation of the request data or additional requirements
-         *     applied during the execution of the request
-         * @enum {string}
-         */
-        UserUpdatePasswordBadRequestErrorMessageEnum: UserUpdatePasswordBadRequestErrorMessageEnum;
-        UserUpdatePasswordBadRequestResponseDto: {
-            /** @description General description of the error class */
-            error: string;
-            /**
-             * @description The error message(s) that occurred during the validation of the request data or additional requirements
-             *     applied during the execution of the request
-             * @default invalid-password-error
-             */
-            message: components["schemas"]["UserUpdatePasswordBadRequestErrorMessageEnum"][];
-            /**
-             * @description The success being "false" indicates that the request failed to complete.
-             * @default false
-             */
-            success: boolean;
-        };
-        UserUpdatePasswordBodyDto: {
-            newPassword: string;
-        };
-        UserUpdatePasswordResponseDto: {
-            /**
-             * Format: constant
-             * @description The success being "true" indicates that the request completed.
-             * @default true
-             */
-            success: boolean;
-        };
+        version: number;
+      };
+      header?: {
+        /** @description The session ID and device ID cookies for the user `id={sessionId}; did={deviceId}` */
+        cookie?: string;
+      };
+      path?: never;
+      cookie?: never;
     };
-    responses: never;
-    parameters: never;
-    requestBodies: never;
-    headers: never;
-    pathItems: never;
-};
-export type $defs = Record<string, never>;
-export interface operations {
-    AdminCreateAccountController_post: {
-        parameters: {
-            query?: never;
-            header: {
-                /** @description Bearer token for authentication */
-                Authorization: string;
-            };
-            path?: never;
-            cookie?: never;
+    requestBody?: never;
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
         };
-        requestBody: {
-            content: {
-                "application/json": components["schemas"]["AdminCreateAccountBodyDto"];
-            };
+        content: {
+          'application/json': string;
         };
-        responses: {
-            201: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["AdminCreateAccountResponseDto"];
-                };
-            };
-            400: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["AdminCreateAccountBadRequestResponseDto"];
-                };
-            };
-        };
+      };
     };
-    AdminCreateRootPathController_post: {
-        parameters: {
-            query: {
-                /** @description The ID of the account to create the root path for. */
-                id: number;
-            };
-            header: {
-                /** @description Bearer token for authentication */
-                Authorization: string;
-            };
-            path?: never;
-            cookie?: never;
-        };
-        requestBody: {
-            content: {
-                "application/json": components["schemas"]["AdminCreateRootPathBodyDto"];
-            };
-        };
-        responses: {
-            /** @description Root path created successfully */
-            201: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["AdminCreateRootPathResponseDto"];
-                };
-            };
-            /** @description Invalid request data */
-            400: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["AdminCreateRootPathBadRequestResponseDto"];
-                };
-            };
-            /** @description Account not found */
-            404: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["AdminCreateRootPathNotFoundResponseDto"];
-                };
-            };
-        };
+  };
+  SynologyEntryController_route: {
+    parameters: {
+      query?: never;
+      header?: {
+        /** @description The session ID and device ID cookies if requesting "pins", "playlist" or the "clearSessionToken" methods */
+        cookie?: string;
+      };
+      path?: never;
+      cookie?: never;
     };
-    AdminDeleteAccountController_delete: {
-        parameters: {
-            query: {
-                /** @description The ID of the account to be deleted. */
-                id: number;
-            };
-            header: {
-                /** @description Bearer token for authentication */
-                Authorization: string;
-            };
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Account deleted successfully */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["AdminDeleteAccountResponseDto"];
-                };
-            };
-            /** @description Invalid account ID or account does not exist */
-            400: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["AdminDeleteAccountBadRequestResponseDto"];
-                };
-            };
-            /** @description Account not found */
-            404: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["AdminDeleteAccountNotFoundResponseDto"];
-                };
-            };
-        };
+    requestBody: {
+      content: {
+        'application/json':
+          | components['schemas']['SynologyEntryCertificateBodyDto']
+          | components['schemas']['SynologyEntrySignInBodyDto']
+          | components['schemas']['SynologyEntryListPinsBodyDto']
+          | components['schemas']['SynologyEntryLogoutBodyDto']
+          | components['schemas']['SynologyEntryCreatePinBodyDto']
+          | components['schemas']['SynologyEntryDeletePinBodyDto']
+          | components['schemas']['SynologyEntryPlaylistAddAlbumBodyDto']
+          | components['schemas']['SynologyEntryPlaylistAddArtistBodyDto']
+          | components['schemas']['SynologyEntryPlaylistAddComposerBodyDto']
+          | components['schemas']['SynologyEntryPlaylistAddGenreBodyDto'];
+      };
     };
-    AdminDeleteRootPathController_delete: {
-        parameters: {
-            query: {
-                /** @description The ID of the root path to delete */
-                id: number;
-            };
-            header: {
-                /** @description Bearer token for authentication */
-                Authorization: string;
-            };
-            path?: never;
-            cookie?: never;
+    responses: {
+      /** @description Handles various entry.cgi requests */
+      200: {
+        headers: {
+          [name: string]: unknown;
         };
-        requestBody?: never;
-        responses: {
-            /** @description Root path deleted successfully */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["AdminDeleteRootPathResponseDto"];
-                };
-            };
-            /** @description Root path not found */
-            404: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["AdminDeleteRootPathNotFoundResponseDto"];
-                };
-            };
+        content: {
+          'application/json':
+            | components['schemas']['SynologyEntryCertificateResponseDto']
+            | components['schemas']['SynologyEntrySignInResponseDto']
+            | components['schemas']['SynologyEntryListPinsResponseDto']
+            | components['schemas']['SynologyEntryLogoutResponseDto']
+            | components['schemas']['SynologySuccessResponseDto'];
         };
+      };
     };
-    AdminIndexerConfigurationController_get: {
-        parameters: {
-            query?: never;
-            header: {
-                /** @description Bearer token for authentication */
-                Authorization: string;
-            };
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["AdminIndexerConfigurationResponseDto"];
-                };
-            };
-        };
+  };
+  SynologyQueryController_route: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    AdminListAccountsController_get: {
-        parameters: {
-            query?: never;
-            header: {
-                /** @description Bearer token for authentication */
-                Authorization: string;
-            };
-            path?: never;
-            cookie?: never;
+    requestBody?: never;
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
         };
-        requestBody?: never;
-        responses: {
-            /** @description Accounts listed successfully */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["AdminListAccountsResponseDto"];
-                };
-            };
-        };
+        content?: never;
+      };
     };
-    AdminListIndexerLogsController_get: {
-        parameters: {
-            query?: {
-                accountId?: number;
-                rootPathId?: number;
-                search?: string;
-            };
-            header: {
-                /** @description Bearer token for authentication */
-                Authorization: string;
-            };
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["AdminListIndexerLogsResponseDto"];
-                };
-            };
-            400: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["AdminListIndexerLogsBadRequestResponseDto"];
-                };
-            };
-            404: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["AdminListIndexerLogsNotFoundResponseDto"];
-                };
-            };
-        };
-    };
-    AdminListRootPathsController_get: {
-        parameters: {
-            query?: never;
-            header: {
-                /** @description Bearer token for authentication */
-                Authorization: string;
-            };
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["AdminListRootPathsResponseDto"];
-                };
-            };
-        };
-    };
-    AdminRegenerateMasterSessionKeyController_post: {
-        parameters: {
-            query?: never;
-            header: {
-                /** @description Bearer token for authentication */
-                Authorization: string;
-            };
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Master session key regenerated successfully */
-            201: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["AdminRegenerateMasterSessionKeyResponseDto"];
-                };
-            };
-        };
-    };
-    AdminRegenerateUserSessionKeyController_post: {
-        parameters: {
-            query: {
-                /** @description The ID of the account to regenerate the session key for. */
-                id: number;
-            };
-            header: {
-                /** @description Bearer token for authentication */
-                Authorization: string;
-            };
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Session key regenerated successfully */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["AdminRegenerateUserSessionKeyResponseDto"];
-                };
-            };
-            201: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["AdminRegenerateUserSessionKeyResponseDto"];
-                };
-            };
-            /** @description Account not found */
-            404: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["AdminRegenerateUserSessionKeyNotFoundResponseDto"];
-                };
-            };
-        };
-    };
-    AdminResetUserPasswordController_post: {
-        parameters: {
-            query: {
-                /** @description The ID of the account whose password is to be reset. */
-                id: number;
-            };
-            header: {
-                /** @description Bearer token for authentication */
-                Authorization: string;
-            };
-            path?: never;
-            cookie?: never;
-        };
-        requestBody: {
-            content: {
-                "application/json": components["schemas"]["AdminResetUserPasswordBodyDto"];
-            };
-        };
-        responses: {
-            /** @description Password reset successfully */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["AdminResetUserPasswordResponseDto"];
-                };
-            };
-            201: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["AdminResetUserPasswordResponseDto"];
-                };
-            };
-            /** @description Invalid request data or additional requirements not met */
-            400: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["AdminResetUserPasswordBadRequestResponseDto"];
-                };
-            };
-            /** @description Account not found */
-            404: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["AdminResetUserPasswordNotFoundResponseDto"];
-                };
-            };
-        };
-    };
-    AdminSetIndexerStatusController_patch: {
-        parameters: {
-            query?: never;
-            header: {
-                /** @description Bearer token for authentication */
-                Authorization: string;
-            };
-            path?: never;
-            cookie?: never;
-        };
-        requestBody: {
-            content: {
-                "application/json": components["schemas"]["AdminSetIndexerStatusBodyDto"];
-            };
-        };
-        responses: {
-            /** @description Scanner status updated successfully */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["AdminSetIndexerStatusResponseDto"];
-                };
-            };
-        };
-    };
-    AdminUpdateRootPathController_patch: {
-        parameters: {
-            query: {
-                /** @description The ID of the root path to update */
-                id: number;
-            };
-            header: {
-                /** @description Bearer token for authentication */
-                Authorization: string;
-            };
-            path?: never;
-            cookie?: never;
-        };
-        requestBody: {
-            content: {
-                "application/json": components["schemas"]["AdminUpdateRootPathBodyDto"];
-            };
-        };
-        responses: {
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["AdminUpdateRootPathResponseDto"];
-                };
-            };
-            /** @description Invalid root path, either malformed or nonexistent */
-            400: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["AdminUpdateRootPathBadRequestResponseDto"];
-                };
-            };
-            /** @description Root path not found */
-            404: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["AdminUpdateRootPathNotFoundResponseDto"];
-                };
-            };
-        };
-    };
-    AdminUpdateUserRolesController_patch: {
-        parameters: {
-            query: {
-                /** @description The ID of the account whose roles are changing. */
-                id: number;
-            };
-            header: {
-                /** @description Bearer token for authentication */
-                Authorization: string;
-            };
-            path?: never;
-            cookie?: never;
-        };
-        requestBody: {
-            content: {
-                "application/json": components["schemas"]["AdminUpdateUserRolesBodyDto"];
-            };
-        };
-        responses: {
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["AdminUpdateUserRolesResponseDto"];
-                };
-            };
-            /** @description Invalid user role or account only admin error */
-            400: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["AdminUpdateUserRolesBadRequestResponseDto"];
-                };
-            };
-            /** @description Account not found */
-            404: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["AdminUpdateUserRolesNotFoundResponseDto"];
-                };
-            };
-        };
-    };
-    GuestCreateSessionController_post: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody: {
-            content: {
-                "application/json": components["schemas"]["GuestCreateSessionBodyDto"];
-            };
-        };
-        responses: {
-            201: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["GuestCreateSessionResponseDto"];
-                };
-            };
-            400: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["GuestCreateSessionBadRequestResponseDto"];
-                };
-            };
-            500: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["InternalServerErrorResponseDto"];
-                };
-            };
-        };
-    };
-    GuestHealthcheckController_healthcheck: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content?: never;
-            };
-        };
-    };
-    UserAlbumCoverController_get: {
-        parameters: {
-            query: {
-                /** @description The ID of the album */
-                id: number;
-                /** @description The width/height size of the image in pixels */
-                size: number;
-            };
-            header: {
-                Authorization: string;
-            };
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "image/jpeg": string;
-                    "image/png": string;
-                    "image/webp": string;
-                };
-            };
-        };
-    };
-    UserArtistCoverController_get: {
-        parameters: {
-            query: {
-                /** @description The ID of the artist */
-                id: number;
-                /** @description The width/height size of the image in pixels */
-                size: number;
-            };
-            header: {
-                Authorization: string;
-            };
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "image/jpeg": string;
-                    "image/png": string;
-                    "image/webp": string;
-                };
-            };
-        };
-    };
-    UserComposerCoverController_get: {
-        parameters: {
-            query: {
-                /** @description The ID of the composer */
-                id: number;
-                /** @description The width/height size of the image in pixels */
-                size: number;
-            };
-            header: {
-                Authorization: string;
-            };
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "image/jpeg": string;
-                    "image/png": string;
-                    "image/webp": string;
-                };
-            };
-        };
-    };
-    UserCreateRootPathController_post: {
-        parameters: {
-            query?: never;
-            header: {
-                /** @description Bearer token for authentication */
-                Authorization: string;
-            };
-            path?: never;
-            cookie?: never;
-        };
-        requestBody: {
-            content: {
-                "application/json": components["schemas"]["UserCreateRootPathBodyDto"];
-            };
-        };
-        responses: {
-            /** @description Root path created successfully */
-            201: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["UserCreateRootPathResponseDto"];
-                };
-            };
-            /** @description Invalid request data */
-            400: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["UserCreateRootPathBadRequestResponseDto"];
-                };
-            };
-        };
-    };
-    UserDeleteRootPathController_delete: {
-        parameters: {
-            query: {
-                /** @description The ID of the root path to delete */
-                id: number;
-            };
-            header: {
-                /** @description Bearer token for authentication */
-                Authorization: string;
-            };
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Root path deleted successfully */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["UserDeleteRootPathResponseDto"];
-                };
-            };
-            /** @description Root path not found */
-            404: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["UserDeleteRootPathNotFoundResponseDto"];
-                };
-            };
-        };
-    };
-    UserEndSessionController_delete: {
-        parameters: {
-            query?: never;
-            header: {
-                /** @description Bearer token for authentication */
-                Authorization: string;
-            };
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["SuccessResponseDto"];
-                };
-            };
-            400: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["BadRequestResponseDto"];
-                };
-            };
-            500: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["InternalServerErrorResponseDto"];
-                };
-            };
-            default: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["SuccessResponseDto"];
-                };
-            };
-        };
-    };
-    UserFolderStructureController_get: {
-        parameters: {
-            query?: never;
-            header: {
-                /** @description Bearer token for authentication */
-                Authorization: string;
-            };
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Successfully retrieved the tree of folders and file contents. */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["UserFolderStructureResponseDto"];
-                };
-            };
-        };
-    };
-    UserGenreCoverController_get: {
-        parameters: {
-            query: {
-                /** @description The ID of the genre */
-                id: number;
-                /** @description The width/height size of the image in pixels */
-                size: number;
-            };
-            header: {
-                Authorization: string;
-            };
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "image/jpeg": string;
-                    "image/png": string;
-                    "image/webp": string;
-                };
-            };
-        };
-    };
-    UserListAlbumArtistsController_get: {
-        parameters: {
-            query?: {
-                /**
-                 * @description Optional filter for the date the album was added to the library, which will do an exact match against
-                 *     the date the album was added to the library.  The date must be in ISO 8601 format (YYYY-MM-DD).
-                 */
-                addedAfter?: string;
-                /**
-                 * @description Optional filter for the date the artist was added to the library, which will do an exact match against
-                 *     the date the artist was added to the library.  The date must be in ISO 8601 format (YYYY-MM-DD).
-                 */
-                addedBefore?: string;
-                /**
-                 * @description Optional search filter that will do a case-insensitive partial-match against the artist
-                 *     name, album name, composer name, or genre.
-                 */
-                filter?: string;
-                /**
-                 * @description Optional filter for the genre name, which will do a case-insensitive partial-match against the
-                 *     genres associated with an artist.
-                 */
-                genre?: string[];
-                limit?: number;
-                offset?: number;
-                /** @description Optional filter for the direction to sort the results by. */
-                sortDirection?: components["schemas"]["SortDirectionEnum"];
-                /** @description Optional filter for the field to sort results by. */
-                sortField?: components["schemas"]["ArtistSortFieldEnum"];
-            };
-            header: {
-                /** @description Bearer token for authentication */
-                Authorization: string;
-            };
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Successfully retrieved the list of album artists for the user. */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["UserListAlbumArtistsResponseDto"];
-                };
-            };
-            /** @description The request was invalid or missing required parameters. */
-            400: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["UserListAlbumArtistsBadRequestResponseDto"];
-                };
-            };
-        };
-    };
-    UserListAlbumArtistsWithTracksController_get: {
-        parameters: {
-            query?: {
-                /**
-                 * @description Optional filter for the date the album was added to the library, which will do an exact match against
-                 *     the date the album was added to the library.  The date must be in ISO 8601 format (YYYY-MM-DD).
-                 */
-                addedAfter?: string;
-                /**
-                 * @description Optional filter for the date the artist was added to the library, which will do an exact match against
-                 *     the date the artist was added to the library.  The date must be in ISO 8601 format (YYYY-MM-DD).
-                 */
-                addedBefore?: string;
-                /**
-                 * @description Optional search filter that will do a case-insensitive partial-match against the artist
-                 *     name, album name, composer name, or genre.
-                 */
-                filter?: string;
-                /**
-                 * @description Optional filter for the genre name, which will do a case-insensitive partial-match against the
-                 *     genres associated with an artist.
-                 */
-                genre?: string[];
-                limit?: number;
-                offset?: number;
-                /** @description Optional filter for the direction to sort the results by. */
-                sortDirection?: components["schemas"]["SortDirectionEnum"];
-                /** @description Optional filter for the field to sort results by. */
-                sortField?: components["schemas"]["ArtistSortFieldEnum"];
-            };
-            header: {
-                /** @description Bearer token for authentication */
-                Authorization: string;
-            };
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Successfully retrieved the list of album artists with tracks for the user. */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["UserListAlbumArtistsWithTracksResponseDto"];
-                };
-            };
-            /** @description The request was invalid or missing required parameters. */
-            400: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["UserListAlbumArtistsWithTracksBadRequestResponseDto"];
-                };
-            };
-        };
-    };
-    UserListAlbumsController_get: {
-        parameters: {
-            query?: {
-                /**
-                 * @description Optional filter for the date the album was added to the library, which will do an exact match against
-                 *     the date the album was added to the library.  The date must be in ISO 8601 format (YYYY-MM-DD).
-                 */
-                addedAfter?: string;
-                /**
-                 * @description Optional filter for the date the album was added to the library, which will do an exact match against
-                 *     the date the album was added to the library.  The date must be in ISO 8601 format (YYYY-MM-DD).
-                 */
-                addedBefore?: string;
-                /**
-                 * @description Optional filter for the artist name, which will do a case-insensitive partial-match against the
-                 *     artists associated with an album.
-                 */
-                artist?: string[];
-                /**
-                 * @description Optional filter for the composer name, which will do a case-insensitive partial-match against the
-                 *     composers associated with an album.
-                 */
-                composer?: string[];
-                /**
-                 * @description Optional search filter that will do a case-insensitive partial-match against the album
-                 *     name, artist name, composer name, or genre.
-                 */
-                filter?: string;
-                /**
-                 * @description Optional filter for the genre name, which will do a case-insensitive partial-match against the
-                 *     genres associated with an album.
-                 */
-                genre?: string[];
-                limit?: number;
-                /**
-                 * @description Maximum rating value, which will do an exact match against the rating associated with an album.  The
-                 *     rating is a value between 0 and 5, inclusive.
-                 */
-                maxRating?: number;
-                /**
-                 * @description Minimum rating value, which will do an exact match against the rating associated with an album.  The
-                 *     rating is a value between 0 and 5, inclusive.
-                 */
-                minRating?: number;
-                offset?: number;
-                /**
-                 * @description Optional filter for the date the album was released, which will do an exact match against
-                 *     the date of release.  The date must be in ISO 8601 format (YYYY-MM-DD).
-                 */
-                releasedAfter?: string;
-                /**
-                 * @description Optional filter for the date the album was released, which will do an exact match against
-                 *     the date of release.  The date must be in ISO 8601 format (YYYY-MM-DD).
-                 */
-                releasedBefore?: string;
-                /** @description Optional filter for the direction to sort the results by. */
-                sortDirection?: components["schemas"]["SortDirectionEnum"];
-                /** @description Optional filter for the field to sort results by. */
-                sortField?: components["schemas"]["AlbumSortFieldEnum"];
-                /**
-                 * @description Optional filter for the year of the album, which will do an exact match against the year associated
-                 *     with an album's release date.
-                 */
-                year?: number;
-            };
-            header: {
-                /** @description Bearer token for authentication */
-                Authorization: string;
-            };
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Successfully retrieved the list of albums for the user. */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["UserListAlbumsResponseDto"];
-                };
-            };
-            /** @description The request was invalid or missing required parameters. */
-            400: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["UserListAlbumsBadRequestResponseDto"];
-                };
-            };
-        };
-    };
-    UserListAlbumsWithTracksController_get: {
-        parameters: {
-            query?: {
-                /**
-                 * @description Optional filter for the date the album was added to the library, which will do an exact match against
-                 *     the date the album was added to the library.  The date must be in ISO 8601 format (YYYY-MM-DD).
-                 */
-                addedAfter?: string;
-                /**
-                 * @description Optional filter for the date the album was added to the library, which will do an exact match against
-                 *     the date the album was added to the library.  The date must be in ISO 8601 format (YYYY-MM-DD).
-                 */
-                addedBefore?: string;
-                /**
-                 * @description Optional filter for the artist name, which will do a case-insensitive partial-match against the
-                 *     artists associated with an album.
-                 */
-                artist?: string[];
-                /**
-                 * @description Optional filter for the composer name, which will do a case-insensitive partial-match against the
-                 *     composers associated with an album.
-                 */
-                composer?: string[];
-                /**
-                 * @description Optional search filter that will do a case-insensitive partial-match against the album
-                 *     name, artist name, composer name, or genre.
-                 */
-                filter?: string;
-                /**
-                 * @description Optional filter for the genre name, which will do a case-insensitive partial-match against the
-                 *     genres associated with an album.
-                 */
-                genre?: string[];
-                limit?: number;
-                /**
-                 * @description Maximum rating value, which will do an exact match against the rating associated with an album.  The
-                 *     rating is a value between 0 and 5, inclusive.
-                 */
-                maxRating?: number;
-                /**
-                 * @description Minimum rating value, which will do an exact match against the rating associated with an album.  The
-                 *     rating is a value between 0 and 5, inclusive.
-                 */
-                minRating?: number;
-                offset?: number;
-                /**
-                 * @description Optional filter for the date the album was released, which will do an exact match against
-                 *     the date of release.  The date must be in ISO 8601 format (YYYY-MM-DD).
-                 */
-                releasedAfter?: string;
-                /**
-                 * @description Optional filter for the date the album was released, which will do an exact match against
-                 *     the date of release.  The date must be in ISO 8601 format (YYYY-MM-DD).
-                 */
-                releasedBefore?: string;
-                /** @description Optional filter for the direction to sort the results by. */
-                sortDirection?: components["schemas"]["SortDirectionEnum"];
-                /** @description Optional filter for the field to sort results by. */
-                sortField?: components["schemas"]["AlbumSortFieldEnum"];
-                /**
-                 * @description Optional filter for the year of the album, which will do an exact match against the year associated
-                 *     with an album's release date.
-                 */
-                year?: number;
-            };
-            header: {
-                /** @description Bearer token for authentication */
-                Authorization: string;
-            };
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Successfully retrieved the list of albums with their tracks for the user. */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["UserListAlbumsWithTracksResponseDto"];
-                };
-            };
-            /** @description The request was invalid or missing required parameters. */
-            400: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["UserListAlbumsWithTracksBadRequestResponseDto"];
-                };
-            };
-        };
-    };
-    UserListIndexerLogsController_get: {
-        parameters: {
-            query?: {
-                rootPathId?: number;
-                search?: string;
-            };
-            header: {
-                /** @description Bearer token for authentication */
-                Authorization: string;
-            };
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["UserListIndexerLogsResponseDto"];
-                };
-            };
-            400: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["UserListIndexerLogsBadRequestResponseDto"];
-                };
-            };
-            404: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["UserListIndexerLogsNotFoundResponseDto"];
-                };
-            };
-        };
-    };
-    UserListRootPathsController_get: {
-        parameters: {
-            query?: never;
-            header: {
-                /** @description Bearer token for authentication */
-                Authorization: string;
-            };
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["UserListRootPathsResponseDto"];
-                };
-            };
-        };
-    };
-    UserListTrackArtistsController_get: {
-        parameters: {
-            query?: {
-                /**
-                 * @description Optional filter for the date the album was added to the library, which will do an exact match against
-                 *     the date the album was added to the library.  The date must be in ISO 8601 format (YYYY-MM-DD).
-                 */
-                addedAfter?: string;
-                /**
-                 * @description Optional filter for the date the artist was added to the library, which will do an exact match against
-                 *     the date the artist was added to the library.  The date must be in ISO 8601 format (YYYY-MM-DD).
-                 */
-                addedBefore?: string;
-                /**
-                 * @description Optional search filter that will do a case-insensitive partial-match against the artist
-                 *     name, album name, composer name, or genre.
-                 */
-                filter?: string;
-                /**
-                 * @description Optional filter for the genre name, which will do a case-insensitive partial-match against the
-                 *     genres associated with an artist.
-                 */
-                genre?: string[];
-                limit?: number;
-                offset?: number;
-                /** @description Optional filter for the direction to sort the results by. */
-                sortDirection?: components["schemas"]["SortDirectionEnum"];
-                /** @description Optional filter for the field to sort results by. */
-                sortField?: components["schemas"]["ArtistSortFieldEnum"];
-            };
-            header: {
-                /** @description Bearer token for authentication */
-                Authorization: string;
-            };
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Successfully retrieved the list of artists for the user. */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["UserListTrackArtistsResponseDto"];
-                };
-            };
-            /** @description The request was invalid or missing required parameters. */
-            400: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["UserListTrackArtistsBadRequestResponseDto"];
-                };
-            };
-        };
-    };
-    UserListTrackArtistsWithTracksController_get: {
-        parameters: {
-            query?: {
-                /**
-                 * @description Optional filter for the date the album was added to the library, which will do an exact match against
-                 *     the date the album was added to the library.  The date must be in ISO 8601 format (YYYY-MM-DD).
-                 */
-                addedAfter?: string;
-                /**
-                 * @description Optional filter for the date the artist was added to the library, which will do an exact match against
-                 *     the date the artist was added to the library.  The date must be in ISO 8601 format (YYYY-MM-DD).
-                 */
-                addedBefore?: string;
-                /**
-                 * @description Optional search filter that will do a case-insensitive partial-match against the artist
-                 *     name, album name, composer name, or genre.
-                 */
-                filter?: string;
-                /**
-                 * @description Optional filter for the genre name, which will do a case-insensitive partial-match against the
-                 *     genres associated with an artist.
-                 */
-                genre?: string[];
-                limit?: number;
-                offset?: number;
-                /** @description Optional filter for the direction to sort the results by. */
-                sortDirection?: components["schemas"]["SortDirectionEnum"];
-                /** @description Optional filter for the field to sort results by. */
-                sortField?: components["schemas"]["ArtistSortFieldEnum"];
-            };
-            header: {
-                /** @description Bearer token for authentication */
-                Authorization: string;
-            };
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Successfully retrieved the list of artists along with their tracks for the user. */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["UserListTrackArtistsWithTracksResponseDto"];
-                };
-            };
-            /** @description The request was invalid or missing required parameters. */
-            400: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["UserListTrackArtistsWithTracksBadRequestResponseDto"];
-                };
-            };
-        };
-    };
-    UserListTrackComposersController_get: {
-        parameters: {
-            query?: {
-                /**
-                 * @description Optional filter for the date the album was added to the library, which will do an exact match against
-                 *     the date the album was added to the library.  The date must be in ISO 8601 format (YYYY-MM-DD).
-                 */
-                addedAfter?: string;
-                /**
-                 * @description Optional filter for the date the composer was added to the library, which will do an exact match against
-                 *     the date the composer was added to the library.  The date must be in ISO 8601 format (YYYY-MM-DD).
-                 */
-                addedBefore?: string;
-                /**
-                 * @description Optional search filter that will do a case-insensitive partial-match against the composer
-                 *     name, artist name, album name, or genre.
-                 */
-                filter?: string;
-                /**
-                 * @description Optional filter for the genre name, which will do a case-insensitive partial-match against the
-                 *     genres associated with a composer.
-                 */
-                genre?: string[];
-                limit?: number;
-                offset?: number;
-                /** @description Optional filter for the direction to sort the results by. */
-                sortDirection?: components["schemas"]["SortDirectionEnum"];
-                /** @description Optional filter for the field to sort results by. */
-                sortField?: components["schemas"]["ComposerSortFieldEnum"];
-            };
-            header: {
-                /** @description Bearer token for authentication */
-                Authorization: string;
-            };
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Successfully retrieved the list of composers for the user. */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["UserListTrackComposersResponseDto"];
-                };
-            };
-            /** @description The request was invalid or missing required parameters. */
-            400: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["UserListTrackComposersBadRequestResponseDto"];
-                };
-            };
-        };
-    };
-    UserListTrackComposersWithTracksController_get: {
-        parameters: {
-            query?: {
-                /**
-                 * @description Optional filter for the date the album was added to the library, which will do an exact match against
-                 *     the date the album was added to the library.  The date must be in ISO 8601 format (YYYY-MM-DD).
-                 */
-                addedAfter?: string;
-                /**
-                 * @description Optional filter for the date the composer was added to the library, which will do an exact match against
-                 *     the date the composer was added to the library.  The date must be in ISO 8601 format (YYYY-MM-DD).
-                 */
-                addedBefore?: string;
-                /**
-                 * @description Optional search filter that will do a case-insensitive partial-match against the composer
-                 *     name, artist name, album name, or genre.
-                 */
-                filter?: string;
-                /**
-                 * @description Optional filter for the genre name, which will do a case-insensitive partial-match against the
-                 *     genres associated with a composer.
-                 */
-                genre?: string[];
-                limit?: number;
-                offset?: number;
-                /** @description Optional filter for the direction to sort the results by. */
-                sortDirection?: components["schemas"]["SortDirectionEnum"];
-                /** @description Optional filter for the field to sort results by. */
-                sortField?: components["schemas"]["ComposerSortFieldEnum"];
-            };
-            header: {
-                /** @description Bearer token for authentication */
-                Authorization: string;
-            };
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Successfully retrieved the list of composers for the user. */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["UserListTrackComposersWithTracksResponseDto"];
-                };
-            };
-            /** @description The request was invalid or missing required parameters. */
-            400: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["UserListTrackComposersWithTracksBadRequestResponseDto"];
-                };
-            };
-        };
-    };
-    UserListTrackGenresController_get: {
-        parameters: {
-            query?: {
-                limit?: number;
-                offset?: number;
-                /** @description Optional filter for the direction to sort the results by. */
-                sortDirection?: components["schemas"]["SortDirectionEnum"];
-                /** @description Optional filter for the field to sort results by. */
-                sortField?: components["schemas"]["GenreSortFieldEnum"];
-            };
-            header: {
-                /** @description Bearer token for authentication */
-                Authorization: string;
-            };
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Successfully retrieved the list of genres for the user. */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["UserListTrackGenresResponseDto"];
-                };
-            };
-            /** @description The request was invalid or missing required parameters. */
-            400: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["UserListTrackGenresBadRequestResponseDto"];
-                };
-            };
-        };
-    };
-    UserListTrackGenresWithTracksController_get: {
-        parameters: {
-            query?: {
-                limit?: number;
-                offset?: number;
-                /** @description Optional filter for the direction to sort the results by. */
-                sortDirection?: components["schemas"]["SortDirectionEnum"];
-                /** @description Optional filter for the field to sort results by. */
-                sortField?: components["schemas"]["GenreSortFieldEnum"];
-            };
-            header: {
-                /** @description Bearer token for authentication */
-                Authorization: string;
-            };
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Successfully retrieved the list of genres for the user. */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["UserListTrackGenresWithTracksResponseDto"];
-                };
-            };
-            /** @description The request was invalid or missing required parameters. */
-            400: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["UserListTrackGenresWithTracksBadRequestResponseDto"];
-                };
-            };
-        };
-    };
-    UserListTracksController_get: {
-        parameters: {
-            query?: {
-                /**
-                 * @description Optional filter for the date the album was added to the library, which will do an exact match against
-                 *     the date the album was added to the library.  The date must be in ISO 8601 format (YYYY-MM-DD).
-                 */
-                addedAfter?: string;
-                /**
-                 * @description Optional filter for the date the album was added to the library, which will do an exact match against
-                 *     the date the album was added to the library.  The date must be in ISO 8601 format (YYYY-MM-DD).
-                 */
-                addedBefore?: string;
-                /**
-                 * @description Optional filter for the album name, which will do a case-insensitive partial-match against the
-                 *     name of the album.
-                 */
-                album?: string;
-                /**
-                 * @description Optional filter for the album artist name, which will do a case-insensitive partial-match against the
-                 *     artists associated with an album.
-                 */
-                albumArtists?: string[];
-                /**
-                 * @description Optional filter for the artist name, which will do a case-insensitive partial-match against the
-                 *     artists associated with tracks.
-                 */
-                artist?: string[];
-                /**
-                 * @description Optional filter for the composer name, which will do a case-insensitive partial-match against the
-                 *     composers associated with an album.
-                 */
-                composer?: string[];
-                /**
-                 * @description Optional search filter that will do a case-insensitive partial-match against the album
-                 *     name, artist name, composer name, or genre.
-                 */
-                filter?: string;
-                /**
-                 * @description Optional filter for the genre name, which will do a case-insensitive partial-match against the
-                 *     genres associated with an album.
-                 */
-                genre?: string[];
-                limit?: number;
-                /**
-                 * @description Maximum rating value, which will do an exact match against the rating associated with an album.  The
-                 *     rating is a value between 0 and 5, inclusive.
-                 */
-                maxRating?: number;
-                /**
-                 * @description Minimum rating value, which will do an exact match against the rating associated with an album.  The
-                 *     rating is a value between 0 and 5, inclusive.
-                 */
-                minRating?: number;
-                offset?: number;
-                /** @description Optional filter for the direction to sort the results by. */
-                sortDirection?: components["schemas"]["SortDirectionEnum"];
-                /** @description Optional filter for the field to sort results by. */
-                sortField?: components["schemas"]["TrackSortFieldEnum"];
-                /**
-                 * @description Optional filter for the year of the album, which will do an exact match against the year associated
-                 *     with an album's release date.
-                 */
-                year?: number;
-            };
-            header: {
-                /** @description Bearer token for authentication */
-                Authorization: string;
-            };
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Successfully retrieved the list of tracks for the user. */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["UserListTracksResponseDto"];
-                };
-            };
-            /** @description The request was invalid or missing required parameters. */
-            400: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["UserListTracksBadRequestResponseDto"];
-                };
-            };
-        };
-    };
-    UserRegenerateSessionKeyController_post: {
-        parameters: {
-            query?: never;
-            header: {
-                /** @description Bearer token for authentication */
-                Authorization: string;
-            };
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Session key regenerated successfully */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["UserRegenerateSessionKeyResponseDto"];
-                };
-            };
-        };
-    };
-    UserRetrieveAlbumController_get: {
-        parameters: {
-            query: {
-                /** @description The ID of the album */
-                id: number;
-            };
-            header: {
-                /** @description Bearer token for authentication */
-                Authorization: string;
-            };
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Successfully retrieved the album data for the user. */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["UserRetrieveAlbumResponseDto"];
-                };
-            };
-            /** @description Album not found */
-            404: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["UserRetrieveAlbumNotFoundResponseDto"];
-                };
-            };
-        };
-    };
-    UserUpdatePasswordController_post: {
-        parameters: {
-            query?: never;
-            header: {
-                /** @description Bearer token for authentication */
-                Authorization: string;
-            };
-            path?: never;
-            cookie?: never;
-        };
-        requestBody: {
-            content: {
-                "application/json": components["schemas"]["UserUpdatePasswordBodyDto"];
-            };
-        };
-        responses: {
-            /** @description Password reset successfully */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["UserUpdatePasswordResponseDto"];
-                };
-            };
-            201: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["UserUpdatePasswordResponseDto"];
-                };
-            };
-            /** @description Invalid request data or additional requirements not met */
-            400: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["UserUpdatePasswordBadRequestResponseDto"];
-                };
-            };
-        };
-    };
-    SynologyAlbumController_route: {
-        parameters: {
-            query?: never;
-            header?: {
-                /** @description The session ID and device ID cookies for the user `id={sessionId}; did={deviceId}` */
-                cookie?: string;
-            };
-            path?: never;
-            cookie?: never;
-        };
-        requestBody: {
-            content: {
-                "application/json": components["schemas"]["SynologyAlbumsBodyDto"] | components["schemas"]["SynologyAlbumsByArtistBodyDto"] | components["schemas"]["SynologyAlbumsByArtistAndGenreBodyDto"] | components["schemas"]["SynologyAlbumsByComposerBodyDto"] | components["schemas"]["SynologyAlbumsByGenreBodyDto"] | components["schemas"]["SynologyAlbumsByDefaultGenreBodyDto"] | components["schemas"]["SynologyAlbumsByArtistAndDefaultGenreBodyDto"];
-            };
-        };
-        responses: {
-            /** @description Returns a list of albums */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["SynologyAlbumResponseDto"];
-                };
-            };
-        };
-    };
-    SynologyArtistController_route: {
-        parameters: {
-            query?: never;
-            header?: {
-                /** @description The session ID and device ID cookies for the user `id={sessionId}; did={deviceId}` */
-                cookie?: string;
-            };
-            path?: never;
-            cookie?: never;
-        };
-        requestBody: {
-            content: {
-                "application/json": components["schemas"]["SynologyArtistsBodyDto"] | components["schemas"]["SynologyArtistsByGenreBodyDto"] | components["schemas"]["SynologyArtistsByDefaultGenreBodyDto"];
-            };
-        };
-        responses: {
-            /** @description Returns a list of artists */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["SynologyArtistResponseDto"];
-                };
-            };
-        };
-    };
-    SynologyComposerController_route: {
-        parameters: {
-            query?: never;
-            header?: {
-                /** @description The session ID and device ID cookies for the user `id={sessionId}; did={deviceId}` */
-                cookie?: string;
-            };
-            path?: never;
-            cookie?: never;
-        };
-        requestBody: {
-            content: {
-                "application/json": components["schemas"]["SynologyComposerBodyDto"];
-            };
-        };
-        responses: {
-            /** @description Returns a list of composers */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["SynologyComposerResponseDto"];
-                };
-            };
-        };
-    };
-    SynologyCoverImageController_route: {
-        parameters: {
-            query?: never;
-            header?: {
-                /** @description The session ID and device ID cookies for the user `id={sessionId}; did={deviceId}` */
-                cookie?: string;
-            };
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description The image blob */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/octet-stream": components["schemas"]["Buffer"];
-                };
-            };
-        };
-    };
-    SynologyFolderController_route: {
-        parameters: {
-            query?: never;
-            header?: {
-                /** @description The session ID and device ID cookies for the user `id={sessionId}; did={deviceId}` */
-                cookie?: string;
-            };
-            path?: never;
-            cookie?: never;
-        };
-        requestBody: {
-            content: {
-                "application/json": components["schemas"]["SynologyRootFolderBodyDto"] | components["schemas"]["SynologyFolderBodyDto"];
-            };
-        };
-        responses: {
-            /** @description Returns a list of folders starting from the root paths and then traversing down their folder trees */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["SynologyFolderResponseDto"];
-                };
-            };
-        };
-    };
-    SynologyGenreController_route: {
-        parameters: {
-            query?: never;
-            header?: {
-                /** @description The session ID and device ID cookies for the user `id={sessionId}; did={deviceId}` */
-                cookie?: string;
-            };
-            path?: never;
-            cookie?: never;
-        };
-        requestBody: {
-            content: {
-                "application/json": components["schemas"]["SynologyGenreBodyDto"];
-            };
-        };
-        responses: {
-            /** @description Returns a list of genres found in the music library, or a hard-coded list of default genres */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["SynologyGenreResponseDto"] | components["schemas"]["SynologyDefaultGenreResponseDto"];
-                };
-            };
-        };
-    };
-    SynologyInfoController_route: {
-        parameters: {
-            query?: never;
-            header: {
-                /** @description The session ID and device ID cookies for the user `id={sessionId}; did={deviceId}` */
-                cookie?: string;
-                id: string;
-            };
-            path?: never;
-            cookie?: never;
-        };
-        requestBody: {
-            content: {
-                "application/json": components["schemas"]["SynologyInfoBodyDto"];
-            };
-        };
-        responses: {
-            /** @description Returns configuration information for the Synology AudioStation API and client capabilities */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["SynologyInfoResponseDto"];
-                };
-            };
-        };
-    };
-    SynologyPlaylistController_routeRequest: {
-        parameters: {
-            query?: never;
-            header?: {
-                /** @description The session ID and device ID cookies for the user `id={sessionId}; did={deviceId}` */
-                cookie?: string;
-            };
-            path?: never;
-            cookie?: never;
-        };
-        requestBody: {
-            content: {
-                "application/json": components["schemas"]["SynologyPlaylistAddOrRemoveItemBodyDto"] | components["schemas"]["SynologyPlaylistCreateNormalBodyDto"] | components["schemas"]["SynologyPlaylistCreateSmartBodyDto"] | components["schemas"]["SynologyPlaylistDeleteBodyDto"] | components["schemas"]["SynologyPlaylistMoveItemsBodyDto"] | components["schemas"]["SynologyPlaylistRemoveMissingBodyDto"] | components["schemas"]["SynologyPlaylistRenameBodyDto"] | components["schemas"]["SynologyPlaylistTrackListBodyDto"] | components["schemas"]["SynologyPlaylistUpdateSmartBodyDto"] | components["schemas"]["SynologyPlaylistRetrieveBodyDto"] | components["schemas"]["SynologyPlaylistListBodyDto"];
-            };
-        };
-        responses: {
-            /** @description Endpoints for creating and managing playlists */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["SynologySuccessResponseDto"] | components["schemas"]["SynologyPlaylistResponseDto"] | components["schemas"]["SynologyPlaylistIdResponseDto"] | components["schemas"]["SynologyPlaylistWithItemsResponseDto"];
-                };
-            };
-        };
-    };
-    SynologyProxyController_getProxyCgi: {
-        parameters: {
-            query: {
-                /**
-                 * @description Synology's API uses this value to route requests appropriately but this software has
-                 *     direct endpoints for their relevant URL paths.  As such this value is ignored for now
-                 *     but defined to match the Synology API.
-                 *
-                 *     This endpoint requires a value of `SYNO.AudioStation.Proxy` be provided for correctness.
-                 */
-                api: components["schemas"]["SynologyApiEnum"];
-                /**
-                 * @description Synology's API uses this value to route requests appropriately but for AudioStation the
-                 *     endpoints have limited functionality, all music-related endpoints `list` except cover
-                 *     images.  As such this value is ignored for now but defined to match the Synology API.
-                 *
-                 *     This endpoint requires a value of `stream` be provided for correctness.
-                 */
-                method: components["schemas"]["SynologyMethodEnum"];
-                /** @description The SHOUTcast stream ID */
-                stream_id: number;
-                /**
-                 * @description Synology's API has versioned endpoints and some have at least 3 versions.  This software
-                 *     currently only supports the latest version of the API for each endpoint and ignores this value
-                 *     for now.  It's possible to build in support for prior versions of an endpoint but that would
-                 *     require using the `debug-proxy` to capture the request and response payloads to understand the
-                 *     differences between versions.  If you are running an older DSM NAS and wish to help then check
-                 *     out the GitHub Issues page and submit a request to support your version of the API.
-                 */
-                version: number;
-            };
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content?: never;
-            };
-        };
-    };
-    SynologyProxyController_route: {
-        parameters: {
-            query?: never;
-            header?: {
-                /** @description The session ID and device ID cookies for the user `id={sessionId}; did={deviceId}` */
-                cookie?: string;
-            };
-            path?: never;
-            cookie?: never;
-        };
-        /** @description Creates a new SHOUTcast radio stream */
-        requestBody: {
-            content: {
-                "application/json": components["schemas"]["SynologyProxyStreamInfoBodyDto"] | components["schemas"]["SynologyProxySongInfoBodyDto"] | components["schemas"]["SynologyProxyDeleteSongInfoBodyDto"];
-            };
-        };
-        responses: {
-            /** @description Proxies a SHOUTcast radio stream */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["SynologyProxyStreamInfoResponseDto"] | components["schemas"]["SynologyProxySongInfoResponseDto"] | components["schemas"]["SynologySuccessResponseDto"];
-                };
-            };
-        };
-    };
-    SynologyRadioController_routeRequests: {
-        parameters: {
-            query?: never;
-            header?: {
-                /** @description The session ID and device ID cookies for the user `id={sessionId}; did={deviceId}` */
-                cookie?: string;
-            };
-            path?: never;
-            cookie?: never;
-        };
-        requestBody: {
-            content: {
-                "application/json": components["schemas"]["SynologyRadioContainerListBodyDto"] | components["schemas"]["SynologyRadioItemListBodyDto"] | components["schemas"]["SynologyRadioAddOrUpdateItemBodyDto"] | components["schemas"]["SynologyRadioAddUserStationBodyDto"];
-            };
-        };
-        responses: {
-            /** @description Returns a list of genres found in the music library, or a hard-coded list of default genres */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["SynologyRadioItemResponseDto"] | components["schemas"]["SynologySuccessResponseDto"];
-                };
-            };
-        };
-    };
-    SynologySearchController_route: {
-        parameters: {
-            query?: never;
-            header?: {
-                /** @description The session ID and device ID cookies for the user `id={sessionId}; did={deviceId}` */
-                cookie?: string;
-            };
-            path?: never;
-            cookie?: never;
-        };
-        requestBody: {
-            content: {
-                "application/json": components["schemas"]["SynologySearchBodyDto"];
-            };
-        };
-        responses: {
-            /** @description Returns a list of artists, albums and songs matching a search query */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["SynologySearchResponseDto"];
-                };
-            };
-        };
-    };
-    SynologySongController_route: {
-        parameters: {
-            query?: never;
-            header?: {
-                /** @description The session ID and device ID cookies for the user `id={sessionId}; did={deviceId}` */
-                cookie?: string;
-            };
-            path?: never;
-            cookie?: never;
-        };
-        requestBody: {
-            content: {
-                "application/json": components["schemas"]["SynologySongsBodyDto"] | components["schemas"]["SynologySongsByAlbumBodyDto"] | components["schemas"]["SynologySongsByArtistBodyDto"] | components["schemas"]["SynologySongsByAlbumArtistBodyDto"] | components["schemas"]["SynologySongsByComposerBodyDto"] | components["schemas"]["SynologySongsByAlbumComposerBodyDto"] | components["schemas"]["SynologySongsByAlbumGenreBodyDto"] | components["schemas"]["SynologySongsByGenreBodyDto"] | components["schemas"]["SynologySongsByAlbumDefaultGenreBodyDto"] | components["schemas"]["SynologySongsByDefaultGenreBodyDto"];
-            };
-        };
-        responses: {
-            /** @description Returns a list of songs */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["SynologySongResponseDto"];
-                };
-            };
-        };
-    };
-    SynologyStreamController_getStreamCgi: {
-        parameters: {
-            query: {
-                /**
-                 * @description Synology's API uses this value to route requests appropriately but this software has
-                 *     direct endpoints for their relevant URL paths.  As such this value is ignored for now
-                 *     but defined to match the Synology API.
-                 *
-                 *     This endpoint requires a value of `SYNO.AudioStation.Stream` be provided for correctness.
-                 */
-                api: components["schemas"]["SynologyApiEnum"];
-                /**
-                 * @description The ID of the song.  Synology uses a string with a prefix and the numeric ID, this software
-                 *     only uses the numeric ID so a `music_` prefix is added for Synology, and then stripped off
-                 *     by the `class-transformer` library.
-                 */
-                id: number;
-                /**
-                 * @description Synology's API uses this value to route requests appropriately but NestJS controllers
-                 *     handle the routing between URL paths so this value is ignored for now but defined to
-                 *     match the Synology API.
-                 *
-                 *     This endpoint requires a value of `stream` be provided for correctness.
-                 */
-                method: components["schemas"]["SynologyMethodEnum"];
-                /**
-                 * @description Synology's API has versioned endpoints and some have at least 3 versions.  This software
-                 *     currently only supports the latest version of the API for each endpoint and ignores this value
-                 *     for now.  It's possible to build in support for prior versions of an endpoint but that would
-                 *     require using the `debug-proxy` to capture the request and response payloads to understand the
-                 *     differences between versions.  If you are running an older DSM NAS and wish to help then check
-                 *     out the GitHub Issues page and submit a request to support your version of the API.
-                 */
-                version: number;
-            };
-            header?: {
-                /** @description The session ID and device ID cookies for the user `id={sessionId}; did={deviceId}` */
-                cookie?: string;
-            };
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": string;
-                };
-            };
-        };
-    };
-    SynologyEntryController_route: {
-        parameters: {
-            query?: never;
-            header?: {
-                /** @description The session ID and device ID cookies if requesting "pins", "playlist" or the "clearSessionToken" methods */
-                cookie?: string;
-            };
-            path?: never;
-            cookie?: never;
-        };
-        requestBody: {
-            content: {
-                "application/json": components["schemas"]["SynologyEntryCertificateBodyDto"] | components["schemas"]["SynologyEntrySignInBodyDto"] | components["schemas"]["SynologyEntryListPinsBodyDto"] | components["schemas"]["SynologyEntryLogoutBodyDto"] | components["schemas"]["SynologyEntryCreatePinBodyDto"] | components["schemas"]["SynologyEntryDeletePinBodyDto"] | components["schemas"]["SynologyEntryPlaylistAddAlbumBodyDto"] | components["schemas"]["SynologyEntryPlaylistAddArtistBodyDto"] | components["schemas"]["SynologyEntryPlaylistAddComposerBodyDto"] | components["schemas"]["SynologyEntryPlaylistAddGenreBodyDto"];
-            };
-        };
-        responses: {
-            /** @description Handles various entry.cgi requests */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["SynologyEntryCertificateResponseDto"] | components["schemas"]["SynologyEntrySignInResponseDto"] | components["schemas"]["SynologyEntryListPinsResponseDto"] | components["schemas"]["SynologyEntryLogoutResponseDto"] | components["schemas"]["SynologySuccessResponseDto"];
-                };
-            };
-        };
-    };
-    SynologyQueryController_route: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content?: never;
-            };
-        };
-    };
+  };
 }
 export enum AdminCreateAccountBadRequestErrorMessageEnum {
-    invalid_role_error = "invalid-role-error",
-    invalid_user_role_error = "invalid-user-role-error",
-    invalid_username_error = "invalid-username-error",
-    invalid_username_length_error = "invalid-username-length-error",
-    invalid_username_not_unique_error = "invalid-username-not-unique-error",
-    invalid_password_error = "invalid-password-error",
-    invalid_password_length_error = "invalid-password-length-error"
+  invalid_role_error = 'invalid-role-error',
+  invalid_user_role_error = 'invalid-user-role-error',
+  invalid_username_error = 'invalid-username-error',
+  invalid_username_length_error = 'invalid-username-length-error',
+  invalid_username_not_unique_error = 'invalid-username-not-unique-error',
+  invalid_password_error = 'invalid-password-error',
+  invalid_password_length_error = 'invalid-password-length-error',
 }
 export enum AdminCreateRootPathBadRequestErrorMessageEnum {
-    root_path_does_not_exist_error = "root-path-does-not-exist-error",
-    duplicate_root_path_error = "duplicate-root-path-error"
+  root_path_does_not_exist_error = 'root-path-does-not-exist-error',
+  duplicate_root_path_error = 'duplicate-root-path-error',
 }
 export enum AdminCreateRootPathNotFoundErrorMessageEnum {
-    account_not_found_error = "account-not-found-error"
+  account_not_found_error = 'account-not-found-error',
 }
 export enum AdminDeleteAccountBadRequestErrorMessageEnum {
-    invalid_account_id_error = "invalid-account-id-error",
-    invalid_account_error = "invalid-account-error",
-    account_only_admin_error = "account-only-admin-error"
+  invalid_account_id_error = 'invalid-account-id-error',
+  invalid_account_error = 'invalid-account-error',
+  account_only_admin_error = 'account-only-admin-error',
 }
 export enum AdminDeleteAccountNotFoundErrorMessageEnum {
-    invalid_account_id_error = "invalid-account-id-error",
-    account_not_found_error = "account-not-found-error"
+  invalid_account_id_error = 'invalid-account-id-error',
+  account_not_found_error = 'account-not-found-error',
 }
 export enum AdminDeleteRootPathNotFoundErrorMessageEnum {
-    root_path_not_found_error = "root-path-not-found-error"
+  root_path_not_found_error = 'root-path-not-found-error',
 }
 export enum AdminListIndexerLogsBadRequestErrorMessageEnum {
-    invalid_account_id_error = "invalid-account-id-error",
-    invalid_root_path_id_error = "invalid-root-path-id-error",
-    invalid_search_length_error = "invalid-search-length-error"
+  invalid_account_id_error = 'invalid-account-id-error',
+  invalid_root_path_id_error = 'invalid-root-path-id-error',
+  invalid_search_length_error = 'invalid-search-length-error',
 }
 export enum AdminListIndexerLogsNotFoundErrorMessageEnum {
-    invalid_account_id_error = "invalid-account-id-error",
-    invalid_root_path_id_error = "invalid-root-path-id-error"
+  invalid_account_id_error = 'invalid-account-id-error',
+  invalid_root_path_id_error = 'invalid-root-path-id-error',
 }
 export enum AdminRegenerateUserSessionKeyNotFoundErrorMessageEnum {
-    account_not_found_error = "account-not-found-error"
+  account_not_found_error = 'account-not-found-error',
 }
 export enum AdminResetUserPasswordBadRequestErrorMessageEnum {
-    invalid_password_error = "invalid-password-error",
-    invalid_password_length_error = "invalid-password-length-error"
+  invalid_password_error = 'invalid-password-error',
+  invalid_password_length_error = 'invalid-password-length-error',
 }
 export enum AdminResetUserPasswordNotFoundErrorMessageEnum {
-    account_not_found_error = "account-not-found-error"
+  account_not_found_error = 'account-not-found-error',
 }
 export enum AdminUpdateRootPathBadRequestErrorMessageEnum {
-    root_path_does_not_exist_error = "root-path-does-not-exist-error",
-    duplicate_root_path_error = "duplicate-root-path-error"
+  root_path_does_not_exist_error = 'root-path-does-not-exist-error',
+  duplicate_root_path_error = 'duplicate-root-path-error',
 }
 export enum AdminUpdateRootPathNotFoundErrorMessageEnum {
-    root_path_not_found_error = "root-path-not-found-error"
+  root_path_not_found_error = 'root-path-not-found-error',
 }
 export enum AdminUpdateUserRolesBadRequestErrorMessageEnum {
-    invalid_user_role_error = "invalid-user-role-error",
-    account_only_admin_error = "account-only-admin-error"
+  invalid_user_role_error = 'invalid-user-role-error',
+  account_only_admin_error = 'account-only-admin-error',
 }
 export enum AdminUpdateUserRolesNotFoundErrorMessageEnum {
-    account_not_found_error = "account-not-found-error"
+  account_not_found_error = 'account-not-found-error',
 }
 export enum AlbumSortFieldEnum {
-    album = "album",
-    album_artist = "album_artist",
-    artist = "artist",
-    composer = "composer",
-    date_added = "date_added",
-    date_released = "date_released",
-    genre = "genre",
-    rating = "rating",
-    year = "year"
+  album = 'album',
+  album_artist = 'album_artist',
+  artist = 'artist',
+  composer = 'composer',
+  date_added = 'date_added',
+  date_released = 'date_released',
+  genre = 'genre',
+  rating = 'rating',
+  year = 'year',
 }
 export enum ArtistSortFieldEnum {
-    artist = "artist",
-    date_added = "date_added"
+  artist = 'artist',
+  date_added = 'date_added',
 }
 export enum BadRequestErrorEnum {
-    bad_request_error = "bad-request-error"
+  bad_request_error = 'bad-request-error',
 }
 export enum ComposerSortFieldEnum {
-    composer = "composer",
-    date_added = "date_added"
+  composer = 'composer',
+  date_added = 'date_added',
 }
 export enum ContentTypeEnum {
-    file = "file",
-    folder = "folder",
-    remote = "remote"
+  file = 'file',
+  folder = 'folder',
+  remote = 'remote',
 }
 export enum FileTypeEnum {
-    flac = "flac",
-    m4a = "m4a",
-    mp3 = "mp3",
-    ogg = "ogg"
+  flac = 'flac',
+  m4a = 'm4a',
+  mp3 = 'mp3',
+  ogg = 'ogg',
 }
 export enum GenreSortFieldEnum {
-    genre = "genre"
+  genre = 'genre',
 }
 export enum GuestCreateSessionBadRequestErrorMessageEnum {
-    invalid_username_error = "invalid-username-error",
-    invalid_username_length_error = "invalid-username-length-error",
-    invalid_password_error = "invalid-password-error",
-    invalid_password_length_error = "invalid-password-length-error"
+  invalid_username_error = 'invalid-username-error',
+  invalid_username_length_error = 'invalid-username-length-error',
+  invalid_password_error = 'invalid-password-error',
+  invalid_password_length_error = 'invalid-password-length-error',
 }
 export enum InternalServerErrorEnum {
-    internal_server_error = "internal-server-error"
+  internal_server_error = 'internal-server-error',
 }
-export enum LibraryTrackExtendedDtoFileType {
-    flac = "flac",
-    m4a = "m4a",
-    mp3 = "mp3",
-    ogg = "ogg"
+export enum LibraryAlbumTrackDtoFileType {
+  flac = 'flac',
+  m4a = 'm4a',
+  mp3 = 'mp3',
+  ogg = 'ogg',
+}
+export enum LibraryTrackDtoFileType {
+  flac = 'flac',
+  m4a = 'm4a',
+  mp3 = 'mp3',
+  ogg = 'ogg',
 }
 export enum PlaylistTypeEnum {
-    normal = "normal",
-    smart = "smart"
+  normal = 'normal',
+  smart = 'smart',
 }
 export enum ShoutcastItemTypeEnum {
-    container = "container",
-    station = "station"
+  container = 'container',
+  station = 'station',
 }
 export enum SmartPlaylistConjugalEnum {
-    and = "and",
-    or = "or"
+  and = 'and',
+  or = 'or',
 }
 export enum SortDirectionEnum {
-    asc = "asc",
-    desc = "desc"
+  asc = 'asc',
+  desc = 'desc',
 }
 export enum SynologyApiEnum {
-    SYNO_AudioStation_Album = "SYNO.AudioStation.Album",
-    SYNO_AudioStation_Artist = "SYNO.AudioStation.Artist",
-    SYNO_AudioStation_Info = "SYNO.AudioStation.Info",
-    SYNO_API_Auth = "SYNO.API.Auth",
-    SYNO_AudioStation_Composer = "SYNO.AudioStation.Composer",
-    SYNO_AudioStation_Cover = "SYNO.AudioStation.Cover",
-    SYNO_API_Encryption = "SYNO.API.Encryption",
-    SYNO_AudioStation_Folder = "SYNO.AudioStation.Folder",
-    SYNO_AudioStation_Genre = "SYNO.AudioStation.Genre",
-    SYNO_API_Info = "SYNO.API.Info",
-    SYNO_AudioStation_Pin = "SYNO.AudioStation.Pin",
-    SYNO_AudioStation_Playlist = "SYNO.AudioStation.Playlist",
-    SYNO_AudioStation_Proxy = "SYNO.AudioStation.Proxy",
-    SYNO_AudioStation_Radio = "SYNO.AudioStation.Radio",
-    SYNO_AudioStation_Search = "SYNO.AudioStation.Search",
-    SYNO_AudioStation_Song = "SYNO.AudioStation.Song",
-    SYNO_AudioStation_Stream = "SYNO.AudioStation.Stream"
+  SYNO_AudioStation_Album = 'SYNO.AudioStation.Album',
+  SYNO_AudioStation_Artist = 'SYNO.AudioStation.Artist',
+  SYNO_AudioStation_Info = 'SYNO.AudioStation.Info',
+  SYNO_API_Auth = 'SYNO.API.Auth',
+  SYNO_AudioStation_Composer = 'SYNO.AudioStation.Composer',
+  SYNO_AudioStation_Cover = 'SYNO.AudioStation.Cover',
+  SYNO_API_Encryption = 'SYNO.API.Encryption',
+  SYNO_AudioStation_Folder = 'SYNO.AudioStation.Folder',
+  SYNO_AudioStation_Genre = 'SYNO.AudioStation.Genre',
+  SYNO_API_Info = 'SYNO.API.Info',
+  SYNO_AudioStation_Pin = 'SYNO.AudioStation.Pin',
+  SYNO_AudioStation_Playlist = 'SYNO.AudioStation.Playlist',
+  SYNO_AudioStation_Proxy = 'SYNO.AudioStation.Proxy',
+  SYNO_AudioStation_Radio = 'SYNO.AudioStation.Radio',
+  SYNO_AudioStation_Search = 'SYNO.AudioStation.Search',
+  SYNO_AudioStation_Song = 'SYNO.AudioStation.Song',
+  SYNO_AudioStation_Stream = 'SYNO.AudioStation.Stream',
 }
 export enum SynologyInfoDataDtoBrowse_personal_library {
-    all = "all",
-    shared = "shared",
-    personal = "personal"
+  all = 'all',
+  shared = 'shared',
+  personal = 'personal',
 }
 export enum SynologyLibraryEnum {
-    all = "all",
-    shared = "shared",
-    personal = "personal"
+  all = 'all',
+  shared = 'shared',
+  personal = 'personal',
 }
 export enum SynologyMethodEnum {
-    add = "add",
-    add_track = "add_track",
-    create = "create",
-    createsmart = "createsmart",
-    delete = "delete",
-    deletesonginfo = "deletesonginfo",
-    getcover = "getcover",
-    getsongcover = "getsongcover",
-    getinfo = "getinfo",
-    getsonginfo = "getsonginfo",
-    getstreamid = "getstreamid",
-    list = "list",
-    list_default_genre = "list_default_genre",
-    clearSessionToken = "clearSessionToken",
-    pin = "pin",
-    query = "query",
-    removemissing = "removemissing",
-    rename = "rename",
-    stream = "stream",
-    transcode = "transcode",
-    unpin = "unpin",
-    updateradios = "updateradios",
-    updatesmart = "updatesmart",
-    updatesongs = "updatesongs"
+  add = 'add',
+  add_track = 'add_track',
+  create = 'create',
+  createsmart = 'createsmart',
+  delete = 'delete',
+  deletesonginfo = 'deletesonginfo',
+  getcover = 'getcover',
+  getsongcover = 'getsongcover',
+  getinfo = 'getinfo',
+  getsonginfo = 'getsonginfo',
+  getstreamid = 'getstreamid',
+  list = 'list',
+  list_default_genre = 'list_default_genre',
+  clearSessionToken = 'clearSessionToken',
+  pin = 'pin',
+  query = 'query',
+  removemissing = 'removemissing',
+  rename = 'rename',
+  stream = 'stream',
+  transcode = 'transcode',
+  unpin = 'unpin',
+  updateradios = 'updateradios',
+  updatesmart = 'updatesmart',
+  updatesongs = 'updatesongs',
 }
 export enum SynologyPinTypeEnum {
-    album = "album",
-    artist = "artist",
-    composer = "composer",
-    genre = "genre",
-    folder = "folder",
-    recently_added = "recently_added",
-    random_100 = "random_100",
-    playlist = "playlist"
+  album = 'album',
+  artist = 'artist',
+  composer = 'composer',
+  genre = 'genre',
+  folder = 'folder',
+  recently_added = 'recently_added',
+  random_100 = 'random_100',
+  playlist = 'playlist',
 }
 export enum SynologyPlaylistDeleteBodyDtoType {
-    normal = "normal",
-    smart = "smart"
+  normal = 'normal',
+  smart = 'smart',
 }
 export enum TrackSortFieldEnum {
-    date_added = "date_added",
-    artist = "artist",
-    album = "album",
-    album_artist = "album_artist",
-    composer = "composer",
-    genre = "genre",
-    title = "title",
-    year = "year"
+  date_added = 'date_added',
+  artist = 'artist',
+  album = 'album',
+  album_artist = 'album_artist',
+  composer = 'composer',
+  genre = 'genre',
+  title = 'title',
+  year = 'year',
 }
 export enum UserCreateRootPathBadRequestErrorMessageEnum {
-    root_path_does_not_exist_error = "root-path-does-not-exist-error",
-    duplicate_root_path_error = "duplicate-root-path-error"
+  root_path_does_not_exist_error = 'root-path-does-not-exist-error',
+  duplicate_root_path_error = 'duplicate-root-path-error',
 }
 export enum UserDeleteRootPathNotFoundErrorMessageEnum {
-    root_path_not_found_error = "root-path-not-found-error"
+  root_path_not_found_error = 'root-path-not-found-error',
 }
 export enum UserListAlbumsBadRequestErrorMessages {
-    invalid_added_after_error = "invalid-added-after-error",
-    invalid_added_before_error = "invalid-added-before-error",
-    invalid_artist_error = "invalid-artist-error",
-    invalid_artist_length_error = "invalid-artist-length-error",
-    invalid_composer_error = "invalid-composer-error",
-    invalid_composer_length_error = "invalid-composer-length-error",
-    invalid_filter_error = "invalid-filter-error",
-    invalid_filter_length_error = "invalid-filter-length-error",
-    invalid_genre_error = "invalid-genre-error",
-    invalid_genre_length_error = "invalid-genre-length-error",
-    invalid_limit_error = "invalid-limit-error",
-    invalid_limit_range_error = "invalid-limit-range-error",
-    invalid_max_rating_error = "invalid-max-rating-error",
-    invalid_min_rating_error = "invalid-min-rating-error",
-    invalid_offset_error = "invalid-offset-error",
-    invalid_offset_range_error = "invalid-offset-range-error",
-    invalid_released_after_error = "invalid-released-after-error",
-    invalid_released_before_error = "invalid-released-before-error",
-    invalid_sort_field_error = "invalid-sort-field-error",
-    invalid_sort_order_error = "invalid-sort-order-error",
-    invalid_year_error = "invalid-year-error"
+  invalid_added_after_error = 'invalid-added-after-error',
+  invalid_added_before_error = 'invalid-added-before-error',
+  invalid_artist_error = 'invalid-artist-error',
+  invalid_artist_length_error = 'invalid-artist-length-error',
+  invalid_composer_error = 'invalid-composer-error',
+  invalid_composer_length_error = 'invalid-composer-length-error',
+  invalid_filter_error = 'invalid-filter-error',
+  invalid_filter_length_error = 'invalid-filter-length-error',
+  invalid_genre_error = 'invalid-genre-error',
+  invalid_genre_length_error = 'invalid-genre-length-error',
+  invalid_limit_error = 'invalid-limit-error',
+  invalid_limit_range_error = 'invalid-limit-range-error',
+  invalid_max_rating_error = 'invalid-max-rating-error',
+  invalid_min_rating_error = 'invalid-min-rating-error',
+  invalid_offset_error = 'invalid-offset-error',
+  invalid_offset_range_error = 'invalid-offset-range-error',
+  invalid_released_after_error = 'invalid-released-after-error',
+  invalid_released_before_error = 'invalid-released-before-error',
+  invalid_sort_field_error = 'invalid-sort-field-error',
+  invalid_sort_order_error = 'invalid-sort-order-error',
+  invalid_year_error = 'invalid-year-error',
 }
 export enum UserListAlbumsWithTracksBadRequestErrorMessages {
-    invalid_added_after_error = "invalid-added-after-error",
-    invalid_added_before_error = "invalid-added-before-error",
-    invalid_artist_error = "invalid-artist-error",
-    invalid_artist_length_error = "invalid-artist-length-error",
-    invalid_composer_error = "invalid-composer-error",
-    invalid_composer_length_error = "invalid-composer-length-error",
-    invalid_filter_error = "invalid-filter-error",
-    invalid_filter_length_error = "invalid-filter-length-error",
-    invalid_genre_error = "invalid-genre-error",
-    invalid_genre_length_error = "invalid-genre-length-error",
-    invalid_limit_error = "invalid-limit-error",
-    invalid_limit_range_error = "invalid-limit-range-error",
-    invalid_max_rating_error = "invalid-max-rating-error",
-    invalid_min_rating_error = "invalid-min-rating-error",
-    invalid_offset_error = "invalid-offset-error",
-    invalid_offset_range_error = "invalid-offset-range-error",
-    invalid_released_after_error = "invalid-released-after-error",
-    invalid_released_before_error = "invalid-released-before-error",
-    invalid_sort_field_error = "invalid-sort-field-error",
-    invalid_sort_order_error = "invalid-sort-order-error",
-    invalid_year_error = "invalid-year-error"
+  invalid_added_after_error = 'invalid-added-after-error',
+  invalid_added_before_error = 'invalid-added-before-error',
+  invalid_artist_error = 'invalid-artist-error',
+  invalid_artist_length_error = 'invalid-artist-length-error',
+  invalid_composer_error = 'invalid-composer-error',
+  invalid_composer_length_error = 'invalid-composer-length-error',
+  invalid_filter_error = 'invalid-filter-error',
+  invalid_filter_length_error = 'invalid-filter-length-error',
+  invalid_genre_error = 'invalid-genre-error',
+  invalid_genre_length_error = 'invalid-genre-length-error',
+  invalid_limit_error = 'invalid-limit-error',
+  invalid_limit_range_error = 'invalid-limit-range-error',
+  invalid_max_rating_error = 'invalid-max-rating-error',
+  invalid_min_rating_error = 'invalid-min-rating-error',
+  invalid_offset_error = 'invalid-offset-error',
+  invalid_offset_range_error = 'invalid-offset-range-error',
+  invalid_released_after_error = 'invalid-released-after-error',
+  invalid_released_before_error = 'invalid-released-before-error',
+  invalid_sort_field_error = 'invalid-sort-field-error',
+  invalid_sort_order_error = 'invalid-sort-order-error',
+  invalid_year_error = 'invalid-year-error',
 }
 export enum UserListIndexerLogsBadRequestErrorMessageEnum {
-    invalid_account_id_error = "invalid-account-id-error",
-    invalid_root_path_id_error = "invalid-root-path-id-error",
-    invalid_search_length_error = "invalid-search-length-error"
+  invalid_account_id_error = 'invalid-account-id-error',
+  invalid_root_path_id_error = 'invalid-root-path-id-error',
+  invalid_search_length_error = 'invalid-search-length-error',
 }
 export enum UserListIndexerLogsNotFoundErrorMessageEnum {
-    invalid_account_id_error = "invalid-account-id-error",
-    invalid_root_path_id_error = "invalid-root-path-id-error"
+  invalid_account_id_error = 'invalid-account-id-error',
+  invalid_root_path_id_error = 'invalid-root-path-id-error',
 }
 export enum UserListTrackArtistsBadRequestErrorMessage {
-    invalid_added_after_error = "invalid-added-after-error",
-    invalid_added_before_error = "invalid-added-before-error",
-    invalid_filter_error = "invalid-filter-error",
-    invalid_filter_length_error = "invalid-filter-length-error",
-    invalid_genre_error = "invalid-genre-error",
-    invalid_genre_length_error = "invalid-genre-length-error",
-    invalid_limit_error = "invalid-limit-error",
-    invalid_limit_range_error = "invalid-limit-range-error",
-    invalid_offset_error = "invalid-offset-error",
-    invalid_offset_range_error = "invalid-offset-range-error",
-    invalid_sort_field_error = "invalid-sort-field-error",
-    invalid_sort_order_error = "invalid-sort-order-error"
+  invalid_added_after_error = 'invalid-added-after-error',
+  invalid_added_before_error = 'invalid-added-before-error',
+  invalid_filter_error = 'invalid-filter-error',
+  invalid_filter_length_error = 'invalid-filter-length-error',
+  invalid_genre_error = 'invalid-genre-error',
+  invalid_genre_length_error = 'invalid-genre-length-error',
+  invalid_limit_error = 'invalid-limit-error',
+  invalid_limit_range_error = 'invalid-limit-range-error',
+  invalid_offset_error = 'invalid-offset-error',
+  invalid_offset_range_error = 'invalid-offset-range-error',
+  invalid_sort_field_error = 'invalid-sort-field-error',
+  invalid_sort_order_error = 'invalid-sort-order-error',
 }
 export enum UserListTrackComposersBadRequestErrorMessages {
-    invalid_added_after_error = "invalid-added-after-error",
-    invalid_added_before_error = "invalid-added-before-error",
-    invalid_filter_error = "invalid-filter-error",
-    invalid_filter_length_error = "invalid-filter-length-error",
-    invalid_genre_error = "invalid-genre-error",
-    invalid_genre_length_error = "invalid-genre-length-error",
-    invalid_limit_error = "invalid-limit-error",
-    invalid_limit_range_error = "invalid-limit-range-error",
-    invalid_offset_error = "invalid-offset-error",
-    invalid_offset_range_error = "invalid-offset-range-error",
-    invalid_sort_field_error = "invalid-sort-field-error",
-    invalid_sort_order_error = "invalid-sort-order-error"
+  invalid_added_after_error = 'invalid-added-after-error',
+  invalid_added_before_error = 'invalid-added-before-error',
+  invalid_filter_error = 'invalid-filter-error',
+  invalid_filter_length_error = 'invalid-filter-length-error',
+  invalid_genre_error = 'invalid-genre-error',
+  invalid_genre_length_error = 'invalid-genre-length-error',
+  invalid_limit_error = 'invalid-limit-error',
+  invalid_limit_range_error = 'invalid-limit-range-error',
+  invalid_offset_error = 'invalid-offset-error',
+  invalid_offset_range_error = 'invalid-offset-range-error',
+  invalid_sort_field_error = 'invalid-sort-field-error',
+  invalid_sort_order_error = 'invalid-sort-order-error',
 }
 export enum UserListTrackGenresBadRequestErrorMessages {
-    invalid_limit_error = "invalid-limit-error",
-    invalid_limit_range_error = "invalid-limit-range-error",
-    invalid_offset_error = "invalid-offset-error",
-    invalid_offset_range_error = "invalid-offset-range-error",
-    invalid_sort_field_error = "invalid-sort-field-error",
-    invalid_sort_order_error = "invalid-sort-order-error"
+  invalid_limit_error = 'invalid-limit-error',
+  invalid_limit_range_error = 'invalid-limit-range-error',
+  invalid_offset_error = 'invalid-offset-error',
+  invalid_offset_range_error = 'invalid-offset-range-error',
+  invalid_sort_field_error = 'invalid-sort-field-error',
+  invalid_sort_order_error = 'invalid-sort-order-error',
 }
 export enum UserListTrackGenresWithTracksBadRequestErrorMessages {
-    invalid_limit_error = "invalid-limit-error",
-    invalid_limit_range_error = "invalid-limit-range-error",
-    invalid_offset_error = "invalid-offset-error",
-    invalid_offset_range_error = "invalid-offset-range-error",
-    invalid_sort_field_error = "invalid-sort-field-error",
-    invalid_sort_order_error = "invalid-sort-order-error"
+  invalid_limit_error = 'invalid-limit-error',
+  invalid_limit_range_error = 'invalid-limit-range-error',
+  invalid_offset_error = 'invalid-offset-error',
+  invalid_offset_range_error = 'invalid-offset-range-error',
+  invalid_sort_field_error = 'invalid-sort-field-error',
+  invalid_sort_order_error = 'invalid-sort-order-error',
 }
 export enum UserListTracksBadRequestErrorMessages {
-    invalid_added_after_error = "invalid-added-after-error",
-    invalid_added_before_error = "invalid-added-before-error",
-    invalid_album_error = "invalid-album-error",
-    invalid_album_length_error = "invalid-album-length-error",
-    invalid_artist_error = "invalid-artist-error",
-    invalid_artist_length_error = "invalid-artist-length-error",
-    invalid_composer_error = "invalid-composer-error",
-    invalid_composer_length_error = "invalid-composer-length-error",
-    invalid_filter_error = "invalid-filter-error",
-    invalid_filter_length_error = "invalid-filter-length-error",
-    invalid_genre_error = "invalid-genre-error",
-    invalid_genre_length_error = "invalid-genre-length-error",
-    invalid_limit_error = "invalid-limit-error",
-    invalid_limit_range_error = "invalid-limit-range-error",
-    invalid_max_rating_error = "invalid-max-rating-error",
-    invalid_min_rating_error = "invalid-min-rating-error",
-    invalid_offset_error = "invalid-offset-error",
-    invalid_offset_range_error = "invalid-offset-range-error",
-    invalid_sort_field_error = "invalid-sort-field-error",
-    invalid_sort_order_error = "invalid-sort-order-error",
-    invalid_year_error = "invalid-year-error"
+  invalid_added_after_error = 'invalid-added-after-error',
+  invalid_added_before_error = 'invalid-added-before-error',
+  invalid_album_error = 'invalid-album-error',
+  invalid_album_length_error = 'invalid-album-length-error',
+  invalid_artist_error = 'invalid-artist-error',
+  invalid_artist_length_error = 'invalid-artist-length-error',
+  invalid_composer_error = 'invalid-composer-error',
+  invalid_composer_length_error = 'invalid-composer-length-error',
+  invalid_filter_error = 'invalid-filter-error',
+  invalid_filter_length_error = 'invalid-filter-length-error',
+  invalid_genre_error = 'invalid-genre-error',
+  invalid_genre_length_error = 'invalid-genre-length-error',
+  invalid_limit_error = 'invalid-limit-error',
+  invalid_limit_range_error = 'invalid-limit-range-error',
+  invalid_max_rating_error = 'invalid-max-rating-error',
+  invalid_min_rating_error = 'invalid-min-rating-error',
+  invalid_offset_error = 'invalid-offset-error',
+  invalid_offset_range_error = 'invalid-offset-range-error',
+  invalid_sort_field_error = 'invalid-sort-field-error',
+  invalid_sort_order_error = 'invalid-sort-order-error',
+  invalid_year_error = 'invalid-year-error',
 }
 export enum UserRetrieveAlbumNotFoundErrorMessage {
-    album_not_found_error = "album-not-found-error"
+  album_not_found_error = 'album-not-found-error',
 }
 export enum UserRoleEnum {
-    user = "user",
-    admin = "admin"
+  user = 'user',
+  admin = 'admin',
 }
 export enum UserUpdatePasswordBadRequestErrorMessageEnum {
-    invalid_password_error = "invalid-password-error",
-    invalid_password_length_error = "invalid-password-length-error"
+  invalid_password_error = 'invalid-password-error',
+  invalid_password_length_error = 'invalid-password-length-error',
 }

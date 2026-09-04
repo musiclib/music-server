@@ -11,6 +11,8 @@ import {
 } from 'src/database/entities';
 import { InjectModel } from '@nestjs/sequelize';
 import { Injectable } from '@nestjs/common';
+import { LibraryTrackDto } from './dtos';
+import { ListResult } from './types/list-result';
 import { Op, Sequelize, literal } from 'sequelize';
 import { SortDirectionEnum, TrackSortFieldEnum } from 'src/types/enums';
 import { TrackFilters } from './types/track-filter';
@@ -248,13 +250,13 @@ export class LibraryTrackService {
     return queryFilter;
   }
 
-  async listTracks(
+  async listTracksById(
     fileIds: number[],
     offset: number,
     limit: number,
     sortField?: TrackSortFieldEnum,
     sortDirection?: SortDirectionEnum,
-  ) {
+  ): Promise<ListResult<LibraryTrackDto>> {
     const sortFieldColumn = this.sortFieldToColumn(sortField);
     const order: OrderItem[] = [];
     if (sortFieldColumn) {
@@ -282,8 +284,7 @@ export class LibraryTrackService {
   )`),
         'artistSort',
       ]);
-    }
-    if (sortField === TrackSortFieldEnum.ALBUM_ARTIST) {
+    } else if (sortField === TrackSortFieldEnum.ALBUM_ARTIST) {
       additionalSortFields.push([
         literal(` (
     SELECT group_concat(artist_name, ', ')
@@ -331,7 +332,7 @@ export class LibraryTrackService {
         'genresSort',
       ]);
     }
-    return this.fileEntity.findAndCountAll({
+    const data = await this.fileEntity.findAndCountAll({
       attributes: [
         'albumId',
         'bitRate',
@@ -355,21 +356,19 @@ export class LibraryTrackService {
       limit: limit || 100_000,
       include: [
         {
-          attributes: ['title'],
+          attributes: ['id', 'title'],
           model: AlbumEntity,
-          required: true,
           include: [
             {
               model: AlbumArtistEntity,
-              required: true,
-              separate: true,
+              attributes: ['albumId', 'artistId'],
               include: [
                 {
                   attributes: ['createdAt', 'id', 'name'],
                   model: ArtistEntity,
-                  required: true,
                 },
               ],
+              separate: true,
             },
           ],
         },
@@ -384,7 +383,6 @@ export class LibraryTrackService {
             },
           ],
           separate: true,
-          required: true,
         },
         {
           attributes: ['composerId'],
@@ -397,7 +395,6 @@ export class LibraryTrackService {
             },
           ],
           separate: true,
-          required: true,
         },
         {
           attributes: ['genreId'],
@@ -410,12 +407,59 @@ export class LibraryTrackService {
             },
           ],
           separate: true,
-          required: true,
         },
       ],
       subQuery: false,
       distinct: true,
     });
+    return {
+      items: data.rows.map((file) => {
+        return {
+          albumArtists:
+            file.album?.albumArtists?.map((albumArtist) => ({
+              id: albumArtist.artist?.id || 0,
+              name: albumArtist.artist?.name || '',
+              createdAt: albumArtist.artist?.createdAt || new Date(),
+            })) || [],
+          albumId: file.album?.id || 0,
+          albumTitle: file.album?.title || '',
+          artists:
+            file.linkedArtists?.map((linkedArtist) => ({
+              id: linkedArtist.artist?.id || 0,
+              name: linkedArtist.artist?.name || '',
+              createdAt: linkedArtist.artist?.createdAt || new Date(),
+            })) || [],
+          comment: file.comment,
+          composers:
+            file.linkedComposers?.map((linkedComposer) => ({
+              id: linkedComposer.composer?.id || 0,
+              name: linkedComposer.composer?.name || '',
+              createdAt: linkedComposer.composer?.createdAt || new Date(),
+            })) || [],
+          discNumber: file.discNumber,
+          duration: file.duration,
+          fileBitRate: file.bitRate,
+          fileChannels: file.channels,
+          fileFrequency: file.frequency,
+          filePath: file.filePath,
+          fileSize: file.fileSize,
+          fileType: file.fileType,
+          frequency: file.frequency,
+          genres:
+            file.linkedGenres?.map((linkedGenre) => ({
+              id: linkedGenre.genre?.id || 0,
+              name: linkedGenre.genre?.name || '',
+              createdAt: linkedGenre.genre?.createdAt || new Date(),
+            })) || [],
+          id: file.id,
+          rating: file.rating,
+          title: file.title,
+          trackNumber: file.trackNumber,
+          year: file.year,
+        };
+      }),
+      total: data.count,
+    };
   }
 
   // eslint-disable-next-line class-methods-use-this
@@ -425,10 +469,10 @@ export class LibraryTrackService {
         return 'createdAt';
       case TrackSortFieldEnum.ARTIST:
         return 'artistSort';
-      case TrackSortFieldEnum.ALBUM:
-        return 'album.title';
       case TrackSortFieldEnum.ALBUM_ARTIST:
         return 'albumArtistSort';
+      case TrackSortFieldEnum.ALBUM:
+        return 'album.title';
       case TrackSortFieldEnum.COMPOSER:
         return 'composerSort';
       case TrackSortFieldEnum.GENRE:

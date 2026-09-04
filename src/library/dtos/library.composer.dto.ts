@@ -31,9 +31,6 @@ export class LibraryComposerWithTracksDto extends LibraryComposerDto {
   /**
    * The list of albums including tracks for the composer
    */
-  @ApiProperty({
-    type: LibraryAlbumWithTracksDto,
-    isArray: true,
-  })
+  @ApiProperty() // not sure why but defining type + isArray results in LibraryAlbumWithTracksDto[][]
   declare albums: LibraryAlbumWithTracksDto[];
 }

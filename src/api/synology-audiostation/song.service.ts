@@ -3,9 +3,9 @@ import { Injectable } from '@nestjs/common';
 import { LibraryService } from 'src/library/library.service';
 import { SynologySongDataDto, SynologySongDto } from './dtos';
 import { replaceDoubleQuotes } from 'src/utils/strings';
-import type { LibraryTrackExtendedDto } from 'src/library/dtos';
+import type { LibraryTrackDto } from 'src/library/dtos';
 
-function songToRow(track: LibraryTrackExtendedDto): SynologySongDto {
+function songToRow(track: LibraryTrackDto): SynologySongDto {
   return {
     additional: {
       song_audio: {
@@ -22,9 +22,7 @@ function songToRow(track: LibraryTrackExtendedDto): SynologySongDto {
       },
       song_tag: {
         album: replaceDoubleQuotes(track.albumTitle || ''),
-        album_artist: replaceDoubleQuotes(
-          replaceDoubleQuotes(track.albumArtists.map((artist) => artist.name).join(', ')),
-        ),
+        album_artist: replaceDoubleQuotes(replaceDoubleQuotes(track.artists.map((artist) => artist.name).join(', '))),
         artist: replaceDoubleQuotes(track.artists.map((artist) => artist.name).join(', ')),
         comment: replaceDoubleQuotes(track.comment || ''),
         composer: track.composers.map((composer) => composer.name).join(', '),

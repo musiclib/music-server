@@ -12,10 +12,10 @@ function albumToRow(album: LibraryAlbumDto): SynologyAlbumDto {
         rating: 0,
       },
     },
-    album_artist: replaceDoubleQuotes(album.albumArtists.join(', ')),
+    album_artist: replaceDoubleQuotes(album.artists.map((artist) => artist.name).join(', ')),
     artist: '',
-    display_artist: album.albumArtists.join(', '),
-    name: replaceDoubleQuotes(album.displayName),
+    display_artist: album.artists.map((artist) => artist.name).join(', '),
+    name: replaceDoubleQuotes(album.title),
     year: album.year,
   };
 }

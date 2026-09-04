@@ -1,5 +1,5 @@
 /* eslint-disable max-classes-per-file */
-import { ApiProperty, PickType } from '@nestjs/swagger';
+import { ApiProperty } from '@nestjs/swagger';
 import { FileTypeEnum } from 'src/types/enums';
 import { IsEnum, IsInt, IsNumber, IsString } from 'class-validator';
 import { LibraryArtistDto, LibraryComposerDto } from '.';
@@ -7,85 +7,15 @@ import { LibraryGenreDto } from './library.genre.dto';
 
 export class LibraryTrackDto {
   /**
-   * The internally-generated unique ID of the track
+   * The list of artists for the track.
    */
-  @IsInt()
-  declare id: number;
+  @ApiProperty() // not sure why but defining type + isArray results in LibraryArtistDto[][]
+  declare albumArtists: LibraryArtistDto[];
 
   /**
-   * The list of artists for the track, if it is a comma-delimited string then it will be parsed into
-   * an array each containing one name.  This data is very inconsistently-formatted even in official-ish
-   * sources like MusicBrainz so it may end up with multiple artists in a single string.
-   */
-  @IsString({ each: true })
-  declare artists: string[];
-
-  /**
-   * The list of composers for the track, if it is a comma-delimited string then it will be parsed into
-   * an array each containing one name.  This data is very inconsistently-formatted even in official-ish
-   * sources like MusicBrainz so it may end up with multiple composers in a single string.
-   */
-  @IsString({ each: true })
-  declare composers: string[];
-
-  /**
-   * The disc number of the track on the album or disc if there are multiple discs.  If this field is not
-   * specified it is assumed to be a single-disc album.
-   */
-  declare discNumber: number;
-
-  /**
-   * The duration of the track in seconds.
-   */
-  @IsNumber()
-  declare duration: number;
-
-  /**
-   * The list of genres for the track, if it is a comma-delimited string then it will be parsed into
-   * an array each containing one name.
-   */
-  @IsString({ each: true })
-  declare genres: string[];
-
-  /**
-   * The track number of the track on the album or disc if there are multiple discs.
-   */
-  @IsInt()
-  declare trackNumber: number;
-
-  /**
-   * The rating of the track which is a value between 0 and 5 inclusive applied to the track.
-   */
-  @IsInt()
-  declare rating: number;
-
-  /**
-   * The title of the track, which is usually the name of the song or piece of music.
+   * The title of the album to which the track belongs.
    */
   @IsString()
-  declare title: string;
-
-  /**
-   * The year of release of the track, often the same as the album except in "greatest hits"
-   * and compilations.
-   */
-  @IsInt()
-  declare year: number;
-}
-
-export class LibraryTrackExtendedDto extends PickType(LibraryTrackDto, [
-  'id',
-  'discNumber',
-  'duration',
-  'trackNumber',
-  'rating',
-  'title',
-  'year',
-]) {
-  /**
-   * The unique ID of the album to which the track belongs.
-   */
-  @IsInt()
   declare albumId: number;
 
   /**
@@ -93,12 +23,6 @@ export class LibraryTrackExtendedDto extends PickType(LibraryTrackDto, [
    */
   @IsString()
   declare albumTitle: string;
-
-  /**
-   * The list of artists for the album to which the track belongs.
-   */
-  @ApiProperty() // not sure why but defining type + isArray results in LibraryArtistDto[][]
-  declare albumArtists: LibraryArtistDto[];
 
   /**
    * The list of artists for the track.
@@ -119,7 +43,19 @@ export class LibraryTrackExtendedDto extends PickType(LibraryTrackDto, [
   declare composers: LibraryComposerDto[];
 
   /**
-   * The bitrate of the audio file for the track, in kbps.
+   * The disc number of the track on the album or disc if there are multiple discs.  If this field is not
+   * specified it is assumed to be a single-disc album.
+   */
+  declare discNumber: number;
+
+  /**
+   * The duration of the track in seconds.
+   */
+  @IsNumber()
+  declare duration: number;
+
+  /**
+   * The bitrate of the audio file for the track, in Kb/s.
    */
   @IsInt()
   declare fileBitRate: number;
@@ -162,4 +98,35 @@ export class LibraryTrackExtendedDto extends PickType(LibraryTrackDto, [
     isArray: true,
   })
   declare genres: LibraryGenreDto[];
+
+  /**
+   * The internally-generated unique ID of the track
+   */
+  @IsInt()
+  declare id: number;
+
+  /**
+   * The rating of the track which is a value between 0 and 5 inclusive applied to the track.
+   */
+  @IsInt()
+  declare rating: number;
+
+  /**
+   * The title of the track, which is usually the name of the song or piece of music.
+   */
+  @IsString()
+  declare title: string;
+
+  /**
+   * The track number of the track on the album or disc if there are multiple discs.
+   */
+  @IsInt()
+  declare trackNumber: number;
+
+  /**
+   * The year of release of the track, often the same as the album except in "greatest hits"
+   * and compilations.
+   */
+  @IsInt()
+  declare year: number;
 }
