@@ -5,6 +5,7 @@ import { FileEntity } from './file.entity';
 import { FileTypeEnum } from 'src/types/enums';
 import { LinkedGenreEntity } from './linked-genre.entity';
 import { RootPathEntity } from './root-path.entity';
+import type { RatingOrUnset } from 'src/types';
 
 /**
  * The CollatedTrackEntity selects data from a view that collates track information
@@ -162,7 +163,7 @@ export class CollatedTrackEntity extends Model<CollatedTrackEntity> {
   declare trackNumber: number;
 
   @Column(DataType.INTEGER)
-  declare trackRating: number;
+  declare trackRating: RatingOrUnset;
 
   @Column(DataType.STRING(255))
   declare trackTitle: string;

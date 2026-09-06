@@ -1,4 +1,5 @@
 import { ADMIN_PASSWORD, ADMIN_USERNAME, api } from './test-helper';
+import { RatingOrUnset } from './types';
 import {
   SmartPlaylistConjugalEnum,
   SynologyApiEnum,
@@ -479,7 +480,7 @@ async function clearSessionToken(params: RequestParams) {
   });
 }
 
-async function rateSongs(params: RequestParams, items: number[], rating: 0 | 1 | 2 | 3 | 4 | 5) {
+async function rateSongs(params: RequestParams, items: number[], rating: RatingOrUnset) {
   return api.POST('/webapi/AudioStation/song.cgi', {
     body: {
       api: SynologyApiEnum.SYNO_AudioStation_Song,
@@ -525,7 +526,7 @@ export type SynologyApi = {
   listPlaylists(): ReturnType<typeof listPlaylists>;
   listRadioContainers(): ReturnType<typeof listRadioContainers>;
   listSongs(filters: SongFilter, offset?: number, limit?: number): ReturnType<typeof listSongs>;
-  rateSongs(items: number[], rating: number): ReturnType<typeof rateSongs>;
+  rateSongs(items: number[], rating: RatingOrUnset): ReturnType<typeof rateSongs>;
   listStationsInContainer(
     container: 'User defined' | 'My favorite' | 'SHOUTcast' | string,
   ): ReturnType<typeof listStationsInContainer>;
@@ -670,7 +671,7 @@ export async function createSynologyApi(username?: string, password?: string): P
     async movePlaylistItems(playlistId: string, items: (number | string)[], offset: number) {
       return movePlaylistItems(params, playlistId, items, offset);
     },
-    async rateSongs(items: number[], rating: 0 | 1 | 2 | 3 | 4 | 5) {
+    async rateSongs(items: number[], rating: RatingOrUnset) {
       return rateSongs(params, items, rating);
     },
     async removeItemFromPlaylist(playlistId: string, offset: number, limit?: number) {

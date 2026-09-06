@@ -4,6 +4,7 @@ import { LibraryService } from 'src/library/library.service';
 import { SynologySongDataDto, SynologySongDto } from './dtos';
 import { replaceDoubleQuotes } from 'src/utils/strings';
 import type { LibraryTrackDto } from 'src/library/dtos';
+import type { RatingOrUnset } from 'src/types';
 
 function songToRow(track: LibraryTrackDto): SynologySongDto {
   return {
@@ -18,7 +19,7 @@ function songToRow(track: LibraryTrackDto): SynologySongDto {
         frequency: track.fileFrequency,
       },
       song_rating: {
-        rating: track.rating,
+        rating: track.rating ?? 0,
       },
       song_tag: {
         album: replaceDoubleQuotes(track.albumTitle || ''),
@@ -219,7 +220,8 @@ export class SynologySongService {
     };
   }
 
-  async rateTracks(accountId: number, fileIds: number[], rating: number): Promise<void> {
+  async rateTracks(accountId: number, fileIds: number[], rating: RatingOrUnset): Promise<void> {
+    console.log('rating', fileIds, rating);
     await this.libraryService.rateTracks(accountId, fileIds, rating);
   }
 }

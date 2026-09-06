@@ -4,6 +4,7 @@ import { ArtistEntity } from './artist.entity';
 import { BelongsTo, Column, DataType, ForeignKey, Model, Table } from 'sequelize-typescript';
 import { FileEntity } from './file.entity';
 import { FileTypeEnum } from 'src/types/enums';
+import type { RatingOrUnset } from 'src/types';
 
 /**
  * The CollatedArtistTrackEntity selects data from a view that collates track information
@@ -152,7 +153,7 @@ export class CollatedArtistTrackEntity extends Model<CollatedArtistTrackEntity> 
   declare trackNumber: number;
 
   @Column(DataType.INTEGER)
-  declare trackRating: number;
+  declare trackRating: RatingOrUnset;
 
   @Column(DataType.STRING(255))
   declare trackTitle: string;

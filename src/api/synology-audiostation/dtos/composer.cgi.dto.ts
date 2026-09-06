@@ -4,6 +4,7 @@ import { IsEnum, IsInt, IsNumber, IsString } from 'class-validator';
 import { SynologyApiEnum, SynologyLibraryEnum, SynologyMethodEnum } from '../enums';
 import { SynologyPaginationDto, SynologyPaginationResponseDto, SynologySuccessResponseDto } from './synology.dto';
 import { Transform } from 'class-transformer';
+import type { RatingOrUnset } from 'src/types';
 
 export class SynologyComposerBodyDto extends SynologyPaginationDto {
   /**
@@ -66,7 +67,7 @@ export class SynologyComposerBodyDto extends SynologyPaginationDto {
 
 class SynologyAlbumComposerRatingDto {
   @IsNumber()
-  declare rating: number;
+  declare rating: RatingOrUnset;
 }
 
 class SynologyAlbumAdditionalDto {

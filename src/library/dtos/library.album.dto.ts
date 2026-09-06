@@ -5,6 +5,7 @@ import { LibraryArtistDto } from './library.artist.dto';
 import { LibraryComposerDto } from './library.composer.dto';
 import { LibraryGenreDto } from './library.genre.dto';
 import { LibraryTrackDto } from './library.track.dto';
+import type { RatingOrUnset } from 'src/types';
 
 export class LibraryAlbumDto {
   /**
@@ -80,7 +81,7 @@ export class LibraryAlbumDto {
    * The aggregate rating for the album, which is a value between 0 and 5 inclusive applied to tracks.
    */
   @IsInt({ each: true })
-  declare rating: number;
+  declare rating: RatingOrUnset;
 
   /**
    * The name or title of the album, this would usually come from an official source such as MusicBrainz

@@ -25,6 +25,7 @@ import { normalizeString, replaceDoubleQuotes } from 'src/utils/strings';
 import type { AlbumFilters } from './types/album-filter';
 import type { ArtistFilters } from './types/artist-filter';
 import type { ListResult } from './types/list-result';
+import type { Rating, RatingOrUnset } from 'src/types';
 
 @Injectable()
 export class LibraryService {
@@ -649,7 +650,7 @@ export class LibraryService {
     };
   }
 
-  async rateTracks(accountId: number, fileIds: number[], rating: 0 | 1 | 2 | 3 | 4 | 5): Promise<void> {
+  async rateTracks(accountId: number, fileIds: number[], rating: RatingOrUnset): Promise<void> {
     const files = await this.fileEntity.findAll({
       where: {
         accountId,
@@ -659,9 +660,10 @@ export class LibraryService {
     if (files.length !== fileIds.length) {
       throw new NotFoundException(ErrorCodes.FILE_NOT_FOUND_ERROR);
     }
+    const newValue: Rating | null = rating > 0 ? (rating as Rating) : null;
     await this.fileEntity.update(
       {
-        rating: rating > 0 ? rating : undefined,
+        rating: newValue,
       },
       {
         where: {

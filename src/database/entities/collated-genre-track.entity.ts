@@ -4,6 +4,7 @@ import { BelongsTo, Column, DataType, ForeignKey, Model, Table } from 'sequelize
 import { FileEntity } from './file.entity';
 import { FileTypeEnum } from 'src/types/enums';
 import { GenreEntity } from './genre.entity';
+import type { RatingOrUnset } from 'src/types';
 
 /**
  * The CollatedGenreTrackEntity selects data from a view that collates track information
@@ -153,7 +154,7 @@ export class CollatedGenreTrackEntity extends Model<CollatedGenreTrackEntity> {
   declare trackNumber: number;
 
   @Column(DataType.INTEGER)
-  declare trackRating: number;
+  declare trackRating: RatingOrUnset;
 
   @Column(DataType.STRING(255))
   declare trackTitle: string;

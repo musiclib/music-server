@@ -455,7 +455,7 @@ export class LibraryTrackService {
               createdAt: linkedGenre.genre?.createdAt || new Date(),
             })) || [],
           id: file.id,
-          rating: file.rating,
+          rating: file.rating ?? 0,
           title: file.title,
           trackNumber: file.trackNumber,
           year: file.year,

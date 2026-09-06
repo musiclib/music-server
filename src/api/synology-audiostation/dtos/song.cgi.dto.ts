@@ -5,6 +5,7 @@ import { IsEnum, IsInt, IsNumber, IsString, Max, Min } from 'class-validator';
 import { SynologyApiEnum, SynologyLibraryEnum, SynologyMethodEnum } from '../enums';
 import { SynologyPaginationDto, SynologyPaginationResponseDto, SynologySuccessResponseDto } from './synology.dto';
 import { Transform } from 'class-transformer';
+import type { RatingOrUnset } from 'src/types';
 
 export class SynologySongsBodyDto extends SynologyPaginationDto {
   @IsString()
@@ -191,7 +192,7 @@ export class SynologySongsRateBodyDto {
   @IsInt()
   @Min(0)
   @Max(5)
-  declare rating: number;
+  declare rating: RatingOrUnset;
 
   /**
    * Synology's API has versioned endpoints and some have at least 3 versions.  This software
@@ -207,8 +208,10 @@ export class SynologySongsRateBodyDto {
 }
 
 class SynologySongRatingDto {
-  @IsNumber()
-  declare rating: number;
+  @IsInt()
+  @Min(0)
+  @Max(5)
+  declare rating: RatingOrUnset;
 }
 
 class SynologySongAudioDto {
