@@ -1,6 +1,6 @@
 import { AlbumSortFieldEnum, SortDirectionEnum } from 'src/types/enums';
 import { Injectable } from '@nestjs/common';
-import { LibraryAlbumDto } from 'src/library/library.album.dto';
+import { LibraryAlbumDto } from 'src/library/dtos/library.album.dto';
 import { LibraryService } from 'src/library/library.service';
 import { SynologyAlbumDataDto, SynologyAlbumDto } from './dtos';
 import { replaceDoubleQuotes } from 'src/utils/strings';
@@ -12,10 +12,10 @@ function albumToRow(album: LibraryAlbumDto): SynologyAlbumDto {
         rating: 0,
       },
     },
-    album_artist: replaceDoubleQuotes(album.albumArtists.join(', ')),
+    album_artist: replaceDoubleQuotes(album.artists.map((artist) => artist.name).join(', ')),
     artist: '',
-    display_artist: album.albumArtists.join(', '),
-    name: replaceDoubleQuotes(album.displayName),
+    display_artist: album.artists.map((artist) => artist.name).join(', '),
+    name: replaceDoubleQuotes(album.title),
     year: album.year,
   };
 }

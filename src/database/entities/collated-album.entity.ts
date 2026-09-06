@@ -1,14 +1,5 @@
-// import { AlbumEntity } from './album.entity';
 import { AccountEntity } from './account.entity';
-import {
-  BelongsTo,
-  Column,
-  DataType,
-  ForeignKey,
-  // ForeignKey,
-  Model,
-  Table,
-} from 'sequelize-typescript';
+import { BelongsTo, Column, DataType, ForeignKey, Model, Table } from 'sequelize-typescript';
 
 /**
  * The CollatedAlbumEntity selects data from a view that collates album information
@@ -38,6 +29,31 @@ export class CollatedAlbumEntity extends Model<CollatedAlbumEntity> {
 
   @BelongsTo(() => AccountEntity)
   declare account: AccountEntity;
+
+  @Column(DataType.STRING(7))
+  declare coverImageLightVibrant?: string | null;
+
+  @Column(DataType.STRING(7))
+  declare coverImageDarkVibrant?: string | null;
+
+  @Column(DataType.STRING(7))
+  declare coverImageMuted?: string | null;
+
+  @Column(DataType.STRING(7))
+  declare coverImageVibrant?: string | null;
+
+  @Column(DataType.STRING(7))
+  declare coverImageDarkMuted?: string | null;
+
+  @Column(DataType.STRING(7))
+  declare coverImageLightMuted?: string | null;
+
+  /**
+   * This field is managed by Sequelize and tracks the date and time the row was created.  This field should not be
+   * specified if you are inserting and updating data.
+   */
+  @Column(DataType.DATE)
+  declare createdAt: Date;
 
   /**
    * The album ID the file belongs to.

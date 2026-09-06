@@ -1,111 +1,47 @@
-import {
-  AlbumArtistEntity,
-  AlbumEntity,
-  ArtistEntity,
-  CollatedArtistTrackEntity,
-  CollatedComposerTrackEntity,
-  CollatedGenreTrackEntity,
-  CollatedTrackEntity,
-  GenreEntity,
-} from 'src/database/entities';
 import { ContentTypeEnum } from 'src/types/enums';
-import { InjectModel } from '@nestjs/sequelize';
-import { Injectable, NotFoundException } from '@nestjs/common';
-import { Op } from 'sequelize';
-import { Sequelize } from 'sequelize-typescript';
+import { Injectable } from '@nestjs/common';
+import { LibraryService } from 'src/library/library.service';
 import { SynologySongDataDto, SynologySongDto } from './dtos';
-import { normalizeString, replaceDoubleQuotes } from 'src/utils/strings';
+import { replaceDoubleQuotes } from 'src/utils/strings';
+import type { LibraryTrackDto } from 'src/library/dtos';
 
-function songToRow(
-  track: CollatedArtistTrackEntity | CollatedComposerTrackEntity | CollatedGenreTrackEntity | CollatedTrackEntity,
-): SynologySongDto {
+function songToRow(track: LibraryTrackDto): SynologySongDto {
   return {
     additional: {
       song_audio: {
-        bitrate: track.trackBitRate,
-        channel: track.trackChannels,
+        bitrate: track.fileBitRate,
+        channel: track.fileChannels,
         codec: track.fileType,
         container: track.fileType,
-        duration: track.trackDuration,
+        duration: track.duration,
         filesize: track.fileSize,
-        frequency: track.trackFrequency,
+        frequency: track.fileFrequency,
       },
       song_rating: {
         rating: 0,
       },
       song_tag: {
         album: replaceDoubleQuotes(track.albumTitle || ''),
-        album_artist: replaceDoubleQuotes(replaceDoubleQuotes(track.albumArtists.join(', '))),
-        artist: replaceDoubleQuotes(track.trackArtists.join(', ')),
-        comment: replaceDoubleQuotes(track.trackComment || ''),
-        composer: '',
-        disc: track.trackDiscNumber,
-        genre: track.trackGenres.join(', '),
+        album_artist: replaceDoubleQuotes(replaceDoubleQuotes(track.artists.map((artist) => artist.name).join(', '))),
+        artist: replaceDoubleQuotes(track.artists.map((artist) => artist.name).join(', ')),
+        comment: replaceDoubleQuotes(track.comment || ''),
+        composer: track.composers.map((composer) => composer.name).join(', '),
+        disc: track.discNumber,
+        genre: track.genres.join(', '),
         track: track.trackNumber,
-        year: track.trackYear,
+        year: track.year,
       },
     },
-    id: `music_${track.fileId}`,
+    id: `music_${track.id}`,
     path: track.filePath,
-    title: replaceDoubleQuotes(track.trackTitle),
+    title: replaceDoubleQuotes(track.title),
     type: ContentTypeEnum.FILE,
   };
 }
 
 @Injectable()
 export class SynologySongService {
-  constructor(
-    @InjectModel(AlbumEntity)
-    private readonly albumEntity: typeof AlbumEntity,
-    @InjectModel(ArtistEntity)
-    private readonly artistEntity: typeof ArtistEntity,
-    @InjectModel(CollatedTrackEntity)
-    private readonly collatedTrackEntity: typeof CollatedTrackEntity,
-    @InjectModel(CollatedArtistTrackEntity)
-    private readonly collatedArtistTrackEntity: typeof CollatedArtistTrackEntity,
-    @InjectModel(CollatedGenreTrackEntity)
-    private readonly collatedGenreTrackEntity: typeof CollatedGenreTrackEntity,
-    @InjectModel(GenreEntity)
-    private readonly genreEntity: typeof GenreEntity,
-  ) {}
-
-  async getAlbumByTitleAndArtist(accountId: number, albumTitle: string, albumArtist: string): Promise<AlbumEntity> {
-    const album = await this.albumEntity.findOne({
-      attributes: ['id'],
-      where: {
-        titleNormalized: normalizeString(albumTitle),
-        accountId,
-      },
-      include: [
-        {
-          model: AlbumArtistEntity,
-          attributes: [],
-          include: [
-            {
-              model: ArtistEntity,
-              attributes: [],
-              where: {
-                nameNormalized: normalizeString(albumArtist),
-              },
-            },
-          ],
-        },
-      ],
-    });
-    if (!album) {
-      throw new NotFoundException(`Album not found for title: ${albumTitle} and artist: ${albumArtist}`);
-    }
-    return album;
-  }
-
-  async getArtistByName(artistName: string): Promise<ArtistEntity | null> {
-    const artist = await this.artistEntity.findOne({
-      where: {
-        nameNormalized: normalizeString(artistName),
-      },
-    });
-    return artist;
-  }
+  constructor(private readonly libraryService: LibraryService) {}
 
   async listArtistTracks(
     accountId: number,
@@ -113,80 +49,41 @@ export class SynologySongService {
     offset: number,
     limit: number,
   ): Promise<SynologySongDataDto> {
-    const artist = await this.getArtistByName(artistName);
-    if (!artist) {
-      throw new NotFoundException(`Artist not found for name: ${artistName}`);
-    }
-    const tracks = await this.collatedTrackEntity.findAll({
-      where: {
-        [Op.and]: [
-          { accountId },
-          Sequelize.where(Sequelize.fn('LOWER', Sequelize.col('album_artists')), artistName.toLocaleLowerCase()),
-        ],
+    const tracks = await this.libraryService.listTracks(
+      accountId,
+      {
+        albumArtist: [artistName],
       },
+      offset,
       limit,
-      offset,
-      order: [
-        ['albumTitle', 'ASC'],
-        ['trackDiscNumber', 'ASC'],
-        ['trackNumber', 'ASC'],
-      ],
-    });
-    const total = await this.collatedArtistTrackEntity.count({
-      where: {
-        [Op.and]: [
-          { accountId },
-          Sequelize.where(Sequelize.fn('LOWER', Sequelize.col('album_artists')), artistName.toLocaleLowerCase()),
-        ],
-      },
-    });
+    );
     return {
-      songs: tracks.map(songToRow),
+      songs: tracks.items.map(songToRow),
       offset,
-      total,
+      total: tracks.total,
     };
   }
 
   async listArtistAlbumTracks(
     accountId: number,
     artistName: string,
-    albumName: string,
+    albumTitle: string,
     offset: number,
     limit: number,
   ): Promise<SynologySongDataDto> {
-    const artist = await this.getArtistByName(artistName);
-    if (!artist) {
-      throw new NotFoundException(`Artist not found for name: ${artistName}`);
-    }
-    const tracks = await this.collatedTrackEntity.findAll({
-      where: {
-        [Op.and]: [
-          { accountId },
-          { albumTitle: albumName },
-          Sequelize.where(Sequelize.fn('LOWER', Sequelize.col('album_artists')), artistName.toLocaleLowerCase()),
-        ],
+    const tracks = await this.libraryService.listTracks(
+      accountId,
+      {
+        album: albumTitle,
+        albumArtist: [artistName],
       },
+      offset,
       limit,
-      offset,
-      order: [
-        ['albumTitle', 'ASC'],
-        ['trackDiscNumber', 'ASC'],
-        ['trackNumber', 'ASC'],
-      ],
-    });
-    const total = await this.collatedArtistTrackEntity.count({
-      where: {
-        [Op.and]: [
-          { accountId },
-          { albumTitle: albumName },
-          Sequelize.where(Sequelize.fn('LOWER', Sequelize.col('album_artists')), artistName.toLocaleLowerCase()),
-        ],
-      },
-    });
+    );
     return {
-      songs: tracks.map(songToRow),
+      songs: tracks.items.map(songToRow),
       offset,
-      total,
+      total: tracks.total,
     };
   }
 
@@ -196,119 +93,76 @@ export class SynologySongService {
     offset: number,
     limit: number,
   ): Promise<SynologySongDataDto> {
-    const tracks = await this.collatedTrackEntity.findAll({
-      where: {
-        [Op.and]: [
-          { accountId },
-          Sequelize.where(Sequelize.fn('LOWER', Sequelize.col('track_composers')), composerName.toLocaleLowerCase()),
-        ],
+    // note: there is a discrepancy here with this API vs Synology where a track
+    // that has multiple composers including <composerName> will be returned
+    // but Synology will return a direct match only where only <composerName>
+    // is attributed.
+    const tracks = await this.libraryService.listTracks(
+      accountId,
+      {
+        composer: [composerName],
       },
+      offset,
       limit,
-      offset,
-      order: [
-        ['albumTitle', 'ASC'],
-        ['trackDiscNumber', 'ASC'],
-        ['trackNumber', 'ASC'],
-      ],
-    });
-    const total = await this.collatedTrackEntity.count({
-      where: {
-        [Op.and]: [
-          { accountId },
-          Sequelize.where(Sequelize.fn('LOWER', Sequelize.col('track_composers')), composerName.toLocaleLowerCase()),
-        ],
-      },
-    });
+    );
     return {
-      songs: tracks.map(songToRow),
+      songs: tracks.items.map(songToRow),
       offset,
-      total,
+      total: tracks.total,
     };
   }
 
   async listComposerAlbumTracks(
     accountId: number,
     composerName: string,
-    albumName: string,
+    albumTitle: string,
     albumArtist: string,
     offset: number,
     limit: number,
   ): Promise<SynologySongDataDto> {
-    const album = await this.getAlbumByTitleAndArtist(accountId, albumName, albumArtist);
-    const tracks = await this.collatedTrackEntity.findAll({
-      where: {
-        [Op.and]: [
-          { accountId },
-          { albumId: album.id },
-          Sequelize.where(Sequelize.fn('LOWER', Sequelize.col('track_composers')), composerName.toLocaleLowerCase()),
-        ],
+    // note: there is a discrepancy here with this API vs Synology where a track
+    // that has multiple composers including <composerName> will be returned
+    // but Synology will return a direct match only where only <composerName>
+    // is attributed.
+    const tracks = await this.libraryService.listTracks(
+      accountId,
+      {
+        album: albumTitle,
+        albumArtist: [albumArtist],
+        composer: [composerName],
       },
+      offset,
       limit,
-      offset,
-      order: [
-        ['albumTitle', 'ASC'],
-        ['trackDiscNumber', 'ASC'],
-        ['trackNumber', 'ASC'],
-      ],
-    });
-    const total = await this.collatedTrackEntity.count({
-      where: {
-        [Op.and]: [
-          { accountId },
-          { albumId: album.id },
-          Sequelize.where(Sequelize.fn('LOWER', Sequelize.col('track_composers')), composerName.toLocaleLowerCase()),
-        ],
-      },
-    });
+    );
     return {
-      songs: tracks.map(songToRow),
+      songs: tracks.items.map(songToRow),
       offset,
-      total,
+      total: tracks.total,
     };
   }
 
   async listGenreAlbumTracks(
     accountId: number,
-    albumName: string,
+    albumTitle: string,
     albumArtist: string,
     genreName: string,
     offset: number,
     limit: number,
   ): Promise<SynologySongDataDto> {
-    const genres = await this.genreEntity.findAll({
-      attributes: ['id'],
-      where: {
-        accountId,
-        nameNormalized: {
-          [Op.in]: genreName.split('/').map(normalizeString),
-        },
+    const tracks = await this.libraryService.listTracks(
+      accountId,
+      {
+        album: albumTitle,
+        albumArtist: [albumArtist],
+        genre: genreName.split('/'),
       },
-    });
-    if (!genres?.length) {
-      throw new NotFoundException(`Genre not found: ${genreName}`);
-    }
-    const album = await this.getAlbumByTitleAndArtist(accountId, albumName, albumArtist);
-    const genreIds = genres.map((genre) => genre.id);
-    const tracks = await this.collatedGenreTrackEntity.findAll({
-      where: {
-        [Op.and]: [{ accountId }, { albumId: album.id }, { genreId: { [Op.in]: genreIds } }],
-      },
-      limit: limit || 100000,
       offset,
-      order: [
-        ['trackDiscNumber', 'ASC'],
-        ['trackNumber', 'ASC'],
-      ],
-    });
-    const total = await this.collatedGenreTrackEntity.count({
-      where: {
-        [Op.and]: [{ accountId }, { albumId: album.id }, { genreId: { [Op.in]: genreIds } }],
-      },
-    });
+      limit,
+    );
     return {
-      songs: tracks.map(songToRow),
+      songs: tracks.items.map(songToRow),
       offset,
-      total,
+      total: tracks.total,
     };
   }
 
@@ -318,38 +172,18 @@ export class SynologySongService {
     offset: number,
     limit: number,
   ): Promise<SynologySongDataDto> {
-    const genres = await this.genreEntity.findAll({
-      attributes: ['id'],
-      where: {
-        accountId,
-        nameNormalized: {
-          [Op.in]: genreName.split('/').map(normalizeString),
-        },
+    const tracks = await this.libraryService.listTracks(
+      accountId,
+      {
+        genre: genreName.split('/'),
       },
-    });
-    if (!genres?.length) {
-      throw new NotFoundException(`Genre not found: ${genreName}`);
-    }
-    const tracks = await this.collatedGenreTrackEntity.findAll({
-      where: {
-        [Op.and]: [{ accountId }, { genreId: { [Op.in]: genres.map((genre) => genre.id) } }],
-      },
-      limit: limit || 100000,
       offset,
-      order: [
-        ['trackDiscNumber', 'ASC'],
-        ['trackNumber', 'ASC'],
-      ],
-    });
-    const total = await this.collatedGenreTrackEntity.count({
-      where: {
-        [Op.and]: [{ accountId }, { genreId: { [Op.in]: genres.map((genre) => genre.id) } }],
-      },
-    });
+      limit,
+    );
     return {
-      songs: tracks.map(songToRow),
+      songs: tracks.items.map(songToRow),
       offset,
-      total,
+      total: tracks.total,
     };
   }
 
@@ -360,55 +194,28 @@ export class SynologySongService {
     offset: number,
     limit: number,
   ): Promise<SynologySongDataDto> {
-    const album = await this.getAlbumByTitleAndArtist(accountId, albumTitle, albumArtist);
-    const tracks = await this.collatedTrackEntity.findAll({
-      where: {
-        accountId,
-        albumId: album.id,
+    const tracks = await this.libraryService.listTracks(
+      accountId,
+      {
+        album: albumTitle,
+        albumArtist: [albumArtist],
       },
-      limit: limit || 100000,
       offset,
-      order: [
-        ['albumTitle', 'ASC'],
-        ['trackDiscNumber', 'ASC'],
-        ['trackNumber', 'ASC'],
-      ],
-    });
-    const total = await this.collatedTrackEntity.count({
-      where: {
-        accountId,
-        albumId: album.id,
-      },
-    });
+      limit,
+    );
     return {
-      songs: tracks.map(songToRow),
+      songs: tracks.items.map(songToRow),
       offset,
-      total,
+      total: tracks.total,
     };
   }
 
   async listTracks(accountId: number, offset: number, limit: number): Promise<SynologySongDataDto> {
-    const tracks = await this.collatedTrackEntity.findAll({
-      where: {
-        accountId,
-      },
-      offset,
-      limit,
-      order: [
-        ['albumTitle', 'ASC'],
-        ['trackDiscNumber', 'ASC'],
-        ['trackNumber', 'ASC'],
-      ],
-    });
-    const total = await this.collatedTrackEntity.count({
-      where: {
-        accountId,
-      },
-    });
+    const tracks = await this.libraryService.listTracks(accountId, {}, offset, limit);
     return {
-      songs: tracks.map(songToRow),
+      songs: tracks.items.map(songToRow),
       offset,
-      total,
+      total: tracks.total,
     };
   }
 }

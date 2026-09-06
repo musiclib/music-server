@@ -5,7 +5,9 @@ import { IndexArtistService } from './index-artist.service';
 import { InjectModel } from '@nestjs/sequelize';
 import { Injectable, Logger } from '@nestjs/common';
 import { Transaction } from 'sequelize';
+import { Vibrant } from 'node-vibrant/node';
 import { normalizeString, sanitizeString, splitArray } from 'src/utils/strings';
+import sharp from 'sharp';
 
 @Injectable()
 export class IndexAlbumService {
@@ -36,13 +38,43 @@ export class IndexAlbumService {
       return existing;
     }
     // insert the album
-    const coverImage = embeddedData.common.picture?.[0]?.data ? Buffer.from(embeddedData.common.picture[0].data) : null;
+    let coverImage = embeddedData.common.picture?.[0]?.data ? Buffer.from(embeddedData.common.picture[0].data) : null;
     const coverImageMimeType = embeddedData.common.picture?.[0]?.format || null;
+    let coverImageLightVibrant: string | null = null;
+    let coverImageDarkVibrant: string | null = null;
+    let coverImageMuted: string | null = null;
+    let coverImageVibrant: string | null = null;
+    let coverImageDarkMuted: string | null = null;
+    let coverImageLightMuted: string | null = null;
+    if (coverImage) {
+      // make sure cover image is 600px x 600px jpeg
+      const sharpImage = sharp(coverImage);
+      const metadata = await sharpImage.metadata();
+      if (metadata.width > 600 || metadata.height > 600) {
+        const resizedImageBuffer = await sharpImage.resize(600, 600, { fit: 'inside' }).toBuffer();
+        coverImage = resizedImageBuffer;
+      }
+      // measure the dominant colors
+      const palette = await Vibrant.from(coverImage as Buffer).getPalette();
+      coverImageLightVibrant = palette?.LightVibrant?.hex || null;
+      coverImageDarkVibrant = palette?.DarkVibrant?.hex || null;
+      coverImageMuted = palette?.Muted?.hex || null;
+      coverImageVibrant = palette?.Vibrant?.hex || null;
+      coverImageDarkMuted = palette?.DarkMuted?.hex || null;
+      coverImageLightMuted = palette?.LightMuted?.hex || null;
+    }
+
     const album = await this.albumEntity.create(
       {
         accountId,
         coverImage,
         coverImageMimeType,
+        coverImageLightVibrant,
+        coverImageDarkVibrant,
+        coverImageMuted,
+        coverImageVibrant,
+        coverImageDarkMuted,
+        coverImageLightMuted,
         folderPath,
         rootPathId: rootPath.id,
         title: sanitizeString(embeddedData?.common.album || '') || '',

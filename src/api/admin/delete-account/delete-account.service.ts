@@ -2,7 +2,7 @@ import { AccountEntity } from 'src/database/entities';
 import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { ErrorCodes } from 'src/constants/error-codes';
 import { InjectModel } from '@nestjs/sequelize';
-import { UserRoleEnum } from 'src/constants/enums/user-role.enum';
+import { UserRoleEnum } from 'src/types/enums';
 
 @Injectable()
 export class AdminDeleteAccountService {

@@ -24,18 +24,20 @@ describe('/webapi/AudioStation/search.cgi', () => {
 
   it('should return artists', async () => {
     const { artists } = await search('artist');
-    expect(artists.length).toBe(3);
+    expect(artists.length).toBe(5);
     expect(artists[0]?.name).toBe('Artist 1');
     expect(artists[1]?.name).toBe('Artist 2');
     expect(artists[2]?.name).toBe('Artist 3');
+    expect(artists[3]?.name).toBe('Artist 3 ft. Artist 2');
+    expect(artists[4]?.name).toBe('Artist 3, Artist 2');
   });
 
   it('should return albums', async () => {
     const { albums } = await search('album');
     expect(albums.length).toBe(5);
     expect(albums[0]?.name).toBe('Album 1');
-    expect(albums[1]?.name).toBe('Album 3');
-    expect(albums[2]?.name).toBe('Album 2');
+    expect(albums[1]?.name).toBe('Album 2');
+    expect(albums[2]?.name).toBe('Album 3');
     expect(albums[3]?.name).toBe('Album 4');
     expect(albums[4]?.name).toBe('Album 5');
   });

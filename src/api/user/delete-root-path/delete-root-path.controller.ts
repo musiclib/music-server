@@ -10,7 +10,7 @@ import {
   UserDeleteRootPathResponseDto,
 } from './delete-root-path.dto';
 import { UserDeleteRootPathService } from './delete-root-path.service';
-import { UserRoleEnum } from 'src/constants/enums';
+import { UserRoleEnum } from 'src/types/enums';
 
 @Controller({
   path: '/api/user',

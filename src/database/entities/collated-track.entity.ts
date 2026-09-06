@@ -1,8 +1,9 @@
 import { AccountEntity } from './account.entity';
 import { AlbumEntity } from './album.entity';
-import { BelongsTo, Column, DataType, ForeignKey, Model, Table } from 'sequelize-typescript';
+import { BelongsTo, Column, DataType, ForeignKey, HasMany, Model, Table } from 'sequelize-typescript';
 import { FileEntity } from './file.entity';
 import { FileTypeEnum } from 'src/types/enums';
+import { LinkedGenreEntity } from './linked-genre.entity';
 import { RootPathEntity } from './root-path.entity';
 
 /**
@@ -48,6 +49,9 @@ export class CollatedTrackEntity extends Model<CollatedTrackEntity> {
   @ForeignKey(() => AlbumEntity)
   declare albumId: number;
 
+  @BelongsTo(() => AlbumEntity)
+  declare album: AlbumEntity;
+
   @Column({
     type: DataType.TEXT,
     get(): string[] {
@@ -62,6 +66,12 @@ export class CollatedTrackEntity extends Model<CollatedTrackEntity> {
 
   @Column(DataType.INTEGER)
   declare albumYear: number;
+
+  @ForeignKey(() => FileEntity)
+  declare fileId: number;
+
+  @BelongsTo(() => FileEntity)
+  declare file: FileEntity;
 
   @Column(DataType.INTEGER)
   declare fileSize: number;
@@ -83,8 +93,6 @@ export class CollatedTrackEntity extends Model<CollatedTrackEntity> {
       key: 'id',
     },
   })
-  @ForeignKey(() => FileEntity)
-  declare fileId: number;
 
   /**
    * The root path ID the file resides in
@@ -139,13 +147,16 @@ export class CollatedTrackEntity extends Model<CollatedTrackEntity> {
   declare trackFrequency: number;
 
   @Column({
-    type: DataType.TEXT,
+    type: DataType.STRING(50),
     get(): string[] {
       const rawValue = this.getDataValue('trackGenres');
       return rawValue?.split(',').map((genre: string) => genre.trim()) || [];
     },
   })
   declare trackGenres: string[];
+
+  @HasMany(() => LinkedGenreEntity, 'fileId')
+  declare linkedTrackGenres: LinkedGenreEntity[];
 
   @Column(DataType.INTEGER)
   declare trackNumber: number;

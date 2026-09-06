@@ -8,6 +8,7 @@ SELECT
 	DISTINCT(artists.name) AS name,
 	artists.name_normalized,
 	artists.id,
+  artists.created_at,
 	albums.account_id
 FROM artists
 INNER JOIN album_artists on album_artists.artist_id = artists.id

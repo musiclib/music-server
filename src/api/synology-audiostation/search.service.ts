@@ -1,108 +1,96 @@
-import { CollatedAlbumEntity, CollatedArtistEntity, CollatedTrackEntity } from 'src/database/entities';
 import { ContentTypeEnum } from 'src/types/enums';
-import { InjectModel } from '@nestjs/sequelize';
 import { Injectable } from '@nestjs/common';
-import { Op, Sequelize } from 'sequelize';
+import { LibraryAlbumDto, LibraryArtistDto, LibraryTrackDto } from 'src/library/dtos';
+import { LibraryService } from 'src/library/library.service';
 import { SynologySearchAlbumDto, SynologySearchArtistDto, SynologySearchDataDto, SynologySongDto } from './dtos';
 import { replaceDoubleQuotes } from 'src/utils/strings';
 
-function albumToRow(album: CollatedAlbumEntity): SynologySearchAlbumDto {
+function albumToRow(album: LibraryAlbumDto): SynologySearchAlbumDto {
   return {
     album_artist: replaceDoubleQuotes(album.artists.join(', ')),
     display_artist: replaceDoubleQuotes(album.artists.join(', ')),
     name: replaceDoubleQuotes(album.title),
-    artist: replaceDoubleQuotes(album.artists[0] || ''),
+    artist: replaceDoubleQuotes(album.artists.map((artist) => artist).join(', ') || ''),
     year: album.year,
   };
 }
 
-function artistToRow(artist: CollatedArtistEntity): SynologySearchArtistDto {
+function artistToRow(artist: LibraryArtistDto): SynologySearchArtistDto {
   return {
     name: replaceDoubleQuotes(artist.name),
   };
 }
 
-function songToRow(song: CollatedTrackEntity): SynologySongDto {
+function songToRow(song: LibraryTrackDto): SynologySongDto {
   return {
     additional: {
       song_audio: {
-        bitrate: song.trackBitRate,
-        channel: song.trackChannels,
+        bitrate: song.fileBitRate,
+        channel: song.fileChannels,
         codec: song.fileType,
         container: song.fileType,
-        duration: song.trackDuration,
+        duration: song.duration,
         filesize: song.fileSize,
-        frequency: song.trackFrequency,
+        frequency: song.fileFrequency,
       },
       song_tag: {
         album: song.albumTitle,
         album_artist: song.albumArtists.join(', '),
-        artist: song.trackArtists.join(', '),
-        comment: song.trackComment || '',
-        composer: song.trackComposers.join(', '),
-        disc: song.trackDiscNumber,
-        genre: song.trackGenres.join(', '),
+        artist: song.artists.map((artist) => artist.name).join(', '),
+        comment: song.comment || '',
+        composer: song.composers.map((composer) => composer.name).join(', '),
+        disc: song.discNumber,
+        genre: song.genres.map((genre) => genre.name).join(', '),
         track: song.trackNumber,
-        year: song.trackYear,
+        year: song.year,
       },
       song_rating: {
         rating: 0,
       },
     },
-    id: song.fileId.toString(),
+    id: song.id.toString(),
     path: song.filePath,
-    title: song.trackTitle,
+    title: song.title,
     type: ContentTypeEnum.FILE,
   };
 }
 
 @Injectable()
 export class SynologySearchService {
-  constructor(
-    @InjectModel(CollatedAlbumEntity)
-    private readonly collatedAlbumEntity: typeof CollatedAlbumEntity,
-    @InjectModel(CollatedArtistEntity)
-    private readonly collatedArtistEntity: typeof CollatedArtistEntity,
-    @InjectModel(CollatedTrackEntity)
-    private readonly collatedTrackEntity: typeof CollatedTrackEntity,
-  ) {}
+  constructor(private readonly libraryService: LibraryService) {}
 
   async listSearchResults(accountId: number, keyword: string): Promise<SynologySearchDataDto> {
-    const albums = await this.collatedAlbumEntity.findAll({
-      where: {
-        [Op.and]: [
-          { accountId },
-          Sequelize.where(Sequelize.fn('LOWER', Sequelize.col('title')), Op.like, `%${keyword.toLocaleLowerCase()}%`),
-        ],
+    const albums = await this.libraryService.listAlbums(
+      accountId,
+      {
+        filter: keyword,
       },
-    });
-    const artists = await this.collatedArtistEntity.findAll({
-      where: {
-        [Op.and]: [
-          { accountId },
-          Sequelize.where(Sequelize.fn('LOWER', Sequelize.col('name')), Op.like, `%${keyword.toLocaleLowerCase()}%`),
-        ],
+      0,
+      100_000,
+    );
+    const artists = await this.libraryService.listTrackArtists(
+      accountId,
+      {
+        filter: keyword,
       },
-    });
-    const tracks = await this.collatedTrackEntity.findAll({
-      where: {
-        [Op.and]: [
-          { accountId },
-          Sequelize.where(
-            Sequelize.fn('LOWER', Sequelize.col('track_title')),
-            Op.like,
-            `%${keyword.toLocaleLowerCase()}%`,
-          ),
-        ],
+      0,
+      100_000,
+    );
+    const tracks = await this.libraryService.listTracks(
+      accountId,
+      {
+        filter: keyword,
       },
-    });
+      0,
+      100_000,
+    );
     return {
-      albumTotal: albums.length,
-      albums: albums.map(albumToRow),
-      artistTotal: artists.length,
-      artists: artists.map(artistToRow),
-      songTotal: tracks.length,
-      songs: tracks.map(songToRow),
+      albumTotal: albums.total,
+      albums: albums.items.map(albumToRow),
+      artistTotal: artists.total,
+      artists: artists.items.map(artistToRow),
+      songTotal: tracks.total,
+      songs: tracks.items.map(songToRow),
     };
   }
 }

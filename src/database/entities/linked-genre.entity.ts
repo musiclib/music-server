@@ -22,6 +22,26 @@ export class LinkedGenreEntity extends Model<LinkedGenreEntity> {
   declare createdAt: Date;
 
   /**
+   * The linked file ID.
+   */
+  @Column({
+    type: DataType.INTEGER,
+    references: {
+      model: FileEntity,
+      key: 'id',
+    },
+    onDelete: 'CASCADE',
+  })
+  @ForeignKey(() => FileEntity)
+  declare fileId: number;
+
+  /**
+   * The linked file.
+   */
+  @BelongsTo(() => FileEntity)
+  declare file?: FileEntity;
+
+  /**
    * The linked genre.
    */
   @Column({
@@ -48,26 +68,6 @@ export class LinkedGenreEntity extends Model<LinkedGenreEntity> {
     autoIncrement: true,
   })
   declare id: number;
-
-  /**
-   * The linked file ID.
-   */
-  @Column({
-    type: DataType.INTEGER,
-    references: {
-      model: FileEntity,
-      key: 'id',
-    },
-    onDelete: 'CASCADE',
-  })
-  @ForeignKey(() => FileEntity)
-  declare fileId: number;
-
-  /**
-   * The linked file.
-   */
-  @BelongsTo(() => FileEntity)
-  declare file?: FileEntity;
 
   /**
    * This field is managed by Sequelize and tracks the most recent date and time the row was last updated.  This field

@@ -1,6 +1,6 @@
 import { Column, DataType, Model, Sequelize, Table } from 'sequelize-typescript';
 import { Guid } from 'typescript-guid';
-import { UserRoleEnum } from 'src/constants/enums';
+import { UserRoleEnum } from 'src/types/enums';
 
 /**
  * The AccountEntity holds all of the information required for a person to securely-access the

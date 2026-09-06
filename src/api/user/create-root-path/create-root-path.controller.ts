@@ -17,7 +17,7 @@ import {
   UserCreateRootPathResponseDto,
 } from './create-root-path.dto';
 import { UserCreateRootPathService } from './create-root-path.service';
-import { UserRoleEnum } from 'src/constants/enums';
+import { UserRoleEnum } from 'src/types/enums';
 
 @Controller({
   path: '/api/user',

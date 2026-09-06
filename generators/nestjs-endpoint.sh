@@ -117,6 +117,8 @@ fi
 API_TAGS=""
 if [ "$API_PATH" == "api/admin" ]; then
   API_TAGS="ADMIN_APIS"
+elif [ "$API_PATH" == "api/user" ]; then
+  API_TAGS="USER_APIS"
 fi
 
 cat <<EOF > $FILE_PATH/${SERVICE_FILE}.controller.ts

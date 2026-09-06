@@ -5,8 +5,7 @@ import { ForbiddenException, Inject, Injectable, Logger, SetMetadata, Unauthoriz
 import { JwtService } from '@nestjs/jwt';
 import { Reflector } from '@nestjs/core';
 import { Request } from 'express';
-import { SessionRestrictionEnum } from 'src/types/enums';
-import { UserRoleEnum } from 'src/constants/enums';
+import { SessionRestrictionEnum, UserRoleEnum } from 'src/types/enums';
 import type { CanActivate, ExecutionContext } from '@nestjs/common';
 
 export const AllowedRoles = (roles: UserRoleEnum[]) => SetMetadata('roles', roles);

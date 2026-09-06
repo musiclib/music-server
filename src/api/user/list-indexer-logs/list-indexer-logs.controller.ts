@@ -19,7 +19,7 @@ import {
   UserListIndexerLogsResponseDto,
 } from './list-indexer-logs.dto';
 import { UserListIndexerLogsService } from './list-indexer-logs.service';
-import { UserRoleEnum } from 'src/constants/enums';
+import { UserRoleEnum } from 'src/types/enums';
 
 @Controller({
   path: '/api/user',

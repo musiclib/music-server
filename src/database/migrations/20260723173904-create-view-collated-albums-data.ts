@@ -7,16 +7,16 @@ CREATE VIEW collated_albums_data AS
 SELECT 
 	albums.id,
 	albums.account_id,
+  albums.created_at,
+	albums.cover_image_mime_type,
+	albums.cover_image_vibrant,
+	albums.cover_image_dark_vibrant,
+	albums.cover_image_light_vibrant,
+	albums.cover_image_muted,
+	albums.cover_image_dark_muted,
+	albums.cover_image_light_muted,
 	albums.title,
 	albums.year,
-	(
-		SELECT name 
-		FROM artists 
-		INNER JOIN album_artists ON 
-				album_artists.album_id=albums.id AND 
-				album_artists.artist_id=artists.id 
-		ORDER BY album_artists.id desc limit 1
-		) AS artist,
 	(
 		SELECT group_concat(unique_artists.name, ', ') 
 		FROM (

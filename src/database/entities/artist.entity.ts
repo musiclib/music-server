@@ -24,6 +24,17 @@ export class ArtistEntity extends Model<ArtistEntity> {
   })
   declare createdAt: Date;
 
+  /**
+   * The ID of the table row is an integer that is assigned by the database when the row is created.
+   */
+  @Column({
+    type: DataType.INTEGER,
+    primaryKey: true,
+    allowNull: false,
+    autoIncrement: true,
+  })
+  declare id: number;
+
   @HasMany(() => LinkedArtistEntity)
   declare linkedArtists: LinkedArtistEntity[];
 
@@ -38,17 +49,6 @@ export class ArtistEntity extends Model<ArtistEntity> {
    */
   @Column(DataType.STRING(255))
   declare nameNormalized: string;
-
-  /**
-   * The ID of the table row is an integer that is assigned by the database when the row is created.
-   */
-  @Column({
-    type: DataType.INTEGER,
-    primaryKey: true,
-    allowNull: false,
-    autoIncrement: true,
-  })
-  declare id: number;
 
   /**
    * This field is managed by Sequelize and tracks the most recent date and time the row was last updated.  This field

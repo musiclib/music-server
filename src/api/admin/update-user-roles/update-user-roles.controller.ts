@@ -20,7 +20,7 @@ import {
 } from '@nestjs/swagger';
 import { Body, Controller, Patch, Query } from '@nestjs/common';
 import { User } from 'src/api/user.decorator';
-import { UserRoleEnum } from 'src/constants/enums';
+import { UserRoleEnum } from 'src/types/enums';
 
 @Controller({
   path: '/api/admin',

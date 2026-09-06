@@ -1,3 +1,5 @@
+import { FileTypeEnum } from 'src/types/enums';
+
 /* eslint-disable @typescript-eslint/quotes */
 const splitDelimiters: string[] = [',', ';', '/', ' & '];
 
@@ -48,7 +50,7 @@ export function sanitizeString(value: string): string {
   return value
     .trim()
     .split("'")
-    .join("' p'")
+    .join("''")
     .replace(/[^\p{L}\p{N}\p{P}\p{P} ]/gu, '');
 }
 
@@ -69,4 +71,26 @@ export function normalizeString(value: string): string {
 export function replaceDoubleQuotes(value: string): string {
   // eslint-disable-next-line @typescript-eslint/quotes
   return value.split("''").join("'");
+}
+
+/**
+ * Returns the corresponding MIME type for a given audio codec.
+ * @param {FileTypeEnum} codec The audio codec for which to get the conten t type
+ * @returns {string} The corresponding MIME type for the audio codec
+ */
+export function getAudioContentType(codec: FileTypeEnum): string {
+  switch (codec) {
+    case FileTypeEnum.MP3:
+      return 'audio/mpeg';
+    case FileTypeEnum.FLAC:
+      return 'audio/flac';
+    // case FileTypeEnum.WAV:
+    //   return 'audio/wav';
+    case FileTypeEnum.OGG:
+      return 'audio/ogg';
+    case FileTypeEnum.M4A:
+      return 'audio/mp4';
+    default:
+      return 'application/octet-stream';
+  }
 }

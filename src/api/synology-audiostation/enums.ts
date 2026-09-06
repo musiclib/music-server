@@ -74,6 +74,7 @@ export enum SynologyMethodEnum {
    */
   RENAME = 'rename',
   STREAM = 'stream',
+  TRANSCODE = 'transcode',
   UNPIN = 'unpin',
   UPDATE_RADIOS = 'updateradios',
   /**

@@ -4,7 +4,7 @@ import { ApiBadRequestResponse, ApiBearerAuth, ApiHeader, ApiOkResponse, ApiOper
 import { Body, Controller, Post, Scope } from '@nestjs/common';
 import { JWT_TOKEN, USER_APIS } from 'src/constants/swagger';
 import { User } from 'src/api/user.decorator';
-import { UserRoleEnum } from 'src/constants/enums';
+import { UserRoleEnum } from 'src/types/enums';
 import {
   UserUpdatePasswordBadRequestResponseDto,
   UserUpdatePasswordBodyDto,

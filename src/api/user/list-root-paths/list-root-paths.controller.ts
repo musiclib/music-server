@@ -6,7 +6,7 @@ import { JWT_TOKEN, USER_APIS } from 'src/constants/swagger';
 import { User } from 'src/api/user.decorator';
 import { UserListRootPathsResponseDto } from './list-root-paths.dto';
 import { UserListRootPathsService } from './list-root-paths.service';
-import { UserRoleEnum } from 'src/constants/enums';
+import { UserRoleEnum } from 'src/types/enums';
 
 @Controller({
   path: '/api/user',

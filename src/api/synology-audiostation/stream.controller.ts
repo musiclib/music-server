@@ -1,11 +1,12 @@
 import { AUTHENTICATED_REQUEST_DESCRIPTION } from './consts';
 import { AccountEntity } from 'src/database/entities';
-import { ApiHeader, ApiOperation, ApiTags } from '@nestjs/swagger';
+import { ApiHeader, ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { Controller, Get, Logger, Query, Res } from '@nestjs/common';
 import { SYNOLOGY_AUDIOSTATION_APIS } from 'src/constants/swagger';
 import { StreamCgiQueryDto } from './dtos';
 import { SynologyStreamService } from './stream.service';
 import { User } from '../user.decorator';
+import { getAudioContentType } from 'src/utils/strings';
 import type { Response } from 'express';
 
 @Controller()
@@ -28,11 +29,17 @@ export class SynologyStreamController {
     name: 'cookie',
     description: 'The session ID and device ID cookies for the user `id={sessionId}; did={deviceId}`',
   })
+  @ApiOkResponse({
+    schema: {
+      type: 'string',
+      format: 'binary',
+    },
+  })
   async getStreamCgi(@User() user: AccountEntity, @Query() query: StreamCgiQueryDto, @Res() res: Response) {
     const streamInfo = await this.streamService.getStream(user.id, query.id);
     res.sendFile(streamInfo.path, {
       headers: {
-        'Content-Type': `audio/${streamInfo.codec}`,
+        'Content-Type': getAudioContentType(streamInfo.codec),
         'Content-Length': streamInfo.fileSize,
       },
     });

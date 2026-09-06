@@ -17,6 +17,7 @@ export class UserListAlbumsService {
     );
     return {
       albums: albums.items,
+      offset: query.offset || 0,
       total: albums.total,
     };
   }

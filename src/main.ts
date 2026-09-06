@@ -4,28 +4,46 @@ import { ClassSerializerInterceptor, Logger, ValidationPipe } from '@nestjs/comm
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { GlobalExceptionFilter } from './api/exception-filter';
 import { NestFactory, Reflector } from '@nestjs/core';
+import compression from 'compression';
 import helmet from 'helmet';
 import helmetConfig from './helmet.config';
+import type { Request } from 'express';
 
 async function bootstrap() {
   // CORS headers
   const cors = {
     origin: [] as string[],
-    credentials: false,
+    credentials: true,
+    methods: ['GET', 'POST', 'PATCH', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+    preflightContinue: false,
+    optionsSuccessStatus: 204,
+    maxAge: 86400, // 24 hours in seconds
   };
   const { CORS_ORIGINS = '' } = process.env;
   if (CORS_ORIGINS?.length) {
     cors.origin = CORS_ORIGINS.split(',');
-    cors.credentials = true;
   }
+  const logger = new Logger('NestApplication');
   const app = await NestFactory.create(AppModule, {
     cors,
     rawBody: true,
+    logger,
     bufferLogs: true,
   });
-  const logger = new Logger('NestApplication');
-  app.useLogger(logger);
   app.use(helmet(helmetConfig));
+  app.use((req, res, next) => {
+    res.setHeader('Cross-Origin-Resource-Policy', 'cross-origin'); // Set CORP header
+    next();
+  });
+  app.use(
+    compression({
+      filter: (req: Request) => {
+        return req.url.indexOf('stream.cgi') === -1 && req.url.indexOf('-cover') === -1;
+      },
+      threshold: 0,
+    }),
+  );
   app.useGlobalFilters(new GlobalExceptionFilter());
   app.useGlobalPipes(
     new ValidationPipe({

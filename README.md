@@ -68,8 +68,8 @@ $ npx dotenv -e .env.localdev npm run start:prod
 
 ## Technical details
 
-NodeJS with NestJS framework is used for the server, and Sequelize ORM is used for database access. The database is SQLite, which is stored in a file in the server's data folder.
+NodeJS with NestJS framework is used for the server, and Sequelize ORM is used for database access. The database is SQLite which is stored in a file in the server's data folder.
 
-Test suites are run with Jest using an in-memory SQLite database and a test library containing a small number of music files that are empty except for their metadata.
+Test suites are run with Jest using an in-memory SQLite database and a test library containing a small number of audio files with dummy metadata.
 
-Swagger can be enabled for API documentation and can be accessed at `/swagger` when the server is running. The OpenAPI specification is available as JSON (`/swagger.json`) and YAML (`/swagger.yaml`).
+Swagger can be enabled for API documentation and can be accessed at `http://localhost:7000/swagger` when the server is running. The OpenAPI specification is available as JSON (`/swagger.json`) and YAML (`/swagger.yaml`).

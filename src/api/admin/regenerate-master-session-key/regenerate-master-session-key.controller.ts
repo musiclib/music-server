@@ -6,7 +6,7 @@ import { AllowedRoles } from 'src/api/role.guard';
 import { ApiBearerAuth, ApiCreatedResponse, ApiHeader, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { Controller, Post, Scope } from '@nestjs/common';
 import { User } from 'src/api/user.decorator';
-import { UserRoleEnum } from 'src/constants/enums';
+import { UserRoleEnum } from 'src/types/enums';
 
 @Controller({
   path: '/api/admin',

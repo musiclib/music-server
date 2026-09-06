@@ -1,8 +1,20 @@
-import { AUTHENTICATED_REQUEST_DESCRIPTION, PAGINATED_DATA_DESCRIPTION } from './consts';
+import { AUTHENTICATED_REQUEST_DESCRIPTION } from './consts';
 import { AccountEntity } from 'src/database/entities';
-import { ApiHeader, ApiOperation, ApiTags } from '@nestjs/swagger';
-import { CACHE_MANAGER, Cache, CacheInterceptor } from '@nestjs/cache-manager';
-import { Controller, Get, HttpCode, HttpStatus, Inject, Logger, Query, Res, UseInterceptors } from '@nestjs/common';
+import { ApiHeader, ApiOkResponse, ApiOperation, ApiProduces, ApiTags } from '@nestjs/swagger';
+import { CACHE_MANAGER, Cache, CacheInterceptor, CacheTTL } from '@nestjs/cache-manager';
+import {
+  Controller,
+  Get,
+  Header,
+  HttpCode,
+  HttpStatus,
+  Inject,
+  Logger,
+  Query,
+  Res,
+  StreamableFile,
+  UseInterceptors,
+} from '@nestjs/common';
 import { CoverCgiAlbumQueryDto, CoverCgiArtistQueryDto, CoverCgiComposerQueryDto, CoverCgiSongQueryDto } from './dtos';
 import { SYNOLOGY_AUDIOSTATION_APIS } from 'src/constants/swagger';
 import { SynologyCoverImageService } from './cover-image.service';
@@ -29,7 +41,6 @@ export class SynologyCoverImageController {
     description: [
       // eslint-disable-next-line max-len
       `Retrieves the cover image for an album, artist, composer or song.  The cover image can be retrieved by specifying the appropriate query parameters in the request.  If an image is not found a default blank cover image will be returned.`,
-      PAGINATED_DATA_DESCRIPTION,
       AUTHENTICATED_REQUEST_DESCRIPTION,
     ].join('\n\n'),
   })
@@ -37,6 +48,17 @@ export class SynologyCoverImageController {
     name: 'cookie',
     description: 'The session ID and device ID cookies for the user `id={sessionId}; did={deviceId}`',
   })
+  @ApiOkResponse({
+    type: Buffer,
+    description: 'The image blob',
+    schema: {
+      type: 'string',
+      format: 'binary',
+    },
+  })
+  @Header('Cache-Control', 'private, max-age=600, stale-while-revalidate=60')
+  @CacheTTL(60)
+  @ApiProduces('application/octet-stream')
   async route(
     @User() user: AccountEntity,
     @Query()
@@ -49,11 +71,6 @@ export class SynologyCoverImageController {
       | any, // TODO: there are some query parameters that are not yet defined in the DTO
     @Res() res: Response,
   ) {
-    const cacheKey = JSON.stringify(query);
-    const cachedValue = await this.cacheManager.get<string>(cacheKey);
-    if (cachedValue) {
-      return cachedValue;
-    }
     let album;
     if ('id' in query) {
       album = await this.coverImageService.getFileCoverImage(user.id, query.id);
@@ -65,16 +82,16 @@ export class SynologyCoverImageController {
       album = await this.coverImageService.getComposerCoverImage(user.id, query.composer_name);
     }
     if (album?.coverImage) {
-      await this.cacheManager.set(cacheKey, album, 300);
-      res.writeHead(206, {
-        'content-type': album.coverImageMimeType,
-        'content-length': album.coverImage.length,
+      return new StreamableFile(album.coverImage, {
+        type: album.coverImageMimeType,
+        disposition: 'inline',
+        length: album.coverImage.length,
       });
-      return res.end(album.coverImage);
     }
     res.setHeader('Content-Type', 'image/png');
-    const blankCoverPath = join(__dirname, 'requests', 'blank-cover.png');
-    const file = createReadStream(blankCoverPath);
-    return file.pipe(res);
+    const blankCoverPath = join(__dirname, 'resources', 'blank-cover.png');
+    return new StreamableFile(createReadStream(blankCoverPath), {
+      type: 'image/png',
+    });
   }
 }

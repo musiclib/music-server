@@ -21,7 +21,7 @@ export class SynologyStreamService {
    */
   async getStream(accountId: number, trackId: number): Promise<StreamDto> {
     const file = await this.fileEntity.findOne({
-      attributes: ['filePath', 'fileSize'],
+      attributes: ['filePath', 'fileSize', 'fileType'],
       where: {
         accountId,
         id: trackId,

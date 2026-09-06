@@ -4,7 +4,7 @@ import { AdminListAccountsService } from './list-accounts.service';
 import { AllowedRoles } from 'src/api/role.guard';
 import { ApiBearerAuth, ApiHeader, ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { Controller, Get, Scope } from '@nestjs/common';
-import { UserRoleEnum } from 'src/constants/enums';
+import { UserRoleEnum } from 'src/types/enums';
 
 @Controller({
   path: '/api/admin',

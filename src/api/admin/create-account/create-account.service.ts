@@ -4,7 +4,7 @@ import { BadRequestException, Injectable } from '@nestjs/common';
 import { ErrorCodes } from 'src/constants/error-codes';
 import { Guid } from 'typescript-guid';
 import { InjectModel } from '@nestjs/sequelize';
-import { UserRoleEnum } from 'src/constants/enums';
+import { UserRoleEnum } from 'src/types/enums';
 
 @Injectable()
 export class AdminCreateAccountService {

@@ -3,7 +3,7 @@ import { ApiProperty } from '@nestjs/swagger';
 import { BadRequestResponseDto, NotFoundResponseDto, SuccessResponseDto } from 'src/api/response.dto';
 import { ErrorCodes } from 'src/constants/error-codes';
 import { IsEnum, IsInt, IsNotEmpty } from 'class-validator';
-import { UserRoleEnum } from 'src/constants/enums';
+import { UserRoleEnum } from 'src/types/enums';
 
 export class AdminUpdateUserRolesQueryDto {
   /**

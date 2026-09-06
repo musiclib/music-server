@@ -31,6 +31,13 @@ export class CollatedArtistEntity extends Model<CollatedArtistEntity> {
   @BelongsTo(() => AccountEntity)
   declare account: AccountEntity;
 
+  /**
+   * This field is managed by Sequelize and tracks the date and time the row was created.  This field should not be
+   * specified if you are inserting and updating data.
+   */
+  @Column(DataType.DATE)
+  declare createdAt: Date;
+
   @Column(DataType.STRING(255))
   declare name: string;
 
