@@ -33,7 +33,7 @@ export class SynologyCoverImageService {
    */
   async getArtistCoverImage(accountId: number, albumArtist: string): Promise<CoverImage | undefined> {
     const artist = await this.albumEntity.findOne({
-      attributes: ['coverImage', 'coverImageMimeType'],
+      attributes: ['id', 'coverImage', 'coverImageMimeType', 'createdAt', 'updatedAt'],
       where: {
         accountId,
       },
@@ -75,7 +75,7 @@ export class SynologyCoverImageService {
     albumTitle?: string,
   ): Promise<CoverImage | undefined> {
     const album = await this.albumEntity.findOne({
-      attributes: ['coverImage', 'coverImageMimeType'],
+      attributes: ['id', 'coverImage', 'coverImageMimeType', 'createdAt', 'updatedAt'],
       where: {
         ...(albumTitle ? { titleNormalized: normalizeString(albumTitle) } : {}),
         accountId,
@@ -131,7 +131,7 @@ export class SynologyCoverImageService {
               include: [
                 {
                   model: AlbumEntity,
-                  attributes: ['coverImage', 'coverImageMimeType'],
+                  attributes: ['id', 'coverImage', 'coverImageMimeType', 'createdAt', 'updatedAt'],
                 },
               ],
             },
@@ -164,7 +164,7 @@ export class SynologyCoverImageService {
       include: [
         {
           model: AlbumEntity,
-          attributes: ['coverImage', 'coverImageMimeType'],
+          attributes: ['id', 'coverImage', 'coverImageMimeType', 'createdAt', 'updatedAt'],
         },
       ],
     });
