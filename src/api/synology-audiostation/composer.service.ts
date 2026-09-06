@@ -1,11 +1,10 @@
-import { CollatedTrackEntity } from 'src/database/entities';
-import { InjectModel } from '@nestjs/sequelize';
 import { Injectable } from '@nestjs/common';
-import { Sequelize } from 'sequelize-typescript';
+import { LibraryComposerDto } from 'src/library/dtos';
+import { LibraryService } from 'src/library/library.service';
 import { SynologyComposerDataDto, SynologyComposerDto } from './dtos/composer.cgi.dto';
 import { replaceDoubleQuotes } from 'src/utils/strings';
 
-function personToRow(person: CollatedTrackEntity): SynologyComposerDto {
+function personToRow(person: LibraryComposerDto): SynologyComposerDto {
   return {
     additional: {
       artist_rating: {
@@ -13,68 +12,19 @@ function personToRow(person: CollatedTrackEntity): SynologyComposerDto {
       },
     },
     id: `composer_${person.id}`,
-    name: replaceDoubleQuotes(person.trackComposers.join(', ')),
+    name: replaceDoubleQuotes(person.name),
   };
 }
 @Injectable()
 export class SynologyComposerService {
-  constructor(
-    @InjectModel(CollatedTrackEntity)
-    private readonly collatedTrackEntity: typeof CollatedTrackEntity,
-  ) {}
+  constructor(private readonly libraryService: LibraryService) {}
 
   async listComposers(accountId: number, offset: number, limit: number): Promise<SynologyComposerDataDto> {
-    const composers = await this.collatedTrackEntity.findAll({
-      attributes: [[Sequelize.fn('DISTINCT', Sequelize.col('track_composers')), 'trackComposers']],
-      where: {
-        accountId,
-      },
-      order: [['track_composers', 'ASC']],
-      limit,
-      offset,
-    });
-    const total = await this.collatedTrackEntity.count({
-      attributes: [[Sequelize.fn('COUNT', Sequelize.fn('DISTINCT', Sequelize.col('track_composers'))), 'count']],
-      where: {
-        accountId,
-      },
-    });
+    const composers = await this.libraryService.listComposers(accountId, {}, offset, limit);
     return {
-      composers: composers.map(personToRow),
+      composers: composers.items.map(personToRow),
       offset,
-      total,
+      total: composers.total,
     };
-    // TODO: Consider if there should be a reconciliation between the Synology API's unique combinations
-    // and the Library API's individual names.
-    //
-    // The Synology API returns all unique combinations of names detected from tracks as composers:
-    //
-    // - Artist 1, Composer 1
-    // - Artist 1, Composer 1, Composer 3
-    // - Artist 1, Composer 2
-    // - Artist 1, Composer 2, Composer 3
-    // - Artist 3, Composer 5
-    // - Composer 1, Composer 2
-    // - Composer 1, Composer 2, Composer 3
-    // - Composer 2, Composer 3
-    // - Composer 4
-    // - Composer 4, Artist 2
-    // - Composer 5
-    // - Composer 6
-    // - Composer 6, Artist 2
-    // - Composer 6, Composer 7
-    //
-    // The Library API returns each of those names individually:
-    //
-    // - Artist 1
-    // - Artist 2
-    // - Artist 3
-    // - Composer 1
-    // - Composer 2
-    // - Composer 3
-    // - Composer 4
-    // - Composer 5
-    // - Composer 6
-    // - Composer 7
   }
 }
