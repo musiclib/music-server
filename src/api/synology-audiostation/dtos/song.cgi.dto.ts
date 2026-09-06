@@ -1,7 +1,7 @@
 /* eslint-disable max-classes-per-file */
 import { ApiProperty } from '@nestjs/swagger';
 import { ContentTypeEnum, FileTypeEnum } from 'src/types/enums';
-import { IsEnum, IsInt, IsNumber, IsString } from 'class-validator';
+import { IsEnum, IsInt, IsNumber, IsString, Max, Min } from 'class-validator';
 import { SynologyApiEnum, SynologyLibraryEnum, SynologyMethodEnum } from '../enums';
 import { SynologyPaginationDto, SynologyPaginationResponseDto, SynologySuccessResponseDto } from './synology.dto';
 import { Transform } from 'class-transformer';
@@ -133,6 +133,38 @@ export class SynologySongsByDefaultGenreBodyDto extends SynologySongsBodyDto {
    */
   @IsString()
   declare genre_filter: string;
+}
+
+export class SynologySongsRateBodyDto extends SynologySongsByAlbumBodyDto {
+  /**
+   * The IDs of the track(s) to rate comes in a `music_<id>,music_<id>` format.
+   *
+   * eg `music_1234,music_5678`
+   *
+   * The posted value is transformed to an array of song IDs as numbers.
+   */
+  @ApiProperty({
+    type: 'integer',
+    isArray: true,
+  })
+  @IsInt()
+  @Transform(({ value }) =>
+    value.split(',').map((v) => {
+      if (v.startsWith('music_')) {
+        return Number.parseInt(v.split('_').pop(), 10);
+      }
+      return v;
+    }),
+  )
+  declare id: number[];
+
+  /**
+   * The rating of the track
+   */
+  @IsInt()
+  @Min(0)
+  @Max(5)
+  declare rating: number;
 }
 
 class SynologySongRatingDto {

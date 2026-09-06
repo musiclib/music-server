@@ -218,4 +218,8 @@ export class SynologySongService {
       total: tracks.total,
     };
   }
+
+  async rateTracks(accountId: number, fileIds: number[], rating: number): Promise<void> {
+    await this.libraryService.rateTracks(accountId, fileIds, rating);
+  }
 }

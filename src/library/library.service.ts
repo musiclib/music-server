@@ -649,6 +649,29 @@ export class LibraryService {
     };
   }
 
+  async rateTracks(accountId: number, fileIds: number[], rating: number): Promise<void> {
+    const files = await this.fileEntity.findAll({
+      where: {
+        accountId,
+        id: fileIds,
+      },
+    });
+    if (files.length !== fileIds.length) {
+      throw new NotFoundException(ErrorCodes.FILE_NOT_FOUND_ERROR);
+    }
+    await this.fileEntity.update(
+      {
+        rating,
+      },
+      {
+        where: {
+          accountId,
+          id: fileIds,
+        },
+      },
+    );
+  }
+
   async retrieveAlbum(accountId: number, albumId: number): Promise<LibraryAlbumWithTracksDto> {
     const matchingAlbumIds = await this.albumService.findMatchingAlbumIds({
       where: {
