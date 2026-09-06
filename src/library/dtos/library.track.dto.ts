@@ -4,6 +4,7 @@ import { FileTypeEnum } from 'src/types/enums';
 import { IsEnum, IsInt, IsNumber, IsString } from 'class-validator';
 import { LibraryArtistDto, LibraryComposerDto } from '.';
 import { LibraryGenreDto } from './library.genre.dto';
+import type { RatingOrUnset } from 'src/types';
 
 export class LibraryTrackDto {
   /**
@@ -109,7 +110,7 @@ export class LibraryTrackDto {
    * The rating of the track which is a value between 0 and 5 inclusive applied to the track.
    */
   @IsInt()
-  declare rating: number;
+  declare rating: RatingOrUnset;
 
   /**
    * The title of the track, which is usually the name of the song or piece of music.

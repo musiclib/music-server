@@ -16,14 +16,7 @@ import { SequelizeModule } from '@nestjs/sequelize';
 
 @Module({
   imports: [
-    SequelizeModule.forFeature([
-      AlbumEntity,
-      AlbumArtistEntity,
-      ArtistEntity,
-      ComposerEntity,
-      FileEntity,
-      GenreEntity,
-    ]),
+    SequelizeModule.forFeature([AlbumEntity, AlbumArtistEntity, ArtistEntity, ComposerEntity, FileEntity, GenreEntity]),
   ],
   providers: [LibraryService, LibraryAlbumService, LibraryArtistService, LibraryComposerService, LibraryTrackService],
   exports: [LibraryService],

@@ -25,6 +25,7 @@ import { normalizeString, replaceDoubleQuotes } from 'src/utils/strings';
 import type { AlbumFilters } from './types/album-filter';
 import type { ArtistFilters } from './types/artist-filter';
 import type { ListResult } from './types/list-result';
+import type { Rating, RatingOrUnset } from 'src/types';
 
 @Injectable()
 export class LibraryService {
@@ -647,6 +648,30 @@ export class LibraryService {
         .filter((item) => item.albums.filter((album) => album.tracks && album.tracks.length > 0).length > 0),
       total: genres.total,
     };
+  }
+
+  async rateTracks(accountId: number, fileIds: number[], rating: RatingOrUnset): Promise<void> {
+    const files = await this.fileEntity.findAll({
+      where: {
+        accountId,
+        id: fileIds,
+      },
+    });
+    if (files.length !== fileIds.length) {
+      throw new NotFoundException(ErrorCodes.FILE_NOT_FOUND_ERROR);
+    }
+    const newValue: Rating | null = rating > 0 ? (rating as Rating) : null;
+    await this.fileEntity.update(
+      {
+        rating: newValue,
+      },
+      {
+        where: {
+          accountId,
+          id: fileIds,
+        },
+      },
+    );
   }
 
   async retrieveAlbum(accountId: number, albumId: number): Promise<LibraryAlbumWithTracksDto> {

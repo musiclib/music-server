@@ -7,6 +7,7 @@ import { LinkedComposerEntity } from './linked-composer.entity';
 import { LinkedGenreEntity } from './linked-genre.entity';
 import { PlaylistItemEntity } from './playlist-item.entity';
 import { RootPathEntity } from './root-path.entity';
+import type { Rating } from 'src/types';
 
 /**
  * The FileEntity holds a reference to a music file within a root path. A user may have
@@ -126,8 +127,11 @@ export class FileEntity extends Model<FileEntity> {
   @HasMany(() => PlaylistItemEntity)
   declare playlistItems?: PlaylistItemEntity[];
 
-  @Column(DataType.INTEGER)
-  declare rating: number;
+  @Column({
+    type: DataType.INTEGER,
+    allowNull: true,
+  })
+  declare rating?: Rating | null;
 
   @Column({
     type: DataType.INTEGER,

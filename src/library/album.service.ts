@@ -24,6 +24,7 @@ import {
 import { LibraryGenreDto } from './dtos/library.genre.dto';
 import { ListResult } from './types/list-result';
 import { normalizeString, replaceDoubleQuotes } from 'src/utils/strings';
+import type { RatingOrUnset } from 'src/types';
 
 @Injectable()
 export class LibraryAlbumService {
@@ -480,7 +481,7 @@ export class LibraryAlbumService {
           createdAt: album.createdAt,
           genres: albumGenres,
           id: album.id,
-          rating: (album as unknown as Record<string, number>).rating ?? 0,
+          rating: ((album as unknown as Record<string, number>).rating ?? 0) as RatingOrUnset,
           sortName: replaceDoubleQuotes(normalizeString(album.title)),
           title: replaceDoubleQuotes(album.title),
           year: album.year,
@@ -751,7 +752,7 @@ export class LibraryAlbumService {
                 fileType: file.fileType,
                 genres: trackGenres,
                 id: file.id,
-                rating: file.rating || 0,
+                rating: file.rating ?? 0,
                 title: replaceDoubleQuotes(file.title),
                 trackNumber: file.trackNumber || 0,
                 year: file.year,
@@ -771,7 +772,7 @@ export class LibraryAlbumService {
           createdAt: album.createdAt,
           genres: albumGenres,
           id: album.id,
-          rating: (album as unknown as Record<string, number>).rating ?? 0,
+          rating: ((album as unknown as Record<string, number>).rating ?? 0) as RatingOrUnset,
           sortName: replaceDoubleQuotes(normalizeString(album.title)),
           title: replaceDoubleQuotes(album.title),
           tracks,

@@ -5012,6 +5012,42 @@ export type components = {
        */
       version: number;
     };
+    SynologySongsRateBodyDto: {
+      /**
+       * @description Synology's API uses this value to route requests appropriately but this software has
+       *     direct endpoints for their relevant URL paths.  As such this value is ignored for now
+       *     but defined to match the Synology API.
+       *
+       *     This endpoint requires a value of `SYNO.AudioStation.Song` be provided for correctness.
+       * @example SYNO.AudioStation.Song
+       */
+      api: components['schemas']['SynologyApiEnum'];
+      /**
+       * @description The IDs of the track(s) to rate comes in a `music_<id>,music_<id>` format.
+       *
+       *     eg `music_1234,music_5678`
+       *
+       *     The posted value is transformed to an array of song IDs as numbers.
+       */
+      id: number[];
+      /**
+       * @description Synology's API uses this value to route requests appropriately. This endpoint requires
+       *     a value of `setrating` be provided for correctness.
+       * @example setrating
+       */
+      method: components['schemas']['SynologyMethodEnum'];
+      /** @description The rating of the track */
+      rating: number;
+      /**
+       * @description Synology's API has versioned endpoints and some have at least 3 versions.  This software
+       *     currently only supports the latest version of the API for each endpoint and ignores this value
+       *     for now.  It's possible to build in support for prior versions of an endpoint but that would
+       *     require using the `debug-proxy` to capture the request and response payloads to understand the
+       *     differences between versions.  If you are running an older DSM NAS and wish to help then check
+       *     out the GitHub Issues page and submit a request to support your version of the API.
+       */
+      version: number;
+    };
     SynologySongTagDto: {
       album: string;
       album_artist: string;
@@ -7837,7 +7873,8 @@ export interface operations {
           | components['schemas']['SynologySongsByAlbumGenreBodyDto']
           | components['schemas']['SynologySongsByGenreBodyDto']
           | components['schemas']['SynologySongsByAlbumDefaultGenreBodyDto']
-          | components['schemas']['SynologySongsByDefaultGenreBodyDto'];
+          | components['schemas']['SynologySongsByDefaultGenreBodyDto']
+          | components['schemas']['SynologySongsRateBodyDto'];
       };
     };
     responses: {
@@ -7847,7 +7884,9 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          'application/json': components['schemas']['SynologySongResponseDto'];
+          'application/json':
+            | components['schemas']['SynologySongResponseDto']
+            | components['schemas']['SynologySuccessResponseDto'];
         };
       };
     };
@@ -8151,6 +8190,7 @@ export enum SynologyMethodEnum {
   query = 'query',
   removemissing = 'removemissing',
   rename = 'rename',
+  setrating = 'setrating',
   stream = 'stream',
   transcode = 'transcode',
   unpin = 'unpin',

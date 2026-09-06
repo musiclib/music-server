@@ -1,12 +1,14 @@
 import { SynologyApi, createSynologyApi } from '../../test-helper.synology';
 import { beforeAll, describe, expect, it } from '@jest/globals';
+import { components } from 'src/types/api-schema';
 
 describe('/webapi/AudioStation/song.cgi', () => {
   let synologyApi: SynologyApi;
 
   async function listSongs(filter: Record<string, string>, offset = 0, limit = 100) {
     const { data, error } = await synologyApi.listSongs(filter, offset, limit);
-    return { data, error, songs: data?.data.songs || [], total: data?.data.total || 0 };
+    const typedData = data as components['schemas']['SynologySongResponseDto'];
+    return { data: typedData, error, songs: typedData?.data.songs || [], total: typedData?.data.total || 0 };
   }
 
   beforeAll(async () => {
@@ -581,5 +583,81 @@ describe('/webapi/AudioStation/song.cgi', () => {
     expect(songs3[6]?.title).toBe('04 Fourth Track');
     expect(songs3[6]?.additional.song_tag.artist).toBe('Artist 3');
     expect(songs3[6]?.additional.song_tag.album).toBe('Album 5');
+  });
+
+  it('should rate song', async () => {
+    const { songs } = await listSongs({
+      album: 'Album 5',
+      album_artist: 'Artist 3',
+    });
+    const song = songs[0];
+    if (!song) {
+      throw new Error('No song found to rate');
+    }
+    const { data } = await synologyApi.rateSongs([Number(song.id.substring('music_'.length))], 5);
+    expect(data?.success).toBe(true);
+    const { songs: songs2 } = await listSongs({
+      album: 'Album 5',
+      album_artist: 'Artist 3',
+    });
+    expect(songs2[0]?.additional.song_rating.rating).toBe(5);
+  });
+
+  it('should rate multiple songs', async () => {
+    const { songs } = await listSongs({
+      album: 'Album 5',
+      album_artist: 'Artist 3',
+    });
+    const song1 = songs[0];
+    const song2 = songs[1];
+    const song3 = songs[2];
+    if (!song1 || !song2 || !song3) {
+      throw new Error('No song found to rate');
+    }
+    const { data } = await synologyApi.rateSongs(
+      [
+        Number(song1.id.substring('music_'.length)),
+        Number(song2.id.substring('music_'.length)),
+        Number(song3.id.substring('music_'.length)),
+      ],
+      3,
+    );
+    expect(data?.success).toBe(true);
+    const { songs: songs2 } = await listSongs({
+      album: 'Album 5',
+      album_artist: 'Artist 3',
+    });
+    expect(songs2[0]?.additional.song_rating.rating).toBe(3);
+    expect(songs2[1]?.additional.song_rating.rating).toBe(3);
+    expect(songs2[2]?.additional.song_rating.rating).toBe(3);
+  });
+
+  it('should unset ratings', async () => {
+    const { songs } = await listSongs({
+      album: 'Album 5',
+      album_artist: 'Artist 3',
+    });
+    const song1 = songs[0];
+    const song2 = songs[1];
+    const song3 = songs[2];
+    if (!song1 || !song2 || !song3) {
+      throw new Error('No song found to rate');
+    }
+    const { data } = await synologyApi.rateSongs(
+      [
+        Number(song1.id.substring('music_'.length)),
+        Number(song2.id.substring('music_'.length)),
+        Number(song3.id.substring('music_'.length)),
+      ],
+      0,
+    );
+    expect(data?.success).toBe(true);
+    const { songs: songs2 } = await listSongs({
+      album: 'Album 5',
+      album_artist: 'Artist 3',
+    });
+    expect(songs2[0]?.additional.song_rating.rating).toBe(0);
+    expect(songs2[1]?.additional.song_rating.rating).toBe(0);
+    expect(songs2[2]?.additional.song_rating.rating).toBe(0);
   });
 });

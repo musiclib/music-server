@@ -23,8 +23,10 @@ import {
   SynologySongsByComposerBodyDto,
   SynologySongsByDefaultGenreBodyDto,
   SynologySongsByGenreBodyDto,
+  SynologySongsRateBodyDto,
 } from './dtos';
 import { SynologySongService } from './song.service';
+import { SynologySuccessResponseDto } from './dtos/synology.dto';
 import { User } from '../user.decorator';
 import { plainToInstance } from 'class-transformer';
 
@@ -51,7 +53,9 @@ export class SynologySongController {
   })
   @ApiOkResponse({
     description: 'Returns a list of songs',
-    type: SynologySongResponseDto,
+    schema: {
+      oneOf: [{ $ref: getSchemaPath(SynologySongResponseDto) }, { $ref: getSchemaPath(SynologySuccessResponseDto) }],
+    },
   })
   @ApiExtraModels(
     SynologySongsBodyDto,
@@ -64,6 +68,9 @@ export class SynologySongController {
     SynologySongsByComposerBodyDto,
     SynologySongsByDefaultGenreBodyDto,
     SynologySongsByGenreBodyDto,
+    SynologySongsRateBodyDto,
+    SynologySongResponseDto,
+    SynologySuccessResponseDto,
   )
   @ApiBody({
     schema: {
@@ -98,6 +105,9 @@ export class SynologySongController {
         {
           $ref: getSchemaPath(SynologySongsByDefaultGenreBodyDto),
         },
+        {
+          $ref: getSchemaPath(SynologySongsRateBodyDto),
+        },
       ],
     },
   })
@@ -115,7 +125,7 @@ export class SynologySongController {
       | SynologySongsByGenreBodyDto
       | SynologySongsByDefaultGenreBodyDto
       | SynologySongsByAlbumDefaultGenreBodyDto,
-  ): Promise<SynologySongResponseDto> {
+  ): Promise<SynologySongResponseDto | SynologySuccessResponseDto> {
     if ('composer' in variousBodies) {
       // Route #1:  Composer tracks for an album
       if ('album' in variousBodies) {
@@ -215,7 +225,15 @@ export class SynologySongController {
         success: true,
       };
     }
-    // Route #9:  Generic track list
+    // Route #9: Rating one or more track(s)
+    if ('rating' in variousBodies) {
+      const body = plainToInstance(SynologySongsRateBodyDto, variousBodies);
+      await this.songService.rateTracks(user.id, body.id, body.rating);
+      return {
+        success: true,
+      };
+    }
+    // Route #10:  Generic track list
     const body = plainToInstance(SynologySongsBodyDto, variousBodies);
     const data = await this.songService.listTracks(user.id, body.offset, body.limit);
     return {

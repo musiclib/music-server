@@ -73,6 +73,10 @@ export enum SynologyMethodEnum {
    * Method for renaming a playlist
    */
   RENAME = 'rename',
+  /**
+   * Method for setting a rating (1-5) on one or more song IDs
+   */
+  SET_RATING = 'setrating',
   STREAM = 'stream',
   TRANSCODE = 'transcode',
   UNPIN = 'unpin',
