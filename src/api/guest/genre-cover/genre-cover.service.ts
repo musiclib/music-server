@@ -6,7 +6,7 @@ import { Op, col, where } from 'sequelize';
 import sharp from 'sharp';
 
 @Injectable()
-export class UserGenreCoverService {
+export class GuestGenreCoverService {
   constructor(
     @InjectModel(AlbumEntity)
     private readonly albumEntity: typeof AlbumEntity,

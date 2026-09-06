@@ -1,12 +1,12 @@
 import { ErrorCodes } from 'src/constants/error-codes';
 import { IsInt, Max, Min } from 'class-validator';
 
-export class UserComposerCoverQueryDto {
+export class GuestGenreCoverQueryDto {
   /**
-   * The ID of the composer
+   * The ID of the genre
    */
-  @IsInt({ message: ErrorCodes.INVALID_COMPOSER_ID_ERROR })
-  @Min(1, { message: ErrorCodes.INVALID_COMPOSER_ID_ERROR })
+  @IsInt({ message: ErrorCodes.INVALID_GENRE_ID_ERROR })
+  @Min(1, { message: ErrorCodes.INVALID_GENRE_ID_ERROR })
   declare id: number;
 
   /**

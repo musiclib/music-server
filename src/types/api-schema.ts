@@ -284,6 +284,57 @@ export type paths = {
     patch: operations['AdminUpdateUserRolesController_patch'];
     trace?: never;
   };
+  '/api/guest/album-cover': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** Cover images for albums, this route is guest-accessible for better browser handling */
+    get: operations['GuestAlbumCoverController_get'];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/guest/artist-cover': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** Cover images for artists.  This route is guest-accessible for better browser-handling. */
+    get: operations['GuestArtistCoverController_get'];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/guest/composer-cover': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** Cover images for composers.  This route is guest-accessible for better browser-handling. */
+    get: operations['GuestComposerCoverController_get'];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
   '/api/guest/create-session': {
     parameters: {
       query?: never;
@@ -298,6 +349,23 @@ export type paths = {
      * @description Creates a user session and returns a JWT token used for authenticating and accessing APIs requiring authentication.
      */
     post: operations['GuestCreateSessionController_post'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/guest/genre-cover': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** Cover images for genres */
+    get: operations['GuestGenreCoverController_get'];
+    put?: never;
+    post?: never;
     delete?: never;
     options?: never;
     head?: never;
@@ -320,49 +388,20 @@ export type paths = {
     patch?: never;
     trace?: never;
   };
-  '/api/user/album-cover': {
+  '/api/guest/stream-file': {
     parameters: {
       query?: never;
       header?: never;
       path?: never;
       cookie?: never;
     };
-    /** Cover images for albums */
-    get: operations['UserAlbumCoverController_get'];
-    put?: never;
-    post?: never;
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/user/artist-cover': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    /** Cover images for artists */
-    get: operations['UserArtistCoverController_get'];
-    put?: never;
-    post?: never;
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/user/composer-cover': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    /** Cover images for composers */
-    get: operations['UserComposerCoverController_get'];
+    /**
+     * Streams audio files.  This route is guest-accessible for better browser handling.
+     * @description Downloads audio files from the music library to the client.  This is used to stream audio files for playback or to download for offline usage.  The audio files are streamed in their original format, and the client is responsible for decoding and playing the audio.  Synology implements transcoding for certain formats, but this is not supported in this server.
+     *
+     *     The request must be authenticated using a valid Synology session ID and device ID cookie for the user, which can be obtained by signing in via the `entry.cgi` endpoint, a two-step process requesting the encryption public key from `/certs` and then  submitting credentials encrypted with it.
+     */
+    get: operations['GuestStreamFileController_get'];
     put?: never;
     post?: never;
     delete?: never;
@@ -443,23 +482,6 @@ export type paths = {
      * @description Returns the folder and file structure of the library.
      */
     get: operations['UserFolderStructureController_get'];
-    put?: never;
-    post?: never;
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/user/genre-cover': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    /** Cover images for genres */
-    get: operations['UserGenreCoverController_get'];
     put?: never;
     post?: never;
     delete?: never;
@@ -1739,6 +1761,27 @@ export type components = {
        * Format: constant
        * @description The success being "true" indicates that the request completed.
        * @default true
+       */
+      success: boolean;
+    };
+    /**
+     * @description The error message(s) that occurred during the validation of the request data or additional requirements
+     *     applied during the execution of the request
+     * @enum {string}
+     */
+    GuestStreamFileNotFoundErrorMessage: GuestStreamFileNotFoundErrorMessage;
+    GuestStreamFileNotFoundResponseDto: {
+      /** @description General description of the error class */
+      error: string;
+      /**
+       * @description The error message(s) that occurred during the validation of the request data or additional requirements
+       *     applied during the execution of the request
+       * @default file-not-found-error
+       */
+      message: components['schemas']['GuestStreamFileNotFoundErrorMessage'][];
+      /**
+       * @description The success being "false" indicates that the request failed to complete.
+       * @default false
        */
       success: boolean;
     };
@@ -6181,6 +6224,84 @@ export interface operations {
       };
     };
   };
+  GuestAlbumCoverController_get: {
+    parameters: {
+      query: {
+        /** @description The ID of the album */
+        id: number;
+        /** @description The width/height size of the image in pixels */
+        size: number;
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'image/jpeg': string;
+          'image/png': string;
+          'image/webp': string;
+        };
+      };
+    };
+  };
+  GuestArtistCoverController_get: {
+    parameters: {
+      query: {
+        /** @description The ID of the artist */
+        id: number;
+        /** @description The width/height size of the image in pixels */
+        size: number;
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'image/jpeg': string;
+          'image/png': string;
+          'image/webp': string;
+        };
+      };
+    };
+  };
+  GuestComposerCoverController_get: {
+    parameters: {
+      query: {
+        /** @description The ID of the composer */
+        id: number;
+        /** @description The width/height size of the image in pixels */
+        size: number;
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'image/jpeg': string;
+          'image/png': string;
+          'image/webp': string;
+        };
+      };
+    };
+  };
   GuestCreateSessionController_post: {
     parameters: {
       query?: never;
@@ -6220,6 +6341,32 @@ export interface operations {
       };
     };
   };
+  GuestGenreCoverController_get: {
+    parameters: {
+      query: {
+        /** @description The ID of the genre */
+        id: number;
+        /** @description The width/height size of the image in pixels */
+        size: number;
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'image/jpeg': string;
+          'image/png': string;
+          'image/webp': string;
+        };
+      };
+    };
+  };
   GuestHealthcheckController_healthcheck: {
     parameters: {
       query?: never;
@@ -6237,17 +6384,13 @@ export interface operations {
       };
     };
   };
-  UserAlbumCoverController_get: {
+  GuestStreamFileController_get: {
     parameters: {
       query: {
-        /** @description The ID of the album */
+        /** @description The ID of the file */
         id: number;
-        /** @description The width/height size of the image in pixels */
-        size: number;
       };
-      header: {
-        Authorization: string;
-      };
+      header?: never;
       path?: never;
       cookie?: never;
     };
@@ -6258,65 +6401,16 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          'image/jpeg': string;
-          'image/png': string;
-          'image/webp': string;
+          'application/json': string;
         };
       };
-    };
-  };
-  UserArtistCoverController_get: {
-    parameters: {
-      query: {
-        /** @description The ID of the artist */
-        id: number;
-        /** @description The width/height size of the image in pixels */
-        size: number;
-      };
-      header: {
-        Authorization: string;
-      };
-      path?: never;
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      200: {
+      /** @description The requested file was not found */
+      404: {
         headers: {
           [name: string]: unknown;
         };
         content: {
-          'image/jpeg': string;
-          'image/png': string;
-          'image/webp': string;
-        };
-      };
-    };
-  };
-  UserComposerCoverController_get: {
-    parameters: {
-      query: {
-        /** @description The ID of the composer */
-        id: number;
-        /** @description The width/height size of the image in pixels */
-        size: number;
-      };
-      header: {
-        Authorization: string;
-      };
-      path?: never;
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'image/jpeg': string;
-          'image/png': string;
-          'image/webp': string;
+          'application/json': components['schemas']['GuestStreamFileNotFoundResponseDto'];
         };
       };
     };
@@ -6457,34 +6551,6 @@ export interface operations {
         };
         content: {
           'application/json': components['schemas']['UserFolderStructureResponseDto'];
-        };
-      };
-    };
-  };
-  UserGenreCoverController_get: {
-    parameters: {
-      query: {
-        /** @description The ID of the genre */
-        id: number;
-        /** @description The width/height size of the image in pixels */
-        size: number;
-      };
-      header: {
-        Authorization: string;
-      };
-      path?: never;
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'image/jpeg': string;
-          'image/png': string;
-          'image/webp': string;
         };
       };
     };
@@ -8002,6 +8068,9 @@ export enum GuestCreateSessionBadRequestErrorMessageEnum {
   invalid_username_length_error = 'invalid-username-length-error',
   invalid_password_error = 'invalid-password-error',
   invalid_password_length_error = 'invalid-password-length-error',
+}
+export enum GuestStreamFileNotFoundErrorMessage {
+  file_not_found_error = 'file-not-found-error',
 }
 export enum InternalServerErrorEnum {
   internal_server_error = 'internal-server-error',

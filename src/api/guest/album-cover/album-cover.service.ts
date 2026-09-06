@@ -1,29 +1,27 @@
 import { AlbumEntity } from 'src/database/entities/album.entity';
 import { CoverImage } from 'src/types/cover-image';
-import { ErrorCodes } from 'src/constants/error-codes';
 import { InjectModel } from '@nestjs/sequelize';
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { Op, col, where } from 'sequelize';
 import sharp from 'sharp';
 
 @Injectable()
-export class UserAlbumCoverService {
+export class GuestAlbumCoverService {
   constructor(
     @InjectModel(AlbumEntity)
     private readonly albumEntity: typeof AlbumEntity,
   ) {}
 
-  async getAlbumCoverImage(accountId: number, albumId: number, size: number): Promise<CoverImage | undefined> {
+  async getAlbumCoverImage(albumId: number, size: number): Promise<CoverImage | undefined> {
     const albumCover = await this.albumEntity.findOne({
-      attributes: ['coverImage', 'coverImageMimeType'],
+      attributes: ['coverImage', 'coverImageMimeType', 'createdAt', 'updatedAt'],
       where: {
         id: albumId,
-        accountId,
         [Op.and]: [where(col('coverImage'), Op.not, null), where(col('coverImageMimeType'), Op.not, null)],
       },
     });
     if (!albumCover) {
-      throw new NotFoundException(ErrorCodes.ALBUM_NOT_FOUND_ERROR);
+      return undefined;
     }
     const sharpImage = sharp(albumCover.coverImage);
     const metadata = await sharpImage.metadata();
@@ -37,6 +35,7 @@ export class UserAlbumCoverService {
     return {
       coverImage: albumCover.coverImage,
       coverImageMimeType: albumCover.coverImageMimeType,
+      updatedAt: albumCover.updatedAt || albumCover.createdAt,
     };
   }
 }

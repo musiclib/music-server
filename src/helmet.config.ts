@@ -1,6 +1,11 @@
 /* eslint-disable @typescript-eslint/quotes */
 import { HelmetOptions } from 'helmet';
 
+const origins = (process.env.ORIGINS ?? '')
+  .split(',')
+  .map((origin) => origin.trim())
+  .filter(Boolean);
+
 const config: HelmetOptions = {
   hsts: {
     maxAge: 31536000,
@@ -12,7 +17,7 @@ const config: HelmetOptions = {
       defaultSrc: ["'self'"],
       styleSrc: ["'self'", "'unsafe-inline'"],
       scriptSrc: ["'self'"],
-      imgSrc: ["'self'", 'data:', 'https:'],
+      imgSrc: ["'self'", 'data:', 'https:', ...origins],
       connectSrc: ["'self'"],
       fontSrc: ["'self'"],
       objectSrc: ["'none'"],

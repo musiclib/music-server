@@ -1,15 +1,12 @@
 /* eslint-disable max-len */
 import { APP_GUARD } from '@nestjs/core';
+import { GuestGenreCoverModule } from '../guest/genre-cover/genre-cover.module';
 import { Module } from '@nestjs/common';
 import { RoleGuard } from '../role.guard';
-import { UserAlbumCoverModule } from './album-cover/album-cover.module';
-import { UserArtistCoverModule } from './artist-cover/artist-cover.module';
-import { UserComposerCoverModule } from './composer-cover/composer-cover.module';
 import { UserCreateRootPathModule } from './create-root-path/create-root-path.module';
 import { UserDeleteRootPathModule } from './delete-root-path/delete-root-path.module';
 import { UserEndSessionModule } from './end-session/end-session.module';
 import { UserFolderStructureModule } from './folder-structure/folder-structure.module';
-import { UserGenreCoverModule } from './genre-cover/genre-cover.module';
 import { UserListAlbumArtistsModule } from './list-album-artists/list-album-artists.module';
 import { UserListAlbumArtistsWithTracksModule } from './list-album-artists-with-tracks/list-album-artists-with-tracks.module';
 import { UserListAlbumsModule } from './list-albums/list-albums.module';
@@ -29,14 +26,11 @@ import { UserUpdatePasswordModule } from './update-password/update-password.modu
 
 @Module({
   imports: [
-    UserAlbumCoverModule,
-    UserArtistCoverModule,
-    UserComposerCoverModule,
     UserCreateRootPathModule,
     UserDeleteRootPathModule,
     UserEndSessionModule,
     UserFolderStructureModule,
-    UserGenreCoverModule,
+    GuestGenreCoverModule,
     UserListAlbumArtistsModule,
     UserListAlbumArtistsWithTracksModule,
     UserListAlbumsModule,

@@ -13,24 +13,34 @@ async function bootstrap() {
   // CORS headers
   const cors = {
     origin: [] as string[],
-    credentials: false,
+    credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+    preflightContinue: false,
+    optionsSuccessStatus: 204,
+    maxAge: 86400, // 24 hours in seconds
   };
   const { CORS_ORIGINS = '' } = process.env;
   if (CORS_ORIGINS?.length) {
     cors.origin = CORS_ORIGINS.split(',');
-    cors.credentials = true;
   }
+  const logger = new Logger('NestApplication');
   const app = await NestFactory.create(AppModule, {
     cors,
     rawBody: true,
+    logger,
     bufferLogs: true,
   });
-  const logger = new Logger('NestApplication');
-  app.useLogger(logger);
   app.use(helmet(helmetConfig));
+  app.use((req, res, next) => {
+    res.setHeader('Cross-Origin-Resource-Policy', 'cross-origin'); // Set CORP header
+    next();
+  });
   app.use(
     compression({
-      filter: (req: Request) => req.url.indexOf('stream.cgi') === -1,
+      filter: (req: Request) => {
+        return req.url.indexOf('stream.cgi') === -1 && req.url.indexOf('-cover') === -1;
+      },
       threshold: 0,
     }),
   );
