@@ -68,6 +68,8 @@ export class SynologySongController {
     SynologySongsByComposerBodyDto,
     SynologySongsByDefaultGenreBodyDto,
     SynologySongsByGenreBodyDto,
+    SynologySongsRateBodyDto,
+    SynologySongResponseDto,
     SynologySuccessResponseDto,
   )
   @ApiBody({
@@ -102,6 +104,9 @@ export class SynologySongController {
         },
         {
           $ref: getSchemaPath(SynologySongsByDefaultGenreBodyDto),
+        },
+        {
+          $ref: getSchemaPath(SynologySongsRateBodyDto),
         },
       ],
     },

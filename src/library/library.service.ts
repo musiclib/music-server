@@ -649,7 +649,7 @@ export class LibraryService {
     };
   }
 
-  async rateTracks(accountId: number, fileIds: number[], rating: number): Promise<void> {
+  async rateTracks(accountId: number, fileIds: number[], rating: 0 | 1 | 2 | 3 | 4 | 5): Promise<void> {
     const files = await this.fileEntity.findAll({
       where: {
         accountId,
@@ -661,7 +661,7 @@ export class LibraryService {
     }
     await this.fileEntity.update(
       {
-        rating,
+        rating: rating > 0 ? rating : undefined,
       },
       {
         where: {

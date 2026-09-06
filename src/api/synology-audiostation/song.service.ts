@@ -18,7 +18,7 @@ function songToRow(track: LibraryTrackDto): SynologySongDto {
         frequency: track.fileFrequency,
       },
       song_rating: {
-        rating: 0,
+        rating: track.rating,
       },
       song_tag: {
         album: replaceDoubleQuotes(track.albumTitle || ''),
