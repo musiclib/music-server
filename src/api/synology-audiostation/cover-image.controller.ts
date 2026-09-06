@@ -1,31 +1,21 @@
 import { AUTHENTICATED_REQUEST_DESCRIPTION } from './consts';
 import { AccountEntity } from 'src/database/entities';
 import { ApiHeader, ApiOkResponse, ApiOperation, ApiProduces, ApiTags } from '@nestjs/swagger';
-import { CACHE_MANAGER, Cache, CacheInterceptor, CacheTTL } from '@nestjs/cache-manager';
-import {
-  Controller,
-  Get,
-  Header,
-  HttpCode,
-  HttpStatus,
-  Inject,
-  Logger,
-  Query,
-  Res,
-  StreamableFile,
-  UseInterceptors,
-} from '@nestjs/common';
+import { CACHE_MANAGER, Cache } from '@nestjs/cache-manager';
+import { Controller, Get, HttpCode, HttpStatus, Inject, Logger, Query, Req, Res } from '@nestjs/common';
 import { CoverCgiAlbumQueryDto, CoverCgiArtistQueryDto, CoverCgiComposerQueryDto, CoverCgiSongQueryDto } from './dtos';
 import { SYNOLOGY_AUDIOSTATION_APIS } from 'src/constants/swagger';
 import { SynologyCoverImageService } from './cover-image.service';
 import { User } from '../user.decorator';
-import { createReadStream } from 'node:fs';
-import { join } from 'node:path';
-import type { Response } from 'express';
+import { join, sep } from 'node:path';
+import { readFileSync } from 'node:fs';
+import type { Request, Response } from 'express';
+
+let blankBuffer: Buffer;
+const emptyBuffer = Buffer.alloc(0);
 
 @Controller()
 @ApiTags(SYNOLOGY_AUDIOSTATION_APIS)
-@UseInterceptors(CacheInterceptor)
 export class SynologyCoverImageController {
   private readonly logger: Logger = new Logger(SynologyCoverImageController.name);
 
@@ -56,20 +46,19 @@ export class SynologyCoverImageController {
       format: 'binary',
     },
   })
-  @Header('Cache-Control', 'private, max-age=600, stale-while-revalidate=60')
-  @CacheTTL(60)
-  @ApiProduces('application/octet-stream')
+  @ApiProduces('image/jpeg', 'image/png', 'image/webp')
+  @ApiOkResponse({
+    schema: {
+      type: 'string',
+      format: 'binary',
+    },
+  })
   async route(
     @User() user: AccountEntity,
     @Query()
-    query:
-      | CoverCgiAlbumQueryDto
-      | CoverCgiArtistQueryDto
-      | CoverCgiComposerQueryDto
-      | CoverCgiSongQueryDto
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      | any, // TODO: there are some query parameters that are not yet defined in the DTO
-    @Res() res: Response,
+    query: CoverCgiAlbumQueryDto | CoverCgiArtistQueryDto | CoverCgiComposerQueryDto | CoverCgiSongQueryDto,
+    @Req() request: Request,
+    @Res() response: Response,
   ) {
     let album;
     if ('id' in query) {
@@ -82,16 +71,32 @@ export class SynologyCoverImageController {
       album = await this.coverImageService.getComposerCoverImage(user.id, query.composer_name);
     }
     if (album?.coverImage) {
-      return new StreamableFile(album.coverImage, {
-        type: album.coverImageMimeType,
-        disposition: 'inline',
-        length: album.coverImage.length,
+      const eTag = `album-${album.id}-${album.updatedAt?.getTime() || ''}-2`;
+      const fileType = album.coverImageMimeType.split(sep).pop();
+      response.set({
+        'Content-Type': album.coverImageMimeType,
+        'Content-Disposition': `inline; filename="album-cover.${album.id}.${fileType}"`,
+        ETag: eTag,
       });
+      if (request.fresh) {
+        response.status(304);
+        return response.end(emptyBuffer);
+      }
+      return response.end(album.coverImage);
     }
-    res.setHeader('Content-Type', 'image/png');
-    const blankCoverPath = join(__dirname, 'resources', 'blank-cover.png');
-    return new StreamableFile(createReadStream(blankCoverPath), {
-      type: 'image/png',
+    // anticipated for:
+    // genres: default_genre_name="..."
+    // folders: id="dir_n"
+    response.set({
+      'Content-Type': 'image/png',
+      'Content-Disposition': `inline; filename="album-cover.blank.png"`,
+      ETag: 'blank-cover',
     });
+    if (request.fresh) {
+      response.status(304);
+      return response.end(emptyBuffer);
+    }
+    blankBuffer = blankBuffer || readFileSync(join(__dirname, 'resources', 'blank-cover.png'));
+    return response.end(blankBuffer);
   }
 }
