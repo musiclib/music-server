@@ -2,9 +2,9 @@ import { ADMIN_APIS, JWT_TOKEN } from 'src/constants/swagger';
 import { AccountEntity } from 'src/database/entities';
 import { AdminSetIndexerStatusBodyDto, AdminSetIndexerStatusResponseDto } from './set-indexer-status.dto';
 import { AdminSetIndexerStatusService } from './set-indexer-status.service';
-import { AllowedRoles } from 'src/api/role.guard';
+import { AllowedRoles, RoleGuard } from 'src/api/role.guard';
 import { ApiBearerAuth, ApiHeader, ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
-import { Body, Controller, Patch, Scope } from '@nestjs/common';
+import { Body, Controller, Patch, Scope, UseGuards } from '@nestjs/common';
 import { User } from 'src/api/user.decorator';
 import { UserRoleEnum } from 'src/types/enums';
 
@@ -13,6 +13,7 @@ import { UserRoleEnum } from 'src/types/enums';
   scope: Scope.REQUEST,
 })
 @ApiTags(ADMIN_APIS)
+@UseGuards(RoleGuard)
 export class AdminSetIndexerStatusController {
   constructor(private readonly setIndexerStatusService: AdminSetIndexerStatusService) {}
 

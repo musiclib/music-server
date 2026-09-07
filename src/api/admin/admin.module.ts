@@ -1,4 +1,3 @@
-import { APP_GUARD } from '@nestjs/core';
 import { AdminCreateAccountModule } from './create-account/create-account.module';
 import { AdminCreateRootPathModule } from './create-root-path/create-root-path.module';
 import { AdminDeleteAccountModule } from './delete-account/delete-account.module';
@@ -15,7 +14,6 @@ import { AdminSetIndexerStatusModule } from './set-indexer-status/set-indexer-st
 import { AdminUpdateRootPathModule } from './update-root-path/update-root-path.module';
 import { AdminUpdateUserRolesModule } from './update-user-roles/update-user-roles.module';
 import { Module } from '@nestjs/common';
-import { RoleGuard } from '../role.guard';
 
 @Module({
   imports: [
@@ -33,12 +31,6 @@ import { RoleGuard } from '../role.guard';
     AdminResetUserPasswordModule,
     AdminRegenerateUserSessionKeyModule,
     AdminRegenerateMasterSessionKeyModule,
-  ],
-  providers: [
-    {
-      provide: APP_GUARD,
-      useClass: RoleGuard,
-    },
   ],
 })
 export class AdminModule {}

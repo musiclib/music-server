@@ -1,4 +1,3 @@
-import { AllowGuest } from 'src/api/role.guard';
 import { ApiOkResponse, ApiOperation, ApiProduces, ApiTags } from '@nestjs/swagger';
 import { Controller, Get, Query, Req, Res, StreamableFile } from '@nestjs/common';
 import { GUEST_APIS } from 'src/constants/swagger';
@@ -20,7 +19,6 @@ export class GuestComposerCoverController {
 
   // eslint-disable-next-line class-methods-use-this
   @Get('composer-cover')
-  @AllowGuest()
   @ApiOperation({
     summary: 'Cover images for composers.  This route is guest-accessible for better browser-handling.',
   })

@@ -7,7 +7,7 @@ import {
   AdminCreateRootPathResponseDto,
 } from './create-root-path.dto';
 import { AdminCreateRootPathService } from './create-root-path.service';
-import { AllowedRoles } from 'src/api/role.guard';
+import { AllowedRoles, RoleGuard } from 'src/api/role.guard';
 import {
   ApiBadRequestResponse,
   ApiBearerAuth,
@@ -17,13 +17,14 @@ import {
   ApiOperation,
   ApiTags,
 } from '@nestjs/swagger';
-import { Body, Controller, Post, Query } from '@nestjs/common';
+import { Body, Controller, Post, Query, UseGuards } from '@nestjs/common';
 import { UserRoleEnum } from 'src/types/enums';
 
 @Controller({
   path: '/api/admin',
 })
 @ApiTags(ADMIN_APIS)
+@UseGuards(RoleGuard)
 export class AdminCreateRootPathController {
   constructor(private readonly createRootPathService: AdminCreateRootPathService) {}
 

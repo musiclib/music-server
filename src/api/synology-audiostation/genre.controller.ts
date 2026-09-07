@@ -1,15 +1,17 @@
 import { AUTHENTICATED_REQUEST_DESCRIPTION, PAGINATED_DATA_DESCRIPTION } from './consts';
 import { AccountEntity } from 'src/database/entities';
 import { ApiExtraModels, ApiHeader, ApiOkResponse, ApiOperation, ApiTags, getSchemaPath } from '@nestjs/swagger';
-import { Body, Controller, HttpCode, HttpStatus, Logger, Post } from '@nestjs/common';
+import { Body, Controller, HttpCode, HttpStatus, Logger, Post, UseGuards } from '@nestjs/common';
 import { SYNOLOGY_AUDIOSTATION_APIS } from 'src/constants/swagger';
 import { SynologyDefaultGenreResponseDto, SynologyGenreBodyDto, SynologyGenreResponseDto } from './dtos';
 import { SynologyGenreService } from './genre.service';
+import { SynologyGuard } from './synology.guard';
 import { SynologyMethodEnum } from './enums';
 import { User } from '../user.decorator';
 
 @Controller()
 @ApiTags(SYNOLOGY_AUDIOSTATION_APIS)
+@UseGuards(SynologyGuard)
 export class SynologyGenreController {
   private readonly logger: Logger = new Logger(SynologyGenreController.name);
 

@@ -1,4 +1,3 @@
-import { AllowGuest } from 'src/api/role.guard';
 import { ApiTags } from '@nestjs/swagger';
 import { Controller, Get } from '@nestjs/common';
 import { GUEST_APIS } from 'src/constants/swagger';
@@ -10,7 +9,6 @@ import { GUEST_APIS } from 'src/constants/swagger';
 export class GuestHealthcheckController {
   // eslint-disable-next-line class-methods-use-this
   @Get('healthcheck')
-  @AllowGuest()
   healthcheck() {
     return { status: 'ok' };
   }

@@ -5,9 +5,9 @@ import {
   AdminDeleteRootPathResponseDto,
 } from './delete-root-path.dto';
 import { AdminDeleteRootPathService } from './delete-root-path.service';
-import { AllowedRoles } from 'src/api/role.guard';
+import { AllowedRoles, RoleGuard } from 'src/api/role.guard';
 import { ApiBearerAuth, ApiHeader, ApiNotFoundResponse, ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
-import { Controller, Delete, Query, Scope } from '@nestjs/common';
+import { Controller, Delete, Query, Scope, UseGuards } from '@nestjs/common';
 import { UserRoleEnum } from 'src/types/enums';
 
 @Controller({
@@ -15,6 +15,7 @@ import { UserRoleEnum } from 'src/types/enums';
   scope: Scope.REQUEST,
 })
 @ApiTags(ADMIN_APIS)
+@UseGuards(RoleGuard)
 export class AdminDeleteRootPathController {
   constructor(private readonly deleteRootPathService: AdminDeleteRootPathService) {}
 

@@ -1,14 +1,16 @@
 import { AUTHENTICATED_REQUEST_DESCRIPTION, PAGINATED_DATA_DESCRIPTION } from './consts';
 import { AccountEntity } from 'src/database/entities';
 import { ApiHeader, ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
-import { Body, Controller, HttpCode, HttpStatus, Logger, Post } from '@nestjs/common';
+import { Body, Controller, HttpCode, HttpStatus, Logger, Post, UseGuards } from '@nestjs/common';
 import { SYNOLOGY_AUDIOSTATION_APIS } from 'src/constants/swagger';
 import { SynologyComposerBodyDto, SynologyComposerResponseDto } from './dtos/composer.cgi.dto';
 import { SynologyComposerService } from './composer.service';
+import { SynologyGuard } from './synology.guard';
 import { User } from '../user.decorator';
 
 @Controller()
 @ApiTags(SYNOLOGY_AUDIOSTATION_APIS)
+@UseGuards(SynologyGuard)
 export class SynologyComposerController {
   private readonly logger: Logger = new Logger(SynologyComposerController.name);
 

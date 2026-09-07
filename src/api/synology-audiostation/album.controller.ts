@@ -9,7 +9,7 @@ import {
   ApiTags,
   getSchemaPath,
 } from '@nestjs/swagger';
-import { Body, Controller, HttpCode, HttpStatus, Logger, Post } from '@nestjs/common';
+import { Body, Controller, HttpCode, HttpStatus, Logger, Post, UseGuards } from '@nestjs/common';
 import { SYNOLOGY_AUDIOSTATION_APIS } from 'src/constants/swagger';
 import {
   SynologyAlbumResponseDto,
@@ -22,11 +22,13 @@ import {
   SynologyAlbumsByGenreBodyDto,
 } from './dtos/album.cgi.dto';
 import { SynologyAlbumService } from './album.service';
+import { SynologyGuard } from './synology.guard';
 import { User } from '../user.decorator';
 import { plainToInstance } from 'class-transformer';
 
 @Controller()
 @ApiTags(SYNOLOGY_AUDIOSTATION_APIS)
+@UseGuards(SynologyGuard)
 export class SynologyAlbumController {
   private readonly logger: Logger = new Logger(SynologyAlbumController.name);
 

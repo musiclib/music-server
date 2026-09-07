@@ -7,7 +7,7 @@ import {
   AdminUpdateRootPathResponseDto,
 } from './update-root-path.dto';
 import { AdminUpdateRootPathService } from './update-root-path.service';
-import { AllowedRoles } from 'src/api/role.guard';
+import { AllowedRoles, RoleGuard } from 'src/api/role.guard';
 import {
   ApiBadRequestResponse,
   ApiBearerAuth,
@@ -17,7 +17,7 @@ import {
   ApiOperation,
   ApiTags,
 } from '@nestjs/swagger';
-import { Body, Controller, Patch, Query, Scope } from '@nestjs/common';
+import { Body, Controller, Patch, Query, Scope, UseGuards } from '@nestjs/common';
 import { UserRoleEnum } from 'src/types/enums';
 
 @Controller({
@@ -25,6 +25,7 @@ import { UserRoleEnum } from 'src/types/enums';
   scope: Scope.REQUEST,
 })
 @ApiTags(ADMIN_APIS)
+@UseGuards(RoleGuard)
 export class AdminUpdateRootPathController {
   constructor(private readonly updateRootPathService: AdminUpdateRootPathService) {}
 

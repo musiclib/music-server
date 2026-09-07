@@ -1,4 +1,4 @@
-import { AllowedRoles } from 'src/api/role.guard';
+import { AllowedRoles, RoleGuard } from 'src/api/role.guard';
 import {
   ApiBadRequestResponse,
   ApiBearerAuth,
@@ -9,7 +9,7 @@ import {
   ApiTags,
 } from '@nestjs/swagger';
 import { BadRequestResponseDto, InternalServerErrorResponseDto, SuccessResponseDto } from 'src/api/response.dto';
-import { Controller, Delete, Logger } from '@nestjs/common';
+import { Controller, Delete, Logger, UseGuards } from '@nestjs/common';
 import { JWT_TOKEN, USER_APIS } from 'src/constants/swagger';
 import { Session } from 'src/api/session.decorator';
 import { SessionEntity } from 'src/database/entities';
@@ -20,6 +20,7 @@ import { UserRoleEnum } from 'src/types/enums';
   path: '/api/user',
 })
 @ApiTags(USER_APIS)
+@UseGuards(RoleGuard)
 export class UserEndSessionController {
   private readonly logger: Logger = new Logger(UserEndSessionController.name);
 
