@@ -31,6 +31,7 @@ async function bootstrap() {
     logger,
     bufferLogs: true,
   });
+  app.getHttpAdapter().getInstance().set('etag', false);
   app.use(helmet(helmetConfig));
   app.use((req, res, next) => {
     res.setHeader('Cross-Origin-Resource-Policy', 'cross-origin'); // Set CORP header
@@ -39,7 +40,12 @@ async function bootstrap() {
   app.use(
     compression({
       filter: (req: Request) => {
-        return req.url.indexOf('stream.cgi') === -1 && req.url.indexOf('-cover') === -1;
+        return (
+          req.url.indexOf('stream.cgi') === -1 &&
+          req.url.indexOf('-cover') === -1 &&
+          req.url.indexOf('authLogin.cgi') === -1 &&
+          req.url.indexOf('.php') === -1
+        );
       },
       threshold: 0,
     }),

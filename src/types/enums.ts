@@ -4,6 +4,7 @@ export enum UserRoleEnum {
 }
 
 export enum SessionRestrictionEnum {
+  QNAP_MUSICSTATION = 'qnap-musicstation',
   SYNOLOGY_AUDIOSTATION = 'synology-audiostation',
   WEB_UI = 'web-ui',
 }
