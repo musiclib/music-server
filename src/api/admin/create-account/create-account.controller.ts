@@ -43,7 +43,6 @@ export class AdminCreateAccountController {
   @ApiBadRequestResponse({
     type: AdminCreateAccountBadRequestResponseDto,
   })
-  @ApiBadRequestResponse({ type: AdminCreateAccountBadRequestResponseDto })
   async post(@Body() body: AdminCreateAccountBodyDto): Promise<AdminCreateAccountResponseDto> {
     await this.createAccountService.post(body.username, body.password, body.roles);
     return {

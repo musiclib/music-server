@@ -84,7 +84,6 @@ export class SynologyEntryService {
   constructor(
     @InjectModel(AlbumEntity)
     private readonly albumEntity: typeof AlbumEntity,
-    @Inject(AuthenticationService)
     private readonly authenticationService: AuthenticationService,
     @InjectModel(CollatedArtistEntity)
     private readonly collatedArtistEntity: typeof CollatedArtistEntity,

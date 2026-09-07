@@ -221,7 +221,6 @@ export class SynologySongService {
   }
 
   async rateTracks(accountId: number, fileIds: number[], rating: RatingOrUnset): Promise<void> {
-    console.log('rating', fileIds, rating);
     await this.libraryService.rateTracks(accountId, fileIds, rating);
   }
 }
