@@ -1,5 +1,5 @@
 import { AccountEntity } from 'src/database/entities';
-import { AllowedRoles } from 'src/api/role.guard';
+import { AllowedRoles, RoleGuard } from 'src/api/role.guard';
 import {
   ApiBadRequestResponse,
   ApiBearerAuth,
@@ -9,7 +9,7 @@ import {
   ApiOperation,
   ApiTags,
 } from '@nestjs/swagger';
-import { Controller, Get, Query } from '@nestjs/common';
+import { Controller, Get, Query, UseGuards } from '@nestjs/common';
 import { JWT_TOKEN, USER_APIS } from 'src/constants/swagger';
 import { User } from 'src/api/user.decorator';
 import {
@@ -25,6 +25,7 @@ import { UserRoleEnum } from 'src/types/enums';
   path: '/api/user',
 })
 @ApiTags(USER_APIS)
+@UseGuards(RoleGuard)
 export class UserListIndexerLogsController {
   constructor(private readonly listIndexerLogsService: UserListIndexerLogsService) {}
 

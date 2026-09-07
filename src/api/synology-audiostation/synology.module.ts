@@ -1,4 +1,3 @@
-import { APP_GUARD } from '@nestjs/core';
 import { LibraryModule } from 'src/library/library.module';
 import { Module } from '@nestjs/common';
 import { SequelizeModule } from '@nestjs/sequelize';
@@ -16,7 +15,6 @@ import { SynologyFolderController } from './folder.controller';
 import { SynologyFolderService } from './folder.service';
 import { SynologyGenreController } from './genre.controller';
 import { SynologyGenreService } from './genre.service';
-import { SynologyGuard } from './synology.guard';
 import { SynologyInfoController } from './info.controller';
 import { SynologyInfoService } from './info.service';
 import { SynologyPlaylistController } from './playlist.controller';
@@ -55,10 +53,6 @@ import { entitiesList } from 'src/database/entities';
     SynologyStreamController,
   ],
   providers: [
-    {
-      provide: APP_GUARD,
-      useClass: SynologyGuard,
-    },
     SynologyAlbumService,
     SynologyArtistService,
     SynologyComposerService,

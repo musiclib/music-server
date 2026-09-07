@@ -1,8 +1,6 @@
 /* eslint-disable max-len */
-import { APP_GUARD } from '@nestjs/core';
 import { GuestGenreCoverModule } from '../guest/genre-cover/genre-cover.module';
 import { Module } from '@nestjs/common';
-import { RoleGuard } from '../role.guard';
 import { UserCreateRootPathModule } from './create-root-path/create-root-path.module';
 import { UserDeleteRootPathModule } from './delete-root-path/delete-root-path.module';
 import { UserEndSessionModule } from './end-session/end-session.module';
@@ -47,12 +45,6 @@ import { UserUpdatePasswordModule } from './update-password/update-password.modu
     UserRegenerateSessionKeyModule,
     UserRetrieveAlbumModule,
     UserUpdatePasswordModule,
-  ],
-  providers: [
-    {
-      provide: APP_GUARD,
-      useClass: RoleGuard,
-    },
   ],
 })
 export class UserModule {}

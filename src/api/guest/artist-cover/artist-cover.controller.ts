@@ -1,4 +1,3 @@
-import { AllowGuest } from 'src/api/role.guard';
 import { ApiOkResponse, ApiOperation, ApiProduces, ApiTags } from '@nestjs/swagger';
 import { Controller, Get, Query, Req, Res, StreamableFile } from '@nestjs/common';
 import { GUEST_APIS } from 'src/constants/swagger';
@@ -19,7 +18,6 @@ export class GuestArtistCoverController {
   constructor(private readonly artistCoverService: GuestArtistCoverService) {}
 
   @Get('artist-cover')
-  @AllowGuest()
   @ApiOperation({
     summary: 'Cover images for artists.  This route is guest-accessible for better browser-handling.',
   })

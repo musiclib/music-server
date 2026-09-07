@@ -5,15 +5,16 @@ import {
   AdminRegenerateUserSessionKeyResponseDto,
 } from './regenerate-user-session-key.dto';
 import { AdminRegenerateUserSessionKeyService } from './regenerate-user-session-key.service';
-import { AllowedRoles } from 'src/api/role.guard';
+import { AllowedRoles, RoleGuard } from 'src/api/role.guard';
 import { ApiBearerAuth, ApiHeader, ApiNotFoundResponse, ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
-import { Controller, Post, Query } from '@nestjs/common';
+import { Controller, Post, Query, UseGuards } from '@nestjs/common';
 import { UserRoleEnum } from 'src/types/enums';
 
 @Controller({
   path: '/api/admin',
 })
 @ApiTags(ADMIN_APIS)
+@UseGuards(RoleGuard)
 export class AdminRegenerateUserSessionKeyController {
   constructor(private readonly regenerateSessionKeyService: AdminRegenerateUserSessionKeyService) {}
 

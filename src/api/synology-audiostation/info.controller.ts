@@ -1,12 +1,14 @@
 import { AUTHENTICATED_REQUEST_DESCRIPTION } from './consts';
 import { ApiHeader, ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
-import { Body, Controller, Headers, HttpCode, HttpStatus, Logger, Post } from '@nestjs/common';
+import { Body, Controller, Headers, HttpCode, HttpStatus, Logger, Post, UseGuards } from '@nestjs/common';
 import { SYNOLOGY_AUDIOSTATION_APIS } from 'src/constants/swagger';
+import { SynologyGuard } from './synology.guard';
 import { SynologyInfoBodyDto, SynologyInfoResponseDto } from './dtos/info.cgi.dto';
 import { SynologyInfoService } from './info.service';
 
 @Controller()
 @ApiTags(SYNOLOGY_AUDIOSTATION_APIS)
+@UseGuards(SynologyGuard)
 export class SynologyInfoController {
   private readonly logger: Logger = new Logger(SynologyInfoController.name);
 

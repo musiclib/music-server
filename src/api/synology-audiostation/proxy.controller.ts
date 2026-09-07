@@ -9,8 +9,9 @@ import {
   ApiTags,
   getSchemaPath,
 } from '@nestjs/swagger';
-import { Body, Controller, Get, HttpCode, HttpStatus, Logger, Post, Query, Res } from '@nestjs/common';
+import { Body, Controller, Get, HttpCode, HttpStatus, Logger, Post, Query, Res, UseGuards } from '@nestjs/common';
 import { SYNOLOGY_AUDIOSTATION_APIS } from 'src/constants/swagger';
+import { SynologyGuard } from './synology.guard';
 import {
   SynologyProxyDeleteSongInfoBodyDto,
   SynologyProxySongInfoBodyDto,
@@ -26,6 +27,7 @@ import type { Response } from 'express';
 
 @Controller()
 @ApiTags(SYNOLOGY_AUDIOSTATION_APIS)
+@UseGuards(SynologyGuard)
 export class SynologyProxyController {
   private readonly logger: Logger = new Logger(SynologyProxyController.name);
 

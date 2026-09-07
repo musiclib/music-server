@@ -1,7 +1,7 @@
 import { AccountEntity } from 'src/database/entities';
-import { AllowedRoles } from 'src/api/role.guard';
+import { AllowedRoles, RoleGuard } from 'src/api/role.guard';
 import { ApiBearerAuth, ApiHeader, ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
-import { Controller, Get, Scope } from '@nestjs/common';
+import { Controller, Get, Scope, UseGuards } from '@nestjs/common';
 import { JWT_TOKEN, USER_APIS } from 'src/constants/swagger';
 import { User } from 'src/api/user.decorator';
 import { UserListRootPathsResponseDto } from './list-root-paths.dto';
@@ -13,6 +13,7 @@ import { UserRoleEnum } from 'src/types/enums';
   scope: Scope.REQUEST,
 })
 @ApiTags(USER_APIS)
+@UseGuards(RoleGuard)
 export class UserListRootPathsController {
   constructor(private readonly listRootPathsService: UserListRootPathsService) {}
 

@@ -1,7 +1,7 @@
 import { AccountEntity } from 'src/database/entities';
-import { AllowedRoles } from 'src/api/role.guard';
+import { AllowedRoles, RoleGuard } from 'src/api/role.guard';
 import { ApiBadRequestResponse, ApiBearerAuth, ApiHeader, ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
-import { Body, Controller, Post, Scope } from '@nestjs/common';
+import { Body, Controller, Post, Scope, UseGuards } from '@nestjs/common';
 import { JWT_TOKEN, USER_APIS } from 'src/constants/swagger';
 import { User } from 'src/api/user.decorator';
 import { UserRoleEnum } from 'src/types/enums';
@@ -17,6 +17,7 @@ import { UserUpdatePasswordService } from './update-password.service';
   scope: Scope.REQUEST,
 })
 @ApiTags(USER_APIS)
+@UseGuards(RoleGuard)
 export class UserUpdatePasswordController {
   constructor(private readonly resetPasswordService: UserUpdatePasswordService) {}
 

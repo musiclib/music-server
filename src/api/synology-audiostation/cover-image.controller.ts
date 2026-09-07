@@ -2,10 +2,11 @@ import { AUTHENTICATED_REQUEST_DESCRIPTION } from './consts';
 import { AccountEntity } from 'src/database/entities';
 import { ApiHeader, ApiOkResponse, ApiOperation, ApiProduces, ApiTags } from '@nestjs/swagger';
 import { CACHE_MANAGER, Cache } from '@nestjs/cache-manager';
-import { Controller, Get, HttpCode, HttpStatus, Inject, Logger, Query, Req, Res } from '@nestjs/common';
+import { Controller, Get, HttpCode, HttpStatus, Inject, Logger, Query, Req, Res, UseGuards } from '@nestjs/common';
 import { CoverCgiAlbumQueryDto, CoverCgiArtistQueryDto, CoverCgiComposerQueryDto, CoverCgiSongQueryDto } from './dtos';
 import { SYNOLOGY_AUDIOSTATION_APIS } from 'src/constants/swagger';
 import { SynologyCoverImageService } from './cover-image.service';
+import { SynologyGuard } from './synology.guard';
 import { User } from '../user.decorator';
 import { join, sep } from 'node:path';
 import { readFileSync } from 'node:fs';
@@ -16,6 +17,7 @@ const emptyBuffer = Buffer.alloc(0);
 
 @Controller()
 @ApiTags(SYNOLOGY_AUDIOSTATION_APIS)
+@UseGuards(SynologyGuard)
 export class SynologyCoverImageController {
   private readonly logger: Logger = new Logger(SynologyCoverImageController.name);
 

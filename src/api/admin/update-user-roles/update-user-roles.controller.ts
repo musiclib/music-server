@@ -8,7 +8,7 @@ import {
   AdminUpdateUserRolesResponseDto,
 } from './update-user-roles.dto';
 import { AdminUpdateUserRolesService } from './update-user-roles.service';
-import { AllowedRoles } from 'src/api/role.guard';
+import { AllowedRoles, RoleGuard } from 'src/api/role.guard';
 import {
   ApiBadRequestResponse,
   ApiBearerAuth,
@@ -18,7 +18,7 @@ import {
   ApiOperation,
   ApiTags,
 } from '@nestjs/swagger';
-import { Body, Controller, Patch, Query } from '@nestjs/common';
+import { Body, Controller, Patch, Query, UseGuards } from '@nestjs/common';
 import { User } from 'src/api/user.decorator';
 import { UserRoleEnum } from 'src/types/enums';
 
@@ -26,6 +26,7 @@ import { UserRoleEnum } from 'src/types/enums';
   path: '/api/admin',
 })
 @ApiTags(ADMIN_APIS)
+@UseGuards(RoleGuard)
 export class AdminUpdateUserRolesController {
   constructor(private readonly updateRolesService: AdminUpdateUserRolesService) {}
 

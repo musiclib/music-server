@@ -6,7 +6,7 @@ import {
   AdminListIndexerLogsResponseDto,
 } from './list-indexer-logs.dto';
 import { AdminListIndexerLogsService } from './list-indexer-logs.service';
-import { AllowedRoles } from 'src/api/role.guard';
+import { AllowedRoles, RoleGuard } from 'src/api/role.guard';
 import {
   ApiBadRequestResponse,
   ApiBearerAuth,
@@ -16,13 +16,14 @@ import {
   ApiOperation,
   ApiTags,
 } from '@nestjs/swagger';
-import { Controller, Get, Query } from '@nestjs/common';
+import { Controller, Get, Query, UseGuards } from '@nestjs/common';
 import { UserRoleEnum } from 'src/types/enums';
 
 @Controller({
   path: '/api/admin',
 })
 @ApiTags(ADMIN_APIS)
+@UseGuards(RoleGuard)
 export class AdminListIndexerLogsController {
   constructor(private readonly listIndexerLogsService: AdminListIndexerLogsService) {}
 

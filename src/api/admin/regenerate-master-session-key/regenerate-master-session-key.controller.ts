@@ -2,9 +2,9 @@ import { ADMIN_APIS, JWT_TOKEN } from 'src/constants/swagger';
 import { AccountEntity } from 'src/database/entities';
 import { AdminRegenerateMasterSessionKeyResponseDto } from './regenerate-master-session-key.dto';
 import { AdminRegenerateMasterSessionKeyService } from './regenerate-master-session-key.service';
-import { AllowedRoles } from 'src/api/role.guard';
+import { AllowedRoles, RoleGuard } from 'src/api/role.guard';
 import { ApiBearerAuth, ApiCreatedResponse, ApiHeader, ApiOperation, ApiTags } from '@nestjs/swagger';
-import { Controller, Post, Scope } from '@nestjs/common';
+import { Controller, Post, Scope, UseGuards } from '@nestjs/common';
 import { User } from 'src/api/user.decorator';
 import { UserRoleEnum } from 'src/types/enums';
 
@@ -13,6 +13,7 @@ import { UserRoleEnum } from 'src/types/enums';
   scope: Scope.REQUEST,
 })
 @ApiTags(ADMIN_APIS)
+@UseGuards(RoleGuard)
 export class AdminRegenerateMasterSessionKeyController {
   constructor(private readonly regenerateMasterSessionKeyService: AdminRegenerateMasterSessionKeyService) {}
 
