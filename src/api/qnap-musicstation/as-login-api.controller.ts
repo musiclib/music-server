@@ -1,9 +1,10 @@
 import { AllowGuest } from 'src/api/role.guard';
 import { ApiProduces, ApiTags } from '@nestjs/swagger';
-import { Controller, Header, HttpCode, HttpStatus, Post, Query, Req } from '@nestjs/common';
+import { Controller, Header, HttpCode, HttpStatus, Post, Query, Req, UseGuards } from '@nestjs/common';
 import { QNAP_MUSICSTATION_APIS } from 'src/constants/swagger';
 import { QnapAsLoginApiService } from './as-login-api.service';
 import { QnapAsLoginQueryDto } from './dtos/as-login.dto';
+import { QnapGuard } from './qnap.guard';
 import { objectToXml } from 'src/utils/xml';
 import type { Request } from 'express';
 
@@ -11,6 +12,7 @@ import type { Request } from 'express';
   path: '/musicstation/api',
 })
 @ApiTags(QNAP_MUSICSTATION_APIS)
+@UseGuards(QnapGuard)
 export class QnapAsLoginApiController {
   constructor(private readonly qnapAsLoginApiService: QnapAsLoginApiService) {}
 

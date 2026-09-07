@@ -1,7 +1,8 @@
 import { AllowGuest } from 'src/api/role.guard';
 import { ApiProduces, ApiTags } from '@nestjs/swagger';
-import { Controller, Get, Header, HttpCode, HttpStatus, Query } from '@nestjs/common';
+import { Controller, Get, Header, HttpCode, HttpStatus, Query, UseGuards } from '@nestjs/common';
 import { QNAP_MUSICSTATION_APIS } from 'src/constants/swagger';
+import { QnapGuard } from './qnap.guard';
 import { QnapMediaToolApiQueryDto } from './dtos/mediatool-api.dto';
 import { QnapMediaToolApiService } from './mediatool-api.service';
 import { objectToXml } from 'src/utils/xml';
@@ -10,6 +11,7 @@ import { objectToXml } from 'src/utils/xml';
   path: '/musicstation/api',
 })
 @ApiTags(QNAP_MUSICSTATION_APIS)
+@UseGuards(QnapGuard)
 export class QnapMediaToolApiController {
   constructor(private readonly mediaToolApiService: QnapMediaToolApiService) {}
 

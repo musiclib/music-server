@@ -1,6 +1,16 @@
 import { AllowGuest } from 'src/api/role.guard';
 import { ApiProduces, ApiTags } from '@nestjs/swagger';
-import { Controller, Get, Header, HttpCode, HttpStatus, NotFoundException, Query, Req } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Header,
+  HttpCode,
+  HttpStatus,
+  NotFoundException,
+  Query,
+  Req,
+  UseGuards,
+} from '@nestjs/common';
 import { QNAP_MUSICSTATION_APIS } from 'src/constants/swagger';
 import {
   QnapAuthExistingLoginQueryDto,
@@ -8,6 +18,7 @@ import {
   QnapAuthLoginQueryDto,
 } from './dtos/auth-login.dto';
 import { QnapAuthLoginService } from './auth-login.service';
+import { QnapGuard } from './qnap.guard';
 import { objectToXml } from 'src/utils/xml';
 import { plainToInstance } from 'class-transformer';
 import type { Request } from 'express';
@@ -16,6 +27,7 @@ import type { Request } from 'express';
   path: '/cgi-bin',
 })
 @ApiTags(QNAP_MUSICSTATION_APIS)
+@UseGuards(QnapGuard)
 export class QnapAuthLoginController {
   constructor(private readonly authLoginService: QnapAuthLoginService) {}
 
