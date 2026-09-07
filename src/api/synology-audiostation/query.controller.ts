@@ -1,12 +1,14 @@
 import { AUTHENTICATED_REQUEST_DESCRIPTION } from './consts';
 import { AllowGuest } from '../role.guard';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
-import { Controller, HttpCode, HttpStatus, Logger, Post } from '@nestjs/common';
+import { Controller, HttpCode, HttpStatus, Logger, Post, UseGuards } from '@nestjs/common';
 import { SYNOLOGY_AUDIOSTATION_APIS } from 'src/constants/swagger';
+import { SynologyGuard } from './synology.guard';
 import { SynologyQueryService } from './query.service';
 
 @Controller()
 @ApiTags(SYNOLOGY_AUDIOSTATION_APIS)
+@UseGuards(SynologyGuard)
 export class SynologyQueryController {
   private readonly logger: Logger = new Logger(SynologyQueryController.name);
 

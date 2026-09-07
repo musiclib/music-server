@@ -1,9 +1,9 @@
 import { ADMIN_APIS, JWT_TOKEN } from 'src/constants/swagger';
 import { AdminListRootPathsResponseDto } from './list-root-paths.dto';
 import { AdminListRootPathsService } from './list-root-paths.service';
-import { AllowedRoles } from 'src/api/role.guard';
+import { AllowedRoles, RoleGuard } from 'src/api/role.guard';
 import { ApiBearerAuth, ApiHeader, ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
-import { Controller, Get, Scope } from '@nestjs/common';
+import { Controller, Get, Scope, UseGuards } from '@nestjs/common';
 import { UserRoleEnum } from 'src/types/enums';
 
 @Controller({
@@ -11,6 +11,7 @@ import { UserRoleEnum } from 'src/types/enums';
   scope: Scope.REQUEST,
 })
 @ApiTags(ADMIN_APIS)
+@UseGuards(RoleGuard)
 export class AdminListRootPathsController {
   constructor(private readonly listRootPathsService: AdminListRootPathsService) {}
 

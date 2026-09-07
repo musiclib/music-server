@@ -7,7 +7,7 @@ import {
   AdminDeleteAccountResponseDto,
 } from './delete-account.dto';
 import { AdminDeleteAccountService } from './delete-account.service';
-import { AllowedRoles } from 'src/api/role.guard';
+import { AllowedRoles, RoleGuard } from 'src/api/role.guard';
 import {
   ApiBadRequestResponse,
   ApiBearerAuth,
@@ -17,7 +17,7 @@ import {
   ApiOperation,
   ApiTags,
 } from '@nestjs/swagger';
-import { Controller, Delete, Query } from '@nestjs/common';
+import { Controller, Delete, Query, UseGuards } from '@nestjs/common';
 import { User } from 'src/api/user.decorator';
 import { UserRoleEnum } from 'src/types/enums';
 
@@ -25,6 +25,7 @@ import { UserRoleEnum } from 'src/types/enums';
   path: '/api/admin',
 })
 @ApiTags(ADMIN_APIS)
+@UseGuards(RoleGuard)
 export class AdminDeleteAccountController {
   constructor(private readonly deleteAccountService: AdminDeleteAccountService) {}
 

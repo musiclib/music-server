@@ -5,7 +5,7 @@ import {
   AdminCreateAccountResponseDto,
 } from './create-account.dto';
 import { AdminCreateAccountService } from './create-account.service';
-import { AllowedRoles } from 'src/api/role.guard';
+import { AllowedRoles, RoleGuard } from 'src/api/role.guard';
 import {
   ApiBadRequestResponse,
   ApiBearerAuth,
@@ -14,7 +14,7 @@ import {
   ApiOperation,
   ApiTags,
 } from '@nestjs/swagger';
-import { Body, Controller, Post, Scope } from '@nestjs/common';
+import { Body, Controller, Post, Scope, UseGuards } from '@nestjs/common';
 import { UserRoleEnum } from 'src/types/enums';
 
 @Controller({
@@ -22,6 +22,7 @@ import { UserRoleEnum } from 'src/types/enums';
   scope: Scope.REQUEST,
 })
 @ApiTags(ADMIN_APIS)
+@UseGuards(RoleGuard)
 export class AdminCreateAccountController {
   constructor(private readonly createAccountService: AdminCreateAccountService) {}
 

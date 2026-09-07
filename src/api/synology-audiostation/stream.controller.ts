@@ -1,9 +1,10 @@
 import { AUTHENTICATED_REQUEST_DESCRIPTION } from './consts';
 import { AccountEntity } from 'src/database/entities';
 import { ApiHeader, ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
-import { Controller, Get, Logger, Query, Res } from '@nestjs/common';
+import { Controller, Get, Logger, Query, Res, UseGuards } from '@nestjs/common';
 import { SYNOLOGY_AUDIOSTATION_APIS } from 'src/constants/swagger';
 import { StreamCgiQueryDto } from './dtos';
+import { SynologyGuard } from './synology.guard';
 import { SynologyStreamService } from './stream.service';
 import { User } from '../user.decorator';
 import { getAudioContentType } from 'src/utils/strings';
@@ -11,6 +12,7 @@ import type { Response } from 'express';
 
 @Controller()
 @ApiTags(SYNOLOGY_AUDIOSTATION_APIS)
+@UseGuards(SynologyGuard)
 export class SynologyStreamController {
   private readonly logger: Logger = new Logger(SynologyStreamController.name);
 

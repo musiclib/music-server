@@ -1,7 +1,7 @@
 import { AccountEntity } from 'src/database/entities/account.entity';
-import { AllowedRoles } from 'src/api/role.guard';
+import { AllowedRoles, RoleGuard } from 'src/api/role.guard';
 import { ApiBearerAuth, ApiHeader, ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, UseGuards } from '@nestjs/common';
 import { JWT_TOKEN, USER_APIS } from 'src/constants/swagger';
 import { User } from 'src/api/user.decorator';
 import { UserFolderStructureResponseDto } from './folder-structure.dto';
@@ -12,6 +12,7 @@ import { UserRoleEnum } from 'src/types/enums';
   path: '/api/user',
 })
 @ApiTags(USER_APIS)
+@UseGuards(RoleGuard)
 export class UserFolderStructureController {
   constructor(private readonly listFoldersService: UserFolderStructureService) {}
 

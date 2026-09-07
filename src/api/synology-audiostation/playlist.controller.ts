@@ -9,8 +9,9 @@ import {
   ApiTags,
   getSchemaPath,
 } from '@nestjs/swagger';
-import { Body, Controller, HttpCode, HttpStatus, Post } from '@nestjs/common';
+import { Body, Controller, HttpCode, HttpStatus, Post, UseGuards } from '@nestjs/common';
 import { SYNOLOGY_AUDIOSTATION_APIS } from 'src/constants/swagger';
+import { SynologyGuard } from './synology.guard';
 import { SynologyMethodEnum } from './enums';
 import {
   SynologyPlaylistAddOrRemoveItemBodyDto,
@@ -35,6 +36,7 @@ import { plainToInstance } from 'class-transformer';
 
 @Controller()
 @ApiTags(SYNOLOGY_AUDIOSTATION_APIS)
+@UseGuards(SynologyGuard)
 export class SynologyPlaylistController {
   constructor(private readonly playlistService: SynologyPlaylistService) {}
 

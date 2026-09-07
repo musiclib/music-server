@@ -1,5 +1,3 @@
-import { AUTHENTICATED_REQUEST_DESCRIPTION } from 'src/api/synology-audiostation/consts';
-import { AllowGuest } from 'src/api/role.guard';
 import { ApiNotFoundResponse, ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { Controller, Get, Query, Req, Res, StreamableFile } from '@nestjs/common';
 import { GUEST_APIS } from 'src/constants/swagger';
@@ -20,13 +18,11 @@ export class GuestStreamFileController {
   constructor(private readonly streamFileService: GuestStreamFileService) {}
 
   @Get('stream-file')
-  @AllowGuest()
   @ApiOperation({
     summary: 'Streams audio files.  This route is guest-accessible for better browser handling.',
     description: [
       // eslint-disable-next-line max-len
       `Downloads audio files from the music library to the client.  This is used to stream audio files for playback or to download for offline usage.  The audio files are streamed in their original format, and the client is responsible for decoding and playing the audio.  Synology implements transcoding for certain formats, but this is not supported in this server.`,
-      AUTHENTICATED_REQUEST_DESCRIPTION,
     ].join('\n\n'),
   })
   @ApiOkResponse({

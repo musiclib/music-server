@@ -10,7 +10,18 @@ import {
   ApiTags,
   getSchemaPath,
 } from '@nestjs/swagger';
-import { BadRequestException, Body, Controller, HttpCode, HttpStatus, Logger, Post, Req, Res } from '@nestjs/common';
+import {
+  BadRequestException,
+  Body,
+  Controller,
+  HttpCode,
+  HttpStatus,
+  Logger,
+  Post,
+  Req,
+  Res,
+  UseGuards,
+} from '@nestjs/common';
 import { SYNOLOGY_AUDIOSTATION_APIS } from 'src/constants/swagger';
 import { Session } from '../session.decorator';
 import { SynologyApiEnum, SynologyMethodEnum } from './enums';
@@ -31,6 +42,7 @@ import {
   SynologyEntrySignInResponseDto,
 } from './dtos';
 import { SynologyEntryService } from './entry.service';
+import { SynologyGuard } from './synology.guard';
 import { SynologySuccessResponseDto } from './dtos/synology.dto';
 import { User } from '../user.decorator';
 import { plainToInstance } from 'class-transformer';
@@ -38,6 +50,7 @@ import type { Response } from 'express';
 
 @Controller()
 @ApiTags(SYNOLOGY_AUDIOSTATION_APIS)
+@UseGuards(SynologyGuard)
 export class SynologyEntryController {
   private readonly logger: Logger = new Logger(SynologyEntryController.name);
 

@@ -1,4 +1,3 @@
-import { AllowGuest } from 'src/api/role.guard';
 import {
   ApiBadRequestResponse,
   ApiCreatedResponse,
@@ -30,7 +29,6 @@ export class GuestCreateSessionController {
       // eslint-disable-next-line max-len
       'Creates a user session and returns a JWT token used for authenticating and accessing APIs requiring authentication.',
   })
-  @AllowGuest()
   @ApiCreatedResponse({
     type: GuestCreateSessionResponseDto,
   })
