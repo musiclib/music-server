@@ -1,11 +1,12 @@
-import { AllowGuest } from 'src/api/role.guard';
+import { AllowedRoles } from 'src/api/role.guard';
 import { ApiProduces, ApiTags } from '@nestjs/swagger';
-import { Controller, Get, Header, HttpCode, HttpStatus, Query, UseGuards } from '@nestjs/common';
+import { Controller, Header, HttpCode, HttpStatus, Post, Query, UseGuards } from '@nestjs/common';
 import { QNAP_MUSICSTATION_APIS } from 'src/constants/swagger';
 import { QnapGuard } from './qnap.guard';
 import { QnapMediaToolApiQueryDto } from './dtos/mediatool-api.dto';
 import { QnapMediaToolApiService } from './mediatool-api.service';
-import { objectToXml } from 'src/utils/xml';
+import { UserRoleEnum } from 'src/types/enums';
+import { toXML } from 'jstoxml';
 
 @Controller({
   path: '/musicstation/api',
@@ -15,14 +16,14 @@ import { objectToXml } from 'src/utils/xml';
 export class QnapMediaToolApiController {
   constructor(private readonly mediaToolApiService: QnapMediaToolApiService) {}
 
-  @Get('mediatool-api')
-  @AllowGuest()
+  @Post('mediatool_api.php')
+  @AllowedRoles([UserRoleEnum.USER, UserRoleEnum.ADMIN])
   @HttpCode(HttpStatus.OK)
   @ApiProduces('text/xml;charset=utf-8')
   @Header('Content-Type', 'text/xml; charset=utf-8')
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   async get(@Query() query: QnapMediaToolApiQueryDto | unknown) {
     const ipList = await this.mediaToolApiService.getIpList();
-    return objectToXml(ipList, 'QDocRoot version="1.0"', 'QDocRoot');
+    return toXML({ 'QDocRoot version="1.0"': ipList });
   }
 }
