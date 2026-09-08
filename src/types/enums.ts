@@ -121,6 +121,7 @@ export enum AlbumSortFieldEnum {
   DATE_ADDED = 'date_added',
   DATE_RELEASED = 'date_released',
   GENRE = 'genre',
+  RANDOM = 'random',
   RATING = 'rating',
   YEAR = 'year',
 }
@@ -128,6 +129,7 @@ export enum AlbumSortFieldEnum {
 export enum ArtistSortFieldEnum {
   ARTIST = 'artist',
   DATE_ADDED = 'date_added',
+  RANDOM = 'random',
 }
 
 export enum ComposerSortFieldEnum {
