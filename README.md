@@ -32,7 +32,7 @@ This software does not modify your music files in any way. It reads the metadata
 
 ## Managing users and root folders
 
-Use the [music-webui](https://github.com/selfhostmedia/music-webui) project to manage users and root folders. The web interface is built with React and provides user, root path and session management.
+Use the [music-webui](https://github.com/musiclib/music-webui) project to manage users and root folders. The web interface is built with React and provides user, root path and session management.
 
 # Configuration and setup
 
@@ -54,7 +54,7 @@ Run it directly:
 - Start the server with `npm run start:prod`
 
 ```bash
-$ git clone https://github.com/selfhostmedia/music-server.git
+$ git clone https://github.com/musiclib/music-server.git
 $ cd music-server
 $ npm ci
 $ npm run build
