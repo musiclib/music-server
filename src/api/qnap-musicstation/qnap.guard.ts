@@ -6,12 +6,6 @@ import { Reflector } from '@nestjs/core';
 import { Request } from 'express';
 import type { CanActivate, ExecutionContext } from '@nestjs/common';
 
-type HeaderPayload = {
-  sessionToken: string;
-  phpSessionId: string;
-  userAgent: string;
-};
-
 @Injectable()
 export class QnapGuard implements CanActivate {
   private readonly logger: Logger = new Logger(QnapGuard.name);
@@ -28,15 +22,15 @@ export class QnapGuard implements CanActivate {
       context.getClass(),
     ]);
     const request = context.switchToHttp().getRequest();
-    const tokens = this.extractPayloadFromHeader(request);
-    if (tokens?.sessionToken) {
+    const sessionToken = this.extractPayloadFromHeader(request);
+    if (sessionToken) {
       try {
         // verify the session token
         const payload: {
           accountId: number;
           sessionId: number;
           tokenHash: string;
-        } = await this.jwtService.verifyAsync(tokens.sessionToken);
+        } = await this.jwtService.verifyAsync(sessionToken);
         if (payload) {
           const user = await this.authenticationService.getAccount(payload.accountId);
           if (!user) {
@@ -69,16 +63,15 @@ export class QnapGuard implements CanActivate {
   }
 
   // eslint-disable-next-line class-methods-use-this
-  private extractPayloadFromHeader(request: Request): HeaderPayload | undefined {
+  private extractPayloadFromHeader(request: Request): string | undefined {
+    if (request.query.sid) {
+      return request.query.sid as string;
+    }
     if (!request.headers.cookie) {
       return undefined;
     }
     if (request.cookies?.QMS_SID) {
-      return {
-        sessionToken: request.cookies.QMS_SID,
-        phpSessionId: request.cookies.PHPSESSID,
-        userAgent: request.headers['user-agent'] || '',
-      };
+      return request.cookies.QMS_SID;
     }
     return undefined;
   }

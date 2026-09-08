@@ -1,9 +1,9 @@
 import { AuthenticationService } from 'src/authentication/authentication.service';
-import { ConfigService } from '@nestjs/config';
+import { ConfigService } from 'src/config/config.service';
 import { ErrorCodes } from 'src/constants/error-codes';
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import { QnapAuthExistingLoginQueryDto, QnapAuthLoginQueryDto } from './dtos/auth-login.dto';
+import { QnapAuthLoginQueryDto } from './dtos/auth-login.dto';
 import { SessionRestrictionEnum } from 'src/types/enums';
 
 @Injectable()
@@ -14,20 +14,20 @@ export class QnapAuthLoginService {
     private readonly jwtService: JwtService,
   ) {}
 
-  async preauthenticate(userAgent: string) {
+  async preauthenticate() {
     return {
       doQuick: '',
       is_booting: 0,
       mediaReady: 1,
       shutdown_info: {
-        type: '-1',
+        type: -1,
         timestamp: 0,
         duration: 0,
       },
       hostname: 'music-server',
       DemoSiteSuppurt: 'no',
-      webAccessPort: this.configService.get('SERVER_PORT'),
-      stunnelEnabled: 0,
+      webAccessPort: 80,
+      stunnelEnabled: 1,
       stunnelPort: '443',
       support_ksmbd: 'yes',
       passwdConstraints: {
@@ -35,10 +35,10 @@ export class QnapAuthLoginService {
         passwdConstraint02: 0,
         passwdConstraint03: 0,
         passwdConstraint04: 0,
-        pw_constraint01_opt: '3',
+        pw_constraint01_opt: 3,
         pw_constraint01_letter: 0,
         pw_min_limit_en: 1,
-        pw_min_limit: '8',
+        pw_min_limit: 8,
       },
       ts: '92782397',
       fwNotice: 0,
@@ -51,7 +51,7 @@ export class QnapAuthLoginService {
       standard_bg_style: 'fill',
       showVersion: 0,
       show_link: 1,
-      cuid: userAgent,
+      cuid: this.configService.get('QNAP_CUID'),
       auth_method: 'ck',
       mfa_support: '',
       function_support: 'redirect_url,xs-auth-redirect,passwordless_login,multi_2sv,app_privilege',
@@ -120,8 +120,8 @@ export class QnapAuthLoginService {
         customFrontLogo: '',
         customLoginLogo: '',
       },
-      webAccessPort: this.configService.get('SERVER_PORT'),
-      HTTPHost: this.configService.get('PINNED_SERVER_ADDRESS'),
+      webAccessPort: this.configService.get('LAN_SERVER_PORT') || this.configService.get('SERVER_PORT'),
+      HTTPHost: this.configService.get('LAN_SERVER_ADDRESS') || this.configService.get('SERVER_ADDRESS'),
       QWebPort: '80',
       webFSEnabled: 1,
       QMultimediaEnabled: 0,
@@ -160,10 +160,10 @@ export class QnapAuthLoginService {
         passwdConstraint02: 0,
         passwdConstraint03: 0,
         passwdConstraint04: 0,
-        pw_constraint01_opt: '3',
+        pw_constraint01_opt: 3,
         pw_constraint01_letter: 0,
         pw_min_limit_en: 1,
-        pw_min_limit: '8',
+        pw_min_limit: 8,
       },
       serviceURL: '/filestation/',
       ts: '92782397',
@@ -178,19 +178,141 @@ export class QnapAuthLoginService {
       standard_bg_style: 'fill',
       showVersion: 0,
       show_link: 1,
-      cuid: userAgent,
+      cuid: this.configService.get('QNAP_CUID'),
       auth_method: 'ck',
       mfa_support: '',
       function_support: 'redirect_url,xs-auth-redirect,passwordless_login,multi_2sv,app_privilege',
     };
   }
 
-  async validateExistingSession(userAgent: string, query: QnapAuthExistingLoginQueryDto) {
+  async resumeSession(jwtToken: string, ipAddress: string) {
+    return {
+      doQuick: '',
+      is_booting: 0,
+      mediaReady: 1,
+      shutdown_info: {
+        type: '-1',
+        timestamp: 0,
+        duration: 0,
+      },
+      authPassed: 1,
+      SMBFW: 0,
+      hero_model: 1,
+      qts_mode_type: 0,
+      isAdmin: 1,
+      user: 'qnap',
+      username: 'qnap',
+      groupname: 'everyone',
+      userid: '1000',
+      force_2sv: 0,
+      userType: 'local',
+      model: {
+        modelName: 'TS-KVM-CLD',
+        internalModelName: 'TS-KVM',
+        platform: 'TS-NASX86',
+        platform_ex: 'X86_KVM',
+        customModelName: '',
+        displayModelName: 'QuTScloud',
+        sas_model: 0,
+        storage_v2: 1,
+        encryptfsSupported: 1,
+        is_zfs: 0,
+        vqts: 'cloud_host',
+        node: '',
+        dual_node: '',
+      },
+      firmware: {
+        name: 'QuTScloud',
+        version: 'c5.2.9',
+        number: '3468',
+        build: '20260413',
+        patch: 0,
+        buildTime: '2026/04/13',
+      },
+      rfs_bits: '64',
+      specVersion: '1.0',
+      hostname: 'QNAP-Demo',
+      DemoSiteSuppurt: 'no',
+      customLogo: {
+        customFrontLogo: '',
+        customLoginLogo: '',
+      },
+      gqMaster: '-1',
+      webAccessPort: this.configService.get('LAN_SERVER_PORT') || this.configService.get('SERVER_PORT'),
+      HTTPHost: this.configService.get('LAN_SERVER_ADDRESS') || this.configService.get('SERVER_ADDRESS'),
+      QWebPort: '80',
+      webFSEnabled: 1,
+      QMultimediaEnabled: 0,
+      MSV2Supported: 0,
+      MSV2WebEnabled: 1,
+      MSV2URL: '/MSV2/',
+      QDownloadEnabled: 0,
+      DSV2Supported: 0,
+      DSV3Supported: 1,
+      DSV2URL: '/downloadstation/?ssid=',
+      QWebEnabled: 0,
+      QWebSSLEnabled: 1,
+      QWebSSLPort: '8081',
+      NVREnabled: 0,
+      NVRURL: '/surveillance/',
+      NVRVER: 1,
+      WFM2: 1,
+      wfmPortEnabled: 0,
+      wfmPort: '8080',
+      wfmSSLEnabled: 0,
+      wfmSSLPort: '443',
+      wfmURL: '/filestation/',
+      QMusicsEnabled: 1,
+      QMusicsURL: '/musicstation/',
+      QVideosEnabled: 0,
+      QVideosURL: '/videostation/',
+      QPhotosEnabled: 0,
+      QPhotosURL: '/photostation/',
+      HDAROOT_ALMOST_FULL: 0,
+      forceSSL: 0,
+      stunnelEnabled: 1,
+      stunnelPort: '443',
+      support_ksmbd: 'yes',
+      passwdConstraints: {
+        passwdConstraint01: 0,
+        passwdConstraint02: 0,
+        passwdConstraint03: 0,
+        passwdConstraint04: 0,
+        pw_constraint01_opt: 3,
+        pw_constraint01_letter: 0,
+        pw_min_limit_en: 1,
+        pw_min_limit: 8,
+      },
+      quickStart: 1,
+      connet_info: {
+        connet_ip: ipAddress,
+      },
+      ts: 92911688,
+      fwNotice: 0,
+      SUID: jwtToken,
+      title: '',
+      content: '',
+      psType: 1,
+      standard_massage: '',
+      standard_color: '#ffffff',
+      standard_size: '12px',
+      standard_bg_style: 'fill',
+      showVersion: 0,
+      show_link: 1,
+      cuid: this.configService.get('QNAP_CUID'),
+      auth_method: 'ck',
+      mfa_support: '',
+      function_support: 'redirect_url,xs-auth-redirect,passwordless_login,multi_2sv,app_privilege',
+      _version: '1.0',
+    };
+  }
+
+  async validateExistingSession(userAgent: string, jwtToken: string) {
     const payload: {
       accountId: number;
       sessionId: number;
       tokenHash: string;
-    } = await this.jwtService.verifyAsync(query.qtoken);
+    } = await this.jwtService.verifyAsync(jwtToken);
     const user = await this.authenticationService.getAccount(payload.accountId);
     if (!user) {
       throw new UnauthorizedException(ErrorCodes.AUTHORIZATION_ERROR, 'session-error-1');
@@ -213,16 +335,16 @@ export class QnapAuthLoginService {
         duration: 0,
       },
       pw_status: 0,
-      qtoken: query.qtoken,
+      qtoken: jwtToken,
       authPassed: 1,
       SMBFW: 0,
       hero_model: 1,
       qts_mode_type: 0,
       user_enable: 1,
       user_account_expiry: 0,
-      authSid: query.qtoken,
+      authSid: jwtToken,
       isAdmin: 1,
-      username: query.user,
+      username: user.username,
       groupname: 'everyone',
       model: {
         modelName: 'TS-KVM-CLD',
@@ -255,8 +377,14 @@ export class QnapAuthLoginService {
         customFrontLogo: '',
         customLoginLogo: '',
       },
-      webAccessPort: this.configService.get('SERVER_PORT'),
-      HTTPHost: this.configService.get('PINNED_SERVER_ADDRESS'),
+      webAccessPort:
+        this.configService.get('WAN_SERVER_PORT') ||
+        this.configService.get('LAN_SERVER_PORT') ||
+        this.configService.get('SERVER_PORT'),
+      HTTPHost:
+        this.configService.get('WAN_SERVER_ADDRESS') ||
+        this.configService.get('LAN_SERVER_ADDRESS') ||
+        this.configService.get('SERVER_ADDRESS'),
       QWebPort: '80',
       webFSEnabled: 1,
       QMultimediaEnabled: 0,
@@ -295,15 +423,15 @@ export class QnapAuthLoginService {
         passwdConstraint02: 0,
         passwdConstraint03: 0,
         passwdConstraint04: 0,
-        pw_constraint01_opt: '3',
+        pw_constraint01_opt: 3,
         pw_constraint01_letter: 0,
         pw_min_limit_en: 1,
-        pw_min_limit: '8',
+        pw_min_limit: 8,
       },
       serviceURL: '/filestation/',
       ts: '92782397',
       fwNotice: 0,
-      SUID: query.qtoken,
+      SUID: jwtToken,
       title: '',
       content: '',
       psType: 1,
@@ -313,7 +441,7 @@ export class QnapAuthLoginService {
       standard_bg_style: 'fill',
       showVersion: 0,
       show_link: 1,
-      cuid: userAgent,
+      cuid: this.configService.get('QNAP_CUID'),
       auth_method: 'ck',
       mfa_support: '',
       function_support: 'redirect_url,xs-auth-redirect,passwordless_login,multi_2sv,app_privilege',

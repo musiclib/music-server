@@ -27,6 +27,9 @@ class BaseLoginQueryDto {
   @IsInt()
   declare force_to_check_2sv: number;
 
+  /**
+   * Flag for remembering signin
+   */
   @IsInt()
   declare remme: number;
 
@@ -55,4 +58,14 @@ export class QnapAuthExistingLoginQueryDto extends BaseLoginQueryDto {
 
   @IsString()
   declare user: string;
+}
+
+export class QnapAuthResumeSessionQueryDto extends BaseLoginQueryDto {
+  /**
+   * On a QNAP NAS this value is a 8-digit short string that authenticates the user
+   * session.  In this software the JWT token is used instead.
+   */
+  @IsString()
+  @IsNotEmpty()
+  declare sid: string;
 }

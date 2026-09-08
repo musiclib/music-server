@@ -1,22 +1,23 @@
 import { AuthenticationService } from 'src/authentication/authentication.service';
+import { ConfigService } from 'src/config/config.service';
 import { ErrorCodes } from 'src/constants/error-codes';
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import { QnapAsLoginQueryDto } from './dtos/as-login.dto';
 
 @Injectable()
 export class QnapAsLoginApiService {
   constructor(
     private readonly authenticationService: AuthenticationService,
+    private readonly configService: ConfigService,
     private readonly jwtService: JwtService,
   ) {}
 
-  async getConfiguration(query: QnapAsLoginQueryDto, userAgent: string) {
+  async getConfiguration(jwtToken: string) {
     const payload: {
       accountId: number;
       sessionId: number;
       tokenHash: string;
-    } = await this.jwtService.verifyAsync(query.ssid);
+    } = await this.jwtService.verifyAsync(jwtToken);
     const user = await this.authenticationService.getAccount(payload.accountId);
     if (!user) {
       throw new UnauthorizedException(ErrorCodes.AUTHORIZATION_ERROR, 'session-error-1');
@@ -43,7 +44,7 @@ export class QnapAsLoginApiService {
             dlnaclient: 0,
             account: user.username,
             usr_id: 1000,
-            sid: query.ssid,
+            sid: jwtToken,
             is_admin: 0,
             email: '',
             personal_email: '',
@@ -59,7 +60,7 @@ export class QnapAsLoginApiService {
             bluetooth_enable: 0,
             ssid: 1,
             is_hero: 0,
-            cuid: userAgent,
+            cuid: this.configService.get('QNAP_CUID'),
             builtinFirmwareVersion: '5.2.9',
             displayModelName: 'Music Server',
             systemModelName: 'TS-KVM-CLD',
