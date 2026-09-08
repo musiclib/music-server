@@ -7,7 +7,7 @@ import { NestFactory, Reflector } from '@nestjs/core';
 import compression from 'compression';
 import helmet from 'helmet';
 import helmetConfig from './helmet.config';
-import type { Request } from 'express';
+import type { NextFunction, Request, Response } from 'express';
 
 async function bootstrap() {
   // CORS headers
@@ -33,7 +33,7 @@ async function bootstrap() {
   });
   app.getHttpAdapter().getInstance().set('etag', false);
   app.use(helmet(helmetConfig));
-  app.use((req, res, next) => {
+  app.use((_: Request, res: Response, next: NextFunction) => {
     res.setHeader('Cross-Origin-Resource-Policy', 'cross-origin'); // Set CORP header
     next();
   });

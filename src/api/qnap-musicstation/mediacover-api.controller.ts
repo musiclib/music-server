@@ -1,17 +1,7 @@
 import { AccountEntity } from 'src/database/entities';
 import { AllowedRoles } from '../role.guard';
 import { ApiOkResponse, ApiProduces, ApiTags } from '@nestjs/swagger';
-import {
-  Controller,
-  Get,
-  HttpCode,
-  HttpStatus,
-  NotFoundException,
-  Query,
-  Req,
-  Res,
-  UseGuards,
-} from '@nestjs/common';
+import { Controller, Get, HttpCode, HttpStatus, NotFoundException, Query, Req, Res, UseGuards } from '@nestjs/common';
 import { CoverImage } from 'src/types/cover-image';
 import { QNAP_MUSICSTATION_APIS } from 'src/constants/swagger';
 import { QnapGuard } from './qnap.guard';

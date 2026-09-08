@@ -1,8 +1,7 @@
 import { AUTHENTICATED_REQUEST_DESCRIPTION } from './consts';
 import { AccountEntity } from 'src/database/entities';
 import { ApiHeader, ApiOkResponse, ApiOperation, ApiProduces, ApiTags } from '@nestjs/swagger';
-import { CACHE_MANAGER, Cache } from '@nestjs/cache-manager';
-import { Controller, Get, HttpCode, HttpStatus, Inject, Logger, Query, Req, Res, UseGuards } from '@nestjs/common';
+import { Controller, Get, HttpCode, HttpStatus, Logger, Query, Req, Res, UseGuards } from '@nestjs/common';
 import { CoverCgiAlbumQueryDto, CoverCgiArtistQueryDto, CoverCgiComposerQueryDto, CoverCgiSongQueryDto } from './dtos';
 import { SYNOLOGY_AUDIOSTATION_APIS } from 'src/constants/swagger';
 import { SynologyCoverImageService } from './cover-image.service';
