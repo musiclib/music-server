@@ -21,10 +21,7 @@ const emptyBuffer = Buffer.alloc(0);
 export class SynologyCoverImageController {
   private readonly logger: Logger = new Logger(SynologyCoverImageController.name);
 
-  constructor(
-    @Inject(CACHE_MANAGER) private cacheManager: Cache,
-    private readonly coverImageService: SynologyCoverImageService,
-  ) {}
+  constructor(private readonly coverImageService: SynologyCoverImageService) {}
 
   @Get('/webapi/AudioStation/cover.cgi')
   @HttpCode(HttpStatus.OK)
@@ -40,14 +37,6 @@ export class SynologyCoverImageController {
     name: 'cookie',
     description: 'The session ID and device ID cookies for the user `id={sessionId}; did={deviceId}`',
   })
-  @ApiOkResponse({
-    type: Buffer,
-    description: 'The image blob',
-    schema: {
-      type: 'string',
-      format: 'binary',
-    },
-  })
   @ApiProduces('image/jpeg', 'image/png', 'image/webp')
   @ApiOkResponse({
     schema: {
@@ -57,10 +46,10 @@ export class SynologyCoverImageController {
   })
   async route(
     @User() user: AccountEntity,
-    @Query()
-    query: CoverCgiAlbumQueryDto | CoverCgiArtistQueryDto | CoverCgiComposerQueryDto | CoverCgiSongQueryDto,
     @Req() request: Request,
     @Res() response: Response,
+    @Query()
+    query: CoverCgiAlbumQueryDto | CoverCgiArtistQueryDto | CoverCgiComposerQueryDto | CoverCgiSongQueryDto,
   ) {
     let album;
     if ('id' in query) {
