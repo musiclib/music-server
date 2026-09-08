@@ -1,10 +1,4 @@
 import {
-  CollatedTrackEntity,
-  PlaylistEntity,
-  PlaylistItemEntity,
-  PlaylistSmartRuleEntity,
-} from 'src/database/entities';
-import {
   ContentTypeEnum,
   FileTypeEnum,
   PlaylistTypeEnum,
@@ -14,7 +8,9 @@ import {
 } from 'src/types/enums';
 import { InjectModel } from '@nestjs/sequelize';
 import { Injectable } from '@nestjs/common';
+import { LibraryService } from 'src/library/library.service';
 import { Op } from 'sequelize';
+import { PlaylistEntity, PlaylistItemEntity, PlaylistSmartRuleEntity } from 'src/database/entities';
 import {
   SynologyPlaylistAddOrRemoveItemBodyDto,
   SynologyPlaylistCreateNormalBodyDto,
@@ -126,8 +122,7 @@ function ruleToRow(rule: PlaylistSmartRuleEntity): SynologyPlaylistRuleDto {
 @Injectable()
 export class SynologyPlaylistService {
   constructor(
-    @InjectModel(CollatedTrackEntity)
-    private readonly collatedTrackEntity: typeof CollatedTrackEntity,
+    private readonly libraryService: LibraryService,
     @InjectModel(PlaylistEntity)
     private readonly playlistEntity: typeof PlaylistEntity,
     @InjectModel(PlaylistItemEntity)
@@ -317,32 +312,26 @@ export class SynologyPlaylistService {
       },
       order: [['position', 'ASC']],
     });
-    const tracks = await this.collatedTrackEntity.findAll({
-      where: {
-        fileId: {
-          [Op.in]: itemIds.map((item) => item.fileId).filter(Boolean) as number[],
-        },
-      },
-    });
+    const tracks = await this.libraryService.listTracks(accountId, {}, 0, 100_000);
     const radioStationTrack = {
-      trackBitRate: 0,
-      trackChannels: 0,
-      fileId: '',
-      fileType: FileTypeEnum.FLAC,
-      filePath: '',
-      trackDuration: 0,
-      fileSize: 0,
-      trackFrequency: 0,
-      albumTitle: '',
-      trackArtists: [],
       albumArtists: [],
-      trackComposers: [],
-      trackComment: '',
-      trackGenres: [],
-      trackTitle: '',
+      albumTitle: '',
+      artists: [],
+      comment: '',
+      composers: [],
+      discNumber: 0,
+      duration: 0,
+      fileBitRate: 0,
+      fileChannels: 0,
+      fileFrequency: 0,
+      filePath: '',
+      fileSize: 0,
+      fileType: FileTypeEnum.FLAC,
+      genres: [],
+      id: '',
+      title: '',
       trackNumber: 0,
-      trackYear: 0,
-      trackDiscNumber: 0,
+      year: 0,
     };
     return {
       playlists: [
@@ -361,43 +350,43 @@ export class SynologyPlaylistService {
               status: 'none',
             },
             songs_offset: body.offset,
-            songs_total: tracks.length,
+            songs_total: tracks.items.length,
             songs: itemIds.map((item) => {
-              const track = tracks.find((t) => t.fileId === item.fileId) || radioStationTrack;
-              const id = track.fileId
-                ? `music_${track.fileId}`
+              const track = tracks.items.find((t) => t.id === item.fileId) || radioStationTrack;
+              const id = track.id
+                ? `music_${track.id}`
                 : // eslint-disable-next-line max-len
                   `remote_{"album":""\\,"artist":""\\,"cover":""\\,"duration":0\\,"title":"${item.radioStationTitle}"}\n ${item.radioStationUrl}}`;
               return {
                 id,
                 position: item.position,
                 path: track?.filePath || item.radioStationUrl || '',
-                title: track?.trackTitle || item.radioStationTitle || '',
-                type: track.fileId ? ContentTypeEnum.FILE : ContentTypeEnum.REMOTE,
+                title: track?.title || item.radioStationTitle || '',
+                type: track.id ? ContentTypeEnum.FILE : ContentTypeEnum.REMOTE,
                 additional: {
                   song_audio: {
-                    bitrate: track?.trackBitRate || 0,
-                    channel: track?.trackChannels || 0,
+                    bitrate: track?.fileBitRate || 0,
+                    channel: track?.fileChannels || 0,
                     codec: track?.fileType || FileTypeEnum.FLAC,
                     container: track?.fileType || FileTypeEnum.FLAC,
-                    duration: track?.trackDuration || 0,
+                    duration: track?.duration || 0,
                     filesize: track?.fileSize || 0,
-                    frequency: track?.trackFrequency || 0,
+                    frequency: track?.fileFrequency || 0,
                   },
                   song_rating: {
                     rating: 0,
                   },
                   song_tag: {
                     album: track.albumTitle || 'sbin',
-                    artist: track.trackArtists?.join(', ') || '',
-                    album_artist: track.albumArtists?.join(', ') || '',
-                    composer: track.trackComposers?.join(', ') || '',
-                    comment: track.trackComment || '',
-                    genre: track.trackGenres?.join(', ') || '',
-                    title: track.trackTitle || '',
+                    artist: track.artists?.map((artist) => artist.name)?.join(', ') || '',
+                    album_artist: track.albumArtists?.map((artist) => artist.name)?.join(', ') || '',
+                    composer: track.composers.map((composer) => composer.name)?.join(', ') || '',
+                    comment: track.comment || '',
+                    genre: track.genres?.map((genre) => genre.name)?.join(', ') || '',
+                    title: track.title || '',
                     track: track.trackNumber || 0,
-                    year: track.trackYear || 0,
-                    disc: track.trackDiscNumber || 0,
+                    year: track.year || 0,
+                    disc: track.discNumber || 0,
                   },
                 },
               };

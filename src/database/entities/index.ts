@@ -2,15 +2,6 @@ import { AccountEntity } from './account.entity';
 import { AlbumArtistEntity } from './album-artist.entity';
 import { AlbumEntity } from './album.entity';
 import { ArtistEntity } from './artist.entity';
-import { CollatedAlbumEntity } from './collated-album.entity';
-import { CollatedArtistAlbumEntity } from './collated-artist-album.entity';
-import { CollatedArtistEntity } from './collated-artist.entity';
-import { CollatedArtistTrackEntity } from './collated-artist-track.entity';
-import { CollatedComposerAlbumEntity } from './collated-composer-album.entity';
-import { CollatedComposerTrackEntity } from './collated-composer-track.entity';
-import { CollatedGenreAlbumEntity } from './collated-genre-album.entity';
-import { CollatedGenreTrackEntity } from './collated-genre-track.entity';
-import { CollatedTrackEntity } from './collated-track.entity';
 import { ComposerEntity } from './composer.entity';
 import { FavoriteItemEntity } from './favorite-item.entity';
 import { FileEntity } from './file.entity';
@@ -34,15 +25,6 @@ export {
   AlbumArtistEntity,
   AlbumEntity,
   ArtistEntity,
-  CollatedAlbumEntity,
-  CollatedArtistAlbumEntity,
-  CollatedArtistEntity,
-  CollatedArtistTrackEntity,
-  CollatedComposerAlbumEntity,
-  CollatedComposerTrackEntity,
-  CollatedGenreAlbumEntity,
-  CollatedGenreTrackEntity,
-  CollatedTrackEntity,
   ComposerEntity,
   FavoriteItemEntity,
   FileEntity,
@@ -82,15 +64,6 @@ export const entitiesList = [
   LinkedArtistEntity,
   LinkedComposerEntity,
   LinkedGenreEntity,
-  CollatedTrackEntity,
-  CollatedAlbumEntity,
-  CollatedArtistEntity,
-  CollatedArtistAlbumEntity,
-  CollatedArtistTrackEntity,
-  CollatedComposerAlbumEntity,
-  CollatedComposerTrackEntity,
-  CollatedGenreAlbumEntity,
-  CollatedGenreTrackEntity,
   ShoutcastContainerEntity,
   ShoutcastItemEntity,
 ];
