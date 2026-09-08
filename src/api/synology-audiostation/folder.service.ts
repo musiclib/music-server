@@ -135,17 +135,6 @@ export class SynologyFolderService {
     const folderTotal = pathContents.length;
     // file contents
     const relativeFilePath = startingFolder.folderPath.replace(rootPath.rootPath, '');
-    // const files = await this.collatedTrackEntity.findAll({
-    //   where: {
-    //     accountId,
-    //     filePath: {
-    //       [Op.like]: `${relativeFilePath}/%`,
-    //     },
-    //     rootPathId: startingFolder.rootPathId,
-    //   },
-    //   offset,
-    //   limit,
-    // });
     const files = await this.libraryService.listTracks(accountId, { filePath: relativeFilePath }, offset, limit);
     for (let i = 0, len = files.items.length; i < len; i += 1) {
       const file = files.items[i];
