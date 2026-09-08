@@ -1,10 +1,12 @@
-import { CollatedTrackEntity, FolderEntity, RootPathEntity } from 'src/database/entities';
 import { ContentTypeEnum } from 'src/types/enums';
+import { FolderEntity, RootPathEntity } from 'src/database/entities';
 import { InjectModel } from '@nestjs/sequelize';
 import { Injectable } from '@nestjs/common';
+import { LibraryService } from 'src/library/library.service';
 import { Op } from 'sequelize';
 import { SynologyFolderDataDto, SynologyFolderDto, SynologySongDto } from './dtos';
 import { sep } from 'node:path';
+import type { LibraryTrackDto } from 'src/library/dtos';
 
 function folderToRow(folder: FolderEntity): SynologyFolderDto {
   return {
@@ -16,17 +18,17 @@ function folderToRow(folder: FolderEntity): SynologyFolderDto {
   };
 }
 
-function fileToRow(track: CollatedTrackEntity): SynologySongDto {
+function fileToRow(track: LibraryTrackDto): SynologySongDto {
   return {
     additional: {
       song_audio: {
-        bitrate: track.trackBitRate,
-        channel: track.trackChannels,
+        bitrate: track.fileBitRate,
+        channel: track.fileChannels,
         codec: track.fileType,
         container: track.fileType,
-        duration: track.trackDuration,
+        duration: track.duration,
         filesize: track.fileSize,
-        frequency: track.trackFrequency,
+        frequency: track.fileFrequency,
       },
       song_rating: {
         rating: 0,
@@ -34,16 +36,16 @@ function fileToRow(track: CollatedTrackEntity): SynologySongDto {
       song_tag: {
         album: track.albumTitle,
         album_artist: track.albumArtists.join(', '),
-        artist: track.trackArtists.join(', '),
-        comment: track.trackComment || '',
-        composer: track.trackComposers.join(', '),
-        disc: track.trackDiscNumber,
-        genre: track.trackGenres.join(', '),
+        artist: track.artists.map((artist) => artist.name).join(', '),
+        comment: track.comment || '',
+        composer: track.composers.map((composer) => composer.name).join(', '),
+        disc: track.discNumber,
+        genre: track.genres.map((genre) => genre.name).join(', '),
         track: track.trackNumber,
-        year: track.trackYear,
+        year: track.year,
       },
     },
-    id: `music_${track.fileId}`,
+    id: `music_${track.id}`,
     path: track.filePath,
     title: track.filePath.split(sep).pop() || track.filePath,
     type: ContentTypeEnum.FILE,
@@ -53,10 +55,9 @@ function fileToRow(track: CollatedTrackEntity): SynologySongDto {
 @Injectable()
 export class SynologyFolderService {
   constructor(
-    @InjectModel(CollatedTrackEntity)
-    private readonly collatedTrackEntity: typeof CollatedTrackEntity,
     @InjectModel(FolderEntity)
     private readonly folderEntity: typeof FolderEntity,
+    private readonly libraryService: LibraryService,
     @InjectModel(RootPathEntity)
     private readonly rootPathEntity: typeof RootPathEntity,
   ) {}
@@ -134,19 +135,20 @@ export class SynologyFolderService {
     const folderTotal = pathContents.length;
     // file contents
     const relativeFilePath = startingFolder.folderPath.replace(rootPath.rootPath, '');
-    const files = await this.collatedTrackEntity.findAll({
-      where: {
-        accountId,
-        filePath: {
-          [Op.like]: `${relativeFilePath}/%`,
-        },
-        rootPathId: startingFolder.rootPathId,
-      },
-      offset,
-      limit,
-    });
-    for (let i = 0, len = files.length; i < len; i += 1) {
-      const file = files[i];
+    // const files = await this.collatedTrackEntity.findAll({
+    //   where: {
+    //     accountId,
+    //     filePath: {
+    //       [Op.like]: `${relativeFilePath}/%`,
+    //     },
+    //     rootPathId: startingFolder.rootPathId,
+    //   },
+    //   offset,
+    //   limit,
+    // });
+    const files = await this.libraryService.listTracks(accountId, { filePath: relativeFilePath }, offset, limit);
+    for (let i = 0, len = files.items.length; i < len; i += 1) {
+      const file = files.items[i];
       if (file) {
         if (file.filePath.lastIndexOf(sep) === relativeFilePath.length) {
           pathContents.push(fileToRow(file));

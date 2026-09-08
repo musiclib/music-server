@@ -2,18 +2,14 @@ import {
   AlbumArtistEntity,
   AlbumEntity,
   ArtistEntity,
-  CollatedArtistAlbumEntity,
-  CollatedArtistEntity,
-  CollatedArtistTrackEntity,
-  CollatedComposerAlbumEntity,
-  CollatedComposerTrackEntity,
-  CollatedGenreAlbumEntity,
-  CollatedGenreTrackEntity,
-  CollatedTrackEntity,
   ComposerEntity,
   FavoriteItemEntity,
+  FileEntity,
   FolderEntity,
   GenreEntity,
+  LinkedArtistEntity,
+  LinkedComposerEntity,
+  LinkedGenreEntity,
   PlaylistEntity,
   PlaylistItemEntity,
   SessionEntity,
@@ -21,6 +17,7 @@ import {
 import { AuthenticationService } from 'src/authentication/authentication.service';
 import { BadRequestException, Inject, Injectable, NotFoundException } from '@nestjs/common';
 import { ConfigService } from 'src/config/config.service';
+import { ErrorCodes } from 'src/constants/error-codes';
 import { InjectModel } from '@nestjs/sequelize';
 import { Op } from 'sequelize';
 import { SessionRestrictionEnum } from 'src/types/enums';
@@ -33,8 +30,8 @@ import {
   SynologyEntrySignInDataDto,
 } from './dtos';
 import { SynologyPinTypeEnum } from './enums';
-import { normalizeString, replaceDoubleQuotes } from 'src/utils/strings';
 import { readFileSync } from 'node:fs';
+import { replaceDoubleQuotes } from 'src/utils/strings';
 import { sep } from 'node:path';
 import crypto from 'node:crypto';
 
@@ -82,28 +79,16 @@ export class SynologyEntryService {
   privateKey: crypto.KeyObject;
 
   constructor(
-    @InjectModel(AlbumEntity)
-    private readonly albumEntity: typeof AlbumEntity,
     @Inject(AuthenticationService)
     private readonly authenticationService: AuthenticationService,
-    @InjectModel(CollatedArtistEntity)
-    private readonly collatedArtistEntity: typeof CollatedArtistEntity,
-    @InjectModel(CollatedArtistAlbumEntity)
-    private readonly collatedArtistAlbumEntity: typeof CollatedArtistAlbumEntity,
-    @InjectModel(CollatedArtistTrackEntity)
-    private readonly collatedArtistTrackEntity: typeof CollatedArtistTrackEntity,
-    @InjectModel(CollatedComposerAlbumEntity)
-    private readonly collatedComposerAlbumEntity: typeof CollatedComposerAlbumEntity,
-    @InjectModel(CollatedComposerTrackEntity)
-    private readonly collatedComposerTrackEntity: typeof CollatedComposerTrackEntity,
-    @InjectModel(CollatedGenreAlbumEntity)
-    private readonly collatedGenreAlbumEntity: typeof CollatedGenreAlbumEntity,
-    @InjectModel(CollatedGenreTrackEntity)
-    private readonly collatedGenreTrackEntity: typeof CollatedGenreTrackEntity,
-    @InjectModel(CollatedTrackEntity)
-    private readonly collatedTrackEntity: typeof CollatedTrackEntity,
+    @InjectModel(AlbumEntity)
+    private readonly albumEntity: typeof AlbumEntity,
+    @InjectModel(ArtistEntity)
+    private readonly artistEntity: typeof ArtistEntity,
     @InjectModel(ComposerEntity)
     private readonly composerEntity: typeof ComposerEntity,
+    @InjectModel(FileEntity)
+    private readonly fileEntity: typeof FileEntity,
     @InjectModel(FolderEntity)
     private readonly folderEntity: typeof FolderEntity,
     @Inject(ConfigService) private readonly configService: ConfigService,
@@ -129,6 +114,157 @@ export class SynologyEntryService {
       format: 'pem',
       type: 'pkcs8',
     });
+  }
+
+  getEncryptionKey(): SynologyEntryCertificateDataDto {
+    return {
+      cipherkey: '__cIpHeRtExT',
+      ciphertoken: '__cIpHeRtOkEn',
+      public_key: this.publicKey,
+      server_time: Math.floor(Date.now() / 1000),
+    };
+  }
+
+  private async getArtistId(accountId: number, artistName: string): Promise<number> {
+    const artist = await this.artistEntity.findOne({
+      attributes: ['id'],
+      where: {
+        name: replaceDoubleQuotes(artistName),
+      },
+      include: [
+        {
+          model: LinkedArtistEntity,
+          attributes: ['artistId'],
+          include: [
+            {
+              attributes: ['id'],
+              model: FileEntity,
+              where: {
+                accountId,
+              },
+              required: true,
+            },
+          ],
+          required: true,
+          separate: true,
+        },
+      ],
+    });
+    if (!artist) {
+      throw new NotFoundException(ErrorCodes.INVALID_ARTIST_ERROR);
+    }
+    return artist.id;
+  }
+
+  private async getComposerId(accountId: number, composerName: string): Promise<number> {
+    const composer = await this.composerEntity.findOne({
+      attributes: ['id'],
+      where: {
+        name: replaceDoubleQuotes(composerName),
+      },
+      include: [
+        {
+          model: LinkedComposerEntity,
+          attributes: ['composerId'],
+          include: [
+            {
+              attributes: ['id'],
+              model: FileEntity,
+              where: {
+                accountId,
+              },
+              required: true,
+            },
+          ],
+          required: true,
+          separate: true,
+        },
+      ],
+    });
+    if (!composer) {
+      throw new NotFoundException(ErrorCodes.INVALID_COMPOSER_ERROR);
+    }
+    return composer.id;
+  }
+
+  private async getGenreId(accountId: number, genreName: string): Promise<number> {
+    const genre = await this.genreEntity.findOne({
+      attributes: ['id'],
+      where: {
+        name: replaceDoubleQuotes(genreName),
+      },
+      include: [
+        {
+          model: LinkedGenreEntity,
+          attributes: ['genreId'],
+          include: [
+            {
+              attributes: ['id'],
+              model: FileEntity,
+              where: {
+                accountId,
+              },
+              required: true,
+            },
+          ],
+          required: true,
+          separate: true,
+        },
+      ],
+    });
+    if (!genre) {
+      throw new NotFoundException(ErrorCodes.INVALID_GENRE_ERROR);
+    }
+    return genre.id;
+  }
+
+  private async getAlbumIdByTitleAndArtist(
+    accountId: number,
+    albumTitle: string,
+    albumArtist: string,
+  ): Promise<number> {
+    const album = await this.albumEntity.findOne({
+      attributes: ['id'],
+      include: [
+        {
+          attributes: ['albumId'],
+          model: AlbumArtistEntity,
+          required: true,
+          separate: true,
+          include: [
+            {
+              attributes: ['id'],
+              model: ArtistEntity,
+              where: {
+                name: replaceDoubleQuotes(albumArtist),
+              },
+              required: true,
+            },
+          ],
+        },
+      ],
+      where: {
+        accountId,
+        title: replaceDoubleQuotes(albumTitle),
+      },
+    });
+    if (!album) {
+      throw new NotFoundException(`Album not found for title: ${albumTitle} and artist: ${albumArtist}`);
+    }
+    return album.id;
+  }
+
+  private async getPlaylist(accountId: number, playlistId: string) {
+    const playlist = await this.playlistEntity.findOne({
+      where: {
+        accountId,
+        name: playlistId,
+      },
+    });
+    if (!playlist) {
+      throw new Error(`Playlist with id ${playlistId} not found`);
+    }
+    return playlist;
   }
 
   async authenticate(userAgent: string, body: SynologyEntrySignInBodyDto): Promise<SynologyEntrySignInDataDto> {
@@ -163,15 +299,6 @@ export class SynologyEntryService {
       did: userAgentHash,
       sid: jwtToken,
       is_portal_port: false,
-    };
-  }
-
-  getEncryptionKey(): SynologyEntryCertificateDataDto {
-    return {
-      cipherkey: '__cIpHeRtExT',
-      ciphertoken: '__cIpHeRtOkEn',
-      public_key: this.publicKey,
-      server_time: Math.floor(Date.now() / 1000),
     };
   }
 
@@ -260,77 +387,19 @@ export class SynologyEntryService {
         let playlistId;
         if (item.criteria.album && item.criteria.album_artist) {
           // eslint-disable-next-line no-await-in-loop
-          const album = await this.collatedArtistAlbumEntity.findOne({
-            attributes: ['id'],
-            where: {
-              accountId,
-              title: replaceDoubleQuotes(item.criteria.album),
-              artist: replaceDoubleQuotes(item.criteria.album_artist),
-            },
-          });
-          if (!album) {
-            throw new NotFoundException({
-              success: false,
-              message: 'Album not found',
-              album: item.criteria.album,
-              artist: item.criteria.album_artist,
-            });
-          }
-          albumId = album.id;
+          albumId = await this.getAlbumIdByTitleAndArtist(accountId, item.criteria.album, item.criteria.album_artist);
         }
         if (item.criteria.artist) {
           // eslint-disable-next-line no-await-in-loop
-          const artist = await this.collatedArtistEntity.findOne({
-            attributes: ['id'],
-            where: {
-              accountId,
-              name: replaceDoubleQuotes(item.criteria.artist),
-            },
-          });
-          if (!artist) {
-            throw new NotFoundException({
-              success: false,
-              message: 'Artist not found',
-              artist: item.criteria.artist,
-            });
-          }
-          artistId = artist.id;
+          artistId = await this.getArtistId(accountId, item.criteria.artist);
         }
         if (item.criteria.composer) {
           // eslint-disable-next-line no-await-in-loop
-          const composer = await this.collatedComposerAlbumEntity.findOne({
-            attributes: ['composerId'],
-            where: {
-              accountId,
-              composerName: replaceDoubleQuotes(item.criteria.composer),
-            },
-          });
-          if (!composer) {
-            throw new NotFoundException({
-              success: false,
-              message: 'Composer not found',
-              composer: item.criteria.composer,
-            });
-          }
-          composerId = composer.composerId;
+          composerId = await this.getComposerId(accountId, item.criteria.composer);
         }
         if (item.criteria.genre) {
           // eslint-disable-next-line no-await-in-loop
-          const genre = await this.collatedGenreAlbumEntity.findOne({
-            attributes: ['genreId'],
-            where: {
-              accountId,
-              genreName: replaceDoubleQuotes(item.criteria.genre),
-            },
-          });
-          if (!genre) {
-            throw new NotFoundException({
-              success: false,
-              message: 'Genre not found',
-              genre: item.criteria.genre,
-            });
-          }
-          genreId = genre.genreId;
+          genreId = await this.getGenreId(accountId, item.criteria.genre);
         }
         if (item.type === 'folder') {
           // eslint-disable-next-line no-await-in-loop
@@ -398,74 +467,38 @@ export class SynologyEntryService {
     return this.listPinnedItems(accountId, 0, 100000);
   }
 
-  private async getPlaylist(accountId: number, playlistId: string) {
-    const playlist = await this.playlistEntity.findOne({
-      where: {
-        accountId,
-        name: playlistId,
-      },
-    });
-    if (!playlist) {
-      throw new Error(`Playlist with id ${playlistId} not found`);
-    }
-    return playlist;
-  }
-
-  async getAlbumByTitleAndArtist(accountId: number, albumTitle: string, albumArtist: string): Promise<AlbumEntity> {
-    const album = await this.albumEntity.findOne({
-      attributes: ['id'],
-      where: {
-        titleNormalized: normalizeString(albumTitle),
-        accountId,
-      },
-      include: [
-        {
-          model: AlbumArtistEntity,
-          attributes: [],
-          include: [
-            {
-              model: ArtistEntity,
-              attributes: [],
-              where: {
-                nameNormalized: normalizeString(albumArtist),
-              },
-            },
-          ],
-        },
-      ],
-    });
-    if (!album) {
-      throw new NotFoundException(`Album not found for title: ${albumTitle} and artist: ${albumArtist}`);
-    }
-    return album;
-  }
-
   async addAlbumToPlaylist(accountId: number, playlistId: string, albumTitle: string, albumArtist: string) {
     const playlist = await this.getPlaylist(accountId, playlistId);
-    const album = await this.getAlbumByTitleAndArtist(accountId, albumTitle, albumArtist);
-    const tracks = await this.collatedTrackEntity.findAll({
+    const albumId = await this.getAlbumIdByTitleAndArtist(accountId, albumTitle, albumArtist);
+    const tracks = await this.fileEntity.findAll({
+      attributes: ['id'],
       where: {
         accountId,
-        albumId: album.id,
+        albumId,
       },
+      order: [
+        ['discNumber', 'ASC'],
+        ['trackNumber', 'ASC'],
+      ],
     });
     const existingItems = await this.playlistItemEntity.findAll({
+      attributes: ['fileId'],
       where: {
         playlistId: playlist.id,
         fileId: {
-          [Op.in]: tracks.map((track) => track.fileId),
+          [Op.in]: tracks.map((track) => track.id),
         },
       },
     });
     const existingFileIds = new Set(existingItems.map((item) => item.fileId));
-    const newTracks = tracks.filter((track) => !existingFileIds.has(track.fileId));
+    const newTracks = tracks.filter((track) => !existingFileIds.has(track.id));
     if (newTracks.length) {
       await this.playlistItemEntity.bulkCreate(
         newTracks.map(
           (track, index) =>
             ({
               playlistId: playlist.id,
-              fileId: track.fileId,
+              fileId: track.id,
               position: existingItems.length + index + 1,
             }) as PlaylistItemEntity,
         ),
@@ -475,38 +508,40 @@ export class SynologyEntryService {
 
   async addArtistToPlaylist(accountId: number, playlistId: string, artistName: string) {
     const playlist = await this.getPlaylist(accountId, playlistId);
-    const artist = await this.collatedArtistEntity.findOne({
+    const artistId = await this.getArtistId(accountId, artistName);
+    const tracks = await this.fileEntity.findAll({
+      attributes: ['id'],
       where: {
         accountId,
-        nameNormalized: normalizeString(artistName),
       },
-    });
-    if (!artist) {
-      throw new NotFoundException(`Artist not found for name: ${artistName}`);
-    }
-    const tracks = await this.collatedArtistTrackEntity.findAll({
-      where: {
-        accountId,
-        artistId: artist.id,
-      },
+      include: [
+        {
+          model: LinkedArtistEntity,
+          required: true,
+          where: {
+            artistId,
+          },
+        },
+      ],
     });
     const existingItems = await this.playlistItemEntity.findAll({
+      attributes: ['fileId'],
       where: {
         playlistId: playlist.id,
         fileId: {
-          [Op.in]: tracks.map((track) => track.fileId),
+          [Op.in]: tracks.map((track) => track.id),
         },
       },
     });
     const existingFileIds = new Set(existingItems.map((item) => item.fileId));
-    const newTracks = tracks.filter((track) => !existingFileIds.has(track.fileId));
+    const newTracks = tracks.filter((track) => !existingFileIds.has(track.id));
     if (newTracks.length) {
       await this.playlistItemEntity.bulkCreate(
         newTracks.map(
           (track, index) =>
             ({
               playlistId: playlist.id,
-              fileId: track.fileId,
+              fileId: track.id,
               position: existingItems.length + index + 1,
             }) as PlaylistItemEntity,
         ),
@@ -516,37 +551,40 @@ export class SynologyEntryService {
 
   async addComposerToPlaylist(accountId: number, playlistId: string, composerName: string) {
     const playlist = await this.getPlaylist(accountId, playlistId);
-    const composer = await this.composerEntity.findOne({
-      where: {
-        nameNormalized: normalizeString(composerName),
-      },
-    });
-    if (!composer) {
-      throw new NotFoundException(`Composer not found for name: ${composerName}`);
-    }
-    const tracks = await this.collatedComposerTrackEntity.findAll({
+    const composerId = await this.getComposerId(accountId, composerName);
+    const tracks = await this.fileEntity.findAll({
+      attributes: ['id'],
       where: {
         accountId,
-        composerId: composer.id,
       },
+      include: [
+        {
+          model: LinkedComposerEntity,
+          required: true,
+          where: {
+            composerId,
+          },
+        },
+      ],
     });
     const existingItems = await this.playlistItemEntity.findAll({
+      attributes: ['fileId'],
       where: {
         playlistId: playlist.id,
         fileId: {
-          [Op.in]: tracks.map((track) => track.fileId),
+          [Op.in]: tracks.map((track) => track.id),
         },
       },
     });
     const existingFileIds = new Set(existingItems.map((item) => item.fileId));
-    const newTracks = tracks.filter((track) => !existingFileIds.has(track.fileId));
+    const newTracks = tracks.filter((track) => !existingFileIds.has(track.id));
     if (newTracks.length) {
       await this.playlistItemEntity.bulkCreate(
         newTracks.map(
           (track, index) =>
             ({
               playlistId: playlist.id,
-              fileId: track.fileId,
+              fileId: track.id,
               position: existingItems.length + index + 1,
             }) as PlaylistItemEntity,
         ),
@@ -556,38 +594,40 @@ export class SynologyEntryService {
 
   async addGenreToPlaylist(accountId: number, playlistId: string, genreName: string) {
     const playlist = await this.getPlaylist(accountId, playlistId);
-    const genre = await this.genreEntity.findOne({
+    const genreId = await this.getGenreId(accountId, genreName);
+    const tracks = await this.fileEntity.findAll({
+      attributes: ['id'],
+      include: [
+        {
+          model: LinkedGenreEntity,
+          required: true,
+          where: {
+            genreId,
+          },
+        },
+      ],
       where: {
         accountId,
-        nameNormalized: normalizeString(genreName),
-      },
-    });
-    if (!genre) {
-      throw new NotFoundException(`Genre not found for name: ${genreName}`);
-    }
-    const tracks = await this.collatedGenreTrackEntity.findAll({
-      where: {
-        accountId,
-        genreId: genre.id,
       },
     });
     const existingItems = await this.playlistItemEntity.findAll({
+      attributes: ['fileId'],
       where: {
         playlistId: playlist.id,
         fileId: {
-          [Op.in]: tracks.map((track) => track.fileId),
+          [Op.in]: tracks.map((track) => track.id),
         },
       },
     });
     const existingFileIds = new Set(existingItems.map((item) => item.fileId));
-    const newTracks = tracks.filter((track) => !existingFileIds.has(track.fileId));
+    const newTracks = tracks.filter((track) => !existingFileIds.has(track.id));
     if (newTracks.length) {
       await this.playlistItemEntity.bulkCreate(
         newTracks.map(
           (track, index) =>
             ({
               playlistId: playlist.id,
-              fileId: track.fileId,
+              fileId: track.id,
               position: existingItems.length + index + 1,
             }) as PlaylistItemEntity,
         ),
