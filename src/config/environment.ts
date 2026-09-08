@@ -1,4 +1,4 @@
-import { IsBoolean, IsIn, IsNotEmpty, IsString, IsUrl } from 'class-validator';
+import { IsBoolean, IsIn, IsInt, IsNotEmpty, IsString, IsUrl } from 'class-validator';
 import { Transform } from 'class-transformer';
 
 /**
@@ -12,21 +12,21 @@ export class Environment {
    */
   @IsBoolean()
   @Transform(({ value }) => value === 'true' || value === true)
-  BUILD_DATABASE?: boolean;
+  declare BUILD_DATABASE?: boolean;
 
   /**
    * The SQLite database file path
    */
   @IsUrl()
   @IsNotEmpty()
-  DATABASE_PATH!: string;
+  declare DATABASE_PATH: string;
 
   /**
    * The JWT secret for signing and verifying tokens. This should be a long, random string for security purposes.
    */
   @IsString()
   @IsNotEmpty()
-  JWT_SECRET!: string;
+  declare JWT_SECRET: string;
 
   /**
    * The environment the application is running in. This can be 'development', 'production', or 'test'.
@@ -34,30 +34,92 @@ export class Environment {
   @IsString()
   @IsIn(['development', 'production', 'test'])
   @IsNotEmpty()
-  NODE_ENV!: 'development' | 'production' | 'test';
-
-  /**
-   * The public key is passed to Synology mobile apps to encrypt credentials
-   */
-  @IsString()
-  PUBLIC_KEY_PATH!: string;
-
-  /**
-   * The private key is used by the application to decrypt credentials encrypted with the public key.
-   */
-  @IsString()
-  PRIVATE_KEY_PATH!: string;
+  declare NODE_ENV: 'development' | 'production' | 'test';
 
   /**
    * The session expiration time in seconds. This should be a positive integer.
    */
   @IsString()
   @IsNotEmpty()
-  SESSION_EXPIRES!: string;
+  declare SESSION_EXPIRES: string;
+
+  /**
+   * The port for the server
+   */
+  @IsInt()
+  @Transform(({ value }) => parseInt(value, 10))
+  declare SERVER_PORT: number;
+
+  /**
+   * The address for the server
+   */
+  @IsString()
+  declare SERVER_ADDRESS: string;
+
+  /**
+   * The LAN address to report for the server
+   */
+  @IsString()
+  declare LAN_SERVER_ADDRESS?: string;
+
+  /**
+   * The LAN address port to report for the server
+   */
+  @IsInt()
+  @Transform(({ value }) => parseInt(value, 10))
+  declare LAN_SERVER_PORT?: number;
+
+  /**
+   * The WAN address to report for the server
+   */
+  @IsString()
+  declare WAN_SERVER_ADDRESS?: string;
+
+  /**
+   * The WAN address port to report for the server
+   */
+  @IsInt()
+  @Transform(({ value }) => parseInt(value, 10))
+  declare WAN_SERVER_PORT?: number;
+
+  /**
+   * ------------------------------------------------------
+   * QNAP Music Station / QMusic configuration
+   * ------------------------------------------------------
+   */
+  @IsBoolean()
+  @Transform(({ value }) => value === 'true' || value === true)
+  declare QNAP_MUSICSTATION_ENABLED?: boolean;
+
+  /**
+   * A server-wide and persistent unique identifier that poses as a secret passed
+   * to QMusic app and posted to the server to verify their access.
+   */
+  @IsString()
+  declare QNAP_CUID?: string;
+
+  /**
+   * ------------------------------------------------------
+   * SYNOLOGY AudioStation / DS Audio configuration
+   * ------------------------------------------------------
+   */
 
   /**
    * Optional flag for enabling the endpoints required to use Synology DS Audio apps
    */
   @IsBoolean()
-  SYNOLOGY_AUDIOSTATION_ENABLED?: boolean;
+  @Transform(({ value }) => value === 'true' || value === true)
+  declare SYNOLOGY_AUDIOSTATION_ENABLED?: boolean;
+
+  /**
+   * The public key is passed to Synology mobile apps to encrypt credentials
+   */
+  @IsString()
+  declare SYNOLOGY_PUBLIC_KEY_PATH: string;
+
+  /**
+   * The private key is used by the application to decrypt credentials encrypted with the public key.
+   */
+  @IsString()
+  declare SYNOLOGY_PRIVATE_KEY_PATH: string;
 }
