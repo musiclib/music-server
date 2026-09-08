@@ -6,7 +6,7 @@ import { QnapGuard } from './qnap.guard';
 import { QnapMediaToolApiQueryDto } from './dtos/mediatool-api.dto';
 import { QnapMediaToolApiService } from './mediatool-api.service';
 import { UserRoleEnum } from 'src/types/enums';
-import { toXML } from 'jstoxml';
+import { objectToXml } from 'src/utils/xml';
 
 @Controller({
   path: '/musicstation/api',
@@ -24,6 +24,6 @@ export class QnapMediaToolApiController {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   async get(@Query() query: QnapMediaToolApiQueryDto | unknown) {
     const ipList = await this.mediaToolApiService.getIpList();
-    return toXML({ 'QDocRoot version="1.0"': ipList });
+    return objectToXml(ipList, 'QDocRoot version="1.0"', 'QDocRoot');
   }
 }
