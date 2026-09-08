@@ -20,7 +20,7 @@ export class QnapMediaListApiService {
         FileType: 'artist',
         Title: artist.name,
         LinkID: artist.id.toString(),
-        ImagePath: `/api/public/artist-cover?id=${artist.id}`,
+        ImagePath: `artist_${artist.id}`,
         Albumartist: artist.name,
       })),
     };
@@ -34,7 +34,7 @@ export class QnapMediaListApiService {
         FileType: 'album',
         Title: album.title,
         LinkID: album.id.toString(),
-        ImagePath: `/api/public/album-cover?id=${album.id}`,
+        ImagePath: `album_${album.id}`,
         Albumartist: album.artists.map((artist) => artist.name).join(', '),
       })),
     };
@@ -67,7 +67,7 @@ export class QnapMediaListApiService {
             FileType: 'artist',
             Title: artist.name,
             LinkID: artist.id.toString(),
-            ImagePath: `/api/public/artist-cover?id=${artist.id}`,
+            ImagePath: `artist_${artist.id}`,
             Albumartist: artist.name,
           };
         }),
@@ -102,7 +102,7 @@ export class QnapMediaListApiService {
             FileType: 'album',
             Title: album.title,
             LinkID: album.id.toString(),
-            ImagePath: `/api/public/album-cover?id=${album.id}`,
+            ImagePath: `album_${album.id}`,
             Albumartist: album.artists.map((artist) => artist.name).join(', '),
           };
         }),
@@ -171,7 +171,7 @@ export class QnapMediaListApiService {
             FileSize: track.fileSize,
             Extension: track.filePath.split('.').pop(),
             LinkId: '',
-            ImagePath: `/api/public/album-cover?id=${track.albumId}`,
+            ImagePath: `album_${track.albumId}`,
             audio_playtime: track.duration * 1000,
             Title: track.title,
             Artist: track.artists.map((artist) => artist.name).join(', '),

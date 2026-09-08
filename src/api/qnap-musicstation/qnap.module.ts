@@ -4,6 +4,8 @@ import { QnapAsLoginApiController } from './as-login-api.controller';
 import { QnapAsLoginApiService } from './as-login-api.service';
 import { QnapAuthLoginController } from './auth-login.controller';
 import { QnapAuthLoginService } from './auth-login.service';
+import { QnapMediaCoverApiController } from './mediacover-api.controller';
+import { QnapMediaCoverApiService } from './mediacover-api.service';
 import { QnapMediaListApiController } from './medialist-api.controller';
 import { QnapMediaListApiService } from './medialist-api.service';
 import { QnapMediaToolApiController } from './mediatool-api.controller';
@@ -16,9 +18,16 @@ import { entitiesList } from 'src/database/entities';
   controllers: [
     QnapAuthLoginController,
     QnapAsLoginApiController,
+    QnapMediaCoverApiController,
     QnapMediaToolApiController,
     QnapMediaListApiController,
   ],
-  providers: [QnapAuthLoginService, QnapAsLoginApiService, QnapMediaToolApiService, QnapMediaListApiService],
+  providers: [
+    QnapAsLoginApiService,
+    QnapAuthLoginService,
+    QnapMediaCoverApiService,
+    QnapMediaListApiService,
+    QnapMediaToolApiService,
+  ],
 })
 export class QnapModule {}
