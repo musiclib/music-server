@@ -245,6 +245,9 @@ export class LibraryTrackService {
         ...(filters?.filter && {
           title: { [Op.like]: `%${normalizeString(filters.filter)}%` },
         }),
+        ...(filters?.filePath && {
+          filePath: { [Op.like]: `${filters.filePath}%` },
+        }),
       },
     };
     return queryFilter;

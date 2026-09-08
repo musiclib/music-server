@@ -33,6 +33,11 @@ export type TrackFilters = {
    */
   composer?: string[];
   /**
+   * Optional filter for the file path, which will do a case-sensitive starting-match against the
+   * file paths of the tracks.
+   */
+  filePath?: string;
+  /**
    * Optional filter for a case-insensitive partial-match against track title, album, artist, composer, or genre.
    */
   filter?: string;
