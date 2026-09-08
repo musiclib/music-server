@@ -46,7 +46,6 @@ export class QnapMediaListApiService {
     currentPage: number,
     sortBy: string,
     sortDirection: SortDirectionEnum,
-    parentId?: number,
   ) {
     const offset = (currentPage - 1) * pageSize;
     const artists = await this.libraryService.listAlbumArtists(

@@ -68,7 +68,6 @@ export class QnapMediaListApiController {
           query.currpage,
           query.sortBy,
           query.desc,
-          query.linkid,
         );
         return objectToXml({ status: 1, ...artistList }, 'QDocRoot version="1.0"', 'QDocRoot');
       }
