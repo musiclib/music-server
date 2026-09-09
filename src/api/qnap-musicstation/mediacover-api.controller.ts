@@ -46,12 +46,15 @@ export class QnapMediaCoverApiController {
     }
     let cover: CoverImage | undefined;
     let eTagKey: string;
+    let fileName: string;
     if (query.imagepath.startsWith('album_')) {
       cover = await this.mediaCoverApiService.getAlbumCoverImage(user.id, itemId);
       eTagKey = `album-${itemId}-${cover?.updatedAt?.getTime() || ''}`;
+      fileName = `album-cover.${itemId}.${cover?.coverImageMimeType?.split(sep).pop()}`;
     } else if (query.imagepath.startsWith('artist_')) {
       cover = await this.mediaCoverApiService.getArtistCoverImage(user.id, itemId);
       eTagKey = `artist-${itemId}-${cover?.updatedAt?.getTime() || ''}`;
+      fileName = `artist-cover.${itemId}.${cover?.coverImageMimeType?.split(sep).pop()}`;
     } else {
       throw new NotFoundException('Resource not found');
     }
@@ -59,10 +62,9 @@ export class QnapMediaCoverApiController {
       throw new NotFoundException('Resource not found');
     }
     if (cover?.coverImage) {
-      const fileType = cover.coverImageMimeType?.split(sep).pop();
       response.set({
         'Content-Type': cover.coverImageMimeType,
-        'Content-Disposition': `inline; filename="album-cover.${itemId}.${fileType}"`,
+        'Content-Disposition': `inline; filename="${fileName}"`,
         ETag: eTagKey,
       });
       if (request.fresh) {

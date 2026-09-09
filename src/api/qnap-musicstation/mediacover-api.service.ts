@@ -20,7 +20,7 @@ export class QnapMediaCoverApiService {
    * @returns {Promise<CoverImage | undefined>} The album cover image.
    */
   async getArtistCoverImage(accountId: number, artistId: number): Promise<CoverImage | undefined> {
-    const artist = await this.albumEntity.findOne({
+    const album = await this.albumEntity.findOne({
       attributes: ['id', 'coverImage', 'coverImageMimeType', 'createdAt', 'updatedAt'],
       where: {
         accountId,
@@ -41,10 +41,10 @@ export class QnapMediaCoverApiService {
         },
       ],
     });
-    if (!artist) {
+    if (!album) {
       throw new NotFoundException(`Cover image not found for artist ID: ${artistId}`);
     }
-    return artist;
+    return album;
   }
 
   /**

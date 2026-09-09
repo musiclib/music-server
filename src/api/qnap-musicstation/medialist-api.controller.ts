@@ -52,6 +52,10 @@ export class QnapMediaListApiController {
         return objectToXml({ status: 1, ...songList }, 'QDocRoot version="1.0"', 'QDocRoot');
       }
       if (query.type === 'album') {
+        if (query.linkid) {
+          const trackList = await this.mediaListApiService.listTracksByAlbum(user.id, query.linkid);
+          return objectToXml({ status: 1, ...trackList }, 'QDocRoot version="1.0"', 'QDocRoot');
+        }
         const albumList = await this.mediaListApiService.listAlbums(
           user.id,
           query.pagesize,
@@ -62,6 +66,17 @@ export class QnapMediaListApiController {
         return objectToXml({ status: 1, ...albumList }, 'QDocRoot version="1.0"', 'QDocRoot');
       }
       if (query.type === 'artist') {
+        if (query.linkid) {
+          const albumList = await this.mediaListApiService.listAlbumsByArtist(
+            user.id,
+            query.linkid,
+            query.pagesize,
+            query.currpage,
+            query.sortBy,
+            query.desc,
+          );
+          return objectToXml({ status: 1, ...albumList }, 'QDocRoot version="1.0"', 'QDocRoot');
+        }
         const artistList = await this.mediaListApiService.listArtists(
           user.id,
           query.pagesize,
@@ -72,6 +87,10 @@ export class QnapMediaListApiController {
         return objectToXml({ status: 1, ...artistList }, 'QDocRoot version="1.0"', 'QDocRoot');
       }
       if (query.type === 'genre') {
+        if (query.linkid) {
+          const trackList = await this.mediaListApiService.listTracksByGenre(user.id, query.linkid);
+          return objectToXml({ status: 1, ...trackList }, 'QDocRoot version="1.0"', 'QDocRoot');
+        }
         const genreList = await this.mediaListApiService.listGenres(
           user.id,
           query.pagesize,
