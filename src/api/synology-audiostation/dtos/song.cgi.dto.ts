@@ -189,6 +189,9 @@ export class SynologySongsRateBodyDto {
   /**
    * The rating of the track
    */
+  @ApiProperty({
+    type: 'integer',
+  })
   @IsInt()
   @Min(0)
   @Max(5)
@@ -208,7 +211,10 @@ export class SynologySongsRateBodyDto {
 }
 
 class SynologySongRatingDto {
-  @IsInt()
+  @ApiProperty({
+    type: 'integer',
+  })
+  @IsNumber()
   @Min(0)
   @Max(5)
   declare rating: RatingOrUnset;

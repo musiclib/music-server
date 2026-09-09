@@ -78,6 +78,9 @@ export class SynologyArtistsByDefaultGenreBodyDto extends ArtistBodyDto {
 }
 
 class SynologyAlbumArtistRatingDto {
+  @ApiProperty({
+    type: 'integer',
+  })
   @IsNumber()
   declare rating: RatingOrUnset;
 }

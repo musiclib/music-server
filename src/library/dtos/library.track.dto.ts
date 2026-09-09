@@ -109,7 +109,10 @@ export class LibraryTrackDto {
   /**
    * The rating of the track which is a value between 0 and 5 inclusive applied to the track.
    */
-  @IsInt()
+  @ApiProperty({
+    type: 'integer',
+  })
+  @IsNumber()
   declare rating: RatingOrUnset;
 
   /**

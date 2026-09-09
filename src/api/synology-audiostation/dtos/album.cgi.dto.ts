@@ -111,6 +111,9 @@ export class SynologyAlbumsByArtistAndDefaultGenreBodyDto extends SynologyAlbums
 }
 
 class SynologyAlbumAverageRatingDto {
+  @ApiProperty({
+    type: 'integer',
+  })
   @IsNumber()
   declare rating: RatingOrUnset;
 }

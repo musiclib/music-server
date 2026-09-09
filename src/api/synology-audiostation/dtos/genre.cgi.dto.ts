@@ -68,6 +68,9 @@ class GenreBodyDto extends SynologyPaginationDto {
 export class SynologyGenreBodyDto extends GenreBodyDto {}
 
 class SynologyAlbumGenreRatingDto {
+  @ApiProperty({
+    type: 'integer',
+  })
   @IsNumber()
   declare rating: RatingOrUnset;
 }
