@@ -2,6 +2,7 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsEnum, IsInt, IsOptional, IsString, Max, Min } from 'class-validator';
 import { SortDirectionEnum } from 'src/types/enums';
+import { Transform } from 'class-transformer';
 
 export class QnapMediaListApiListQueryDto {
   /**
@@ -28,6 +29,14 @@ export class QnapMediaListApiListQueryDto {
   @Min(1)
   @IsOptional()
   declare linkid?: number;
+
+  /**
+   * A list of song ids for songs_info actions
+   */
+  @Transform(({ value }) => (value ? value.split(',').map(Number) : []))
+  @IsInt({ each: true })
+  @IsOptional()
+  declare linkidlist: number[];
 
   /**
    * The page size, AKA the "limit" elsewhere in this server
@@ -59,7 +68,7 @@ export class QnapMediaListApiListQueryDto {
   /**
    * Media grouping to return, album, artist
    */
-  @IsEnum(['songs', 'artist', 'album', 'genre'])
+  @IsEnum(['songs', 'artist', 'album', 'genre', 'songs_info'])
   declare type: string;
 }
 

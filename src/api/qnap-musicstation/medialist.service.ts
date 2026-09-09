@@ -359,4 +359,20 @@ export class QnapMediaListApiService {
       },
     };
   }
+
+  async listTracksById(accountId: number, fileIds: number[]) {
+    const tracks = await this.libraryService.listTracks(
+      accountId,
+      {
+        fileIds,
+      },
+      0,
+      100_000,
+    );
+    return {
+      datas: {
+        data: tracks.items.map(songToRow),
+      },
+    };
+  }
 }

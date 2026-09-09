@@ -221,6 +221,9 @@ export class LibraryTrackService {
       include: joinedTables,
       where: {
         accountId,
+        ...(filters?.fileIds?.length && {
+          id: filters.fileIds,
+        }),
         ...(filters?.year && {
           year: filters.year,
         }),
