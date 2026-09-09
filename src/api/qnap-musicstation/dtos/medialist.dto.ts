@@ -68,7 +68,7 @@ export class QnapMediaListApiListQueryDto {
   /**
    * Media grouping to return, album, artist
    */
-  @IsEnum(['songs', 'artist', 'album', 'genre', 'songs_info'])
+  @IsEnum(['songs', 'artist', 'album', 'genre', 'songs_info', 'folder'])
   declare type: string;
 }
 

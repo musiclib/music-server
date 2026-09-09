@@ -3,6 +3,8 @@ import { CoverImage } from 'src/types/cover-image';
 import { InjectModel } from '@nestjs/sequelize';
 import { Injectable, NotFoundException } from '@nestjs/common';
 
+const emptyBuffer = Buffer.alloc(0);
+
 @Injectable()
 export class QnapMediaCoverApiService {
   constructor(
@@ -68,5 +70,14 @@ export class QnapMediaCoverApiService {
       throw new NotFoundException(`Album not found for album ID: ${albumId}`);
     }
     return album;
+  }
+
+  // eslint-disable-next-line class-methods-use-this
+  async getFolderCoverImage() {
+    return {
+      coverImage: emptyBuffer,
+      coverImageMimeType: '',
+      updatedAt: new Date(1970, 0, 1, 0, 0, 0, 0),
+    };
   }
 }

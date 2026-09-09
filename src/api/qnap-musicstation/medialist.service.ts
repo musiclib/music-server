@@ -3,8 +3,10 @@ import {
   AlbumEntity,
   ArtistEntity,
   FileEntity,
+  FolderEntity,
   GenreEntity,
   LinkedGenreEntity,
+  RootPathEntity,
 } from 'src/database/entities';
 import {
   AlbumSortFieldEnum,
@@ -17,6 +19,8 @@ import { InjectModel } from '@nestjs/sequelize';
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { LibraryAlbumDto, LibraryArtistDto, LibraryTrackDto } from 'src/library/dtos';
 import { LibraryService } from 'src/library/library.service';
+import { Op } from 'sequelize';
+import { sep } from 'path';
 
 function songToRow(track: LibraryTrackDto) {
   return {
@@ -68,8 +72,19 @@ function artistToRow(artist: LibraryArtistDto) {
     FileName: artist.name,
     FileType: 'artist',
     ImagePath: `artist_${artist.id}`,
-    LinkID: artist.id.toString(),
+    LinkID: artist.id,
     Title: artist.name,
+  };
+}
+
+function folderToRow(folder: FolderEntity, segmentName: string) {
+  return {
+    FileName: segmentName,
+    FilePath: folder.folderPath,
+    FileType: 'folder',
+    LinkID: folder.id,
+    ImagePath: `folder_${folder.id}`,
+    prefix: folder.folderPath,
   };
 }
 
@@ -82,7 +97,11 @@ export class QnapMediaListApiService {
     private readonly artistEntity: typeof ArtistEntity,
     @InjectModel(GenreEntity)
     private readonly genreEntity: typeof GenreEntity,
+    @InjectModel(FolderEntity)
+    private readonly folderEntity: typeof FolderEntity,
     private readonly libraryService: LibraryService,
+    @InjectModel(RootPathEntity)
+    private readonly rootPathEntity: typeof RootPathEntity,
   ) {}
 
   private async getAlbum(accountId: number, albumId: number) {
@@ -263,6 +282,86 @@ export class QnapMediaListApiService {
         CurrPage: currentPage,
         PageSize: pageSize,
         data: albums.items.filter((album) => album.artists.find((a) => a.name === artist.name)).map(albumToRow),
+      },
+    };
+  }
+
+  async listRootFolders(accountId: number) {
+    const folders = await this.folderEntity.findAll({
+      where: {
+        accountId,
+        isRoot: true,
+      },
+      order: [['folderPath', 'ASC']],
+    });
+    return {
+      datas: {
+        data: folders.map((folder) => folderToRow(folder, folder.folderPath.split(sep).pop() || folder.folderPath)),
+      },
+    };
+  }
+
+  async listFolders(accountId: number, folderId: number) {
+    const startingFolder = await this.folderEntity.findOne({
+      where: {
+        id: folderId,
+        accountId,
+      },
+    });
+    if (!startingFolder) {
+      throw new Error(`Folder with ID ${folderId} not found`);
+    }
+    // find the root path entity that matches the basePath
+    const rootPath = await this.rootPathEntity.findByPk(startingFolder.rootPathId);
+    if (!rootPath) {
+      throw new Error(`No root path found for base path: ${startingFolder.folderPath}`);
+    }
+    const stemParts = startingFolder.folderPath.split(sep).filter((part) => part.length > 0);
+    type FolderType = ReturnType<typeof folderToRow>;
+    type FileType = ReturnType<typeof songToRow>;
+    const pathContents: (FolderType | FileType)[] = [];
+    // folder contents
+    const folders = await this.folderEntity.findAll({
+      where: {
+        accountId,
+        folderPath: {
+          [Op.like]: `${startingFolder.folderPath}/%`,
+        },
+        isRoot: false,
+        rootPathId: startingFolder.rootPathId,
+      },
+    });
+    for (let i = 0, len = folders.length; i < len; i += 1) {
+      const subFolder = folders[i];
+      if (subFolder) {
+        const folderPath = subFolder.folderPath
+          .split(sep)
+          .filter((part) => part.length > 0)
+          .slice(0, stemParts.length + 1)
+          .join(sep)
+          .substring(rootPath.rootPath.length);
+        const lastSegment = folderPath.split(sep).pop() || folderPath;
+        // check if unique
+        const existing = pathContents.find((item) => (item as FolderType).FileName === lastSegment);
+        if (!existing) {
+          pathContents.push(folderToRow(subFolder, lastSegment));
+        }
+      }
+    }
+    // file contents
+    const relativeFilePath = startingFolder.folderPath.replace(rootPath.rootPath, '');
+    const files = await this.libraryService.listTracks(accountId, { filePath: relativeFilePath }, 0, 100_000);
+    for (let i = 0, len = files.items.length; i < len; i += 1) {
+      const file = files.items[i];
+      if (file) {
+        if (file.filePath.lastIndexOf(sep) === relativeFilePath.length) {
+          pathContents.push(songToRow(file));
+        }
+      }
+    }
+    return {
+      datas: {
+        data: pathContents,
       },
     };
   }

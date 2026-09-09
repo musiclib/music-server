@@ -112,6 +112,16 @@ export class QnapMediaListApiController {
         const trackList = await this.mediaListApiService.listTracksById(user.id, query.linkidlist);
         return objectToXml({ status: 1, ...trackList }, 'QDocRoot version="1.0"', 'QDocRoot');
       }
+      if (query.type === 'folder') {
+        // Route #9:  list folders
+        if (query.linkid) {
+          const folderList = await this.mediaListApiService.listFolders(user.id, query.linkid);
+          return objectToXml({ status: 1, ...folderList }, 'QDocRoot version="1.0"', 'QDocRoot');
+        }
+        // Route #10:  list root folders
+        const folderList = await this.mediaListApiService.listRootFolders(user.id);
+        return objectToXml({ status: 1, ...folderList }, 'QDocRoot version="1.0"', 'QDocRoot');
+      }
     }
     throw new NotFoundException('Resource not found');
   }
