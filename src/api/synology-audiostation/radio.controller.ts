@@ -103,7 +103,7 @@ export class SynologyRadioController {
       | SynologyRadioAddUserStationBodyDto,
   ): Promise<SynologyRadioItemResponseDto | SynologySuccessResponseDto> {
     if (variousBodies.method === 'list' && 'container' in variousBodies) {
-      // Route #1: Requesting the stations for a genre, which bundles the genre name
+      // Route #1:  Requesting the stations for a genre, which bundles the genre name
       // in the container field (e.g., `SHOUTcast_genre_Rock`).
       if (variousBodies.container.indexOf('_genre_') > -1) {
         const body = plainToInstance(SynologyRadioItemListBodyDto, variousBodies);
@@ -119,11 +119,11 @@ export class SynologyRadioController {
       if (variousBodies.offset === -1) {
         return this.addOrUpdateItem(user, body);
       }
-      // Route #4: Updating a favorite or user-defined station
+      // Route #4:  Updating a favorite or user-defined station
       if (body.radios_json[0]?.url) {
         return this.addOrUpdateItem(user, body);
       }
-      // Route #5: Deleting a favorite or user-defined station
+      // Route #5:  Deleting a favorite or user-defined station
       return this.deleteItem(user, body);
     }
     // Route #6:  Adding a user-defined station
@@ -141,7 +141,7 @@ export class SynologyRadioController {
         offset: -1,
       });
     }
-    // Route #7: Requesting the container list
+    // Route #7:  Requesting the container list
     return this.listContainers(user);
   }
 

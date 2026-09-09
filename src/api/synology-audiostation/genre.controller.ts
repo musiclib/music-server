@@ -60,7 +60,7 @@ export class SynologyGenreController {
         success: true,
       };
     }
-    // Route #2: the genres present in the music catalog
+    // Route #2:  the genres present in the music catalog
     const data = await this.genreService.listGenres(user.id, body.offset || 0, body.limit || 100000);
     return {
       data,
