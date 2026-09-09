@@ -16,7 +16,7 @@ import { objectToXml } from 'src/utils/xml';
 export class QnapAsLocalPlaybackApiController {
   constructor(private readonly qnapAsLocalPlaybackApiService: QnapAsLocalPlaybackApiService) {}
 
-  @Post('as_localplayback_api.php')
+  @Post('as_localplayback.php')
   @HttpCode(HttpStatus.OK)
   @AllowedRoles([UserRoleEnum.USER, UserRoleEnum.ADMIN])
   @ApiProduces('text/xml; charset=utf-8')
