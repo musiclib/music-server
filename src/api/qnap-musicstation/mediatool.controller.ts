@@ -3,8 +3,8 @@ import { ApiProduces, ApiTags } from '@nestjs/swagger';
 import { Controller, Header, HttpCode, HttpStatus, Post, Query, UseGuards } from '@nestjs/common';
 import { QNAP_MUSICSTATION_APIS } from 'src/constants/swagger';
 import { QnapGuard } from './qnap.guard';
-import { QnapMediaToolApiQueryDto } from './dtos/mediatool-api.dto';
-import { QnapMediaToolApiService } from './mediatool-api.service';
+import { QnapMediaToolApiQueryDto } from './dtos/mediatool.dto';
+import { QnapMediaToolApiService } from './mediatool.service';
 import { UserRoleEnum } from 'src/types/enums';
 import { objectToXml } from 'src/utils/xml';
 
