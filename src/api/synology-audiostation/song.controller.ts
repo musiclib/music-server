@@ -227,7 +227,7 @@ export class SynologySongController {
         success: true,
       };
     }
-    // Route #9: Rating one or more track(s)
+    // Route #9:  Rating one or more track(s)
     if ('rating' in variousBodies) {
       const body = plainToInstance(SynologySongsRateBodyDto, variousBodies);
       await this.songService.rateTracks(user.id, body.id, body.rating);

@@ -103,12 +103,12 @@ export class SynologyEntryService {
     @InjectModel(SessionEntity)
     private readonly sessionEntity: typeof SessionEntity,
   ) {
-    const publicKey = readFileSync(this.configService.get('PUBLIC_KEY_PATH')).toString('utf8');
+    const publicKey = readFileSync(this.configService.get('SYNOLOGY_PUBLIC_KEY_PATH')).toString('utf8');
     this.publicKey = publicKey
       .split('\n')
       .filter((line) => !line.includes('BEGIN PUBLIC KEY') && !line.includes('END PUBLIC KEY'))
       .join('');
-    const privateKeyData = readFileSync(this.configService.get('PRIVATE_KEY_PATH')).toString('utf8');
+    const privateKeyData = readFileSync(this.configService.get('SYNOLOGY_PRIVATE_KEY_PATH')).toString('utf8');
     this.privateKey = crypto.createPrivateKey({
       key: privateKeyData,
       format: 'pem',

@@ -4,6 +4,7 @@ export enum UserRoleEnum {
 }
 
 export enum SessionRestrictionEnum {
+  QNAP_MUSICSTATION = 'qnap-musicstation',
   SYNOLOGY_AUDIOSTATION = 'synology-audiostation',
   WEB_UI = 'web-ui',
 }
@@ -120,6 +121,7 @@ export enum AlbumSortFieldEnum {
   DATE_ADDED = 'date_added',
   DATE_RELEASED = 'date_released',
   GENRE = 'genre',
+  RANDOM = 'random',
   RATING = 'rating',
   YEAR = 'year',
 }
@@ -127,6 +129,7 @@ export enum AlbumSortFieldEnum {
 export enum ArtistSortFieldEnum {
   ARTIST = 'artist',
   DATE_ADDED = 'date_added',
+  RANDOM = 'random',
 }
 
 export enum ComposerSortFieldEnum {

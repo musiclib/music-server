@@ -1,6 +1,6 @@
 /* eslint-disable max-classes-per-file */
 import { ApiProperty, OmitType } from '@nestjs/swagger';
-import { IsDate, IsInt, IsString } from 'class-validator';
+import { IsDate, IsInt, IsNumber, IsString } from 'class-validator';
 import { LibraryArtistDto } from './library.artist.dto';
 import { LibraryComposerDto } from './library.composer.dto';
 import { LibraryGenreDto } from './library.genre.dto';
@@ -80,7 +80,10 @@ export class LibraryAlbumDto {
   /**
    * The aggregate rating for the album, which is a value between 0 and 5 inclusive applied to tracks.
    */
-  @IsInt({ each: true })
+  @ApiProperty({
+    type: 'integer',
+  })
+  @IsNumber()
   declare rating: RatingOrUnset;
 
   /**

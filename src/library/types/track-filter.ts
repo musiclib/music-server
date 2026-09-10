@@ -33,6 +33,10 @@ export type TrackFilters = {
    */
   composer?: string[];
   /**
+   * Optional filter for retrieving specific files.
+   */
+  fileIds?: number[];
+  /**
    * Optional filter for the file path, which will do a case-sensitive starting-match against the
    * file paths of the tracks.
    */

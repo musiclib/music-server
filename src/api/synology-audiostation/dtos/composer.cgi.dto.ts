@@ -66,6 +66,9 @@ export class SynologyComposerBodyDto extends SynologyPaginationDto {
 }
 
 class SynologyAlbumComposerRatingDto {
+  @ApiProperty({
+    type: 'integer',
+  })
   @IsNumber()
   declare rating: RatingOrUnset;
 }

@@ -1,8 +1,7 @@
 import { AUTHENTICATED_REQUEST_DESCRIPTION } from './consts';
 import { AccountEntity } from 'src/database/entities';
 import { ApiHeader, ApiOkResponse, ApiOperation, ApiProduces, ApiTags } from '@nestjs/swagger';
-import { CACHE_MANAGER, Cache } from '@nestjs/cache-manager';
-import { Controller, Get, HttpCode, HttpStatus, Inject, Logger, Query, Req, Res, UseGuards } from '@nestjs/common';
+import { Controller, Get, HttpCode, HttpStatus, Logger, Query, Req, Res, UseGuards } from '@nestjs/common';
 import { CoverCgiAlbumQueryDto, CoverCgiArtistQueryDto, CoverCgiComposerQueryDto, CoverCgiSongQueryDto } from './dtos';
 import { SYNOLOGY_AUDIOSTATION_APIS } from 'src/constants/swagger';
 import { SynologyCoverImageService } from './cover-image.service';
@@ -21,10 +20,7 @@ const emptyBuffer = Buffer.alloc(0);
 export class SynologyCoverImageController {
   private readonly logger: Logger = new Logger(SynologyCoverImageController.name);
 
-  constructor(
-    @Inject(CACHE_MANAGER) private cacheManager: Cache,
-    private readonly coverImageService: SynologyCoverImageService,
-  ) {}
+  constructor(private readonly coverImageService: SynologyCoverImageService) {}
 
   @Get('/webapi/AudioStation/cover.cgi')
   @HttpCode(HttpStatus.OK)
@@ -40,14 +36,6 @@ export class SynologyCoverImageController {
     name: 'cookie',
     description: 'The session ID and device ID cookies for the user `id={sessionId}; did={deviceId}`',
   })
-  @ApiOkResponse({
-    type: Buffer,
-    description: 'The image blob',
-    schema: {
-      type: 'string',
-      format: 'binary',
-    },
-  })
   @ApiProduces('image/jpeg', 'image/png', 'image/webp')
   @ApiOkResponse({
     schema: {
@@ -57,10 +45,10 @@ export class SynologyCoverImageController {
   })
   async route(
     @User() user: AccountEntity,
-    @Query()
-    query: CoverCgiAlbumQueryDto | CoverCgiArtistQueryDto | CoverCgiComposerQueryDto | CoverCgiSongQueryDto,
     @Req() request: Request,
     @Res() response: Response,
+    @Query()
+    query: CoverCgiAlbumQueryDto | CoverCgiArtistQueryDto | CoverCgiComposerQueryDto | CoverCgiSongQueryDto,
   ) {
     let album;
     if ('id' in query) {

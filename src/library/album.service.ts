@@ -24,6 +24,7 @@ import {
 import { LibraryGenreDto } from './dtos/library.genre.dto';
 import { ListResult } from './types/list-result';
 import { normalizeString, replaceDoubleQuotes } from 'src/utils/strings';
+import sequelize from 'sequelize/lib/sequelize';
 import type { RatingOrUnset } from 'src/types';
 
 @Injectable()
@@ -244,7 +245,11 @@ export class LibraryAlbumService {
     const sortFieldColumn = this.sortFieldToColumn(sortField);
     const order: OrderItem[] = [];
     if (sortFieldColumn) {
-      order.push([Sequelize.fn('lower', Sequelize.col(sortFieldColumn as string)), sortDirection || 'ASC']);
+      if (sortField === AlbumSortFieldEnum.RANDOM) {
+        order.push(sequelize.literal('RANDOM()'));
+      } else {
+        order.push([Sequelize.fn('lower', Sequelize.col(sortFieldColumn as string)), sortDirection || 'ASC']);
+      }
     } else {
       order.push(
         [Sequelize.fn('lower', Sequelize.col('album.title')), 'ASC'],
@@ -499,7 +504,9 @@ export class LibraryAlbumService {
   ): Promise<ListResult<LibraryAlbumWithTracksDto>> {
     const sortFieldColumn = this.sortFieldToColumn(sortField);
     const order: OrderItem[] = [];
-    if (sortFieldColumn) {
+    if (sortField === AlbumSortFieldEnum.RANDOM) {
+      order.push(sequelize.literal('RANDOM()'));
+    } else if (sortFieldColumn) {
       order.push([Sequelize.fn('lower', Sequelize.col(sortFieldColumn as string)), sortDirection || 'ASC']);
     } else {
       order.push(

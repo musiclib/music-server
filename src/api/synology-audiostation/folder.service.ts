@@ -80,7 +80,6 @@ export class SynologyFolderService {
     };
   }
 
-  // eslint-disable-next-line class-methods-use-this
   async listFolders(
     accountId: number,
     folderId: number,

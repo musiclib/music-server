@@ -167,7 +167,7 @@ export class LibraryTrackService {
         model: LinkedArtistEntity,
         attributes: [],
         where: {
-          artistId: { [Op.in]: artistIds },
+          artistId: artistIds,
         },
         required: true,
       });
@@ -176,19 +176,19 @@ export class LibraryTrackService {
     if (composerIds.length) {
       joinedTables.push({
         model: LinkedComposerEntity,
-        attributes: ['composerId'],
+        attributes: [],
         where: {
-          composerId: { [Op.in]: composerIds },
+          composerId: composerIds,
         },
         required: true,
       });
     }
     if (genreIds.length) {
       joinedTables.push({
-        attributes: ['genreId'],
+        attributes: [],
         model: LinkedGenreEntity,
         where: {
-          genreId: { [Op.in]: genreIds },
+          genreId: genreIds,
         },
         required: true,
       });
@@ -208,7 +208,7 @@ export class LibraryTrackService {
                 model: AlbumArtistEntity,
                 attributes: ['artistId'],
                 where: {
-                  artistId: { [Op.in]: albumArtistIds },
+                  artistId: albumArtistIds,
                 },
                 required: true,
               },
@@ -221,6 +221,9 @@ export class LibraryTrackService {
       include: joinedTables,
       where: {
         accountId,
+        ...(filters?.fileIds?.length && {
+          id: filters.fileIds,
+        }),
         ...(filters?.year && {
           year: filters.year,
         }),

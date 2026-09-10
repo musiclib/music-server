@@ -19,9 +19,10 @@ import { LibraryComposerDto, LibraryComposerWithTracksDto, LibraryTrackDto } fro
 import { LibraryComposerService } from './composer.service';
 import { LibraryGenreDto, LibraryGenreWithTracksDto } from './dtos/library.genre.dto';
 import { LibraryTrackService } from './track.service';
-import { Op, Sequelize } from 'sequelize';
+import { Op, OrderItem, Sequelize } from 'sequelize';
 import { TrackFilters } from './types/track-filter';
 import { normalizeString, replaceDoubleQuotes } from 'src/utils/strings';
+import sequelize from 'sequelize/lib/sequelize';
 import type { AlbumFilters } from './types/album-filter';
 import type { ArtistFilters } from './types/artist-filter';
 import type { ListResult } from './types/list-result';
@@ -114,6 +115,12 @@ export class LibraryService {
     sortDirection?: SortDirectionEnum,
   ): Promise<ListResult<LibraryArtistDto>> {
     const sortFieldColumn = this.artistService.sortFieldToColumn(sortField);
+    const order: OrderItem[] = [];
+    if (sortField === ArtistSortFieldEnum.RANDOM) {
+      order.push(sequelize.literal('RANDOM()'));
+    } else {
+      order.push([Sequelize.fn('LOWER', Sequelize.col(sortFieldColumn)), sortDirection || 'ASC']);
+    }
     const normalizedFilterString = filters?.filter ? normalizeString(filters.filter) : undefined;
     const queryFilter = await this.artistService.createAlbumArtistQueryFilter(accountId, filters);
     const artistIds = await this.artistService.findMatchingArtistIds(queryFilter);
@@ -135,7 +142,7 @@ export class LibraryService {
           },
         }),
       },
-      order: [[Sequelize.fn('LOWER', Sequelize.col(sortFieldColumn)), sortDirection || 'ASC']],
+      order,
       offset,
       limit,
     });
@@ -422,6 +429,12 @@ export class LibraryService {
     sortDirection?: SortDirectionEnum,
   ): Promise<ListResult<LibraryArtistDto>> {
     const sortFieldColumn = this.artistService.sortFieldToColumn(sortField);
+    const order: OrderItem[] = [];
+    if (sortField === ArtistSortFieldEnum.RANDOM) {
+      order.push(sequelize.literal('RANDOM()'));
+    } else {
+      order.push([Sequelize.fn('LOWER', Sequelize.col(sortFieldColumn)), sortDirection || 'ASC']);
+    }
     const normalizedFilterString = filters?.filter ? normalizeString(filters.filter) : undefined;
     const queryFilter = await this.artistService.createArtistQueryFilter(accountId, filters);
     const artistIds = await this.artistService.findMatchingArtistIds(queryFilter);
@@ -444,7 +457,7 @@ export class LibraryService {
         }),
       },
       subQuery: false,
-      order: [[Sequelize.fn('LOWER', Sequelize.col(sortFieldColumn)), sortDirection || 'ASC']],
+      order,
       offset,
       limit,
     });

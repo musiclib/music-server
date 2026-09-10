@@ -131,7 +131,7 @@ export class SynologyAlbumController {
     if ('artist' in variousBodies) {
       return this.listAlbumsByArtist(user, plainToInstance(SynologyAlbumsByArtistBodyDto, variousBodies));
     }
-    // Route #6: all albums
+    // Route #6:  all albums
     return this.listAlbums(user, plainToInstance(SynologyAlbumsBodyDto, variousBodies));
   }
 

@@ -24,3 +24,4 @@ export const USER_APIS = 'User APIs';
 export const JWT_TOKEN = 'Session token';
 
 export const SYNOLOGY_AUDIOSTATION_APIS = 'Synology AudioStation APIs';
+export const QNAP_MUSICSTATION_APIS = 'QNAP MusicStation APIs';

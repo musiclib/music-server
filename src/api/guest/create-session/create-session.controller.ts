@@ -38,7 +38,6 @@ export class GuestCreateSessionController {
   @ApiInternalServerErrorResponse({
     type: InternalServerErrorResponseDto,
   })
-  @ApiBadRequestResponse({ type: GuestCreateSessionBadRequestResponseDto })
   async post(@Req() req: Request, @Body() body: GuestCreateSessionBodyDto): Promise<GuestCreateSessionResponseDto> {
     const userAgent = req.headers['user-agent'] || '';
     const jwtToken = await this.createSessionService.post(userAgent, body);

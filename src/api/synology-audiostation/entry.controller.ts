@@ -169,7 +169,7 @@ export class SynologyEntryController {
     | SynologyEntryLogoutResponseDto
     | SynologySuccessResponseDto
   > {
-    // Route #1: requesting encryption key and field names
+    // Route #1:  requesting encryption key and field names
     if (
       'api' in variousBodies &&
       variousBodies.api === SynologyApiEnum.ENCRYPTION &&
@@ -177,12 +177,12 @@ export class SynologyEntryController {
     ) {
       return this.getEncryptionKey();
     }
-    // Route #2: signing in with encrypted username/password credentials
+    // Route #2:  signing in with encrypted username/password credentials
     if (!('api' in variousBodies) && '__cIpHeRtExT' in variousBodies) {
       const userAgent = req.headers['user-agent'] || '';
       return this.signIn(userAgent, plainToInstance(SynologyEntrySignInBodyDto, variousBodies), response);
     }
-    // Route #3: returns pinned items
+    // Route #3:  returns pinned items
     if (
       user &&
       'api' in variousBodies &&
@@ -191,7 +191,7 @@ export class SynologyEntryController {
     ) {
       return this.listPinnedItems(user, plainToInstance(SynologyEntryListPinsBodyDto, variousBodies));
     }
-    // Route #4: pinning items
+    // Route #4:  pinning items
     if (
       user &&
       'api' in variousBodies &&
@@ -200,7 +200,7 @@ export class SynologyEntryController {
     ) {
       return this.createPinnedItem(user, plainToInstance(SynologyEntryCreatePinBodyDto, variousBodies));
     }
-    // Route #5: unpinning an item
+    // Route #5:  unpinning an item
     if (
       user &&
       'api' in variousBodies &&
@@ -209,7 +209,7 @@ export class SynologyEntryController {
     ) {
       return this.deletePinnedItem(user, plainToInstance(SynologyEntryDeletePinBodyDto, variousBodies));
     }
-    // Route #6: logging out, for some reason a request may be made without user/session
+    // Route #6:  logging out, for some reason a request may be made without user/session
     if (
       'api' in variousBodies &&
       variousBodies.api === SynologyApiEnum.AUTH &&
@@ -223,22 +223,22 @@ export class SynologyEntryController {
       variousBodies.api === SynologyApiEnum.PLAYLIST &&
       variousBodies.method === SynologyMethodEnum.ADD_TRACK
     ) {
-      // Route #7: adding albums to a playlist
+      // Route #7:  adding albums to a playlist
       if ('album' in variousBodies) {
         return this.addAlbumToPlaylist(user, plainToInstance(SynologyEntryPlaylistAddAlbumBodyDto, variousBodies));
       }
-      // Route #8: adding artists to a playlist
+      // Route #8:  adding artists to a playlist
       if ('artist' in variousBodies) {
         return this.addArtistToPlaylist(user, plainToInstance(SynologyEntryPlaylistAddArtistBodyDto, variousBodies));
       }
-      // Route #9: adding composers to a playlist
+      // Route #9:  adding composers to a playlist
       if ('composer' in variousBodies) {
         return this.addComposerToPlaylist(
           user,
           plainToInstance(SynologyEntryPlaylistAddComposerBodyDto, variousBodies),
         );
       }
-      // Route #10: adding genres to a playlist
+      // Route #10:  adding genres to a playlist
       if ('genre' in variousBodies) {
         return this.addGenreToPlaylist(user, plainToInstance(SynologyEntryPlaylistAddGenreBodyDto, variousBodies));
       }
