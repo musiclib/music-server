@@ -2,8 +2,8 @@ import { AllowedRoles } from 'src/api/role.guard';
 import { ApiProduces, ApiTags } from '@nestjs/swagger';
 import { Controller, Header, HttpCode, HttpStatus, Post, Query, UseGuards } from '@nestjs/common';
 import { QNAP_MUSICSTATION_APIS } from 'src/constants/swagger';
-import { QnapAsLocalPlaybackApiService } from './as-localplayback.service';
 import { QnapAsLocalPlaybackQueryDto } from './dtos/as-localplayback.dto';
+import { QnapAsLocalPlaybackService } from './as-localplayback.service';
 import { QnapGuard } from './qnap.guard';
 import { UserRoleEnum } from 'src/types/enums';
 import { objectToXml } from 'src/utils/xml';
@@ -13,8 +13,8 @@ import { objectToXml } from 'src/utils/xml';
 })
 @ApiTags(QNAP_MUSICSTATION_APIS)
 @UseGuards(QnapGuard)
-export class QnapAsLocalPlaybackApiController {
-  constructor(private readonly qnapAsLocalPlaybackApiService: QnapAsLocalPlaybackApiService) {}
+export class QnapAsLocalPlaybackController {
+  constructor(private readonly qnapAsLocalPlaybackApiService: QnapAsLocalPlaybackService) {}
 
   @Post('as_localplayback.php')
   @HttpCode(HttpStatus.OK)

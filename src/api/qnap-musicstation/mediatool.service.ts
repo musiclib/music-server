@@ -1,28 +1,28 @@
 import { ConfigService } from 'src/config/config.service';
 import { Injectable } from '@nestjs/common';
+import { QnapMediaToolDto } from './dtos/mediatool.dto';
 
 @Injectable()
-export class QnapMediaToolApiService {
+export class QnapMediaToolService {
   constructor(private readonly configService: ConfigService) {}
 
-  async getIpList() {
+  getIpList(): QnapMediaToolDto {
     return {
-      status: 1,
-      info: {
-        LANIP: this.configService.get('LAN_SERVER_ADDRESS') || this.configService.get('SERVER_ADDRESS'),
-        LANIP_LIST: this.configService.get('LAN_SERVER_ADDRESS') || this.configService.get('SERVER_ADDRESS'),
-        INNERPORT: this.configService.get('LAN_SERVER_PORT') || this.configService.get('SERVER_PORT'),
-        // INNERPORT_SSL: '443',
-        EXTIP:
-          this.configService.get('WAN_SERVER_ADDRESS') ||
-          this.configService.get('LAN_SERVER_ADDRESS') ||
-          this.configService.get('SERVER_ADDRESS'),
-        EXTPORT:
-          this.configService.get('WAN_SERVER_PORT') ||
-          this.configService.get('LAN_SERVER_PORT') ||
-          this.configService.get('SERVER_PORT'),
-        // EXTPORT_SSL: '443',
-      },
+      LANIP: this.configService.get('LAN_SERVER_ADDRESS') || this.configService.get('SERVER_ADDRESS') || 'localhost',
+      LANIP_LIST:
+        this.configService.get('LAN_SERVER_ADDRESS') || this.configService.get('SERVER_ADDRESS') || 'localhost',
+      INNERPORT: this.configService.get('LAN_SERVER_PORT') || this.configService.get('SERVER_PORT') || 8080,
+      // INNERPORT_SSL: '443',
+      EXTIP:
+        this.configService.get('WAN_SERVER_ADDRESS') ||
+        this.configService.get('LAN_SERVER_ADDRESS') ||
+        this.configService.get('SERVER_ADDRESS'),
+      EXTPORT:
+        this.configService.get('WAN_SERVER_PORT') ||
+        this.configService.get('LAN_SERVER_PORT') ||
+        this.configService.get('SERVER_PORT') ||
+        8080,
+      // EXTPORT_SSL: '443',
     };
   }
 }

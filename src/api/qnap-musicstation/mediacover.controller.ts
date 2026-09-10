@@ -5,8 +5,8 @@ import { Controller, Get, HttpCode, HttpStatus, NotFoundException, Query, Req, R
 import { CoverImage } from 'src/types/cover-image';
 import { QNAP_MUSICSTATION_APIS } from 'src/constants/swagger';
 import { QnapGuard } from './qnap.guard';
-import { QnapMediaCoverApiQueryDto } from './dtos/mediacover.dto';
-import { QnapMediaCoverApiService } from './mediacover.service';
+import { QnapMediaCoverQueryDto } from './dtos/mediacover.dto';
+import { QnapMediaCoverService } from './mediacover.service';
 import { User } from '../user.decorator';
 import { UserRoleEnum } from 'src/types/enums';
 import { join, sep } from 'node:path';
@@ -22,8 +22,8 @@ const emptyBuffer = Buffer.alloc(0);
 })
 @ApiTags(QNAP_MUSICSTATION_APIS)
 @UseGuards(QnapGuard)
-export class QnapMediaCoverApiController {
-  constructor(private readonly mediaCoverApiService: QnapMediaCoverApiService) {}
+export class QnapMediaCoverController {
+  constructor(private readonly mediaCoverApiService: QnapMediaCoverService) {}
 
   @Get('mediacover_api.php')
   @AllowedRoles([UserRoleEnum.USER, UserRoleEnum.ADMIN])
@@ -39,7 +39,7 @@ export class QnapMediaCoverApiController {
     @User() user: AccountEntity,
     @Req() request: Request,
     @Res() response: Response,
-    @Query() query: QnapMediaCoverApiQueryDto,
+    @Query() query: QnapMediaCoverQueryDto,
   ) {
     const itemId = Number(query.imagepath.split('_')[1]);
     if (!itemId) {

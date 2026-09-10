@@ -398,8 +398,6 @@ export type paths = {
     /**
      * Streams audio files.  This route is guest-accessible for better browser handling.
      * @description Downloads audio files from the music library to the client.  This is used to stream audio files for playback or to download for offline usage.  The audio files are streamed in their original format, and the client is responsible for decoding and playing the audio.  Synology implements transcoding for certain formats, but this is not supported in this server.
-     *
-     *     The request must be authenticated using a valid Synology session ID and device ID cookie for the user, which can be obtained by signing in via the `entry.cgi` endpoint, a two-step process requesting the encryption public key from `/certs` and then  submitting credentials encrypted with it.
      */
     get: operations['GuestStreamFileController_get'];
     put?: never;
@@ -805,6 +803,119 @@ export type paths = {
      * @description Resets the user's password to a new value.
      */
     post: operations['UserUpdatePasswordController_post'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/cgi-bin/authLogin.cgi': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get: operations['QnapAuthLoginController_routeRequest'];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/musicstation/api/as_get_file_api.php': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get: operations['QnapAsGetFileController_get'];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/musicstation/api/as_localplayback.php': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    put?: never;
+    post: operations['QnapAsLocalPlaybackController_post'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/musicstation/api/as_login_api.php': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    put?: never;
+    post: operations['QnapAsLoginController_post'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/musicstation/api/mediacover_api.php': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get: operations['QnapMediaCoverController_get'];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/musicstation/api/medialist_api.php': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    put?: never;
+    /** Handle QNAP Music Station media-list API requests */
+    post: operations['QnapMediaListController_post'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/musicstation/api/mediatool_api.php': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    put?: never;
+    post: operations['QnapMediaToolController_get'];
     delete?: never;
     options?: never;
     head?: never;
@@ -1713,7 +1824,6 @@ export type components = {
        */
       success: boolean;
     };
-    Buffer: Record<string, never>;
     /** @enum {string} */
     ComposerSortFieldEnum: ComposerSortFieldEnum;
     /**
@@ -2036,6 +2146,492 @@ export type components = {
     };
     /** @enum {string} */
     PlaylistTypeEnum: PlaylistTypeEnum;
+    QnapAlbumDto: {
+      Albumartist: string;
+      Artist: string;
+      FileName: string;
+      FileType: string;
+      Genre: string;
+      ImagePath: string;
+      Is_VA: boolean;
+      LinkID: number;
+      Title: string;
+    };
+    QnapArtistDto: {
+      Albumartist: string;
+      FileName: string;
+      FileType: string;
+      ImagePath: string;
+      LinkID: number;
+      Title: string;
+    };
+    QnapAuthConnectionInfoDto: {
+      connet_ip: string;
+    };
+    QnapAuthCustomLogoDto: {
+      customFrontLogo: string;
+      customLoginLogo: string;
+    };
+    QnapAuthFirmwareDto: {
+      build: number;
+      buildTime: string;
+      name: string;
+      number: number;
+      patch: number;
+      version: string;
+    };
+    QnapAuthLoginAuthenticateQueryDto: {
+      /** @description The client browser or app user agent */
+      client_agent: string;
+      /** @description The client app */
+      client_app: string;
+      /** @description An ID value sent by the client, probably randomly-generated or a fingerprint */
+      client_id: string;
+      force_to_check_2sv: number;
+      pwd: string;
+      /** @description Flag for remembering signin */
+      remme: number;
+      service: number;
+      serviceKey: number;
+      user: string;
+    };
+    QnapAuthLoginDto: {
+      auth_method: string;
+      authPassed: number;
+      authSid: string;
+      content: string;
+      cuid: string;
+      customLogo: components['schemas']['QnapAuthCustomLogoDto'];
+      DemoSiteSuppurt: string;
+      doQuick: string;
+      DSV2Supported: number;
+      DSV2URL: string;
+      DSV3Supported: number;
+      firmware: components['schemas']['QnapAuthFirmwareDto'];
+      forceSSL: number;
+      function_support: string;
+      fwNotice: number;
+      groupname: string;
+      HDAROOT_ALMOST_FULL: number;
+      hero_model: number;
+      hostname: string;
+      HTTPHost: string;
+      is_booting: number;
+      isAdmin: number;
+      mediaReady: number;
+      mfa_support: string;
+      model: components['schemas']['QnapAuthModelDto'];
+      MSV2Supported: number;
+      MSV2URL: string;
+      MSV2WebEnabled: number;
+      NVREnabled: number;
+      NVRURL: string;
+      NVRVER: number;
+      passwdConstraints: components['schemas']['QnapAuthPasswordConstraintsDto'];
+      psType: number;
+      pw_status: number;
+      QDownloadEnabled: number;
+      QMultimediaEnabled: number;
+      QMusicsEnabled: number;
+      QMusicsURL: string;
+      QPhotosEnabled: number;
+      QPhotosURL: string;
+      qtoken: string;
+      qts_mode_type: number;
+      QVideosEnabled: number;
+      QVideosURL: string;
+      QWebEnabled: number;
+      QWebPort: number;
+      QWebSSLEnabled: number;
+      QWebSSLPort: number;
+      rfs_bits: number;
+      serviceURL: string;
+      show_link: number;
+      showVersion: number;
+      shutdown_info: components['schemas']['QnapAuthShutdownInfoDto'];
+      SMBFW: number;
+      specVersion: string;
+      standard_bg_style: string;
+      standard_color: string;
+      standard_massage: string;
+      standard_size: string;
+      stunnelEnabled: number;
+      stunnelPort: number;
+      SUID: string;
+      support_ksmbd: string;
+      title: string;
+      ts: number;
+      user_account_expiry: number;
+      user_enable: number;
+      username: string;
+      webAccessPort: number;
+      webFSEnabled: number;
+      WFM2: number;
+      wfmPort: number;
+      wfmPortEnabled: number;
+      wfmSSLEnabled: number;
+      wfmSSLPort: number;
+      wfmURL: string;
+    };
+    QnapAuthLoginResumeSessionQueryDto: {
+      /** @description The client browser or app user agent */
+      client_agent: string;
+      /** @description The client app */
+      client_app: string;
+      /** @description An ID value sent by the client, probably randomly-generated or a fingerprint */
+      client_id: string;
+      force_to_check_2sv: number;
+      /** @description Flag for remembering signin */
+      remme: number;
+      service: number;
+      serviceKey: number;
+      /**
+       * @description On a QNAP NAS this value is a 8-digit short string that authenticates the user
+       *     session.  In this software the JWT token is used instead.
+       */
+      sid: string;
+    };
+    QnapAuthModelDto: {
+      customModelName: string;
+      displayModelName: string;
+      dual_node: string;
+      encryptfsSupported: number;
+      internalModelName: string;
+      is_zfs: number;
+      modelName: string;
+      node: string;
+      platform: string;
+      platform_ex: string;
+      sas_model: number;
+      storage_v2: number;
+      vqts: string;
+    };
+    QnapAuthPasswordConstraintsDto: {
+      passwdConstraint01: number;
+      passwdConstraint02: number;
+      passwdConstraint03: number;
+      passwdConstraint04: number;
+      pw_constraint01_letter: number;
+      pw_constraint01_opt: number;
+      pw_min_limit: number;
+      pw_min_limit_en: number;
+    };
+    QnapAuthResumeSessionDto: {
+      _version: string;
+      auth_method: string;
+      authPassed: number;
+      connet_info: components['schemas']['QnapAuthConnectionInfoDto'];
+      content: string;
+      cuid: string;
+      customLogo: components['schemas']['QnapAuthCustomLogoDto'];
+      DemoSiteSuppurt: string;
+      doQuick: string;
+      DSV2Supported: number;
+      DSV2URL: string;
+      DSV3Supported: number;
+      firmware: components['schemas']['QnapAuthFirmwareDto'];
+      force_2sv: number;
+      forceSSL: number;
+      function_support: string;
+      fwNotice: number;
+      gqMaster: number;
+      groupname: string;
+      HDAROOT_ALMOST_FULL: number;
+      hero_model: number;
+      hostname: string;
+      HTTPHost: string;
+      is_booting: number;
+      isAdmin: number;
+      mediaReady: number;
+      mfa_support: string;
+      model: components['schemas']['QnapAuthModelDto'];
+      MSV2Supported: number;
+      MSV2URL: string;
+      MSV2WebEnabled: number;
+      NVREnabled: number;
+      NVRURL: string;
+      NVRVER: number;
+      passwdConstraints: components['schemas']['QnapAuthPasswordConstraintsDto'];
+      psType: number;
+      QDownloadEnabled: number;
+      QMultimediaEnabled: number;
+      QMusicsEnabled: number;
+      QMusicsURL: string;
+      QPhotosEnabled: number;
+      QPhotosURL: string;
+      qts_mode_type: number;
+      quickStart: number;
+      QVideosEnabled: number;
+      QVideosURL: string;
+      QWebEnabled: number;
+      QWebPort: number;
+      QWebSSLEnabled: number;
+      QWebSSLPort: number;
+      rfs_bits: number;
+      show_link: number;
+      showVersion: number;
+      shutdown_info: components['schemas']['QnapAuthShutdownInfoDto'];
+      SMBFW: number;
+      specVersion: string;
+      standard_bg_style: string;
+      standard_color: string;
+      standard_massage: string;
+      standard_size: string;
+      stunnelEnabled: number;
+      stunnelPort: number;
+      SUID: string;
+      support_ksmbd: string;
+      title: string;
+      ts: number;
+      user: string;
+      userid: number;
+      username: string;
+      userType: string;
+      webAccessPort: number;
+      webFSEnabled: number;
+      WFM2: number;
+      wfmPort: number;
+      wfmPortEnabled: number;
+      wfmSSLEnabled: number;
+      wfmSSLPort: number;
+      wfmURL: string;
+    };
+    QnapAuthShutdownInfoDto: {
+      duration: number;
+      timestamp: number;
+      type: number;
+    };
+    QnapFolderDto: {
+      FileName: string;
+      FilePath: string;
+      FileType: string;
+      ImagePath: string;
+      LinkID: number;
+      prefix: string;
+    };
+    QnapGenreDto: {
+      FileName: string;
+      FileType: string;
+      LinkID: string;
+      Title: string;
+    };
+    QnapMediaListAlbumsPaginatedDto: {
+      CurrPage: number;
+      data: components['schemas']['QnapAlbumDto'][];
+      PageSize: number;
+      TotalCounts: number;
+    };
+    QnapMediaListAlbumsResponseDto: {
+      datas: components['schemas']['QnapMediaListAlbumsPaginatedDto'];
+    };
+    QnapMediaListArtistsPaginatedDto: {
+      CurrPage: number;
+      data: components['schemas']['QnapArtistDto'][];
+      PageSize: number;
+      TotalCounts: number;
+    };
+    QnapMediaListArtistsResponseDto: {
+      datas: components['schemas']['QnapMediaListArtistsPaginatedDto'];
+    };
+    QnapMediaListFoldersDto: {
+      data: components['schemas']['QnapFolderDto'][];
+    };
+    QnapMediaListFoldersResponseDto: {
+      datas: components['schemas']['QnapMediaListFoldersDto'];
+    };
+    QnapMediaListGenresPaginatedDto: {
+      CurrPage: number;
+      data: components['schemas']['QnapGenreDto'][];
+      PageSize: number;
+      TotalCounts: number;
+    };
+    QnapMediaListGenresResponseDto: {
+      datas: components['schemas']['QnapMediaListGenresPaginatedDto'];
+    };
+    QnapMediaListQueryDto: {
+      /** @description The action (always "list") */
+      act: string;
+      /** @description The current page, which multiplied by page size is AKA the "offset" elsewhere in this server */
+      currpage: number;
+      /**
+       * @description The sort direction
+       * @default asc
+       */
+      desc: components['schemas']['SortDirectionEnum'];
+      /** @description The ID of an item being browsed, such as an artist or album or genre */
+      linkid?: number;
+      /** @description A list of song ids for songs_info actions */
+      linkidlist: number[];
+      /** @description The page size, AKA the "limit" elsewhere in this server */
+      pagesize: number;
+      /**
+       * @description The field to sort by
+       * @default title
+       */
+      sortBy: string;
+      /** @description Media grouping to return, album, artist */
+      type: string;
+    };
+    QnapMediaListRandomQueryDto: {
+      act: string;
+      /** @description Analogous for "limit" for pagination */
+      counts: number;
+      /** @description Media grouping to return, album, artist */
+      type: string;
+    };
+    QnapMediaListTracksPaginatedDto: {
+      CurrPage: number;
+      data: components['schemas']['QnapTrackDto'][];
+      PageSize: number;
+      TotalCounts: number;
+    };
+    QnapMediaListTracksResponseDto: {
+      datas: components['schemas']['QnapMediaListTracksPaginatedDto'];
+    };
+    QnapMediaToolDto: {
+      EXTIP: string;
+      EXTPORT: number;
+      EXTPORT_SSL?: string;
+      INNERPORT: number;
+      INNERPORT_SSL?: string;
+      LANIP: string;
+      LANIP_LIST: string;
+    };
+    QnapMediaToolResponseDto: {
+      info: components['schemas']['QnapMediaToolDto'];
+      success: number;
+    };
+    QnapPreauthenticateDto: {
+      auth_method: string;
+      content: string;
+      cuid: string;
+      DemoSiteSuppurt: string;
+      doQuick: string;
+      function_support: string;
+      fwNotice: number;
+      hostname: string;
+      is_booting: number;
+      mediaReady: number;
+      mfa_support: string;
+      passwdConstraints: components['schemas']['QnapAuthPasswordConstraintsDto'];
+      psType: number;
+      show_link: number;
+      showVersion: number;
+      shutdown_info: components['schemas']['QnapAuthShutdownInfoDto'];
+      standard_bg_style: string;
+      standard_color: string;
+      standard_massage: string;
+      standard_size: string;
+      stunnelEnabled: number;
+      stunnelPort: number;
+      support_ksmbd: string;
+      title: string;
+      ts: number;
+      webAccessPort: number;
+    };
+    QnapTrackDto: {
+      Album: string;
+      AlbumArtist: string;
+      Artist: string;
+      audio_playtime: string;
+      did: string;
+      Disc: string;
+      Extension: string;
+      /** @description Boolean flag for being favorited, which is not supported in Qnap's UI */
+      favorite: number;
+      FileName: string;
+      FilePath: string;
+      FileSize: string;
+      FileType: string;
+      /**
+       * Format: integer
+       * @default 3
+       */
+      Formatid: number;
+      Genre: string;
+      ImagePath: string;
+      iOrderNr: string;
+      LinkID: number;
+      /**
+       * Format: integer
+       * @default 0
+       */
+      MediaType: number;
+      Order: string;
+      /**
+       * Format: integer
+       * @default 0
+       */
+      Rating: Record<string, never>;
+      SongID: number;
+      Title: string;
+      Tracknumber?: number;
+      UseCount: number;
+      Year?: number;
+    };
+    QnapUserAsLoginDatasDto: {
+      /** @description The first item contains user information. The second item contains system and application information. */
+      data: (
+        | components['schemas']['QnapUserAsLoginUserDataDto']
+        | components['schemas']['QnapUserAsLoginSystemDataDto']
+      )[];
+    };
+    QnapUserAsLoginDto: {
+      datas: components['schemas']['QnapUserAsLoginDatasDto'];
+    };
+    QnapUserAsLoginFunctionsDto: {
+      /**
+       * @description Whether the user can create shared folders.
+       * @example 0
+       */
+      createsharefolder: number;
+    };
+    QnapUserAsLoginSystemDataDto: {
+      api_version: string;
+      appVersion: string;
+      auth: number;
+      cayin_install: number;
+      cayin_license: string;
+      homes: number;
+      media_console_support: string;
+      mediafoder_counts: number;
+      MSVersion: string;
+      qsync: number;
+      recycle: number;
+    };
+    QnapUserAsLoginUserDataDto: {
+      account: string;
+      alarm: number;
+      api_functions: components['schemas']['QnapUserAsLoginFunctionsDto'];
+      bluetooth: number;
+      bluetooth_enable: number;
+      builtinFirmwareVersion: string;
+      cuid: string;
+      defaultUpload: string;
+      defaultUpload_Full_Path: string;
+      defaultUpload_ID: string;
+      displayModelName: string;
+      dlna: number;
+      dlnaclient: number;
+      email: string;
+      home_path: string;
+      id3tageditor: number;
+      internetradio: number;
+      is_admin: number;
+      is_hero: number;
+      localplayback: number;
+      localplayback_enable: number;
+      medialib: number;
+      personal_email: string;
+      qdms_enable: number;
+      scanMode: string;
+      sid: string;
+      ssid: number;
+      status: number;
+      systemModelName: string;
+      usr_id: number;
+      writable: string;
+    };
     /**
      * @description The `type` value is expected to always be `container` for SHOUTcast genres, and
      *     `radio` for actual stations.  Possibly other values for favorites and custom-added
@@ -7470,6 +8066,185 @@ export interface operations {
       };
     };
   };
+  QnapAuthLoginController_routeRequest: {
+    parameters: {
+      query?: {
+        /** @description The client browser or app user agent */
+        client_agent?: string;
+        /** @description The client app */
+        client_app?: string;
+        /** @description An ID value sent by the client, probably randomly-generated or a fingerprint */
+        client_id?: string;
+        force_to_check_2sv?: number;
+        pwd?: string;
+        qtoken?: string;
+        /** @description Flag for remembering signin */
+        remme?: number;
+        service?: number;
+        serviceKey?: number;
+        /**
+         * @description On a QNAP NAS this value is a 8-digit short string that authenticates the user
+         *     session.  In this software the JWT token is used instead.
+         */
+        sid?: string;
+        user?: string;
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description QNAP authentication response */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/xml':
+            | components['schemas']['QnapPreauthenticateDto']
+            | components['schemas']['QnapAuthLoginDto']
+            | components['schemas']['QnapAuthResumeSessionDto'];
+        };
+      };
+    };
+  };
+  QnapAsGetFileController_get: {
+    parameters: {
+      query: {
+        addcounts: number;
+        ext: string;
+        f: number;
+        from: string;
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': string;
+        };
+      };
+    };
+  };
+  QnapAsLocalPlaybackController_post: {
+    parameters: {
+      query: {
+        act: string;
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'text/xml; charset=utf-8': string;
+        };
+      };
+    };
+  };
+  QnapAsLoginController_post: {
+    parameters: {
+      query: {
+        act: string;
+        ssid: string;
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description QNAP user login information */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/xml': components['schemas']['QnapUserAsLoginDto'];
+        };
+      };
+    };
+  };
+  QnapMediaCoverController_get: {
+    parameters: {
+      query: {
+        /** @description The action (always "list") */
+        imagepath: string;
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'image/jpeg': string;
+          'image/png': string;
+          'image/webp': string;
+        };
+      };
+    };
+  };
+  QnapMediaListController_post: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'text/xml;charset=utf-8':
+            | components['schemas']['QnapMediaListArtistsResponseDto']
+            | components['schemas']['QnapMediaListAlbumsResponseDto']
+            | components['schemas']['QnapMediaListGenresResponseDto']
+            | components['schemas']['QnapMediaListFoldersResponseDto']
+            | components['schemas']['QnapMediaListTracksResponseDto'];
+        };
+      };
+    };
+  };
+  QnapMediaToolController_get: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description QNAP authentication response */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/xml': components['schemas']['QnapMediaToolResponseDto'];
+        };
+      };
+    };
+  };
   SynologyAlbumController_route: {
     parameters: {
       query?: never;
@@ -7573,13 +8348,14 @@ export interface operations {
     };
     requestBody?: never;
     responses: {
-      /** @description The image blob */
       200: {
         headers: {
           [name: string]: unknown;
         };
         content: {
-          'application/octet-stream': components['schemas']['Buffer'];
+          'image/jpeg': string;
+          'image/png': string;
+          'image/webp': string;
         };
       };
     };
@@ -8074,12 +8850,14 @@ export enum AlbumSortFieldEnum {
   date_added = 'date_added',
   date_released = 'date_released',
   genre = 'genre',
+  random = 'random',
   rating = 'rating',
   year = 'year',
 }
 export enum ArtistSortFieldEnum {
   artist = 'artist',
   date_added = 'date_added',
+  random = 'random',
 }
 export enum BadRequestErrorEnum {
   bad_request_error = 'bad-request-error',

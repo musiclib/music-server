@@ -1,3 +1,24 @@
+function escapeXml(value) {
+  return String(value)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&apos;');
+}
+
+function xmlValue(value) {
+  const text = String(value);
+
+  // CDATA is useful when the value contains markup-sensitive characters
+  if (/[<&]/.test(text)) {
+    // CDATA cannot contain "]]>", so split it safely if necessary
+    return `<![CDATA[${text.replace(/\]\]>/g, ']]]]><![CDATA[>')}]]>`;
+  }
+
+  return escapeXml(text);
+}
+
 /**
  * Converts a JS object to XML wrapped in an open/closing tag
  * @param {Record<string | number, unknown> | Array<unknown>} obj An object
@@ -33,7 +54,7 @@ export function objectToXml(
           const itemXml = objectToXml(value as Record<string | number, unknown>, key, key, indent + 2);
           xml += `\n${itemXml}${' '.repeat(indent)}`;
         } else {
-          xml += `\n${' '.repeat(indent + 2)}<${key}><![CDATA[${value}]]></${key}>`;
+          xml += `\n${' '.repeat(indent + 2)}<${key}>${xmlValue(value)}</${key}>`;
         }
       }
     }

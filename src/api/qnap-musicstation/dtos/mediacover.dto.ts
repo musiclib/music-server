@@ -1,6 +1,6 @@
 import { IsString } from 'class-validator';
 
-export class QnapMediaCoverApiQueryDto {
+export class QnapMediaCoverQueryDto {
   /**
    * The action (always "list")
    */

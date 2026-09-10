@@ -89,7 +89,7 @@ function folderToRow(folder: FolderEntity, segmentName: string) {
 }
 
 @Injectable()
-export class QnapMediaListApiService {
+export class QnapMediaListService {
   constructor(
     @InjectModel(AlbumEntity)
     private readonly albumEntity: typeof AlbumEntity,

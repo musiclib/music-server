@@ -3,16 +3,17 @@ import { ConfigService } from 'src/config/config.service';
 import { ErrorCodes } from 'src/constants/error-codes';
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
+import { QnapUserAsLoginDto } from './dtos/as-login.dto';
 
 @Injectable()
-export class QnapAsLoginApiService {
+export class QnapAsLoginService {
   constructor(
     private readonly authenticationService: AuthenticationService,
     private readonly configService: ConfigService,
     private readonly jwtService: JwtService,
   ) {}
 
-  async getConfiguration(jwtToken: string) {
+  async getConfiguration(jwtToken: string): Promise<QnapUserAsLoginDto> {
     const payload: {
       accountId: number;
       sessionId: number;
@@ -60,7 +61,7 @@ export class QnapAsLoginApiService {
             bluetooth_enable: 0,
             ssid: 1,
             is_hero: 0,
-            cuid: this.configService.get('QNAP_CUID'),
+            cuid: this.configService.get('QNAP_CUID') || '',
             builtinFirmwareVersion: '5.2.9',
             displayModelName: 'Music Server',
             systemModelName: 'TS-KVM-CLD',

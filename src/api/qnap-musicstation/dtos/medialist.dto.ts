@@ -1,10 +1,229 @@
 /* eslint-disable max-classes-per-file */
 import { ApiProperty } from '@nestjs/swagger';
-import { IsEnum, IsInt, IsOptional, IsString, Max, Min } from 'class-validator';
+import { IsBoolean, IsEnum, IsInt, IsNumber, IsOptional, IsString, Max, Min } from 'class-validator';
+import { type RatingOrUnset } from 'src/types';
 import { SortDirectionEnum } from 'src/types/enums';
 import { Transform } from 'class-transformer';
 
-export class QnapMediaListApiListQueryDto {
+export class QnapArtistDto {
+  @IsString()
+  declare Albumartist: string;
+
+  @IsString()
+  declare FileName: string;
+
+  @IsString()
+  declare FileType: 'artist';
+
+  @IsString()
+  declare ImagePath: string;
+
+  @IsInt()
+  declare LinkID: number;
+
+  @IsString()
+  declare Title: string;
+}
+
+export class QnapAlbumDto {
+  @IsString()
+  declare Albumartist: string;
+
+  @IsString()
+  declare Artist: string;
+
+  @IsString()
+  declare FileName: string;
+
+  @IsString()
+  declare FileType: 'album';
+
+  @IsString()
+  declare Genre: string;
+
+  @IsString()
+  declare ImagePath: string;
+
+  @IsBoolean()
+  declare Is_VA: boolean;
+
+  @IsInt()
+  declare LinkID: number;
+
+  @IsString()
+  declare Title: string;
+}
+
+export class QnapFolderDto {
+  @IsString()
+  declare FileName: string;
+
+  @IsString()
+  declare FilePath: string;
+
+  @IsString()
+  declare FileType: 'folder';
+
+  @IsInt()
+  declare LinkID: number;
+
+  @IsString()
+  declare ImagePath: string;
+
+  @IsString()
+  declare prefix: string;
+}
+
+export class QnapGenreDto {
+  @IsString()
+  declare FileName: string;
+
+  @IsString()
+  declare FileType: 'genre';
+
+  @IsString()
+  declare Title: string;
+
+  @IsString()
+  declare LinkID: string;
+}
+
+export class QnapTrackDto {
+  @IsString()
+  declare Album: string;
+
+  @IsString()
+  declare AlbumArtist: string;
+
+  @IsString()
+  declare Artist: string;
+
+  @IsString()
+  declare audio_playtime: string;
+
+  @IsString()
+  declare did: string;
+
+  @IsString()
+  declare Disc: string;
+
+  @IsString()
+  declare Extension: string;
+
+  /**
+   * Boolean flag for being favorited, which is not supported in Qnap's UI
+   */
+  @IsInt()
+  declare favorite: number;
+
+  @IsString()
+  declare FileName: string;
+
+  @IsString()
+  declare FilePath: string;
+
+  @IsString()
+  declare FileSize: string;
+
+  @IsString()
+  declare FileType: string;
+
+  @ApiProperty({
+    format: 'integer',
+    default: 3,
+  })
+  @IsInt()
+  declare Formatid: 3;
+
+  @IsString()
+  declare Genre: string;
+
+  @IsString()
+  declare ImagePath: string;
+
+  @IsString()
+  declare iOrderNr: string;
+
+  @IsInt()
+  declare LinkID: number;
+
+  @ApiProperty({
+    format: 'integer',
+    default: 0,
+  })
+  @IsNumber()
+  declare MediaType: 0;
+
+  @IsString()
+  declare Order: string;
+
+  @ApiProperty({
+    format: 'integer',
+    default: 0,
+  })
+  @IsNumber()
+  declare Rating: RatingOrUnset;
+
+  @IsInt()
+  declare SongID: number;
+
+  @IsString()
+  declare Title: string;
+
+  @IsInt()
+  @IsOptional()
+  declare Tracknumber?: number;
+
+  @IsInt()
+  declare UseCount: number;
+
+  @IsInt()
+  @IsOptional()
+  declare Year?: number;
+}
+
+export class QnapMediaListRandomQueryDto {
+  @IsEnum(['random'])
+  declare act: string;
+
+  /**
+   * Analogous for "limit" for pagination
+   */
+  @IsInt()
+  @Min(1)
+  @Max(100_000)
+  declare counts: number;
+
+  /**
+   * Media grouping to return, album, artist
+   */
+  @IsEnum(['album', 'artist'])
+  declare type: string;
+}
+
+export class QnapMediaListRandomArtistsResponseDto {
+  @IsInt()
+  declare success: number;
+
+  @ApiProperty({
+    type: QnapArtistDto,
+    isArray: true,
+  })
+  declare datas: QnapArtistDto[];
+}
+
+export class QnapMediaListRandomAlbumsResponseDto {
+  @IsInt()
+  declare success: number;
+
+  @ApiProperty({
+    type: QnapAlbumDto,
+    isArray: true,
+  })
+  declare datas: QnapAlbumDto[];
+}
+
+export class QnapMediaListQueryDto {
   /**
    * The action (always "list")
    */
@@ -72,21 +291,112 @@ export class QnapMediaListApiListQueryDto {
   declare type: string;
 }
 
-export class QnapMediaListApiRandomQueryDto {
-  @IsEnum(['random'])
-  declare act: string;
-
-  /**
-   * Analogous for "limit" for pagination
-   */
+class QnapMediaListAlbumsPaginatedDto {
   @IsInt()
-  @Min(1)
-  @Max(100_000)
-  declare counts: number;
+  declare TotalCounts: number;
 
-  /**
-   * Media grouping to return, album, artist
-   */
-  @IsEnum(['album', 'artist'])
-  declare type: string;
+  @IsInt()
+  declare CurrPage: number;
+
+  @IsInt()
+  declare PageSize: number;
+
+  @ApiProperty({
+    type: QnapAlbumDto,
+    isArray: true,
+  })
+  declare data: QnapAlbumDto[];
+}
+
+class QnapMediaListArtistsPaginatedDto {
+  @IsInt()
+  declare TotalCounts: number;
+
+  @IsInt()
+  declare CurrPage: number;
+
+  @IsInt()
+  declare PageSize: number;
+
+  @ApiProperty({
+    type: QnapArtistDto,
+    isArray: true,
+  })
+  declare data: QnapArtistDto[];
+}
+
+class QnapMediaListFoldersDto {
+  @ApiProperty({
+    type: QnapFolderDto,
+    isArray: true,
+  })
+  declare data: QnapFolderDto[];
+}
+
+class QnapMediaListGenresPaginatedDto {
+  @IsInt()
+  declare TotalCounts: number;
+
+  @IsInt()
+  declare CurrPage: number;
+
+  @IsInt()
+  declare PageSize: number;
+
+  @ApiProperty({
+    type: QnapGenreDto,
+    isArray: true,
+  })
+  declare data: QnapGenreDto[];
+}
+class QnapMediaListTracksPaginatedDto {
+  @IsInt()
+  declare TotalCounts: number;
+
+  @IsInt()
+  declare CurrPage: number;
+
+  @IsInt()
+  declare PageSize: number;
+
+  @ApiProperty({
+    type: QnapTrackDto,
+    isArray: true,
+  })
+  declare data: QnapTrackDto[];
+}
+
+export class QnapMediaListArtistsResponseDto {
+  @ApiProperty({
+    type: QnapMediaListArtistsPaginatedDto,
+  })
+  declare datas: QnapMediaListArtistsPaginatedDto;
+}
+
+export class QnapMediaListAlbumsResponseDto {
+  @ApiProperty({
+    type: QnapMediaListAlbumsPaginatedDto,
+  })
+  declare datas: QnapMediaListAlbumsPaginatedDto;
+}
+
+export class QnapMediaListGenresResponseDto {
+  @ApiProperty({
+    type: QnapMediaListGenresPaginatedDto,
+  })
+  declare datas: QnapMediaListGenresPaginatedDto;
+}
+
+export class QnapMediaListFoldersResponseDto {
+  @ApiProperty({
+    type: QnapMediaListFoldersDto,
+  })
+  declare datas: QnapMediaListFoldersDto;
+}
+
+export class QnapMediaListTracksResponseDto {
+  @ApiProperty({
+    type: QnapMediaListTracksPaginatedDto,
+  })
+  declare datas: QnapMediaListTracksPaginatedDto;
 }

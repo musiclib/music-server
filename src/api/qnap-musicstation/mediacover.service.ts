@@ -6,7 +6,7 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 const emptyBuffer = Buffer.alloc(0);
 
 @Injectable()
-export class QnapMediaCoverApiService {
+export class QnapMediaCoverService {
   constructor(
     @InjectModel(AlbumEntity)
     private readonly albumEntity: typeof AlbumEntity,
