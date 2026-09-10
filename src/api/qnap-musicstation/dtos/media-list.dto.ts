@@ -258,7 +258,7 @@ export class QnapMediaListRandomAlbumsResponseDto {
   declare datas: QnapAlbumDto[];
 }
 
-export class QnapMediaListQueryDto {
+export class QnapMediaListGeneralQueryDto {
   /**
    * The action (always "list")
    */
@@ -290,7 +290,7 @@ export class QnapMediaListQueryDto {
   @Transform(({ value }) => (value ? value.split(',').map(Number) : []))
   @IsInt({ each: true })
   @IsOptional()
-  declare linkidlist: number[];
+  declare linkidlist?: number[];
 
   /**
    * The page size, AKA the "limit" elsewhere in this server
@@ -331,9 +331,11 @@ class QnapMediaListAlbumsPaginatedDto {
   declare TotalCounts: number;
 
   @IsInt()
+  @Transform(({ value }) => Number.parseInt(value, 10))
   declare CurrPage: number;
 
   @IsInt()
+  @Transform(({ value }) => Number.parseInt(value, 10))
   declare PageSize: number;
 
   @ApiProperty({
@@ -348,9 +350,11 @@ class QnapMediaListArtistsPaginatedDto {
   declare TotalCounts: number;
 
   @IsInt()
+  @Transform(({ value }) => Number.parseInt(value, 10))
   declare CurrPage: number;
 
   @IsInt()
+  @Transform(({ value }) => Number.parseInt(value, 10))
   declare PageSize: number;
 
   @ApiProperty({
@@ -373,6 +377,7 @@ class QnapMediaListGenresPaginatedDto {
   declare TotalCounts: number;
 
   @IsInt()
+  @Transform(({ value }) => Number.parseInt(value, 10))
   declare CurrPage: number;
 
   @IsInt()
@@ -389,6 +394,7 @@ class QnapMediaListTracksPaginatedDto {
   declare TotalCounts: number;
 
   @IsInt()
+  @Transform(({ value }) => Number.parseInt(value, 10))
   declare CurrPage: number;
 
   @IsInt()

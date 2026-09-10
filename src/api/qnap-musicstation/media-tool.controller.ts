@@ -3,8 +3,8 @@ import { ApiExtraModels, ApiOkResponse, ApiProduces, ApiTags, getSchemaPath } fr
 import { Controller, Header, HttpCode, HttpStatus, Post, Query, UseGuards } from '@nestjs/common';
 import { QNAP_MUSICSTATION_APIS } from 'src/constants/swagger';
 import { QnapGuard } from './qnap.guard';
-import { QnapMediaToolQueryDto, QnapMediaToolResponseDto } from './dtos/mediatool.dto';
-import { QnapMediaToolService } from './mediatool.service';
+import { QnapMediaToolQueryDto, QnapMediaToolResponseDto } from './dtos/media-tool.dto';
+import { QnapMediaToolService } from './media-tool.service';
 import { UserRoleEnum } from 'src/types/enums';
 import { objectToXml } from 'src/utils/xml';
 

@@ -5,8 +5,8 @@ import { Controller, Get, HttpCode, HttpStatus, NotFoundException, Query, Req, R
 import { CoverImage } from 'src/types/cover-image';
 import { QNAP_MUSICSTATION_APIS } from 'src/constants/swagger';
 import { QnapGuard } from './qnap.guard';
-import { QnapMediaCoverQueryDto } from './dtos/mediacover.dto';
-import { QnapMediaCoverService } from './mediacover.service';
+import { QnapMediaCoverQueryDto } from './dtos/media-cover.dto';
+import { QnapMediaCoverService } from './media-cover.service';
 import { User } from '../user.decorator';
 import { UserRoleEnum } from 'src/types/enums';
 import { join, sep } from 'node:path';

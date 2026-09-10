@@ -10,6 +10,10 @@ const xmlInterceptor: Middleware = {
     const bodyText = bodyData ? new TextDecoder('utf-8').decode(bodyData.value) : '';
     if (bodyText.startsWith('<?xml')) {
       const parsedBody = bodyText ? await xml2js.parseStringPromise(bodyText, { explicitArray: false }) : null;
+      // single-item responses are parsed as objects
+      if (parsedBody?.QDocRoot?.datas?.data && !Array.isArray(parsedBody.QDocRoot.datas.data)) {
+        parsedBody.QDocRoot.datas.data = [parsedBody.QDocRoot.datas.data];
+      }
       return new Response(parsedBody ? JSON.stringify(parsedBody.QDocRoot) : body, { ...resOptions, status: 200 });
     }
     return new Response(bodyText, { ...resOptions, status: 200 });
@@ -32,22 +36,25 @@ type RequestParams = {
   };
 };
 
-type ListMediaQueryDto = components['schemas']['QnapMediaListQueryDto'];
+type ListMediaQueryDto =
+  | components['schemas']['QnapMediaListBucketQueryDto']
+  | components['schemas']['QnapMediaListGeneralQueryDto']
+  | components['schemas']['QnapMediaListRandomQueryDto'];
 
-async function listMedia(params: RequestParams, filters: ListMediaQueryDto, offset?: number, limit?: number) {
-  const { data, error } = await api.POST('/musicstation/api/medialist_api.php', {
-    query: {
-      ...filters,
-      offset: offset || 0,
-      limit: limit || 100000,
-      ...params.query,
-    },
+async function listMedia(params: RequestParams, filters: ListMediaQueryDto, currpage?: number, pagesize?: number) {
+  return api.POST('/musicstation/api/medialist_api.php', {
+    params: {
+      query: {
+        ...filters,
+        ...params.query,
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        linkid: (filters as any)?.linkid?.toString(),
+        currpage: currpage || 1,
+        pagesize: pagesize || 100000,
+      },
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } as any,
   });
-  const xml = data ? await xml2js.parseStringPromise(data) : null;
-  return {
-    error,
-    data: xml,
-  };
 }
 
 export type QnapApi = {
@@ -64,11 +71,20 @@ export type QnapApi = {
 export async function createQnapApi(username?: string, password?: string): Promise<QnapApi> {
   // do the sign in
   type QnapAuthLoginDto = components['schemas']['QnapAuthLoginDto'];
-
+  const clientId = Math.random().toString(36).substring(2) + Math.random().toString(36).substring(2);
   const signinResponse = await api.GET(`/cgi-bin/authLogin.cgi`, {
-    query: {
-      user: username || ADMIN_USERNAME,
-      password: Buffer.from(password || ADMIN_PASSWORD).toString('base64'),
+    params: {
+      query: {
+        client_agent: 'jest test',
+        client_app: 'Qmusic',
+        client_id: clientId,
+        force_to_check_2sv: 0,
+        pwd: Buffer.from(password || ADMIN_PASSWORD).toString('base64'),
+        remme: 1,
+        serviceKey: 1,
+        service: 1,
+        user: username || ADMIN_USERNAME,
+      },
     },
   });
   if (!signinResponse?.data) {

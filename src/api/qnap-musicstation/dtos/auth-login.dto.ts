@@ -3,8 +3,6 @@ import { ApiProperty, PickType } from '@nestjs/swagger';
 import { IsEnum, IsInt, IsNotEmpty, IsString } from 'class-validator';
 import { Transform } from 'class-transformer';
 
-export class QnapAuthLoginPreAuthQueryDto {}
-
 class BaseLoginQueryDto {
   /**
    * The client browser or app user agent

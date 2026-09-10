@@ -1,6 +1,6 @@
 import { ConfigService } from 'src/config/config.service';
 import { Injectable } from '@nestjs/common';
-import { QnapMediaToolDto } from './dtos/mediatool.dto';
+import { QnapMediaToolDto } from './dtos/media-tool.dto';
 
 @Injectable()
 export class QnapMediaToolService {

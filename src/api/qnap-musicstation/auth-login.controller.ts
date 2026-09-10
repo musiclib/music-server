@@ -25,10 +25,12 @@ import { QnapGuard } from './qnap.guard';
 import { objectToXml } from 'src/utils/xml';
 import type { Request } from 'express';
 
-class QnapAuthLoginQueryDto extends IntersectionType(
-  PartialType(QnapAuthLoginAuthenticateQueryDto),
-  PartialType(QnapAuthLoginResumeSessionQueryDto),
-  PartialType(QnapAuthLoginExistingLoginQueryDto),
+class QnapAuthLoginQueryDto extends PartialType(
+  IntersectionType(
+    QnapAuthLoginAuthenticateQueryDto,
+    QnapAuthLoginResumeSessionQueryDto,
+    QnapAuthLoginExistingLoginQueryDto,
+  ),
 ) {}
 
 @Controller({
@@ -73,6 +75,7 @@ export class QnapAuthLoginController {
   @ApiExtraModels(
     QnapAuthLoginAuthenticateQueryDto,
     QnapAuthLoginResumeSessionQueryDto,
+    QnapAuthLoginExistingLoginQueryDto,
     QnapAuthResumeSessionDto,
     QnapPreauthenticateDto,
     QnapAuthLoginDto,

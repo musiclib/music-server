@@ -2273,6 +2273,21 @@ export type components = {
       wfmSSLPort: number;
       wfmURL: string;
     };
+    QnapAuthLoginExistingLoginQueryDto: {
+      /** @description The client browser or app user agent */
+      client_agent: string;
+      /** @description The client app */
+      client_app: string;
+      /** @description An ID value sent by the client, probably randomly-generated or a fingerprint */
+      client_id: string;
+      force_to_check_2sv: number;
+      qtoken: string;
+      /** @description Flag for remembering signin */
+      remme: number;
+      service: number;
+      serviceKey: number;
+      user: string;
+    };
     QnapAuthLoginFailedDto: {
       auth_method: string;
       authPassed: number;
@@ -2457,22 +2472,29 @@ export type components = {
     QnapMediaListArtistsResponseDto: {
       datas: components['schemas']['QnapMediaListArtistsPaginatedDto'];
     };
+    QnapMediaListBucketQueryDto: {
+      /** @default list */
+      act: string;
+      /**
+       * @description The link ID for the bucket, which can be either 'Mg-3D-3D' or 'Mw-3D-3D'
+       *     Mg-3D-3D means "recently added"
+       *     Mw-3D-3D means "frequently played"
+       * @default Mg-3D-3D
+       */
+      linkid: string;
+      /**
+       * @description Media grouping to return, album, artist
+       * @default myfavorite
+       */
+      type: string;
+    };
     QnapMediaListFoldersDto: {
       data: components['schemas']['QnapFolderDto'][];
     };
     QnapMediaListFoldersResponseDto: {
       datas: components['schemas']['QnapMediaListFoldersDto'];
     };
-    QnapMediaListGenresPaginatedDto: {
-      CurrPage: number;
-      data: components['schemas']['QnapGenreDto'][];
-      PageSize: number;
-      TotalCounts: number;
-    };
-    QnapMediaListGenresResponseDto: {
-      datas: components['schemas']['QnapMediaListGenresPaginatedDto'];
-    };
-    QnapMediaListQueryDto: {
+    QnapMediaListGeneralQueryDto: {
       /** @description The action (always "list") */
       act: string;
       /** @description The current page, which multiplied by page size is AKA the "offset" elsewhere in this server */
@@ -2485,7 +2507,7 @@ export type components = {
       /** @description The ID of an item being browsed, such as an artist or album or genre */
       linkid?: number;
       /** @description A list of song ids for songs_info actions */
-      linkidlist: number[];
+      linkidlist?: number[];
       /** @description The page size, AKA the "limit" elsewhere in this server */
       pagesize: number;
       /**
@@ -2496,7 +2518,25 @@ export type components = {
       /** @description Media grouping to return, album, artist */
       type: string;
     };
+    QnapMediaListGenresPaginatedDto: {
+      CurrPage: number;
+      data: components['schemas']['QnapGenreDto'][];
+      PageSize: number;
+      TotalCounts: number;
+    };
+    QnapMediaListGenresResponseDto: {
+      datas: components['schemas']['QnapMediaListGenresPaginatedDto'];
+    };
+    QnapMediaListRandomAlbumsResponseDto: {
+      datas: components['schemas']['QnapAlbumDto'][];
+      success: number;
+    };
+    QnapMediaListRandomArtistsResponseDto: {
+      datas: components['schemas']['QnapArtistDto'][];
+      success: number;
+    };
     QnapMediaListRandomQueryDto: {
+      /** @default random */
       act: string;
       /** @description Analogous for "limit" for pagination */
       counts: number;
@@ -8235,17 +8275,20 @@ export interface operations {
     };
     requestBody?: never;
     responses: {
+      /** @description List of songs, artists, albums, genres, folders, or tracks */
       200: {
         headers: {
           [name: string]: unknown;
         };
         content: {
-          'text/xml;charset=utf-8':
+          'application/xml':
             | components['schemas']['QnapMediaListArtistsResponseDto']
             | components['schemas']['QnapMediaListAlbumsResponseDto']
             | components['schemas']['QnapMediaListGenresResponseDto']
             | components['schemas']['QnapMediaListFoldersResponseDto']
-            | components['schemas']['QnapMediaListTracksResponseDto'];
+            | components['schemas']['QnapMediaListTracksResponseDto']
+            | components['schemas']['QnapMediaListRandomArtistsResponseDto']
+            | components['schemas']['QnapMediaListRandomAlbumsResponseDto'];
         };
       };
     };

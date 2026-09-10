@@ -19,20 +19,21 @@ import {
   QnapMediaListArtistsResponseDto,
   QnapMediaListBucketQueryDto,
   QnapMediaListFoldersResponseDto,
+  QnapMediaListGeneralQueryDto,
   QnapMediaListGenresResponseDto,
-  QnapMediaListQueryDto,
+  QnapMediaListRandomAlbumsResponseDto,
+  QnapMediaListRandomArtistsResponseDto,
   QnapMediaListRandomQueryDto,
   QnapMediaListTracksResponseDto,
-} from './dtos/medialist.dto';
-import { QnapMediaListService } from './medialist.service';
+} from './dtos/media-list.dto';
+import { QnapMediaListService } from './media-list.service';
 import { SortDirectionEnum, UserRoleEnum } from 'src/types/enums';
 import { User } from '../user.decorator';
 import { objectToXml } from 'src/utils/xml';
+import { plainToInstance } from 'class-transformer';
 
-class QnaMediaListQueryDto extends IntersectionType(
-  PartialType(QnapMediaListRandomQueryDto),
-  PartialType(QnapMediaListQueryDto),
-  PartialType(QnapMediaListBucketQueryDto),
+class QnapMediaListQueryDto extends PartialType(
+  IntersectionType(QnapMediaListRandomQueryDto, QnapMediaListGeneralQueryDto, QnapMediaListBucketQueryDto),
 ) {}
 
 @Controller({
@@ -50,37 +51,54 @@ export class QnapMediaListController {
   @Header('Content-Type', 'text/xml; charset=utf-8')
   @ApiOperation({ summary: 'Handle QNAP Music Station media-list API requests' })
   @ApiOkResponse({
-    schema: {
-      oneOf: [
-        {
-          $ref: getSchemaPath(QnapMediaListArtistsResponseDto),
+    description: 'List of songs, artists, albums, genres, folders, or tracks',
+    content: {
+      'application/xml': {
+        schema: {
+          oneOf: [
+            {
+              $ref: getSchemaPath(QnapMediaListArtistsResponseDto),
+            },
+            {
+              $ref: getSchemaPath(QnapMediaListAlbumsResponseDto),
+            },
+            {
+              $ref: getSchemaPath(QnapMediaListGenresResponseDto),
+            },
+            {
+              $ref: getSchemaPath(QnapMediaListFoldersResponseDto),
+            },
+            {
+              $ref: getSchemaPath(QnapMediaListTracksResponseDto),
+            },
+            {
+              $ref: getSchemaPath(QnapMediaListRandomArtistsResponseDto),
+            },
+            {
+              $ref: getSchemaPath(QnapMediaListRandomAlbumsResponseDto),
+            },
+          ],
         },
-        {
-          $ref: getSchemaPath(QnapMediaListAlbumsResponseDto),
-        },
-        {
-          $ref: getSchemaPath(QnapMediaListGenresResponseDto),
-        },
-        {
-          $ref: getSchemaPath(QnapMediaListFoldersResponseDto),
-        },
-        {
-          $ref: getSchemaPath(QnapMediaListTracksResponseDto),
-        },
-      ],
+      },
     },
   })
   @ApiExtraModels(
     QnapMediaListRandomQueryDto,
-    QnapMediaListQueryDto,
+    QnapMediaListGeneralQueryDto,
+    QnapMediaListBucketQueryDto,
+    QnapMediaListRandomArtistsResponseDto,
+    QnapMediaListRandomAlbumsResponseDto,
     QnapMediaListArtistsResponseDto,
     QnapMediaListAlbumsResponseDto,
     QnapMediaListGenresResponseDto,
     QnapMediaListFoldersResponseDto,
     QnapMediaListTracksResponseDto,
   )
-  async post(@User() user: AccountEntity, @Query() query: QnaMediaListQueryDto) {
-    if (query.act === 'random') {
+  async post(@User() user: AccountEntity, @Query() variousQueries: QnapMediaListQueryDto | Record<string, unknown>) {
+    if (variousQueries.act === 'random') {
+      const query = plainToInstance(QnapMediaListRandomQueryDto, variousQueries, {
+        enableImplicitConversion: true,
+      });
       if (query.type === 'artist') {
         const randomList = await this.mediaListApiService.listRandomArtists(user.id, query.counts || 250);
         return objectToXml({ status: 1, ...randomList }, 'QDocRoot version="1.0"', 'QDocRoot');
@@ -90,7 +108,10 @@ export class QnapMediaListController {
         return objectToXml({ status: 1, ...randomList }, 'QDocRoot version="1.0"', 'QDocRoot');
       }
     }
-    if (query.act === 'list') {
+    if (variousQueries.act === 'list') {
+      const query = plainToInstance(QnapMediaListGeneralQueryDto, variousQueries, {
+        enableImplicitConversion: true,
+      });
       // Route #1:  song list
       if (query.type === 'songs') {
         const songList = await this.mediaListApiService.listTracks(
@@ -172,6 +193,11 @@ export class QnapMediaListController {
         const folderList = await this.mediaListApiService.listRootFolders(user.id);
         return objectToXml({ status: 1, ...folderList }, 'QDocRoot version="1.0"', 'QDocRoot');
       }
+    }
+    if (variousQueries.linkid) {
+      const query = plainToInstance(QnapMediaListBucketQueryDto, variousQueries, {
+        enableImplicitConversion: true,
+      });
       // Route #11:  list recently added
       if (query.type === 'get_spotlight_list' && query.linkid === 'Mg-3D-3D') {
         const spotlightList = await this.mediaListApiService.listTracksRecentlyAdded(user.id);

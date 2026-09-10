@@ -4,11 +4,6 @@ import { describe, expect, it } from '@jest/globals';
 
 describe('/cgi-bin/authLogin.cgi', () => {
   const clientId = Math.random().toString(36).substring(2) + Math.random().toString(36).substring(2);
-  // let qnapApi: QnapApi;
-
-  // beforeAll(async () => {
-  //   qnapApi = await createQnapApi();
-  // });
 
   describe('authentication', () => {
     it('should create session', async () => {
