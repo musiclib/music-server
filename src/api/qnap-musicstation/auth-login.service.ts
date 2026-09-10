@@ -4,8 +4,8 @@ import { ErrorCodes } from 'src/constants/error-codes';
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import {
+  QnapAuthLoginAuthenticateQueryDto,
   QnapAuthLoginDto,
-  QnapAuthLoginQueryDto,
   QnapAuthResumeSessionDto,
   QnapPreauthenticateDto,
 } from './dtos/auth-login.dto';
@@ -63,7 +63,7 @@ export class QnapAuthLoginService {
     };
   }
 
-  async authenticate(userAgent: string, query: QnapAuthLoginQueryDto): Promise<QnapAuthLoginDto> {
+  async authenticate(userAgent: string, query: QnapAuthLoginAuthenticateQueryDto): Promise<QnapAuthLoginDto> {
     const username = query.user;
     const password = query.pwd;
     const jwtToken = await this.authenticationService.createSession(
