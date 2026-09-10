@@ -594,6 +594,12 @@ class SynologyPlaylistDto {
 }
 
 export class SynologyPlaylistDataDto {
+  @IsNumber()
+  declare offset: number;
+
+  @IsNumber()
+  declare total: number;
+
   @ApiProperty({
     type: SynologyPlaylistDto,
     isArray: true,

@@ -1,6 +1,6 @@
 /* eslint-disable max-classes-per-file */
 import { ApiProperty } from '@nestjs/swagger';
-import { IsBoolean, IsInt, IsString } from 'class-validator';
+import { IsBoolean, IsNumber, IsString } from 'class-validator';
 import { SynologySuccessResponseDto } from './synology.dto';
 import { Transform } from 'class-transformer';
 
@@ -8,8 +8,8 @@ export class SynologyEntrySignInBodyDto {
   @IsString()
   declare __cIpHeRtExT: string;
 
-  @Transform(({ value }) => Number.parseInt(value, 10))
-  @IsInt()
+  @Transform(({ value }) => Number.parseFloat(value))
+  @IsNumber()
   declare client_time: number;
 }
 

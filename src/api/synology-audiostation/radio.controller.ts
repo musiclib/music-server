@@ -102,10 +102,10 @@ export class SynologyRadioController {
       | SynologyRadioAddOrUpdateItemBodyDto
       | SynologyRadioAddUserStationBodyDto,
   ): Promise<SynologyRadioItemResponseDto | SynologySuccessResponseDto> {
-    if (variousBodies.method === 'list' && 'container' in variousBodies) {
+    if (variousBodies.method === 'list' && (variousBodies as SynologyRadioItemListBodyDto).container) {
       // Route #1:  Requesting the stations for a genre, which bundles the genre name
       // in the container field (e.g., `SHOUTcast_genre_Rock`).
-      if (variousBodies.container.indexOf('_genre_') > -1) {
+      if ((variousBodies as SynologyRadioItemListBodyDto).container.indexOf('_genre_') > -1) {
         const body = plainToInstance(SynologyRadioItemListBodyDto, variousBodies);
         return this.listStations(user, body);
       }

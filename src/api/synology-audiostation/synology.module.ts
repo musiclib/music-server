@@ -17,6 +17,7 @@ import { SynologyGenreController } from './genre.controller';
 import { SynologyGenreService } from './genre.service';
 import { SynologyInfoController } from './info.controller';
 import { SynologyInfoService } from './info.service';
+import { SynologyLyricsController } from './lyrics.controller';
 import { SynologyPlaylistController } from './playlist.controller';
 import { SynologyPlaylistService } from './playlist.service';
 import { SynologyProxyController } from './proxy.controller';
@@ -25,6 +26,7 @@ import { SynologyQueryController } from './query.controller';
 import { SynologyQueryService } from './query.service';
 import { SynologyRadioController } from './radio.controller';
 import { SynologyRadioService } from './radio.service';
+import { SynologyRemotePlayerController } from './remote-player.controller';
 import { SynologySearchController } from './search.controller';
 import { SynologySearchService } from './search.service';
 import { SynologySongController } from './song.controller';
@@ -44,10 +46,12 @@ import { entitiesList } from 'src/database/entities';
     SynologyFolderController,
     SynologyGenreController,
     SynologyInfoController,
+    SynologyLyricsController,
     SynologyPlaylistController,
     SynologyProxyController,
     SynologyQueryController,
     SynologyRadioController,
+    SynologyRemotePlayerController,
     SynologySearchController,
     SynologySongController,
     SynologyStreamController,
