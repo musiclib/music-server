@@ -6,6 +6,7 @@ import { JwtService } from '@nestjs/jwt';
 import {
   QnapAuthLoginAuthenticateQueryDto,
   QnapAuthLoginDto,
+  QnapAuthLoginFailedDto,
   QnapAuthResumeSessionDto,
   QnapPreauthenticateDto,
 } from './dtos/auth-login.dto';
@@ -63,16 +64,49 @@ export class QnapAuthLoginService {
     };
   }
 
-  async authenticate(userAgent: string, query: QnapAuthLoginAuthenticateQueryDto): Promise<QnapAuthLoginDto> {
-    const username = query.user;
-    const password = query.pwd;
-    const jwtToken = await this.authenticationService.createSession(
-      username,
-      password,
-      userAgent,
-      SessionRestrictionEnum.QNAP_MUSICSTATION,
-      3650,
-    );
+  async authenticate(
+    userAgent: string,
+    query: QnapAuthLoginAuthenticateQueryDto,
+  ): Promise<QnapAuthLoginDto | QnapAuthLoginFailedDto> {
+    let jwtToken;
+    try {
+      jwtToken = await this.authenticationService.createSession(
+        query.user,
+        query.pwd,
+        userAgent,
+        SessionRestrictionEnum.QNAP_MUSICSTATION,
+        3650,
+      );
+    } catch (error) {
+      return {
+        doQuick: '',
+        is_booting: 0,
+        mediaReady: 1,
+        shutdown_info: {
+          type: -1,
+          timestamp: 0,
+          duration: 0,
+        },
+        authPassed: 0,
+        errorValue: -1,
+        username: '',
+        ts: 92782397,
+        fwNotice: 0,
+        title: '',
+        content: '',
+        psType: 1,
+        standard_massage: '',
+        standard_color: '#ffffff',
+        standard_size: '12px',
+        standard_bg_style: 'fill',
+        showVersion: 0,
+        show_link: 1,
+        cuid: this.configService.get('QNAP_CUID') || '',
+        auth_method: 'ck',
+        mfa_support: '',
+        function_support: 'redirect_url,xs-auth-redirect,passwordless_login,multi_2sv,app_privilege',
+      };
+    }
     return {
       doQuick: '',
       is_booting: 0,
@@ -92,7 +126,7 @@ export class QnapAuthLoginService {
       user_account_expiry: 0,
       authSid: jwtToken,
       isAdmin: 1,
-      username,
+      username: query.user,
       groupname: 'everyone',
       model: {
         modelName: 'TS-KVM-CLD',

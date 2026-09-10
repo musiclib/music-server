@@ -1,5 +1,5 @@
 /* eslint-disable max-classes-per-file */
-import { ApiProperty } from '@nestjs/swagger';
+import { ApiProperty, PickType } from '@nestjs/swagger';
 import { IsEnum, IsInt, IsNotEmpty, IsString } from 'class-validator';
 import { Transform } from 'class-transformer';
 
@@ -492,6 +492,38 @@ export class QnapAuthLoginDto extends QnapAuthBaseDto {
 
   @ApiProperty()
   declare serviceURL: string;
+}
+
+export class QnapAuthLoginFailedDto extends PickType(QnapAuthBaseDto, [
+  'doQuick',
+  'is_booting',
+  'mediaReady',
+  'shutdown_info',
+  'authPassed',
+  'ts',
+  'fwNotice',
+  'title',
+  'content',
+  'psType',
+  'standard_massage',
+  'standard_color',
+  'standard_size',
+  'standard_bg_style',
+  'showVersion',
+  'show_link',
+  'cuid',
+  'auth_method',
+  'mfa_support',
+  'function_support',
+] as const) {
+  @IsInt()
+  declare errorValue: number;
+
+  @IsInt()
+  declare authPassed: number;
+
+  @IsString()
+  declare username: '';
 }
 
 export class QnapAuthResumeSessionDto extends QnapAuthBaseDto {

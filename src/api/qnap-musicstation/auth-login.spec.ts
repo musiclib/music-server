@@ -48,7 +48,8 @@ describe('/cgi-bin/authLogin.cgi', () => {
           },
         },
       });
-      expect((data as unknown as { message: string[] }).message[0]).toBe('invalid-username-error');
+      const typedData = data as components['schemas']['QnapAuthLoginFailedDto'];
+      expect(typedData.authPassed).toBe('0');
     });
 
     it('should reject invalid account password', async () => {
@@ -67,7 +68,8 @@ describe('/cgi-bin/authLogin.cgi', () => {
           },
         },
       });
-      expect((data as unknown as { message: string[] }).message[0]).toBe('invalid-password-error');
+      const typedData = data as components['schemas']['QnapAuthLoginFailedDto'];
+      expect(typedData.authPassed).toBe('0');
     });
   });
 });

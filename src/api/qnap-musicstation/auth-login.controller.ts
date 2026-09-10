@@ -15,6 +15,7 @@ import {
   QnapAuthLoginAuthenticateQueryDto,
   QnapAuthLoginDto,
   QnapAuthLoginExistingLoginQueryDto,
+  QnapAuthLoginFailedDto,
   QnapAuthLoginResumeSessionQueryDto,
   QnapAuthResumeSessionDto,
   QnapPreauthenticateDto,
@@ -56,6 +57,9 @@ export class QnapAuthLoginController {
               $ref: getSchemaPath(QnapAuthLoginDto),
             },
             {
+              $ref: getSchemaPath(QnapAuthLoginFailedDto),
+            },
+            {
               $ref: getSchemaPath(QnapAuthResumeSessionDto),
             },
           ],
@@ -72,6 +76,7 @@ export class QnapAuthLoginController {
     QnapAuthResumeSessionDto,
     QnapPreauthenticateDto,
     QnapAuthLoginDto,
+    QnapAuthLoginFailedDto,
   )
   @Header('Content-Type', 'application/xml')
   async routeRequest(@Req() req: Request, @Ip() ipAddress: string, @Query() variousQueries: QnapAuthLoginQueryDto) {

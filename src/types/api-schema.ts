@@ -2273,6 +2273,30 @@ export type components = {
       wfmSSLPort: number;
       wfmURL: string;
     };
+    QnapAuthLoginFailedDto: {
+      auth_method: string;
+      authPassed: number;
+      content: string;
+      cuid: string;
+      doQuick: string;
+      errorValue: number;
+      function_support: string;
+      fwNotice: number;
+      is_booting: number;
+      mediaReady: number;
+      mfa_support: string;
+      psType: number;
+      show_link: number;
+      showVersion: number;
+      shutdown_info: components['schemas']['QnapAuthShutdownInfoDto'];
+      standard_bg_style: string;
+      standard_color: string;
+      standard_massage: string;
+      standard_size: string;
+      title: string;
+      ts: number;
+      username: string;
+    };
     QnapAuthLoginResumeSessionQueryDto: {
       /** @description The client browser or app user agent */
       client_agent: string;
@@ -8104,6 +8128,7 @@ export interface operations {
           'application/xml':
             | components['schemas']['QnapPreauthenticateDto']
             | components['schemas']['QnapAuthLoginDto']
+            | components['schemas']['QnapAuthLoginFailedDto']
             | components['schemas']['QnapAuthResumeSessionDto'];
         };
       };
