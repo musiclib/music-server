@@ -182,7 +182,42 @@ export class QnapTrackDto {
   declare Year?: number;
 }
 
+export class QnapMediaListBucketQueryDto {
+  @ApiProperty({
+    type: 'string',
+    default: 'list',
+  })
+  @IsEnum(['list'])
+  declare act: string;
+
+  /**
+   * The link ID for the bucket, which can be either 'Mg-3D-3D' or 'Mw-3D-3D'
+   * Mg-3D-3D means "recently added"
+   * Mw-3D-3D means "frequently played"
+   */
+  @ApiProperty({
+    type: 'string',
+    default: 'Mg-3D-3D',
+  })
+  @IsEnum(['Mg-3D-3D', 'Mw-3D-3D'])
+  declare linkid: string;
+
+  /**
+   * Media grouping to return, album, artist
+   */
+  @ApiProperty({
+    type: 'string',
+    default: 'myfavorite',
+  })
+  @IsEnum(['myfavorite', 'get_spotlight_list', 'recycle'])
+  declare type: string;
+}
+
 export class QnapMediaListRandomQueryDto {
+  @ApiProperty({
+    type: 'string',
+    default: 'random',
+  })
   @IsEnum(['random'])
   declare act: string;
 

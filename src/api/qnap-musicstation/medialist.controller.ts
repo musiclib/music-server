@@ -1,12 +1,23 @@
+/* eslint-disable max-classes-per-file */
 import { AccountEntity } from 'src/database/entities';
 import { AllowedRoles } from '../role.guard';
-import { ApiExtraModels, ApiOkResponse, ApiOperation, ApiProduces, ApiTags, getSchemaPath } from '@nestjs/swagger';
-import { Controller, Header, HttpCode, HttpStatus, NotFoundException, Post, Query, UseGuards } from '@nestjs/common';
+import {
+  ApiExtraModels,
+  ApiOkResponse,
+  ApiOperation,
+  ApiProduces,
+  ApiTags,
+  IntersectionType,
+  PartialType,
+  getSchemaPath,
+} from '@nestjs/swagger';
+import { Controller, Header, HttpCode, HttpStatus, Post, Query, UseGuards } from '@nestjs/common';
 import { QNAP_MUSICSTATION_APIS } from 'src/constants/swagger';
 import { QnapGuard } from './qnap.guard';
 import {
   QnapMediaListAlbumsResponseDto,
   QnapMediaListArtistsResponseDto,
+  QnapMediaListBucketQueryDto,
   QnapMediaListFoldersResponseDto,
   QnapMediaListGenresResponseDto,
   QnapMediaListQueryDto,
@@ -14,10 +25,15 @@ import {
   QnapMediaListTracksResponseDto,
 } from './dtos/medialist.dto';
 import { QnapMediaListService } from './medialist.service';
+import { SortDirectionEnum, UserRoleEnum } from 'src/types/enums';
 import { User } from '../user.decorator';
-import { UserRoleEnum } from 'src/types/enums';
 import { objectToXml } from 'src/utils/xml';
-import { plainToInstance } from 'class-transformer';
+
+class QnaMediaListQueryDto extends IntersectionType(
+  PartialType(QnapMediaListRandomQueryDto),
+  PartialType(QnapMediaListQueryDto),
+  PartialType(QnapMediaListBucketQueryDto),
+) {}
 
 @Controller({
   path: '/musicstation/api',
@@ -63,31 +79,26 @@ export class QnapMediaListController {
     QnapMediaListFoldersResponseDto,
     QnapMediaListTracksResponseDto,
   )
-  async post(
-    @User() user: AccountEntity,
-    @Query() variousQueries: QnapMediaListRandomQueryDto | QnapMediaListQueryDto,
-  ) {
-    if (variousQueries.act === 'random') {
-      const query = plainToInstance(QnapMediaListRandomQueryDto, variousQueries);
+  async post(@User() user: AccountEntity, @Query() query: QnaMediaListQueryDto) {
+    if (query.act === 'random') {
       if (query.type === 'artist') {
-        const randomList = await this.mediaListApiService.listRandomArtists(user.id, query.counts);
+        const randomList = await this.mediaListApiService.listRandomArtists(user.id, query.counts || 250);
         return objectToXml({ status: 1, ...randomList }, 'QDocRoot version="1.0"', 'QDocRoot');
       }
       if (query.type === 'album') {
-        const randomList = await this.mediaListApiService.listRandomAlbums(user.id, query.counts);
+        const randomList = await this.mediaListApiService.listRandomAlbums(user.id, query.counts || 250);
         return objectToXml({ status: 1, ...randomList }, 'QDocRoot version="1.0"', 'QDocRoot');
       }
     }
-    if (variousQueries.act === 'list') {
-      const query = plainToInstance(QnapMediaListQueryDto, variousQueries);
+    if (query.act === 'list') {
       // Route #1:  song list
       if (query.type === 'songs') {
         const songList = await this.mediaListApiService.listTracks(
           user.id,
-          query.pagesize,
-          query.currpage,
-          query.sortBy,
-          query.desc,
+          query.pagesize || 250,
+          query.currpage || 1,
+          query.sortBy || 'title',
+          query.desc || SortDirectionEnum.ASC,
         );
         return objectToXml({ status: 1, ...songList }, 'QDocRoot version="1.0"', 'QDocRoot');
       }
@@ -100,10 +111,10 @@ export class QnapMediaListController {
         // Route #3:  album list
         const albumList = await this.mediaListApiService.listAlbums(
           user.id,
-          query.pagesize,
-          query.currpage,
-          query.sortBy,
-          query.desc,
+          query.pagesize || 250,
+          query.currpage || 1,
+          query.sortBy || 'title',
+          query.desc || SortDirectionEnum.ASC,
         );
         return objectToXml({ status: 1, ...albumList }, 'QDocRoot version="1.0"', 'QDocRoot');
       }
@@ -113,20 +124,20 @@ export class QnapMediaListController {
           const albumList = await this.mediaListApiService.listAlbumsByArtist(
             user.id,
             query.linkid,
-            query.pagesize,
-            query.currpage,
-            query.sortBy,
-            query.desc,
+            query.pagesize || 250,
+            query.currpage || 1,
+            query.sortBy || 'title',
+            query.desc || SortDirectionEnum.ASC,
           );
           return objectToXml({ status: 1, ...albumList }, 'QDocRoot version="1.0"', 'QDocRoot');
         }
         // Route #5:  artist list
         const artistList = await this.mediaListApiService.listArtists(
           user.id,
-          query.pagesize,
-          query.currpage,
-          query.sortBy,
-          query.desc,
+          query.pagesize || 250,
+          query.currpage || 1,
+          query.sortBy || 'title',
+          query.desc || SortDirectionEnum.ASC,
         );
         return objectToXml({ status: 1, ...artistList }, 'QDocRoot version="1.0"', 'QDocRoot');
       }
@@ -139,16 +150,16 @@ export class QnapMediaListController {
         // Route #7:  genre list
         const genreList = await this.mediaListApiService.listGenres(
           user.id,
-          query.pagesize,
-          query.currpage,
-          query.sortBy,
-          query.desc,
+          query.pagesize || 250,
+          query.currpage || 1,
+          query.sortBy || 'title',
+          query.desc || SortDirectionEnum.ASC,
         );
         return objectToXml({ status: 1, ...genreList }, 'QDocRoot version="1.0"', 'QDocRoot');
       }
       // Route #8:  list of songs information
       if (query.type === 'songs_info') {
-        const trackList = await this.mediaListApiService.listTracksById(user.id, query.linkidlist);
+        const trackList = await this.mediaListApiService.listTracksById(user.id, query.linkidlist || []);
         return objectToXml({ status: 1, ...trackList }, 'QDocRoot version="1.0"', 'QDocRoot');
       }
       if (query.type === 'folder') {
@@ -161,7 +172,25 @@ export class QnapMediaListController {
         const folderList = await this.mediaListApiService.listRootFolders(user.id);
         return objectToXml({ status: 1, ...folderList }, 'QDocRoot version="1.0"', 'QDocRoot');
       }
+      // Route #11:  list recently added
+      if (query.type === 'get_spotlight_list' && query.linkid === 'Mg-3D-3D') {
+        const spotlightList = await this.mediaListApiService.listTracksRecentlyAdded(user.id);
+        return objectToXml({ status: 1, ...spotlightList }, 'QDocRoot version="1.0"', 'QDocRoot');
+      }
     }
-    throw new NotFoundException('Resource not found');
+    // return an empty list for unsupported routes including:
+    // Route #12:  list frequently played
+    // Route #13:  list favorites
+    // Route #14:  list trash
+    return objectToXml(
+      {
+        status: 1,
+        datas: {
+          data: [],
+        },
+      },
+      'QDocRoot version="1.0"',
+      'QDocRoot',
+    );
   }
 }

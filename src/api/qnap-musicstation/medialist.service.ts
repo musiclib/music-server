@@ -474,4 +474,20 @@ export class QnapMediaListService {
       },
     };
   }
+
+  async listTracksRecentlyAdded(accountId: number) {
+    const tracks = await this.libraryService.listTracks(
+      accountId,
+      {},
+      0,
+      250,
+      TrackSortFieldEnum.DATE_ADDED,
+      SortDirectionEnum.DESC,
+    );
+    return {
+      datas: {
+        data: tracks.items.map(songToRow),
+      },
+    };
+  }
 }
