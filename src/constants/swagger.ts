@@ -25,7 +25,7 @@ export const SYNOLOGY_AUDIOSTATION_APIS = 'Synology AudioStation APIs';
 /**
  * The compatibility layer for QNAP Music Station and their QMusic smartphoen apps.
  */
-export const QNAP_MUSICSTATION_APIS = 'QNAP MusicStation APIs';
+export const QNAP_MUSICSTATION_APIS = 'QNAP Music Station APIs';
 
 /**
  * The JWT token key for authenticating on Swagger.  This token is a base64-encoded string that is reversible in the
