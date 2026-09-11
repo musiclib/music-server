@@ -7,9 +7,6 @@ import { Transform } from 'class-transformer';
 
 export class QnapArtistDto {
   @IsString()
-  declare Albumartist: string;
-
-  @IsString()
   declare FileName: string;
 
   @IsString()
@@ -72,6 +69,9 @@ export class QnapFolderDto {
 
   @IsString()
   declare prefix: string;
+
+  @IsString()
+  declare Title: string;
 }
 
 export class QnapGenreDto {
@@ -236,15 +236,30 @@ export class QnapMediaListRandomQueryDto {
   declare type: string;
 }
 
+class QnapMediaListRandomArtistsDataDto {
+  @ApiProperty({
+    type: QnapArtistDto,
+    isArray: true,
+  })
+  declare data: QnapArtistDto[];
+}
+
 export class QnapMediaListRandomArtistsResponseDto {
   @IsInt()
   declare success: number;
 
   @ApiProperty({
-    type: QnapArtistDto,
+    type: QnapMediaListRandomArtistsDataDto,
+  })
+  declare datas: QnapMediaListRandomArtistsDataDto;
+}
+
+class QnapMediaListRandomAlbumsDataDto {
+  @ApiProperty({
+    type: QnapAlbumDto,
     isArray: true,
   })
-  declare datas: QnapArtistDto[];
+  declare data: QnapAlbumDto[];
 }
 
 export class QnapMediaListRandomAlbumsResponseDto {
@@ -252,10 +267,9 @@ export class QnapMediaListRandomAlbumsResponseDto {
   declare success: number;
 
   @ApiProperty({
-    type: QnapAlbumDto,
-    isArray: true,
+    type: QnapMediaListRandomAlbumsDataDto,
   })
-  declare datas: QnapAlbumDto[];
+  declare datas: QnapMediaListRandomAlbumsDataDto;
 }
 
 export class QnapMediaListGeneralQueryDto {

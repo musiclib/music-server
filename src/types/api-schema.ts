@@ -818,6 +818,22 @@ export type paths = {
     };
     get: operations['QnapAuthLoginController_routeRequest'];
     put?: never;
+    post: operations['QnapAuthLoginController_postRequest'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/cgi-bin/sys/sysRequest.cgi': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get: operations['QnapSysRequestController_routeRequest'];
+    put?: never;
     post?: never;
     delete?: never;
     options?: never;
@@ -1092,6 +1108,38 @@ export type paths = {
     patch?: never;
     trace?: never;
   };
+  '/webapi/AudioStation/lyrics_search.cgi': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    put?: never;
+    post: operations['SynologyLyricsController_routeSearch'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/webapi/AudioStation/lyrics.cgi': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    put?: never;
+    post: operations['SynologyLyricsController_route'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
   '/webapi/AudioStation/playlist.cgi': {
     parameters: {
       query?: never;
@@ -1166,6 +1214,22 @@ export type paths = {
      *     The request must be authenticated using a valid Synology session ID and device ID cookie for the user, which can be obtained by signing in via the `entry.cgi` endpoint, a two-step process requesting the encryption public key from `/certs` and then  submitting credentials encrypted with it.
      */
     post: operations['SynologyRadioController_routeRequests'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/webapi/AudioStation/remote_player.cgi': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    put?: never;
+    post: operations['SynologyRemotePlayerController_route'];
     delete?: never;
     options?: never;
     head?: never;
@@ -2165,6 +2229,10 @@ export type components = {
       LinkID: number;
       Title: string;
     };
+    QnapAsLoginBodyDto: {
+      act?: string;
+      ssid?: string;
+    };
     QnapAuthConnectionInfoDto: {
       connet_ip: string;
     };
@@ -2311,6 +2379,27 @@ export type components = {
       title: string;
       ts: number;
       username: string;
+    };
+    QnapAuthLoginQueryDto: {
+      /** @description The client browser or app user agent */
+      client_agent?: string;
+      /** @description The client app */
+      client_app?: string;
+      /** @description An ID value sent by the client, probably randomly-generated or a fingerprint */
+      client_id?: string;
+      force_to_check_2sv?: number;
+      pwd?: string;
+      qtoken?: string;
+      /** @description Flag for remembering signin */
+      remme?: number;
+      service?: number;
+      serviceKey?: number;
+      /**
+       * @description On a QNAP NAS this value is a 8-digit short string that authenticates the user
+       *     session.  In this software the JWT token is used instead.
+       */
+      sid?: string;
+      user?: string;
     };
     QnapAuthLoginResumeSessionQueryDto: {
       /** @description The client browser or app user agent */
@@ -2527,12 +2616,18 @@ export type components = {
     QnapMediaListGenresResponseDto: {
       datas: components['schemas']['QnapMediaListGenresPaginatedDto'];
     };
+    QnapMediaListRandomAlbumsDataDto: {
+      data: components['schemas']['QnapAlbumDto'][];
+    };
     QnapMediaListRandomAlbumsResponseDto: {
-      datas: components['schemas']['QnapAlbumDto'][];
+      datas: components['schemas']['QnapMediaListRandomAlbumsDataDto'];
       success: number;
     };
+    QnapMediaListRandomArtistsDataDto: {
+      data: components['schemas']['QnapArtistDto'][];
+    };
     QnapMediaListRandomArtistsResponseDto: {
-      datas: components['schemas']['QnapArtistDto'][];
+      datas: components['schemas']['QnapMediaListRandomArtistsDataDto'];
       success: number;
     };
     QnapMediaListRandomQueryDto: {
@@ -2592,6 +2687,117 @@ export type components = {
       title: string;
       ts: number;
       webAccessPort: number;
+    };
+    QnapSysRequestCustomLogoDto: {
+      customFrontLogo: string;
+      customLoginLogo: string;
+    };
+    QnapSysRequestDto: {
+      authPassed: number;
+      customLogo: components['schemas']['QnapSysRequestCustomLogoDto'];
+      DemoSiteSuppurt: Record<string, never>;
+      firmware: components['schemas']['QnapSysRequestFirmwareDto'];
+      func: components['schemas']['QnapSysRequestFuncDto'];
+      hostname: string;
+      model: components['schemas']['QnapSysRequestModelDto'];
+      rfs_bits: number;
+      sleepSupport: number;
+      specVersion: string;
+    };
+    QnapSysRequestFirmwareDto: {
+      build: number;
+      /** Format: date */
+      buildTime: string;
+      name: string;
+      number: number;
+      patch: number;
+      version: string;
+    };
+    QnapSysRequestFuncDto: {
+      name: string;
+      ownContent: components['schemas']['QnapSysRequestFuncOwnContentDto'];
+    };
+    QnapSysRequestFuncOwnContentConsoleDto: {
+      auto_launch: number;
+    };
+    QnapSysRequestFuncOwnContentDateAndTimeDto: {
+      codepage: number;
+      dateformatindex: number;
+      day: number;
+      dn: number;
+      hour: number;
+      minute: number;
+      month: number;
+      NTP: components['schemas']['QnapSysRequestFuncOwnContentDateAndTimeNtpDto'];
+      second: number;
+      timeformat: number;
+      timezone: string;
+      year: number;
+    };
+    QnapSysRequestFuncOwnContentDateAndTimeNtpDto: {
+      DSTfrom: string;
+      DSToffset: string;
+      DSTto: string;
+      enable: number;
+      enableAdjDST: string;
+      enableDSTtable: string;
+      ntpServer: string;
+      timeInterval: number;
+      type: string;
+    };
+    QnapSysRequestFuncOwnContentDto: {
+      console_mgmt: components['schemas']['QnapSysRequestFuncOwnContentConsoleDto'];
+      dateandtime: components['schemas']['QnapSysRequestFuncOwnContentDateAndTimeDto'];
+      Popup: components['schemas']['QnapSysRequestFuncOwnContentPopUpDto'];
+      Region: components['schemas']['QnapSysRequestFuncOwnContentRegionDto'];
+      system: components['schemas']['QnapSysRequestFuncOwnContentSystemDto'];
+    };
+    QnapSysRequestFuncOwnContentPopUpDto: {
+      raid_scrubbing_enabled: number;
+    };
+    QnapSysRequestFuncOwnContentRegionDto: {
+      account_myqnapcloud: string;
+      download_qnap: string;
+      license_myqnapcloud: string;
+      sys_region: string;
+      update_qnap: string;
+      www_myqnapcloud: string;
+    };
+    QnapSysRequestFuncOwnContentSystemDto: {
+      CSPEnable: number;
+      hideHF: number;
+      HSTS: number;
+      HTTPCompress: number;
+      iframe: number;
+      iframeurl: string;
+      MaxSSLProtocol: number;
+      optionHF: number;
+      port: number;
+      RedirectSystem: number;
+      ServerHeader: string;
+      ServerHeaderEnable: number;
+      serverName: string;
+      SSL: number;
+      SSLForce: number;
+      SSLHighCipherEnable: number;
+      SSLPort: number;
+      SSLProtocol: number;
+      XContentType: number;
+    };
+    QnapSysRequestModelDto: {
+      customModelName: string;
+      displayModelName: string;
+      dual_node: string;
+      encryptfsSupported: number;
+      internalModelName: string;
+      is_zfs: number;
+      modelName: string;
+      node: string;
+      platform: string;
+      platform_ex: string;
+      sas_model: number;
+      storage_v2: number;
+      vqts: string;
     };
     QnapTrackDto: {
       Album: string;
@@ -4245,7 +4451,9 @@ export type components = {
       version: number;
     };
     SynologyPlaylistDataDto: {
+      offset: number;
       playlists: components['schemas']['SynologyPlaylistDto'][];
+      total: number;
     };
     SynologyPlaylistDeleteBodyDto: {
       /**
@@ -8174,6 +8382,51 @@ export interface operations {
       };
     };
   };
+  QnapAuthLoginController_postRequest: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['QnapAuthLoginQueryDto'];
+      };
+    };
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'text/xml': string;
+        };
+      };
+    };
+  };
+  QnapSysRequestController_routeRequest: {
+    parameters: {
+      query: {
+        sid: string;
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description QNAP user login information */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/xml': components['schemas']['QnapSysRequestDto'];
+        };
+      };
+    };
+  };
   QnapAsGetFileController_get: {
     parameters: {
       query: {
@@ -8214,22 +8467,26 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          'text/xml; charset=utf-8': string;
+          'text/xml': string;
         };
       };
     };
   };
   QnapAsLoginController_post: {
     parameters: {
-      query: {
-        act: string;
-        ssid: string;
+      query?: {
+        act?: string;
+        ssid?: string;
       };
       header?: never;
       path?: never;
       cookie?: never;
     };
-    requestBody?: never;
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['QnapAsLoginBodyDto'];
+      };
+    };
     responses: {
       /** @description QNAP user login information */
       200: {
@@ -8514,6 +8771,40 @@ export interface operations {
       };
     };
   };
+  SynologyLyricsController_routeSearch: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      201: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+    };
+  };
+  SynologyLyricsController_route: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      201: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+    };
+  };
   SynologyPlaylistController_routeRequest: {
     parameters: {
       query?: never;
@@ -8665,6 +8956,23 @@ export interface operations {
             | components['schemas']['SynologyRadioItemResponseDto']
             | components['schemas']['SynologySuccessResponseDto'];
         };
+      };
+    };
+  };
+  SynologyRemotePlayerController_route: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      201: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
       };
     };
   };

@@ -67,6 +67,9 @@ export class QnapGuard implements CanActivate {
     if (request.query.sid) {
       return request.query.sid as string;
     }
+    if (request.body?.sid) {
+      return request.body.sid as string;
+    }
     if (!request.headers.cookie) {
       return undefined;
     }

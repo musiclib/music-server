@@ -5,9 +5,9 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { GlobalExceptionFilter } from './api/exception-filter';
 import { NestFactory, Reflector } from '@nestjs/core';
 import compression from 'compression';
+import express, { type NextFunction, Request, Response } from 'express';
 import helmet from 'helmet';
 import helmetConfig from './helmet.config';
-import type { NextFunction, Request, Response } from 'express';
 
 async function bootstrap() {
   // CORS headers
@@ -27,12 +27,22 @@ async function bootstrap() {
   const logger = new Logger('NestApplication');
   const app = await NestFactory.create(AppModule, {
     cors,
+    bodyParser: true,
     rawBody: true,
     logger,
     bufferLogs: true,
   });
+  // fix QNAP's "application/x-www-form-urlencoded;charset=UTF-8;"
+  app.use((req: Request, _: Response, next: NextFunction) => {
+    if (req.headers['content-type']?.toLowerCase().startsWith('application/x-www-form-urlencoded;charset=utf-8;')) {
+      req.headers['content-type'] = 'application/x-www-form-urlencoded; charset=UTF-8';
+    }
+    next();
+  });
   app.getHttpAdapter().getInstance().set('etag', false);
   app.use(helmet(helmetConfig));
+  app.use(express.json());
+  // set CORP header
   app.use((_: Request, res: Response, next: NextFunction) => {
     res.setHeader('Cross-Origin-Resource-Policy', 'cross-origin'); // Set CORP header
     next();
@@ -40,12 +50,7 @@ async function bootstrap() {
   app.use(
     compression({
       filter: (req: Request) => {
-        return (
-          req.url.indexOf('stream.cgi') === -1 &&
-          req.url.indexOf('-cover') === -1 &&
-          req.url.indexOf('authLogin.cgi') === -1 &&
-          req.url.indexOf('.php') === -1
-        );
+        return req.url.indexOf('stream.cgi') === -1 && req.url.indexOf('-cover') === -1;
       },
       threshold: 0,
     }),

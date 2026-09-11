@@ -38,7 +38,7 @@ function songToRow(track: LibraryTrackDto) {
     FileType: 'music',
     Formatid: 3, // TODO: may refer to MP3, FLAC etc not sure
     Genre: track.genres.map((item) => item.name).join(', '),
-    ImagePath: `album_${track.albumId}`,
+    ImagePath: `api/mediacover_api.php?albumId=${track.albumId}`,
     iOrderNr: '',
     LinkID: `music_${track.id}`,
     MediaType: 0, // TODO: may refer to MP3, FLAC etc not sure
@@ -59,7 +59,7 @@ function albumToRow(album: LibraryAlbumDto) {
     FileName: album.title,
     FileType: 'album',
     Genre: album.genres.map((genre) => genre.name).join(', '),
-    ImagePath: `album_${album.id}`,
+    ImagePath: `api/mediacover_api.php?albumId=${album.id}`,
     Is_VA: false,
     LinkID: album.id,
     Title: album.title,
@@ -68,10 +68,9 @@ function albumToRow(album: LibraryAlbumDto) {
 
 function artistToRow(artist: LibraryArtistDto) {
   return {
-    Albumartist: artist.name,
     FileName: artist.name,
     FileType: 'artist',
-    ImagePath: `artist_${artist.id}`,
+    ImagePath: `api/mediacover_api.php?artistId=${artist.id}`,
     LinkID: artist.id,
     Title: artist.name,
   };
@@ -79,11 +78,12 @@ function artistToRow(artist: LibraryArtistDto) {
 
 function folderToRow(folder: FolderEntity, segmentName: string) {
   return {
+    Title: segmentName,
     FileName: segmentName,
     FilePath: folder.folderPath,
     FileType: 'folder',
     LinkID: folder.id,
-    ImagePath: `folder_${folder.id}`,
+    ImagePath: `api/mediacover_api.php?folderId=${folder.id}`,
     prefix: folder.folderPath,
   };
 }
@@ -193,14 +193,18 @@ export class QnapMediaListService {
   async listRandomArtists(accountId: number, limit: number) {
     const artists = await this.libraryService.listAlbumArtists(accountId, {}, 0, limit, ArtistSortFieldEnum.RANDOM);
     return {
-      datas: artists.items.map(artistToRow),
+      datas: {
+        data: artists.items.map(artistToRow),
+      },
     };
   }
 
   async listRandomAlbums(accountId: number, limit: number) {
     const albums = await this.libraryService.listAlbums(accountId, {}, 0, limit, AlbumSortFieldEnum.RANDOM);
     return {
-      datas: albums.items.map(albumToRow),
+      datas: {
+        data: albums.items.map(albumToRow),
+      },
     };
   }
 

@@ -44,6 +44,7 @@ export class GlobalExceptionFilter implements ExceptionFilter {
     this.logger.error({
       url: request.url,
       method: request.method,
+      query: request.query,
       userId: request.user?.id,
       sessionId: request.session?.id,
       error: errorData.error,

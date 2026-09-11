@@ -11,7 +11,7 @@ import {
   PartialType,
   getSchemaPath,
 } from '@nestjs/swagger';
-import { Controller, Header, HttpCode, HttpStatus, Post, Query, UseGuards } from '@nestjs/common';
+import { Body, Controller, Header, HttpCode, HttpStatus, Post, Query, UseGuards } from '@nestjs/common';
 import { QNAP_MUSICSTATION_APIS } from 'src/constants/swagger';
 import { QnapGuard } from './qnap.guard';
 import {
@@ -47,8 +47,8 @@ export class QnapMediaListController {
   @Post('medialist_api.php')
   @AllowedRoles([UserRoleEnum.USER, UserRoleEnum.ADMIN])
   @HttpCode(HttpStatus.OK)
-  @ApiProduces('text/xml;charset=utf-8')
-  @Header('Content-Type', 'text/xml; charset=utf-8')
+  @ApiProduces('text/xml')
+  @Header('Content-Type', 'text/xml')
   @ApiOperation({ summary: 'Handle QNAP Music Station media-list API requests' })
   @ApiOkResponse({
     description: 'List of songs, artists, albums, genres, folders, or tracks',
@@ -94,9 +94,18 @@ export class QnapMediaListController {
     QnapMediaListFoldersResponseDto,
     QnapMediaListTracksResponseDto,
   )
-  async post(@User() user: AccountEntity, @Query() variousQueries: QnapMediaListQueryDto | Record<string, unknown>) {
-    if (variousQueries.act === 'random') {
-      const query = plainToInstance(QnapMediaListRandomQueryDto, variousQueries, {
+  async post(
+    @User() user: AccountEntity,
+    @Query() variousQueries: QnapMediaListQueryDto | Record<string, unknown>,
+    @Body() variousBodies: QnapMediaListQueryDto | Record<string, unknown>,
+  ) {
+    const data = {
+      ...variousQueries,
+      ...variousBodies,
+    };
+    console.log('medialist', 'query', variousQueries, 'body', variousBodies, 'data', data);
+    if (data.act === 'random') {
+      const query = plainToInstance(QnapMediaListRandomQueryDto, data, {
         enableImplicitConversion: true,
       });
       if (query.type === 'artist') {
@@ -108,8 +117,8 @@ export class QnapMediaListController {
         return objectToXml({ status: 1, ...randomList }, 'QDocRoot version="1.0"', 'QDocRoot');
       }
     }
-    if (variousQueries.act === 'list') {
-      const query = plainToInstance(QnapMediaListGeneralQueryDto, variousQueries, {
+    if (data.act === 'list') {
+      const query = plainToInstance(QnapMediaListGeneralQueryDto, data, {
         enableImplicitConversion: true,
       });
       // Route #1:  song list
@@ -187,15 +196,17 @@ export class QnapMediaListController {
         // Route #9:  list folders
         if (query.linkid) {
           const folderList = await this.mediaListApiService.listFolders(user.id, query.linkid);
+          console.log('nested folders', query.linkid, folderList.datas.data);
           return objectToXml({ status: 1, ...folderList }, 'QDocRoot version="1.0"', 'QDocRoot');
         }
         // Route #10:  list root folders
         const folderList = await this.mediaListApiService.listRootFolders(user.id);
+        console.log('folders', folderList);
         return objectToXml({ status: 1, ...folderList }, 'QDocRoot version="1.0"', 'QDocRoot');
       }
     }
-    if (variousQueries.linkid) {
-      const query = plainToInstance(QnapMediaListBucketQueryDto, variousQueries, {
+    if (data.linkid) {
+      const query = plainToInstance(QnapMediaListBucketQueryDto, data, {
         enableImplicitConversion: true,
       });
       // Route #11:  list recently added

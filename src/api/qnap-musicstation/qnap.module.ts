@@ -2,8 +2,8 @@ import { LibraryModule } from 'src/library/library.module';
 import { Module } from '@nestjs/common';
 import { QnapAsGetFileController } from './as-get-file.controller';
 import { QnapAsGetFileService } from './as-get-file.service';
-import { QnapAsLocalPlaybackController } from './as-localplayback.controller';
-import { QnapAsLocalPlaybackService } from './as-localplayback.service';
+import { QnapAsLocalPlaybackController } from './as-local-playback.controller';
+import { QnapAsLocalPlaybackService } from './as-local-playback.service';
 import { QnapAsLoginController } from './as-login.controller';
 import { QnapAsLoginService } from './as-login.service';
 import { QnapAuthLoginController } from './auth-login.controller';
@@ -14,6 +14,8 @@ import { QnapMediaListController } from './media-list.controller';
 import { QnapMediaListService } from './media-list.service';
 import { QnapMediaToolController } from './media-tool.controller';
 import { QnapMediaToolService } from './media-tool.service';
+import { QnapSysRequestController } from './sys-request.controller';
+import { QnapSysRequestService } from './sys-request.service';
 import { SequelizeModule } from '@nestjs/sequelize/dist/sequelize.module';
 import { entitiesList } from 'src/database/entities';
 
@@ -27,6 +29,7 @@ import { entitiesList } from 'src/database/entities';
     QnapMediaCoverController,
     QnapMediaListController,
     QnapMediaToolController,
+    QnapSysRequestController,
   ],
   providers: [
     QnapAsGetFileService,
@@ -36,6 +39,7 @@ import { entitiesList } from 'src/database/entities';
     QnapMediaCoverService,
     QnapMediaListService,
     QnapMediaToolService,
+    QnapSysRequestService,
   ],
 })
 export class QnapModule {}

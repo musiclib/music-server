@@ -1,4 +1,5 @@
-import { IsInt, IsString } from 'class-validator';
+import { ApiPropertyOptional } from '@nestjs/swagger';
+import { IsInt, IsOptional, IsString } from 'class-validator';
 import { Transform } from 'class-transformer';
 
 export class QnapAsGetFileQueryDto {
@@ -9,9 +10,13 @@ export class QnapAsGetFileQueryDto {
   @IsString()
   declare ext: string;
 
+  @ApiPropertyOptional()
   @IsString()
-  declare from: string;
+  @IsOptional()
+  declare from?: string;
 
+  @ApiPropertyOptional()
   @IsInt()
-  declare addcounts: number;
+  @IsOptional()
+  declare addcounts?: number;
 }
