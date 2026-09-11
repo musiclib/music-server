@@ -1,8 +1,8 @@
 # Music Server
 
-This software indexes music files in one or more folders and provides an API for accessing them.
+This software indexes music files across one or more folders, for one or more users, and provides an API for accessing them that is compatible with some mobile apps and includes a web interface.
 
-The goal of this server is to be a multi-client backend that allows existing music smartphone apps to be used without a proprietary NAS, cloud service, and as a lightweight alternative to video-streaming software like JellyFin. Each person using the server can exercise their own preference for which smartphone app they want to use.
+The goal of this server is to be a multi-client backend that allows existing music smartphone apps to be used without a proprietary Synology or QNAP NAS. It provides an offramp if you use Synology Audiostation or QNAP Music Station, allowing you to continue using their accompanying DS Audio and QMusic smartphone apps with your own self-hosted backend.
 
 ## Synology apps
 
