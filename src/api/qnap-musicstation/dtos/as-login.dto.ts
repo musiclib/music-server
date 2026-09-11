@@ -1,18 +1,32 @@
 /* eslint-disable max-classes-per-file */
-import { ApiExtraModels, ApiProperty, getSchemaPath } from '@nestjs/swagger';
-import { IsEnum, IsNotEmpty, IsString } from 'class-validator';
+import { ApiExtraModels, ApiProperty, ApiPropertyOptional, getSchemaPath } from '@nestjs/swagger';
+import { IsNotEmpty, IsOptional, IsString } from 'class-validator';
 
 export class QnapAsLoginQueryDto {
-  @ApiProperty({
-    default: 'login',
-  })
-  @IsString()
-  @IsEnum(['login'])
-  declare act: string;
-
+  @ApiPropertyOptional()
   @IsString()
   @IsNotEmpty()
-  declare ssid: string;
+  @IsOptional()
+  declare act?: string;
+
+  @ApiPropertyOptional()
+  @IsString()
+  @IsNotEmpty()
+  @IsOptional()
+  declare ssid?: string;
+}
+export class QnapAsLoginBodyDto {
+  @ApiPropertyOptional()
+  @IsString()
+  @IsNotEmpty()
+  @IsOptional()
+  declare act?: string;
+
+  @ApiPropertyOptional()
+  @IsString()
+  @IsNotEmpty()
+  @IsOptional()
+  declare ssid?: string;
 }
 
 export class QnapUserAsLoginFunctionsDto {

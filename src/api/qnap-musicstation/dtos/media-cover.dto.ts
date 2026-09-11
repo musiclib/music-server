@@ -1,9 +1,28 @@
-import { IsString } from 'class-validator';
+import { ApiPropertyOptional } from '@nestjs/swagger';
+import { IsInt, IsOptional, IsString } from 'class-validator';
+import { Transform } from 'class-transformer';
 
 export class QnapMediaCoverQueryDto {
-  /**
-   * The action (always "list")
-   */
+  @ApiPropertyOptional()
   @IsString()
-  declare imagepath: string;
+  @IsOptional()
+  declare imagepath?: string;
+
+  @ApiPropertyOptional()
+  @IsInt()
+  @IsOptional()
+  @Transform(({ value }) => (value ? Number.parseInt(value, 10) : undefined))
+  declare artistId?: number;
+
+  @ApiPropertyOptional()
+  @IsInt()
+  @IsOptional()
+  @Transform(({ value }) => (value ? Number.parseInt(value, 10) : undefined))
+  declare albumId?: number;
+
+  @ApiPropertyOptional()
+  @IsInt()
+  @IsOptional()
+  @Transform(({ value }) => (value ? Number.parseInt(value, 10) : undefined))
+  declare folderId?: number;
 }

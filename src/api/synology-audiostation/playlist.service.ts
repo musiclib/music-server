@@ -264,7 +264,7 @@ export class SynologyPlaylistService {
   }
 
   async getPlaylists(accountId: number): Promise<SynologyPlaylistDataDto> {
-    const playlists = await this.playlistEntity.findAll({
+    const playlists = await this.playlistEntity.findAndCountAll({
       where: {
         accountId,
       },
@@ -272,14 +272,14 @@ export class SynologyPlaylistService {
     });
     const rules = await this.playlistSmartRuleEntity.findAll({
       where: {
-        playlistId: {
-          [Op.in]: playlists.map((p) => p.id),
-        },
+        playlistId: playlists.rows.map((p) => p.id),
       },
       order: [['id', 'ASC']],
     });
     return {
-      playlists: playlists.map((playlist) => {
+      offset: 0,
+      total: playlists.count,
+      playlists: playlists.rows.map((playlist) => {
         const playlistRules = rules.filter((rule) => rule.playlistId === playlist.id);
         return {
           id: `playlist_personal_${playlist.type}/${playlist.name}`,
@@ -401,6 +401,8 @@ export class SynologyPlaylistService {
     const playlist = await this.getPlaylist(accountId, body.id);
     if (playlist.type === PlaylistTypeEnum.NORMAL) {
       return {
+        offset: 0,
+        total: 1,
         playlists: [
           {
             id: `playlist_personal_${playlist.type}/${playlist.name}`,
@@ -428,6 +430,8 @@ export class SynologyPlaylistService {
       order: [['id', 'ASC']],
     });
     return {
+      offset: 0,
+      total: 1,
       playlists: [
         {
           id: `playlist_personal_${playlist.type}/${playlist.name}`,

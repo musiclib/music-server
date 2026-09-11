@@ -1,30 +1,46 @@
 # Music Server
 
-This software indexes music files in one or more folders and provides an API for accessing them.
+This software indexes music files across one or more folders, for one or more users, and provides an API for accessing them that is compatible with some mobile apps and includes a web interface.
 
-The goal of this server is to be a multi-client backend that allows existing music smartphone apps to be used without a proprietary NAS, cloud service, and as a lightweight alternative to video-streaming software like JellyFin. Each person using the server can exercise their own preference for which smartphone app they want to use.
+The goal of this server is to be a multi-client backend that allows existing music smartphone apps to be used without a proprietary Synology or QNAP NAS. It provides an offramp if you use Synology Audiostation or QNAP Music Station, allowing you to continue using their accompanying DS Audio and QMusic smartphone apps with your own self-hosted backend.
 
-This software is not "vibe-coded" but has been built in conjunction with GitHub Copilot's code completion functionality.
-
-## Synology compatibility
-
-The API has been designed to be compatible with the Synology Audio Station API so it can be used as a drop-in replacement for Synology's DS Audio apps for Android and iOS:
+## Synology apps
 
 - iOS: https://apps.apple.com/us/app/ds-audio/id321495303
 - Android: https://play.google.com/store/apps/details?id=com.synology.DSaudio&hl=en-US
-- Android: https://www.synology.com/en-us/support/download
+- Sideload: https://www.synology.com/en-us/support/download
 
-The Synology API endpoints are fully compatible except for the concept of "shared" and "personal" libraries. On a Synology NAS these refer to a shared volume and the personal music folder within each user's home folder. This server does not have the concept of shared and personal libraries but each user can add the same root folders to access the same music collection.
+## QNAP apps
 
-Some functionality is only available in their AudioStation web interface such as creating playlists. The APIs for this exist but are not used by their smartphone apps.
+- iOS: https://apps.apple.com/us/app/qnap-qmusic/id596677182
+- Android: https://play.google.com/store/apps/details?id=com.qnap.qmusic
+- Sideload: https://www.qnap.com/en-ca/mobile-apps/?category=entertainment
 
-RSA certificates required for encrypting credentials are stored in the `certs` folder and should be overwritten with your own. The docker image will automatically overwrite these for you.
+## Compatibility table
 
-```bash
-$ cd certs
-$ openssl genrsa -out private.pem 4096
-$ openssl rsa -in private.pem -pubout -out public.pem
-```
+| Feature               | DS Audio (Android) | DS Audio (iOS) | QMusic (Android) | QMusic (iOS) |
+| --------------------- | ------------------ | -------------- | ---------------- | ------------ |
+| Authentication        | ✅                 | ✅             | ✅               | ✅           |
+| Browse albums         | ✅                 | ✅             | ✅               | ✅           |
+| Browse artists        | ✅                 | ✅             | ✅               | ✅           |
+| Browse composers      | ✅                 | ✅             | ✖️               | ✖️           |
+| Browse genres         | ✅                 | ✅             | ✅               | ✅           |
+| Browse songs          | ✅                 | ✅             | ✅               | ✅           |
+| Download songs        | ✅                 | ✅             | ✅               | ✅           |
+| Favorites / Pins      | ✅                 | ✅             | ⬜               | ⬜           |
+| Frequently played     | ⬜                 | ⬜             | ⬜               | ⬜           |
+| Lyrics                | ⬜                 | ⬜             | ⬜               | ⬜           |
+| Play downloaded songs | ✅                 | ✅             | ✅               | ✅           |
+| Playlists             | ✅                 | ✅             | ⬜               | ⬜           |
+| Radio                 | ✅                 | ✅             | ⬜               | ⬜           |
+| Rating                | ✅                 | ✅             | ⬜               | ⬜           |
+| Recently added        | ✅                 | ✅             | ✅               | ⬜           |
+| Share media           | ✖️                 | ✖️             | ⬜               | ⬜           |
+| Streaming             | ✅                 | ✅             | ✅               | ✅           |
+| Top rated             | ✅                 | ✅             | ⬜               | ⬜           |
+| Trash can             | ✖️                 | ✖️             | ⬜               | ⬜           |
+
+✖️ means unsupported by the app
 
 ## Managing your metadata
 
@@ -53,17 +69,39 @@ Run it directly:
 - Build the server with `npm run build`
 - Start the server with `npm run start:prod`
 
+### Starting in production
+
 ```bash
 $ git clone https://github.com/musiclib/music-server.git
 $ cd music-server
 $ npm ci
 $ npm run build
-# set up your environment variables (see `.env.localdev` for an example)
+
+# to run in production first set up your environment variables
 $ npm run sequelize:migrate
 $ npm run sequelize:seed:all
 $ npm run start:prod
-# or to just get started immediately:
-$ npx dotenv -e .env.localdev npm run start:prod
+# if you are using a .env file then prefix this command
+$ npx dotenv -e .your.env ...
+```
+
+### Starting in development
+
+```bash
+# to run in development mode copy the .env.localdev file to .env
+$ cat .env.localdev > .env
+# edit the .env file's IP address, default admin account
+$ npx dotenv -e .env npm run sequelize:migrate
+$ npx dotenv -e .env npm run sequelize:seed:all
+$ npm run start:dev
+```
+
+## Running tests
+
+```bash
+$ npm run start:test
+# in a separate terminal
+$ npm run test
 ```
 
 ## Technical details

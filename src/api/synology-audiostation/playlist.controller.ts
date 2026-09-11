@@ -196,7 +196,8 @@ export class SynologyPlaylistController {
     }
     // Router #11:  list the playlists in the music library
     if (variousBodies.method === SynologyMethodEnum.LIST) {
-      return this.getPlaylists(user);
+      const data = await this.getPlaylists(user);
+      return data;
     }
     // Route #12:  get the track list for a playlist
     const body = plainToInstance(SynologyPlaylistTrackListBodyDto, variousBodies);

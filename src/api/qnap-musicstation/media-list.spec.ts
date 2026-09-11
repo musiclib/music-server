@@ -51,7 +51,7 @@ describe('/musicstation/api/medialist_api.php', () => {
       type: 'album',
     });
     expect(error).toBeUndefined();
-    expect(data?.datas.length).toBe(2);
+    expect(data?.datas.data.length).toBe(2);
     // TODO: verify this
   });
 
@@ -62,7 +62,7 @@ describe('/musicstation/api/medialist_api.php', () => {
       type: 'artist',
     });
     expect(error).toBeUndefined();
-    expect(data?.datas.length).toBe(2);
+    expect(data?.datas.data.length).toBe(2);
     // TODO: verify this
   });
 

@@ -41,28 +41,41 @@ export class QnapMediaCoverController {
     @Res() response: Response,
     @Query() query: QnapMediaCoverQueryDto,
   ) {
-    const itemId = Number(query.imagepath.split('_')[1]);
-    if (!itemId) {
-      throw new NotFoundException('Resource not found');
+    if (query.imagepath) {
+      const parts = query.imagepath.split('?').pop();
+      if (parts?.length) {
+        const [key, val] = parts.split('=');
+        if (val) {
+          const q = query;
+          if (key === 'artistId') {
+            q.artistId = Number.parseInt(val, 10);
+          } else if (key === 'albumId') {
+            q.albumId = Number.parseInt(val, 10);
+          } else if (key === 'folderId') {
+            q.folderId = Number.parseInt(val, 10);
+          }
+        }
+      }
     }
+
     let cover: CoverImage | undefined;
     let eTagKey: string;
     let fileName: string;
     let blankFileName: string;
-    if (query.imagepath.startsWith('album_')) {
-      cover = await this.mediaCoverApiService.getAlbumCoverImage(user.id, itemId);
-      eTagKey = `album-${itemId}-${cover?.updatedAt?.getTime() || ''}`;
-      fileName = `album-cover.${itemId}.${cover?.coverImageMimeType?.split(sep).pop()}`;
+    if (query.albumId) {
+      cover = await this.mediaCoverApiService.getAlbumCoverImage(user.id, query.albumId);
+      eTagKey = `album-${query.albumId}-${cover?.updatedAt?.getTime() || ''}`;
+      fileName = `album-cover.${query.albumId}.${cover?.coverImageMimeType?.split(sep).pop()}`;
       blankFileName = 'album-cover.blank.png';
-    } else if (query.imagepath.startsWith('artist_')) {
-      cover = await this.mediaCoverApiService.getArtistCoverImage(user.id, itemId);
-      eTagKey = `artist-${itemId}-${cover?.updatedAt?.getTime() || ''}`;
-      fileName = `artist-cover.${itemId}.${cover?.coverImageMimeType?.split(sep).pop()}`;
+    } else if (query.artistId) {
+      cover = await this.mediaCoverApiService.getArtistCoverImage(user.id, query.artistId);
+      eTagKey = `artist-${query.artistId}-${cover?.updatedAt?.getTime() || ''}`;
+      fileName = `artist-cover.${query.artistId}.${cover?.coverImageMimeType?.split(sep).pop()}`;
       blankFileName = 'artist-cover.blank.png';
-    } else if (query.imagepath.startsWith('folder_')) {
+    } else if (query.folderId) {
       cover = await this.mediaCoverApiService.getFolderCoverImage();
-      eTagKey = `folder-${itemId}-${cover?.updatedAt?.getTime() || ''}`;
-      fileName = `folder-cover.${itemId}.${cover?.coverImageMimeType?.split(sep).pop()}`;
+      eTagKey = `folder-${query.folderId}-${cover?.updatedAt?.getTime() || ''}`;
+      fileName = `folder-cover.${query.folderId}.${cover?.coverImageMimeType?.split(sep).pop()}`;
       blankFileName = 'folder-cover.blank.png';
     } else {
       throw new NotFoundException('Resource not found');
@@ -91,7 +104,7 @@ export class QnapMediaCoverController {
       response.status(304);
       return response.end(emptyBuffer);
     }
-    if (query.imagepath.startsWith('folder_')) {
+    if (query.folderId) {
       blankFolderBuffer = blankFolderBuffer || readFileSync(join(__dirname, 'resources', 'blank-folder.png'));
       return response.end(blankFolderBuffer);
     }

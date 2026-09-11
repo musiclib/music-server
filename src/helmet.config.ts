@@ -30,7 +30,7 @@ const config: HelmetOptions = {
     },
   },
   frameguard: {
-    action: 'deny', // Deny all framing
+    action: 'sameorigin',
   },
   noSniff: true,
   xssFilter: true,

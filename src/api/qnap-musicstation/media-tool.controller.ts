@@ -19,8 +19,8 @@ export class QnapMediaToolController {
   @Post('mediatool_api.php')
   @AllowedRoles([UserRoleEnum.USER, UserRoleEnum.ADMIN])
   @HttpCode(HttpStatus.OK)
-  @ApiProduces('text/xml;charset=utf-8')
-  @Header('Content-Type', 'text/xml; charset=utf-8')
+  @ApiProduces('text/xml')
+  @Header('Content-Type', 'text/xml')
   @ApiOkResponse({
     description: 'QNAP authentication response',
     content: {

@@ -178,7 +178,7 @@ export class SynologyEntryController {
       return this.getEncryptionKey();
     }
     // Route #2:  signing in with encrypted username/password credentials
-    if (!('api' in variousBodies) && '__cIpHeRtExT' in variousBodies) {
+    if ((!('api' in variousBodies) || variousBodies.api === SynologyApiEnum.AUTH) && '__cIpHeRtExT' in variousBodies) {
       const userAgent = req.headers['user-agent'] || '';
       return this.signIn(userAgent, plainToInstance(SynologyEntrySignInBodyDto, variousBodies), response);
     }
