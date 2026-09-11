@@ -63,13 +63,14 @@ export class QnapAuthLoginController {
   @Header('Content-Type', XML_MIME_TYPE)
   @ApiProduces(XML_MIME_TYPE)
   @ApiOperation({
-    summary: 'QNAP authentication (Android)',
+    summary: 'QNAP authentication handler (Android)',
     description: [
-      [
-        'Handles QNAP Music Station authentication requests.',
-        'This includes preauthentication reporting system capabilities, authenticating users and creating sessions.',
-        'The Android QMusic app uses the GET request.',
-      ].join('\n'),
+      'Handles various QNAP Music Station authentication requests.',
+      'Preauthentication requests return password configuration and system information.',
+      'Authentication requests validate the username and password, which is sent base-64 encoded.',
+      'Validating sessions confirms a JWT token and returns system configuration information.',
+      'Resuming sessions does not validate the JWT token and returns system configuration information.',
+      'The Android QMusic app uses `GET` and querystring parameters, the iPhone app `POSTS` and uses the `POST` body.',
     ].join('\n'),
   })
   @ApiOkResponse({
@@ -146,11 +147,12 @@ export class QnapAuthLoginController {
   @ApiOperation({
     summary: 'QNAP authentication handler (iPhone)',
     description: [
-      [
-        'Handles QNAP Music Station authentication requests.',
-        'This includes preauthentication reporting system capabilities, authenticating users and creating sessions.',
-        QNAP_POST_TO_GET,
-      ].join('\n'),
+      'Handles various QNAP Music Station authentication requests.',
+      'Preauthentication requests return password configuration and system information.',
+      'Authentication requests validate the username and password, which is sent base-64 encoded.',
+      'Validating sessions confirms a JWT token and returns system configuration information.',
+      'Resuming sessions does not validate the JWT token and returns system configuration information.',
+      QNAP_POST_TO_GET,
     ].join('\n'),
   })
   async postRequest(@Req() req: Request, @Ip() ipAddress: string, @Body() body: QnapAuthLoginQueryDto) {
