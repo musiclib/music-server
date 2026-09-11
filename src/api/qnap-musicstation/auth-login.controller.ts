@@ -63,7 +63,7 @@ export class QnapAuthLoginController {
   @Header('Content-Type', XML_MIME_TYPE)
   @ApiProduces(XML_MIME_TYPE)
   @ApiOperation({
-    summary: 'QNAP authentication',
+    summary: 'QNAP authentication (Android)',
     description: [
       [
         'Handles QNAP Music Station authentication requests.',
@@ -144,7 +144,7 @@ export class QnapAuthLoginController {
   @Header('Content-Type', XML_MIME_TYPE)
   @ApiProduces(XML_MIME_TYPE)
   @ApiOperation({
-    summary: 'QNAP authentication',
+    summary: 'QNAP authentication handler (iPhone)',
     description: [
       [
         'Handles QNAP Music Station authentication requests.',
