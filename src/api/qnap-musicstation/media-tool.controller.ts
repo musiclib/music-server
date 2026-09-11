@@ -1,7 +1,7 @@
 import { AllowedRoles } from 'src/api/role.guard';
-import { ApiExtraModels, ApiOkResponse, ApiProduces, ApiTags, getSchemaPath } from '@nestjs/swagger';
+import { ApiExtraModels, ApiOkResponse, ApiOperation, ApiProduces, ApiTags, getSchemaPath } from '@nestjs/swagger';
 import { Controller, Header, HttpCode, HttpStatus, Post, Query, UseGuards } from '@nestjs/common';
-import { QNAP_MUSICSTATION_APIS } from 'src/constants/swagger';
+import { QNAP_AUTHENTICATED_REQUEST_DESCRIPTION, QNAP_MUSICSTATION_APIS, XML_MIME_TYPE } from 'src/constants/swagger';
 import { QnapGuard } from './qnap.guard';
 import { QnapMediaToolQueryDto, QnapMediaToolResponseDto } from './dtos/media-tool.dto';
 import { QnapMediaToolService } from './media-tool.service';
@@ -19,8 +19,8 @@ export class QnapMediaToolController {
   @Post('mediatool_api.php')
   @AllowedRoles([UserRoleEnum.USER, UserRoleEnum.ADMIN])
   @HttpCode(HttpStatus.OK)
-  @ApiProduces('text/xml')
-  @Header('Content-Type', 'text/xml')
+  @Header('Content-Type', XML_MIME_TYPE)
+  @ApiProduces(XML_MIME_TYPE)
   @ApiOkResponse({
     description: 'QNAP authentication response',
     content: {
@@ -39,6 +39,13 @@ export class QnapMediaToolController {
     },
   })
   @ApiExtraModels(QnapMediaToolResponseDto)
+  @ApiOperation({
+    summary: 'Reports IP addresses to mobile apps',
+    description: [
+      'This endpoint reports the LAN and WAN IP addresses and ports to mobile clients.',
+      QNAP_AUTHENTICATED_REQUEST_DESCRIPTION,
+    ].join('\n'),
+  })
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   async get(@Query() query: QnapMediaToolQueryDto | unknown) {
     const info = await this.mediaToolApiService.getIpList();

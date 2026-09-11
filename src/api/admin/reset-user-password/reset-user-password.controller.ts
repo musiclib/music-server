@@ -1,4 +1,10 @@
-import { ADMIN_APIS, JWT_TOKEN } from 'src/constants/swagger';
+import {
+  ADMINISTRATOR_ONLY_ROUTE,
+  ADMIN_APIS,
+  JWT_AUTHENTICATED_REQUEST_DESCRIPTION,
+  JWT_TOKEN,
+  JWT_TOKEN_HEADER,
+} from 'src/constants/swagger';
 import {
   AdminResetUserPasswordBadRequestResponseDto,
   AdminResetUserPasswordBodyDto,
@@ -32,17 +38,15 @@ export class AdminResetUserPasswordController {
   @Post('reset-user-password')
   @ApiOperation({
     summary: 'Reset user password',
-    description:
-      // eslint-disable-next-line max-len
-      `Resets the password for a specified user account. This operation is typically used when an administrator needs to reset a user's password for security or account recovery purposes.`,
+    description: [
+      `Resets the password for a specified user account and invalidates their prior sessions.`,
+      JWT_AUTHENTICATED_REQUEST_DESCRIPTION,
+      ADMINISTRATOR_ONLY_ROUTE,
+    ].join('\n'),
   })
   @AllowedRoles([UserRoleEnum.ADMIN])
   @ApiBearerAuth(JWT_TOKEN)
-  @ApiHeader({
-    name: 'Authorization',
-    description: 'Bearer token for authentication',
-    required: true,
-  })
+  @ApiHeader(JWT_TOKEN_HEADER)
   @ApiOkResponse({
     type: AdminResetUserPasswordResponseDto,
     description: 'Password reset successfully',

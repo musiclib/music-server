@@ -1,4 +1,10 @@
-import { ADMIN_APIS, JWT_TOKEN } from 'src/constants/swagger';
+import {
+  ADMINISTRATOR_ONLY_ROUTE,
+  ADMIN_APIS,
+  JWT_AUTHENTICATED_REQUEST_DESCRIPTION,
+  JWT_TOKEN,
+  JWT_TOKEN_HEADER,
+} from 'src/constants/swagger';
 import {
   AdminCreateRootPathBadRequestResponseDto,
   AdminCreateRootPathBodyDto,
@@ -30,16 +36,16 @@ export class AdminCreateRootPathController {
 
   @Post('create-root-path')
   @ApiOperation({
-    summary: 'Create a new root path',
-    description: 'Creates a new root path for the specified account.',
+    summary: 'Add new root path to account',
+    description: [
+      'Add a library root path to an account.  This will add media in the path when the indexer reaches it.',
+      JWT_AUTHENTICATED_REQUEST_DESCRIPTION,
+      ADMINISTRATOR_ONLY_ROUTE,
+    ].join('\n'),
   })
   @AllowedRoles([UserRoleEnum.ADMIN])
   @ApiBearerAuth(JWT_TOKEN)
-  @ApiHeader({
-    name: 'Authorization',
-    description: 'Bearer token for authentication',
-    required: true,
-  })
+  @ApiHeader(JWT_TOKEN_HEADER)
   @ApiCreatedResponse({
     description: 'Root path created successfully',
     type: AdminCreateRootPathResponseDto,

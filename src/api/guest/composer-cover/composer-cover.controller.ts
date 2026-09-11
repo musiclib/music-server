@@ -1,6 +1,6 @@
 import { ApiOkResponse, ApiOperation, ApiProduces, ApiTags } from '@nestjs/swagger';
+import { BINARY_RESPONSE, GUEST_APIS, IMAGE_MIME_TYPES } from 'src/constants/swagger';
 import { Controller, Get, Query, Req, Res, StreamableFile } from '@nestjs/common';
-import { GUEST_APIS } from 'src/constants/swagger';
 import { GuestComposerCoverQueryDto } from './composer-cover.dto';
 import { GuestComposerCoverService } from './composer-cover.service';
 import { join } from 'node:path';
@@ -20,15 +20,16 @@ export class GuestComposerCoverController {
   // eslint-disable-next-line class-methods-use-this
   @Get('composer-cover')
   @ApiOperation({
-    summary: 'Cover images for composers.  This route is guest-accessible for better browser-handling.',
+    summary: 'Retrieves cover images for composers',
+    description: [
+      'This endpoint retrieves the cover image for a specified composer.',
+      'The image comes from the first song crediting them as a composer that contains an embedded image.',
+      'If the composer has no cover image a default blank cover is returned.',
+      'The response supports Etag caching to optimize browser performance.',
+    ].join('\n'),
   })
-  @ApiProduces('image/jpeg', 'image/png', 'image/webp')
-  @ApiOkResponse({
-    schema: {
-      type: 'string',
-      format: 'binary',
-    },
-  })
+  @ApiProduces(...IMAGE_MIME_TYPES)
+  @ApiOkResponse(BINARY_RESPONSE)
   async get(
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     @Query() query: GuestComposerCoverQueryDto,

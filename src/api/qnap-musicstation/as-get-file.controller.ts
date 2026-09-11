@@ -1,8 +1,13 @@
+import {
+  AUDIO_MIME_TYPES,
+  BINARY_RESPONSE,
+  QNAP_AUTHENTICATED_REQUEST_DESCRIPTION,
+  QNAP_MUSICSTATION_APIS,
+} from 'src/constants/swagger';
 import { AccountEntity } from 'src/database/entities';
 import { AllowedRoles } from 'src/api/role.guard';
-import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
+import { ApiOkResponse, ApiOperation, ApiProduces, ApiTags } from '@nestjs/swagger';
 import { Controller, Get, HttpCode, HttpStatus, Query, Res, UseGuards } from '@nestjs/common';
-import { QNAP_MUSICSTATION_APIS } from 'src/constants/swagger';
 import { QnapAsGetFileQueryDto } from './dtos/as-get-file.dto';
 import { QnapAsGetFileService } from './as-get-file.service';
 import { QnapGuard } from './qnap.guard';
@@ -22,11 +27,11 @@ export class QnapAsGetFileController {
   @Get('as_get_file_api.php')
   @HttpCode(HttpStatus.OK)
   @AllowedRoles([UserRoleEnum.USER, UserRoleEnum.ADMIN])
-  @ApiOkResponse({
-    schema: {
-      type: 'string',
-      format: 'binary',
-    },
+  @ApiOkResponse(BINARY_RESPONSE)
+  @ApiProduces(...AUDIO_MIME_TYPES)
+  @ApiOperation({
+    summary: 'Streams a music file to QMusic clients',
+    description: ['Streams a music file for playback.', QNAP_AUTHENTICATED_REQUEST_DESCRIPTION].join('\n'),
   })
   async get(@User() user: AccountEntity, @Res() response: Response, @Query() query: QnapAsGetFileQueryDto) {
     const file = await this.qnapAsGetFileApiService.getFile(user.id, query.f);

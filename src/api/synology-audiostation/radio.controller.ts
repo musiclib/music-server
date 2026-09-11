@@ -1,4 +1,3 @@
-import { AUTHENTICATED_REQUEST_DESCRIPTION } from './consts';
 import { AccountEntity } from 'src/database/entities';
 import {
   ApiBody,
@@ -10,7 +9,11 @@ import {
   getSchemaPath,
 } from '@nestjs/swagger';
 import { Body, Controller, HttpCode, HttpStatus, Logger, Post, UseGuards } from '@nestjs/common';
-import { SYNOLOGY_AUDIOSTATION_APIS } from 'src/constants/swagger';
+import {
+  SYNOLOGY_AUDIOSTATION_APIS,
+  SYNOLOGY_AUTHENTICATED_REQUEST_DESCRIPTION,
+  SYNOLOGY_COOKIE_HEADER,
+} from 'src/constants/swagger';
 import { SynologyGuard } from './synology.guard';
 import {
   SynologyRadioAddOrUpdateItemBodyDto,
@@ -47,13 +50,10 @@ export class SynologyRadioController {
       `SHOUTcast radio integration is a feature of Synology AudioStation that allows users to listen to SHOUTcast radio stations directly from the AudioStation interface. This endpoint provides information about available SHOUTcast genres and stations`,
       `The genres are a hard-coded list.  The stations are retrieved from the SHOUTcast API and briefly cached.`,
       `The integration does not require a SHOUTcast account, but it does require an active internet connection.`,
-      AUTHENTICATED_REQUEST_DESCRIPTION,
+      SYNOLOGY_AUTHENTICATED_REQUEST_DESCRIPTION,
     ].join('\n\n'),
   })
-  @ApiHeader({
-    name: 'cookie',
-    description: 'The session ID and device ID cookies for the user `id={sessionId}; did={deviceId}`',
-  })
+  @ApiHeader(SYNOLOGY_COOKIE_HEADER)
   @ApiOkResponse({
     description: 'Returns a list of genres found in the music library, or a hard-coded list of default genres',
     schema: {

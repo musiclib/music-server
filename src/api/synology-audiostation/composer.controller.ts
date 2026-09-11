@@ -1,8 +1,12 @@
-import { AUTHENTICATED_REQUEST_DESCRIPTION, PAGINATED_DATA_DESCRIPTION } from './consts';
 import { AccountEntity } from 'src/database/entities';
 import { ApiHeader, ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { Body, Controller, HttpCode, HttpStatus, Logger, Post, UseGuards } from '@nestjs/common';
-import { SYNOLOGY_AUDIOSTATION_APIS } from 'src/constants/swagger';
+import {
+  PAGINATED_DATA_DESCRIPTION,
+  SYNOLOGY_AUDIOSTATION_APIS,
+  SYNOLOGY_AUTHENTICATED_REQUEST_DESCRIPTION,
+  SYNOLOGY_COOKIE_HEADER,
+} from 'src/constants/swagger';
 import { SynologyComposerBodyDto, SynologyComposerResponseDto } from './dtos/composer.cgi.dto';
 import { SynologyComposerService } from './composer.service';
 import { SynologyGuard } from './synology.guard';
@@ -26,13 +30,10 @@ export class SynologyComposerController {
       // eslint-disable-next-line max-len
       `When a track is recognized as having multiple composers, each composer is counted as a separate composer.  For  instance, a track with the composer "Composer 1, Composer 2" will be counted as both "Composer 1" and "Composer 2".`,
       PAGINATED_DATA_DESCRIPTION,
-      AUTHENTICATED_REQUEST_DESCRIPTION,
+      SYNOLOGY_AUTHENTICATED_REQUEST_DESCRIPTION,
     ].join('\n\n'),
   })
-  @ApiHeader({
-    name: 'cookie',
-    description: 'The session ID and device ID cookies for the user `id={sessionId}; did={deviceId}`',
-  })
+  @ApiHeader(SYNOLOGY_COOKIE_HEADER)
   @ApiOkResponse({
     description: 'Returns a list of composers',
     type: SynologyComposerResponseDto,

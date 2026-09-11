@@ -1,4 +1,10 @@
-import { ADMIN_APIS, JWT_TOKEN } from 'src/constants/swagger';
+import {
+  ADMINISTRATOR_ONLY_ROUTE,
+  ADMIN_APIS,
+  JWT_AUTHENTICATED_REQUEST_DESCRIPTION,
+  JWT_TOKEN,
+  JWT_TOKEN_HEADER,
+} from 'src/constants/swagger';
 import { AdminListAccountsResponseDto } from './list-accounts.dto';
 import { AdminListAccountsService } from './list-accounts.service';
 import { AllowedRoles, RoleGuard } from 'src/api/role.guard';
@@ -18,15 +24,15 @@ export class AdminListAccountsController {
   @Get('list-accounts')
   @ApiOperation({
     summary: 'List all accounts',
-    description: 'Retrieves a list of all accounts in the system.',
+    description: [
+      'Retrieves a list of all accounts in the system.',
+      JWT_AUTHENTICATED_REQUEST_DESCRIPTION,
+      ADMINISTRATOR_ONLY_ROUTE,
+    ].join('\n'),
   })
   @AllowedRoles([UserRoleEnum.ADMIN])
   @ApiBearerAuth(JWT_TOKEN)
-  @ApiHeader({
-    name: 'Authorization',
-    description: 'Bearer token for authentication',
-    required: true,
-  })
+  @ApiHeader(JWT_TOKEN_HEADER)
   @ApiOkResponse({
     description: 'Accounts listed successfully',
     type: AdminListAccountsResponseDto,

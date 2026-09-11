@@ -3,6 +3,7 @@ import { AllowGuest } from 'src/api/role.guard';
 import {
   ApiExtraModels,
   ApiOkResponse,
+  ApiOperation,
   ApiProduces,
   ApiTags,
   IntersectionType,
@@ -23,7 +24,7 @@ import {
   Scope,
   UseGuards,
 } from '@nestjs/common';
-import { QNAP_MUSICSTATION_APIS } from 'src/constants/swagger';
+import { QNAP_MUSICSTATION_APIS, QNAP_POST_TO_GET, XML_MIME_TYPE } from 'src/constants/swagger';
 import {
   QnapAuthLoginAuthenticateQueryDto,
   QnapAuthLoginDto,
@@ -59,7 +60,19 @@ export class QnapAuthLoginController {
   @Get('authLogin.cgi')
   @AllowGuest()
   @HttpCode(HttpStatus.OK)
-  @ApiProduces('text/xml')
+  @Header('Content-Type', XML_MIME_TYPE)
+  @ApiProduces(XML_MIME_TYPE)
+  @ApiOperation({
+    summary: 'QNAP authentication handler (Android)',
+    description: [
+      'Handles various QNAP Music Station authentication requests.',
+      'Preauthentication requests return password configuration and system information.',
+      'Authentication requests validate the username and password, which is sent base-64 encoded.',
+      'Validating sessions confirms a JWT token and returns system configuration information.',
+      'Resuming sessions does not validate the JWT token and returns system configuration information.',
+      'The Android QMusic app uses `GET` and querystring parameters, the iPhone app `POSTS` and uses the `POST` body.',
+    ].join('\n'),
+  })
   @ApiOkResponse({
     description: 'QNAP authentication response',
     content: {
@@ -95,7 +108,6 @@ export class QnapAuthLoginController {
     QnapAuthLoginDto,
     QnapAuthLoginFailedDto,
   )
-  @Header('Content-Type', 'text/xml')
   async routeRequest(@Req() req: Request, @Ip() ipAddress: string, @Query() variousQueries: QnapAuthLoginQueryDto) {
     // console.log('authLogin.cgi', { query: variousQueries });
     const userAgent = req.headers['user-agent'] || '';
@@ -130,8 +142,19 @@ export class QnapAuthLoginController {
   @Post('authLogin.cgi')
   @AllowGuest()
   @HttpCode(HttpStatus.OK)
-  @ApiProduces('text/xml')
-  @Header('Content-Type', 'text/xml')
+  @Header('Content-Type', XML_MIME_TYPE)
+  @ApiProduces(XML_MIME_TYPE)
+  @ApiOperation({
+    summary: 'QNAP authentication handler (iPhone)',
+    description: [
+      'Handles various QNAP Music Station authentication requests.',
+      'Preauthentication requests return password configuration and system information.',
+      'Authentication requests validate the username and password, which is sent base-64 encoded.',
+      'Validating sessions confirms a JWT token and returns system configuration information.',
+      'Resuming sessions does not validate the JWT token and returns system configuration information.',
+      QNAP_POST_TO_GET,
+    ].join('\n'),
+  })
   async postRequest(@Req() req: Request, @Ip() ipAddress: string, @Body() body: QnapAuthLoginQueryDto) {
     return this.routeRequest(req, ipAddress, body);
   }

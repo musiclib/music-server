@@ -18,7 +18,7 @@ export class AdminDeleteRootPathResponseDto extends SuccessResponseDto {}
 export class AdminDeleteRootPathNotFoundResponseDto extends NotFoundResponseDto {
   /**
    * The error message(s) that occurred during the validation of the request data or additional requirements
-   * applied during the execution of the request
+   * applied while serving the request
    */
   @ApiProperty({
     isArray: true,

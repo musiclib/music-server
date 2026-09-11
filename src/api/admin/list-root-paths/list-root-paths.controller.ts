@@ -1,4 +1,10 @@
-import { ADMIN_APIS, JWT_TOKEN } from 'src/constants/swagger';
+import {
+  ADMINISTRATOR_ONLY_ROUTE,
+  ADMIN_APIS,
+  JWT_AUTHENTICATED_REQUEST_DESCRIPTION,
+  JWT_TOKEN,
+  JWT_TOKEN_HEADER,
+} from 'src/constants/swagger';
 import { AdminListRootPathsResponseDto } from './list-root-paths.dto';
 import { AdminListRootPathsService } from './list-root-paths.service';
 import { AllowedRoles, RoleGuard } from 'src/api/role.guard';
@@ -17,16 +23,18 @@ export class AdminListRootPathsController {
 
   @Get('list-root-paths')
   @ApiOperation({
-    summary: 'List all root paths',
-    description: 'Retrieves a list of all root paths in the system.',
+    summary: `List all sources of music for all users`,
+    description: [
+      `Retrieves a list of all root paths for all user accounts, eg \`/home/<username>/music\`.',
+      'These paths are indexed periodically or when files are changed to build the music library.`,
+      'The indexer works from a single queue so the more root paths the longer the delay between scanning.',
+      JWT_AUTHENTICATED_REQUEST_DESCRIPTION,
+      ADMINISTRATOR_ONLY_ROUTE,
+    ].join('\n'),
   })
   @AllowedRoles([UserRoleEnum.ADMIN])
   @ApiBearerAuth(JWT_TOKEN)
-  @ApiHeader({
-    name: 'Authorization',
-    description: 'Bearer token for authentication',
-    required: true,
-  })
+  @ApiHeader(JWT_TOKEN_HEADER)
   @ApiOkResponse({
     type: AdminListRootPathsResponseDto,
   })

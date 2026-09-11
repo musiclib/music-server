@@ -1,4 +1,10 @@
-import { ADMIN_APIS, JWT_TOKEN } from 'src/constants/swagger';
+import {
+  ADMINISTRATOR_ONLY_ROUTE,
+  ADMIN_APIS,
+  JWT_AUTHENTICATED_REQUEST_DESCRIPTION,
+  JWT_TOKEN,
+  JWT_TOKEN_HEADER,
+} from 'src/constants/swagger';
 import {
   AdminRegenerateUserSessionKeyNotFoundResponseDto,
   AdminRegenerateUserSessionKeyQueryDto,
@@ -21,17 +27,15 @@ export class AdminRegenerateUserSessionKeyController {
   @Post('regenerate-user-session-key')
   @ApiOperation({
     summary: `Invalidate a user's sessions`,
-    description:
-      // eslint-disable-next-line max-len
-      'Regenerates the session key for a specified user account. This operation is typically used when a user needs to reset their session key for security reasons.',
+    description: [
+      'Regenerates the master session key for a specific user, invalidating all sessions for that user.',
+      JWT_AUTHENTICATED_REQUEST_DESCRIPTION,
+      ADMINISTRATOR_ONLY_ROUTE,
+    ].join('\n'),
   })
   @AllowedRoles([UserRoleEnum.ADMIN])
   @ApiBearerAuth(JWT_TOKEN)
-  @ApiHeader({
-    name: 'Authorization',
-    description: 'Bearer token for authentication',
-    required: true,
-  })
+  @ApiHeader(JWT_TOKEN_HEADER)
   @ApiOkResponse({
     type: AdminRegenerateUserSessionKeyResponseDto,
     description: 'Session key regenerated successfully',

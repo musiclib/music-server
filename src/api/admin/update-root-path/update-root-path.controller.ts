@@ -1,4 +1,10 @@
-import { ADMIN_APIS, JWT_TOKEN } from 'src/constants/swagger';
+import {
+  ADMINISTRATOR_ONLY_ROUTE,
+  ADMIN_APIS,
+  JWT_AUTHENTICATED_REQUEST_DESCRIPTION,
+  JWT_TOKEN,
+  JWT_TOKEN_HEADER,
+} from 'src/constants/swagger';
 import {
   AdminUpdateRootPathBadRequestResponseDto,
   AdminUpdateRootPathBodyDto,
@@ -32,17 +38,17 @@ export class AdminUpdateRootPathController {
   @Patch('update-root-path')
   @ApiOperation({
     summary: 'Update a root path',
-    description:
-      // eslint-disable-next-line max-len
-      'Updates the specified root path with a new path. If the scanner is running then all previous data will be removed and recreated when it indexes the new path.  If the scanner is paued you may move the files to the new path and then resume the scanner to continue indexing.',
+    description: [
+      'Updates the specified root path with a new path.',
+      'If the scanner is running then all previous data will be removed and recreated when it indexes the new path.',
+      'If the scanner is paused you may move files then resume the scanner to retain their data.',
+      JWT_AUTHENTICATED_REQUEST_DESCRIPTION,
+      ADMINISTRATOR_ONLY_ROUTE,
+    ].join('\n'),
   })
   @AllowedRoles([UserRoleEnum.ADMIN])
   @ApiBearerAuth(JWT_TOKEN)
-  @ApiHeader({
-    name: 'Authorization',
-    description: 'Bearer token for authentication',
-    required: true,
-  })
+  @ApiHeader(JWT_TOKEN_HEADER)
   @ApiOkResponse({
     type: AdminUpdateRootPathResponseDto,
   })

@@ -1,4 +1,10 @@
-import { ADMIN_APIS, JWT_TOKEN } from 'src/constants/swagger';
+import {
+  ADMINISTRATOR_ONLY_ROUTE,
+  ADMIN_APIS,
+  JWT_AUTHENTICATED_REQUEST_DESCRIPTION,
+  JWT_TOKEN,
+  JWT_TOKEN_HEADER,
+} from 'src/constants/swagger';
 import { AccountEntity } from 'src/database/entities';
 import { AdminSetIndexerStatusBodyDto, AdminSetIndexerStatusResponseDto } from './set-indexer-status.dto';
 import { AdminSetIndexerStatusService } from './set-indexer-status.service';
@@ -20,15 +26,15 @@ export class AdminSetIndexerStatusController {
   @Patch('/set-indexer-status')
   @ApiOperation({
     summary: 'Set the indexer status',
-    description: 'Enables or disables the indexer to allow moving root paths or to preserve system resources.',
+    description: [
+      'Enables or disables the indexer to allow moving root paths or to preserve system resources.',
+      JWT_AUTHENTICATED_REQUEST_DESCRIPTION,
+      ADMINISTRATOR_ONLY_ROUTE,
+    ].join('\n'),
   })
   @AllowedRoles([UserRoleEnum.ADMIN])
   @ApiBearerAuth(JWT_TOKEN)
-  @ApiHeader({
-    name: 'Authorization',
-    description: 'Bearer token for authentication',
-    required: true,
-  })
+  @ApiHeader(JWT_TOKEN_HEADER)
   @ApiOkResponse({
     description: 'Scanner status updated successfully',
     type: AdminSetIndexerStatusResponseDto,

@@ -1,4 +1,10 @@
-import { ADMIN_APIS, JWT_TOKEN } from 'src/constants/swagger';
+import {
+  ADMINISTRATOR_ONLY_ROUTE,
+  ADMIN_APIS,
+  JWT_AUTHENTICATED_REQUEST_DESCRIPTION,
+  JWT_TOKEN,
+  JWT_TOKEN_HEADER,
+} from 'src/constants/swagger';
 import { AccountEntity } from 'src/database/entities';
 import {
   AdminDeleteAccountBadRequestResponseDto,
@@ -32,17 +38,15 @@ export class AdminDeleteAccountController {
   @Delete('delete-account')
   @ApiOperation({
     summary: 'Delete an account',
-    // eslint-disable-next-line max-len
-    description:
+    description: [
       'Deletes the specified account.  If it is the only admin account a new one account must be created first.',
+      JWT_AUTHENTICATED_REQUEST_DESCRIPTION,
+      ADMINISTRATOR_ONLY_ROUTE,
+    ].join('\n'),
   })
   @AllowedRoles([UserRoleEnum.ADMIN])
   @ApiBearerAuth(JWT_TOKEN)
-  @ApiHeader({
-    name: 'Authorization',
-    description: 'Bearer token for authentication',
-    required: true,
-  })
+  @ApiHeader(JWT_TOKEN_HEADER)
   @ApiOkResponse({
     type: AdminDeleteAccountResponseDto,
     description: 'Account deleted successfully',

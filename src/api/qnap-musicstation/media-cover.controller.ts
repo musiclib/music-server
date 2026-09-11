@@ -1,9 +1,14 @@
 import { AccountEntity } from 'src/database/entities';
 import { AllowedRoles } from '../role.guard';
-import { ApiOkResponse, ApiProduces, ApiTags } from '@nestjs/swagger';
+import { ApiOkResponse, ApiOperation, ApiProduces, ApiTags } from '@nestjs/swagger';
+import {
+  BINARY_RESPONSE,
+  IMAGE_MIME_TYPES,
+  QNAP_AUTHENTICATED_REQUEST_DESCRIPTION,
+  QNAP_MUSICSTATION_APIS,
+} from 'src/constants/swagger';
 import { Controller, Get, HttpCode, HttpStatus, NotFoundException, Query, Req, Res, UseGuards } from '@nestjs/common';
 import { CoverImage } from 'src/types/cover-image';
-import { QNAP_MUSICSTATION_APIS } from 'src/constants/swagger';
 import { QnapGuard } from './qnap.guard';
 import { QnapMediaCoverQueryDto } from './dtos/media-cover.dto';
 import { QnapMediaCoverService } from './media-cover.service';
@@ -28,12 +33,18 @@ export class QnapMediaCoverController {
   @Get('mediacover_api.php')
   @AllowedRoles([UserRoleEnum.USER, UserRoleEnum.ADMIN])
   @HttpCode(HttpStatus.OK)
-  @ApiProduces('image/jpeg', 'image/png', 'image/webp')
-  @ApiOkResponse({
-    schema: {
-      type: 'string',
-      format: 'binary',
-    },
+  @ApiProduces(...IMAGE_MIME_TYPES)
+  @ApiOkResponse(BINARY_RESPONSE)
+  @ApiOperation({
+    summary: 'Retrieves cover images',
+    description: [
+      'This endpoint retrieves the cover image for a specified album, artist, or folder.',
+      'The image comes from the first song in the album that contains an embedded image.',
+      'If the album has no cover image a default blank cover is returned.',
+      'The response supports Etag caching to optimize browser performance.',
+      'The asset ID may be provided as an `imagepath` value like `api/mediacover_api.php?id=123` or as an ID value.',
+      QNAP_AUTHENTICATED_REQUEST_DESCRIPTION,
+    ].join('\n'),
   })
   async get(
     @User() user: AccountEntity,

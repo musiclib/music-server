@@ -1,4 +1,11 @@
-import { ADMIN_APIS, GUEST_APIS, JWT_TOKEN, SYNOLOGY_AUDIOSTATION_APIS, USER_APIS } from './constants/swagger';
+import {
+  ADMIN_APIS,
+  GUEST_APIS,
+  JWT_TOKEN,
+  QNAP_MUSICSTATION_APIS,
+  SYNOLOGY_AUDIOSTATION_APIS,
+  USER_APIS,
+} from './constants/swagger';
 import { AppModule } from './app.module';
 import { ClassSerializerInterceptor, Logger, ValidationPipe } from '@nestjs/common';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
@@ -74,11 +81,30 @@ async function bootstrap() {
   );
   if (process.env.SWAGGER_ENABLED) {
     const swaggerDocumentOptions = new DocumentBuilder()
-      .setTitle('API Server')
-      .addTag(GUEST_APIS, 'APIs for guests to sign in or any other unauthenticated actions.')
-      .addTag(USER_APIS, 'WebUI APIs for users to create and manage their collections and other data.')
-      .addTag(ADMIN_APIS, 'WebUI APIs for administrators to manage the platform and its users.')
-      .addTag(SYNOLOGY_AUDIOSTATION_APIS, 'APIs for Synology DS Audio apps for iPhone and Android.')
+      .setTitle('Music Server API')
+      .setDescription(
+        [
+          'API documentation for building your own audio client on Music Server.',
+          // eslint-disable-next-line max-len
+          'This API consists of "Standard API" with User, Admin and Guest APIs that allow you to manage your music library and user accounts.  These APIs return JSON except where serving image/audio files and each have their successful and erroneous responses defined.\n',
+          'Each endpoint has a single input and response format and URL structure describing its functionality.',
+          'Endpoints map directly to source code, eg `/api/user/list-albums` is found in `/src/api/user/list-albums`.',
+          '\nThe Synology and QNAP APIs are documented here to share learnings, you should not build on them.',
+        ].join('\n '),
+      )
+      .setExternalDoc('View documentation online', 'https://musiclib.github.io/music-server')
+      .setLicense('Source code repository', 'https://github.com/musiclib/music-server')
+      .addTag(GUEST_APIS, 'Standard APIs for guests to sign in or any other unauthenticated actions.')
+      .addTag(USER_APIS, 'Standard APIs for users to create and manage their collections and other data.')
+      .addTag(ADMIN_APIS, 'Standard APIs for administrators to manage the platform and its users.')
+      .addTag(
+        SYNOLOGY_AUDIOSTATION_APIS,
+        'Compatibility layer emulating Synology AudioStation, for Synology DS Audio smartphone apps.',
+      )
+      .addTag(
+        QNAP_MUSICSTATION_APIS,
+        'Compatibility layer emulating QNAP Music Station, for QNAP QMusic smartphone apps.',
+      )
       .setVersion('1.0')
       .addBearerAuth(
         {
@@ -100,7 +126,9 @@ async function bootstrap() {
         defaultModelsExpandDepth: -1,
         defaultModelExpandDepth: 10,
         persistAuthorization: true,
+        operationsSorter: 'alpha',
         withCredentials: true,
+        supportedSubmitMethods: process.env.NODE_ENV === 'test' ? [] : undefined,
       },
     });
   }

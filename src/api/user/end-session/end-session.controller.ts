@@ -10,7 +10,7 @@ import {
 } from '@nestjs/swagger';
 import { BadRequestResponseDto, InternalServerErrorResponseDto, SuccessResponseDto } from 'src/api/response.dto';
 import { Controller, Delete, Logger, UseGuards } from '@nestjs/common';
-import { JWT_TOKEN, USER_APIS } from 'src/constants/swagger';
+import { JWT_AUTHENTICATED_REQUEST_DESCRIPTION, JWT_TOKEN, JWT_TOKEN_HEADER, USER_APIS } from 'src/constants/swagger';
 import { Session } from 'src/api/session.decorator';
 import { SessionEntity } from 'src/database/entities';
 import { UserEndSessionService } from './end-session.service';
@@ -28,16 +28,15 @@ export class UserEndSessionController {
 
   @Delete('end-session')
   @ApiOperation({
-    summary: 'Signs out',
-    description: 'Ends a user session and invalidates the associated JWT token.',
+    summary: 'Terminate the session',
+    description: [
+      'Ends a user session and invalidates the JWT token provided in the `Authorization` header.',
+      JWT_AUTHENTICATED_REQUEST_DESCRIPTION,
+    ].join('\n'),
   })
   @AllowedRoles([UserRoleEnum.USER, UserRoleEnum.ADMIN])
   @ApiBearerAuth(JWT_TOKEN)
-  @ApiHeader({
-    name: 'Authorization',
-    description: 'Bearer token for authentication',
-    required: true,
-  })
+  @ApiHeader(JWT_TOKEN_HEADER)
   @ApiResponse({
     type: SuccessResponseDto,
   })

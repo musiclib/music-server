@@ -1,6 +1,6 @@
 import { ApiOkResponse, ApiOperation, ApiProduces, ApiTags } from '@nestjs/swagger';
+import { BINARY_RESPONSE, GUEST_APIS, IMAGE_MIME_TYPES } from 'src/constants/swagger';
 import { Controller, Get, Query, Req, Res, StreamableFile } from '@nestjs/common';
-import { GUEST_APIS } from 'src/constants/swagger';
 import { GuestArtistCoverQueryDto } from './artist-cover.dto';
 import { GuestArtistCoverService } from './artist-cover.service';
 import { join, sep } from 'node:path';
@@ -19,15 +19,17 @@ export class GuestArtistCoverController {
 
   @Get('artist-cover')
   @ApiOperation({
-    summary: 'Cover images for artists.  This route is guest-accessible for better browser-handling.',
+    summary: 'Retrieves cover images for artists',
+    description: [
+      'This endpoint retrieves the cover image for a specified artist.',
+      // eslint-disable-next-line max-len
+      'The image comes from the first track that contains a cover and credits them as an album artist, falling back to the first track crediting them as a track artist.',
+      'If the artist has no cover image a default blank cover is returned.',
+      'The response supports Etag caching to optimize browser performance.',
+    ].join('\n'),
   })
-  @ApiProduces('image/jpeg', 'image/png', 'image/webp')
-  @ApiOkResponse({
-    schema: {
-      type: 'string',
-      format: 'binary',
-    },
-  })
+  @ApiProduces(...IMAGE_MIME_TYPES)
+  @ApiOkResponse(BINARY_RESPONSE)
   async get(
     @Query() query: GuestArtistCoverQueryDto,
     @Req() request: Request,

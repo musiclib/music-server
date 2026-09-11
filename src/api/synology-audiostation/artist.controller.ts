@@ -1,4 +1,3 @@
-import { AUTHENTICATED_REQUEST_DESCRIPTION, PAGINATED_DATA_DESCRIPTION } from './consts';
 import { AccountEntity } from 'src/database/entities';
 import {
   ApiBody,
@@ -10,7 +9,12 @@ import {
   getSchemaPath,
 } from '@nestjs/swagger';
 import { Body, Controller, HttpCode, HttpStatus, Logger, Post, UseGuards } from '@nestjs/common';
-import { SYNOLOGY_AUDIOSTATION_APIS } from 'src/constants/swagger';
+import {
+  PAGINATED_DATA_DESCRIPTION,
+  SYNOLOGY_AUDIOSTATION_APIS,
+  SYNOLOGY_AUTHENTICATED_REQUEST_DESCRIPTION,
+  SYNOLOGY_COOKIE_HEADER,
+} from 'src/constants/swagger';
 import {
   SynologyArtistResponseDto,
   SynologyArtistsBodyDto,
@@ -37,13 +41,10 @@ export class SynologyArtistController {
     description: [
       `Lists artists found in the music library.  The artists can be filtered by genre.`,
       PAGINATED_DATA_DESCRIPTION,
-      AUTHENTICATED_REQUEST_DESCRIPTION,
+      SYNOLOGY_AUTHENTICATED_REQUEST_DESCRIPTION,
     ].join('\n\n'),
   })
-  @ApiHeader({
-    name: 'cookie',
-    description: 'The session ID and device ID cookies for the user `id={sessionId}; did={deviceId}`',
-  })
+  @ApiHeader(SYNOLOGY_COOKIE_HEADER)
   @ApiOkResponse({
     description: 'Returns a list of artists',
     type: SynologyArtistResponseDto,

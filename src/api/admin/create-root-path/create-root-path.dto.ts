@@ -25,7 +25,7 @@ export class AdminCreateRootPathResponseDto extends SuccessResponseDto {}
 export class AdminCreateRootPathNotFoundResponseDto extends NotFoundResponseDto {
   /**
    * The error message(s) that occurred during the validation of the request data or additional requirements
-   * applied during the execution of the request
+   * applied while serving the request
    */
   @ApiProperty({
     isArray: true,
@@ -39,7 +39,7 @@ export class AdminCreateRootPathNotFoundResponseDto extends NotFoundResponseDto 
 export class AdminCreateRootPathBadRequestResponseDto extends BadRequestResponseDto {
   /**
    * The error message(s) that occurred during the validation of the request data or additional requirements
-   * applied during the execution of the request
+   * applied while serving the request
    */
   @ApiProperty({
     isArray: true,

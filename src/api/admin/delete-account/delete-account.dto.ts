@@ -17,7 +17,7 @@ export class AdminDeleteAccountResponseDto extends SuccessResponseDto {}
 export class AdminDeleteAccountNotFoundResponseDto extends NotFoundResponseDto {
   /**
    * The error message(s) that occurred during the validation of the request data or additional requirements
-   * applied during the execution of the request
+   * applied while serving the request
    */
   @ApiProperty({
     isArray: true,
@@ -31,7 +31,7 @@ export class AdminDeleteAccountNotFoundResponseDto extends NotFoundResponseDto {
 export class AdminDeleteAccountBadRequestResponseDto extends BadRequestResponseDto {
   /**
    * The error message(s) that occurred during the validation of the request data or additional requirements
-   * applied during the execution of the request
+   * applied while serving the request
    */
   @ApiProperty({
     isArray: true,

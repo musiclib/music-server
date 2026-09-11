@@ -2,7 +2,7 @@ import { AccountEntity } from 'src/database/entities';
 import { AllowedRoles, RoleGuard } from 'src/api/role.guard';
 import { ApiBearerAuth, ApiHeader, ApiNotFoundResponse, ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { Controller, Get, Query, UseGuards } from '@nestjs/common';
-import { JWT_TOKEN, USER_APIS } from 'src/constants/swagger';
+import { JWT_AUTHENTICATED_REQUEST_DESCRIPTION, JWT_TOKEN, JWT_TOKEN_HEADER, USER_APIS } from 'src/constants/swagger';
 import { User } from 'src/api/user.decorator';
 import {
   UserRetrieveAlbumNotFoundResponseDto,
@@ -22,16 +22,15 @@ export class UserRetrieveAlbumController {
 
   @Get('retrieve-album')
   @ApiOperation({
-    summary: 'Retrieve album',
-    description: `Retrieves an album with all of its information necessary for viewing and playing-back the tracks.`,
+    summary: 'Retrieves single albums',
+    description: [
+      `Retrieves an album and its complete track list with all information necessary for viewing and playback.`,
+      JWT_AUTHENTICATED_REQUEST_DESCRIPTION,
+    ].join('\n'),
   })
   @AllowedRoles([UserRoleEnum.USER, UserRoleEnum.ADMIN])
   @ApiBearerAuth(JWT_TOKEN)
-  @ApiHeader({
-    name: 'Authorization',
-    description: 'Bearer token for authentication',
-    required: true,
-  })
+  @ApiHeader(JWT_TOKEN_HEADER)
   @ApiOkResponse({
     description: 'Successfully retrieved the album data for the user.',
     type: UserRetrieveAlbumResponseDto,

@@ -1,4 +1,3 @@
-import { AUTHENTICATED_REQUEST_DESCRIPTION } from './consts';
 import { AccountEntity, SessionEntity } from 'src/database/entities';
 import { AllowGuest } from '../role.guard';
 import {
@@ -22,7 +21,7 @@ import {
   Res,
   UseGuards,
 } from '@nestjs/common';
-import { SYNOLOGY_AUDIOSTATION_APIS } from 'src/constants/swagger';
+import { SYNOLOGY_AUDIOSTATION_APIS, SYNOLOGY_AUTHENTICATED_REQUEST_DESCRIPTION } from 'src/constants/swagger';
 import { Session } from '../session.decorator';
 import { SynologyApiEnum, SynologyMethodEnum } from './enums';
 import {
@@ -71,7 +70,7 @@ export class SynologyEntryController {
       `This endpoint handles various system-level operations such as authentication, along with certain operations such as listing and managing favorite/pinned items, and adding certain items to playlists.\n\nSome of the operations require authentication - logging out, adding items to playlists, and listing/managing pinned items.  Other operations do not require authentication - retrieving the encryption key and signing in.`,
       // eslint-disable-next-line max-len
       `For the actions requiring authentication, the request must be authenticated using a valid Synology session ID and device ID cookie for the user, which can be obtained by signing in via the \`entry.cgi\` endpoint, a two-step process requesting the encryption public key from \`/certs\` and then submitting credentials encrypted with it.`,
-      AUTHENTICATED_REQUEST_DESCRIPTION,
+      SYNOLOGY_AUTHENTICATED_REQUEST_DESCRIPTION,
     ].join('\n\n'),
   })
   @ApiHeader({

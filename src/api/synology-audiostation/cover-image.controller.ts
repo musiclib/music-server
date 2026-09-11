@@ -1,9 +1,14 @@
-import { AUTHENTICATED_REQUEST_DESCRIPTION } from './consts';
 import { AccountEntity } from 'src/database/entities';
 import { ApiHeader, ApiOkResponse, ApiOperation, ApiProduces, ApiTags } from '@nestjs/swagger';
+import {
+  BINARY_RESPONSE,
+  IMAGE_MIME_TYPES,
+  SYNOLOGY_AUDIOSTATION_APIS,
+  SYNOLOGY_AUTHENTICATED_REQUEST_DESCRIPTION,
+  SYNOLOGY_COOKIE_HEADER,
+} from 'src/constants/swagger';
 import { Controller, Get, HttpCode, HttpStatus, Logger, Query, Req, Res, UseGuards } from '@nestjs/common';
 import { CoverCgiAlbumQueryDto, CoverCgiArtistQueryDto, CoverCgiComposerQueryDto, CoverCgiSongQueryDto } from './dtos';
-import { SYNOLOGY_AUDIOSTATION_APIS } from 'src/constants/swagger';
 import { SynologyCoverImageService } from './cover-image.service';
 import { SynologyGuard } from './synology.guard';
 import { User } from '../user.decorator';
@@ -29,20 +34,12 @@ export class SynologyCoverImageController {
     description: [
       // eslint-disable-next-line max-len
       `Retrieves the cover image for an album, artist, composer or song.  The cover image can be retrieved by specifying the appropriate query parameters in the request.  If an image is not found a default blank cover image will be returned.`,
-      AUTHENTICATED_REQUEST_DESCRIPTION,
+      SYNOLOGY_AUTHENTICATED_REQUEST_DESCRIPTION,
     ].join('\n\n'),
   })
-  @ApiHeader({
-    name: 'cookie',
-    description: 'The session ID and device ID cookies for the user `id={sessionId}; did={deviceId}`',
-  })
-  @ApiProduces('image/jpeg', 'image/png', 'image/webp')
-  @ApiOkResponse({
-    schema: {
-      type: 'string',
-      format: 'binary',
-    },
-  })
+  @ApiHeader(SYNOLOGY_COOKIE_HEADER)
+  @ApiProduces(...IMAGE_MIME_TYPES)
+  @ApiOkResponse(BINARY_RESPONSE)
   async route(
     @User() user: AccountEntity,
     @Req() request: Request,
