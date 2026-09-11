@@ -249,7 +249,7 @@ const UserListAlbumsWithTracksBadRequestErrorMessages = [
 export class UserListAlbumsWithTracksBadRequestResponseDto extends BadRequestResponseDto {
   /**
    * The error message(s) that occurred during the validation of the request data or additional requirements
-   * applied during the execution of the request.
+   * applied while serving the request.
    */
   @ApiProperty({
     isArray: true,

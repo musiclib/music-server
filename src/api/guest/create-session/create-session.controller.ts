@@ -24,10 +24,12 @@ export class GuestCreateSessionController {
 
   @Post('create-session')
   @ApiOperation({
-    summary: 'Signs in',
-    description:
-      // eslint-disable-next-line max-len
-      'Creates a user session and returns a JWT token used for authenticating and accessing APIs requiring authentication.',
+    summary: 'Sign in',
+    description: [
+      'Creates a user session and returns a JWT token used for authenticated API requests.',
+      'The session can be lasting or temporary.',
+      'Sessions are locked to the APIs that created them, these tokens cannot access QNAP or Synology APIs.',
+    ].join('\n'),
   })
   @ApiCreatedResponse({
     type: GuestCreateSessionResponseDto,

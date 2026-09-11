@@ -20,7 +20,8 @@ export class GuestGenreCoverController {
   // eslint-disable-next-line class-methods-use-this
   @Get('genre-cover')
   @ApiOperation({
-    summary: 'Cover images for genres',
+    summary: 'Retrieves cover images for genres',
+    description: ['This endpoint returns a placeholder image for all genres.'].join('\n'),
   })
   @ApiProduces('image/jpeg', 'image/png', 'image/webp')
   @ApiOkResponse({
@@ -44,7 +45,7 @@ export class GuestGenreCoverController {
     //   });
     // }
     response.set({
-      'Content-Disposition': `inline; filename="album-cover.${query.id}.png"`,
+      'Content-Disposition': `inline; filename="genre-cover.${query.id}.png"`,
       'Content-Type': 'image/png',
       ETag: 'blank-cover',
     });

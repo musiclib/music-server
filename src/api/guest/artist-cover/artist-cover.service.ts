@@ -1,4 +1,4 @@
-import { AlbumArtistEntity } from 'src/database/entities';
+import { AlbumArtistEntity, LinkedArtistEntity } from 'src/database/entities';
 import { AlbumEntity } from 'src/database/entities/album.entity';
 import { CoverImage } from 'src/types/cover-image';
 import { InjectModel } from '@nestjs/sequelize/dist/common/sequelize.decorators';
@@ -14,7 +14,7 @@ export class GuestArtistCoverService {
   ) {}
 
   async getArtistCoverImage(artistId: number, size: number): Promise<CoverImage | undefined> {
-    const artistCover = await this.albumEntity.findOne({
+    let artistCover = await this.albumEntity.findOne({
       attributes: ['id', 'coverImage', 'coverImageMimeType', 'createdAt', 'updatedAt'],
       include: [
         {
@@ -30,6 +30,25 @@ export class GuestArtistCoverService {
         [Op.and]: [where(col('coverImage'), Op.not, null), where(col('coverImageMimeType'), Op.not, null)],
       },
     });
+    if (!artistCover) {
+      artistCover = await this.albumEntity.findOne({
+        attributes: ['id', 'coverImage', 'coverImageMimeType', 'createdAt', 'updatedAt'],
+        include: [
+          {
+            attributes: ['albumId', 'artistId'],
+            model: LinkedArtistEntity,
+            where: {
+              artistId,
+            },
+            required: true,
+          },
+        ],
+        where: {
+          [Op.and]: [where(col('coverImage'), Op.not, null), where(col('coverImageMimeType'), Op.not, null)],
+        },
+      });
+    }
+
     if (!artistCover) {
       return undefined;
     }

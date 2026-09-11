@@ -19,10 +19,10 @@ export class GuestStreamFileController {
 
   @Get('stream-file')
   @ApiOperation({
-    summary: 'Streams audio files.  This route is guest-accessible for better browser handling.',
+    summary: 'Serves audio files',
     description: [
       // eslint-disable-next-line max-len
-      `Downloads audio files from the music library to the client.  This is used to stream audio files for playback or to download for offline usage.  The audio files are streamed in their original format, and the client is responsible for decoding and playing the audio.  Synology implements transcoding for certain formats, but this is not supported in this server.`,
+      `Downloads audio files from the music library to the client.  This is used to stream audio files for playback or to download for offline usage.  The audio files are streamed in their original format and the client is responsible for decoding and playing the audio.`,
     ].join('\n\n'),
   })
   @ApiOkResponse({

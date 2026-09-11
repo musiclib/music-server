@@ -1,4 +1,4 @@
-import { ApiTags } from '@nestjs/swagger';
+import { ApiExcludeController, ApiTags } from '@nestjs/swagger';
 import { Controller, Get } from '@nestjs/common';
 import { GUEST_APIS } from 'src/constants/swagger';
 
@@ -6,6 +6,7 @@ import { GUEST_APIS } from 'src/constants/swagger';
   path: '/api/guest',
 })
 @ApiTags(GUEST_APIS)
+@ApiExcludeController(true)
 export class GuestHealthcheckController {
   // eslint-disable-next-line class-methods-use-this
   @Get('healthcheck')

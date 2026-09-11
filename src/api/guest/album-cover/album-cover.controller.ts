@@ -17,7 +17,13 @@ export class GuestAlbumCoverController {
 
   @Get('album-cover')
   @ApiOperation({
-    summary: 'Cover images for albums, this route is guest-accessible for better browser handling',
+    summary: 'Retrieves cover images for albums',
+    description: [
+      'This endpoint retrieves the cover image for a specified album.',
+      'The image comes from the first song in the album that contains an embedded image.',
+      'If the album has no cover image a default blank cover is returned.',
+      'The response supports Etag caching to optimize browser performance.',
+    ].join('\n'),
   })
   @ApiProduces('image/jpeg', 'image/png', 'image/webp')
   @ApiOkResponse({

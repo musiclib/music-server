@@ -22,6 +22,13 @@ export class UserTreeItemDto {
     type: UserTreeItemDto,
     isArray: true,
     required: false,
+    example: [
+      {
+        folder: 'sub-folder',
+        fullPath: '/path/to/sub-folder',
+        id: 123,
+      },
+    ],
   })
   declare children?: UserTreeItemDto[];
 }
