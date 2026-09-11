@@ -1,6 +1,6 @@
 import { ApiOkResponse, ApiOperation, ApiProduces, ApiTags } from '@nestjs/swagger';
+import { BINARY_RESPONSE, GUEST_APIS, IMAGE_MIME_TYPES } from 'src/constants/swagger';
 import { Controller, Get, Query, Req, Res, StreamableFile } from '@nestjs/common';
-import { GUEST_APIS } from 'src/constants/swagger';
 import { GuestAlbumCoverQueryDto } from './album-cover.dto';
 import { GuestAlbumCoverService } from './album-cover.service';
 import { join, sep } from 'node:path';
@@ -25,13 +25,8 @@ export class GuestAlbumCoverController {
       'The response supports Etag caching to optimize browser performance.',
     ].join('\n'),
   })
-  @ApiProduces('image/jpeg', 'image/png', 'image/webp')
-  @ApiOkResponse({
-    schema: {
-      type: 'string',
-      format: 'binary',
-    },
-  })
+  @ApiProduces(...IMAGE_MIME_TYPES)
+  @ApiOkResponse(BINARY_RESPONSE)
   async get(
     @Query() query: GuestAlbumCoverQueryDto,
     @Req() request: Request,

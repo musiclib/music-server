@@ -10,7 +10,7 @@ import {
   ApiTags,
 } from '@nestjs/swagger';
 import { Controller, Get, Query, UseGuards } from '@nestjs/common';
-import { JWT_TOKEN, USER_APIS } from 'src/constants/swagger';
+import { JWT_AUTHENTICATED_REQUEST_DESCRIPTION, JWT_TOKEN, JWT_TOKEN_HEADER, USER_APIS } from 'src/constants/swagger';
 import { User } from 'src/api/user.decorator';
 import {
   UserListIndexerLogsBadRequestResponseDto,
@@ -31,19 +31,20 @@ export class UserListIndexerLogsController {
 
   @Get('list-indexer-logs')
   @ApiOperation({
-    summary: 'List indexer logs',
-    description:
-      // eslint-disable-next-line max-len
-      'Retrieves a list of indexer logs based on the provided query parameters which may filter by root path or search term.  The logs are only held in memory and will disappear when the server restarts or to stay within the log size specified in the `system_configurations` table.',
+    summary: 'Monitor what the indexer is doing for your library',
+    description: [
+      'Retrieves the most recent indexer logs based on any provided query parameters.',
+      `Logs are held in memory and will clear whenever the server restarts.`,
+      'The oldest logs will discard as they accumulate beyond the capacity in the `system_configurations` table.',
+      'If you have multiple users it may be common for this to be empty as the capacity is filled by other users.',
+      JWT_AUTHENTICATED_REQUEST_DESCRIPTION,
+    ].join('\n'),
   })
   @AllowedRoles([UserRoleEnum.USER, UserRoleEnum.ADMIN])
   @ApiBearerAuth(JWT_TOKEN)
-  @ApiHeader({
-    name: 'Authorization',
-    description: 'Bearer token for authentication',
-    required: true,
-  })
+  @ApiHeader(JWT_TOKEN_HEADER)
   @ApiOkResponse({
+    description: 'Successful response with an array of data and pagination information.',
     type: UserListIndexerLogsResponseDto,
   })
   @ApiBadRequestResponse({

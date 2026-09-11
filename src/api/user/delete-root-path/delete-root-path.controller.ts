@@ -2,7 +2,7 @@ import { AccountEntity } from 'src/database/entities';
 import { AllowedRoles, RoleGuard } from 'src/api/role.guard';
 import { ApiBearerAuth, ApiHeader, ApiNotFoundResponse, ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { Controller, Delete, Query, Scope, UseGuards } from '@nestjs/common';
-import { JWT_TOKEN, USER_APIS } from 'src/constants/swagger';
+import { JWT_AUTHENTICATED_REQUEST_DESCRIPTION, JWT_TOKEN, JWT_TOKEN_HEADER, USER_APIS } from 'src/constants/swagger';
 import { User } from 'src/api/user.decorator';
 import {
   UserDeleteRootPathNotFoundResponseDto,
@@ -23,18 +23,17 @@ export class UserDeleteRootPathController {
 
   @Delete('delete-root-path')
   @ApiOperation({
-    summary: 'Delete a root path',
-    description:
+    summary: `Remove a music source from the user's account`,
+    description: [
       // eslint-disable-next-line max-len
-      'Deletes the specified root path.  This will delete all associated information in the database immediately, the songs and folders will no longer be present in their data.  This will not affect any files on the file system.',
+      `Deletes the specified root path and all associated information in the database immediately.`,
+      `The songs and folders will no longer be present in your librariy but the files will remain on the file system.`,
+      JWT_AUTHENTICATED_REQUEST_DESCRIPTION,
+    ].join('\n'),
   })
   @AllowedRoles([UserRoleEnum.USER, UserRoleEnum.ADMIN])
   @ApiBearerAuth(JWT_TOKEN)
-  @ApiHeader({
-    name: 'Authorization',
-    description: 'Bearer token for authentication',
-    required: true,
-  })
+  @ApiHeader(JWT_TOKEN_HEADER)
   @ApiOkResponse({
     description: 'Root path deleted successfully',
     type: UserDeleteRootPathResponseDto,

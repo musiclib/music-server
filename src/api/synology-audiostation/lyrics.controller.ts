@@ -1,10 +1,11 @@
-import { ApiTags } from '@nestjs/swagger';
+import { ApiExcludeController, ApiTags } from '@nestjs/swagger';
 import { Controller, Logger, Post, UseGuards } from '@nestjs/common';
 import { SYNOLOGY_AUDIOSTATION_APIS } from 'src/constants/swagger';
 import { SynologyGuard } from './synology.guard';
 
 @Controller()
 @ApiTags(SYNOLOGY_AUDIOSTATION_APIS)
+@ApiExcludeController()
 @UseGuards(SynologyGuard)
 export class SynologyLyricsController {
   private readonly logger: Logger = new Logger(SynologyLyricsController.name);

@@ -3,6 +3,7 @@ import { AllowGuest } from 'src/api/role.guard';
 import {
   ApiExtraModels,
   ApiOkResponse,
+  ApiOperation,
   ApiProduces,
   ApiTags,
   IntersectionType,
@@ -23,7 +24,7 @@ import {
   Scope,
   UseGuards,
 } from '@nestjs/common';
-import { QNAP_MUSICSTATION_APIS } from 'src/constants/swagger';
+import { QNAP_MUSICSTATION_APIS, QNAP_POST_TO_GET, XML_MIME_TYPE } from 'src/constants/swagger';
 import {
   QnapAuthLoginAuthenticateQueryDto,
   QnapAuthLoginDto,
@@ -59,7 +60,18 @@ export class QnapAuthLoginController {
   @Get('authLogin.cgi')
   @AllowGuest()
   @HttpCode(HttpStatus.OK)
-  @ApiProduces('text/xml')
+  @Header('Content-Type', XML_MIME_TYPE)
+  @ApiProduces(XML_MIME_TYPE)
+  @ApiOperation({
+    summary: 'QNAP authentication',
+    description: [
+      [
+        'Handles QNAP Music Station authentication requests.',
+        'This includes preauthentication reporting system capabilities, authenticating users and creating sessions.',
+        'The Android QMusic app uses the GET request.',
+      ].join('\n'),
+    ].join('\n'),
+  })
   @ApiOkResponse({
     description: 'QNAP authentication response',
     content: {
@@ -95,7 +107,6 @@ export class QnapAuthLoginController {
     QnapAuthLoginDto,
     QnapAuthLoginFailedDto,
   )
-  @Header('Content-Type', 'text/xml')
   async routeRequest(@Req() req: Request, @Ip() ipAddress: string, @Query() variousQueries: QnapAuthLoginQueryDto) {
     // console.log('authLogin.cgi', { query: variousQueries });
     const userAgent = req.headers['user-agent'] || '';
@@ -130,8 +141,18 @@ export class QnapAuthLoginController {
   @Post('authLogin.cgi')
   @AllowGuest()
   @HttpCode(HttpStatus.OK)
-  @ApiProduces('text/xml')
-  @Header('Content-Type', 'text/xml')
+  @Header('Content-Type', XML_MIME_TYPE)
+  @ApiProduces(XML_MIME_TYPE)
+  @ApiOperation({
+    summary: 'QNAP authentication',
+    description: [
+      [
+        'Handles QNAP Music Station authentication requests.',
+        'This includes preauthentication reporting system capabilities, authenticating users and creating sessions.',
+        QNAP_POST_TO_GET,
+      ].join('\n'),
+    ].join('\n'),
+  })
   async postRequest(@Req() req: Request, @Ip() ipAddress: string, @Body() body: QnapAuthLoginQueryDto) {
     return this.routeRequest(req, ipAddress, body);
   }

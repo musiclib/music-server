@@ -2,7 +2,15 @@ import { AccountEntity } from 'src/database/entities';
 import { AllowedRoles, RoleGuard } from 'src/api/role.guard';
 import { ApiBadRequestResponse, ApiBearerAuth, ApiHeader, ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { Controller, Get, Query, UseGuards } from '@nestjs/common';
-import { JWT_TOKEN, USER_APIS } from 'src/constants/swagger';
+import {
+  FILTERED_DATA_DESCRIPTION,
+  JWT_AUTHENTICATED_REQUEST_DESCRIPTION,
+  JWT_TOKEN,
+  JWT_TOKEN_HEADER,
+  PAGINATED_DATA_DESCRIPTION,
+  TRACK_INFORMATION_EXCLUDED,
+  USER_APIS,
+} from 'src/constants/swagger';
 import { User } from 'src/api/user.decorator';
 import {
   UserListAlbumArtistsBadRequestResponseDto,
@@ -22,22 +30,24 @@ export class UserListAlbumArtistsController {
 
   @Get('list-album-artists')
   @ApiOperation({
-    summary: 'List album artists',
-    description: `Retrieves a list of album artists for the user based on the provided query parameters.`,
+    summary: 'List artists credited to albums',
+    description: [
+      `Album artists are the artists attributed directly to the album, usually a subset of artists credited to tracks.`,
+      FILTERED_DATA_DESCRIPTION,
+      TRACK_INFORMATION_EXCLUDED,
+      PAGINATED_DATA_DESCRIPTION,
+      JWT_AUTHENTICATED_REQUEST_DESCRIPTION,
+    ].join('\n'),
   })
   @AllowedRoles([UserRoleEnum.USER, UserRoleEnum.ADMIN])
   @ApiBearerAuth(JWT_TOKEN)
-  @ApiHeader({
-    name: 'Authorization',
-    description: 'Bearer token for authentication',
-    required: true,
-  })
+  @ApiHeader(JWT_TOKEN_HEADER)
   @ApiOkResponse({
-    description: 'Successfully retrieved the list of album artists for the user.',
+    description: 'Successful response with an array of data and pagination information.',
     type: UserListAlbumArtistsResponseDto,
   })
   @ApiBadRequestResponse({
-    description: 'The request was invalid or missing required parameters.',
+    description: 'Failure response with error information relating to missing or invalid parameters.',
     type: UserListAlbumArtistsBadRequestResponseDto,
   })
   async get(

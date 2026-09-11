@@ -1,4 +1,3 @@
-import { AUTHENTICATED_REQUEST_DESCRIPTION } from './consts';
 import { AllowGuest } from '../role.guard';
 import {
   ApiBody,
@@ -10,7 +9,11 @@ import {
   getSchemaPath,
 } from '@nestjs/swagger';
 import { Body, Controller, Get, HttpCode, HttpStatus, Logger, Post, Query, Res, UseGuards } from '@nestjs/common';
-import { SYNOLOGY_AUDIOSTATION_APIS } from 'src/constants/swagger';
+import {
+  SYNOLOGY_AUDIOSTATION_APIS,
+  SYNOLOGY_AUTHENTICATED_REQUEST_DESCRIPTION,
+  SYNOLOGY_COOKIE_HEADER,
+} from 'src/constants/swagger';
 import { SynologyGuard } from './synology.guard';
 import {
   SynologyProxyDeleteSongInfoBodyDto,
@@ -39,13 +42,10 @@ export class SynologyProxyController {
     summary: 'Proxies SHOUTcast radio streams',
     description: [
       `Creates and terminates a basic HTTP proxy to a SHOUTcast radio stream.`,
-      AUTHENTICATED_REQUEST_DESCRIPTION,
+      SYNOLOGY_AUTHENTICATED_REQUEST_DESCRIPTION,
     ].join('\n\n'),
   })
-  @ApiHeader({
-    name: 'cookie',
-    description: 'The session ID and device ID cookies for the user `id={sessionId}; did={deviceId}`',
-  })
+  @ApiHeader(SYNOLOGY_COOKIE_HEADER)
   @ApiOkResponse({
     description: 'Proxies a SHOUTcast radio stream',
     schema: {

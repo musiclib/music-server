@@ -1,4 +1,10 @@
-import { ADMIN_APIS, JWT_TOKEN } from 'src/constants/swagger';
+import {
+  ADMINISTRATOR_ONLY_ROUTE,
+  ADMIN_APIS,
+  JWT_AUTHENTICATED_REQUEST_DESCRIPTION,
+  JWT_TOKEN,
+  JWT_TOKEN_HEADER,
+} from 'src/constants/swagger';
 import {
   AdminDeleteRootPathNotFoundResponseDto,
   AdminDeleteRootPathQueryDto,
@@ -22,17 +28,16 @@ export class AdminDeleteRootPathController {
   @Delete('delete-root-path')
   @ApiOperation({
     summary: 'Delete a root path',
-    description:
-      // eslint-disable-next-line max-len
-      'Deletes the specified root path.  This will delete all associated information in the database immediately, the songs and folders will no longer be present in their data.  This will not affect any files on the file system.',
+    description: [
+      'Deletes the specified root path for a user and immediately deletes all associated information in the database.',
+      `This will not affect any files on the file system but they will no longer be present in the user's library.`,
+      JWT_AUTHENTICATED_REQUEST_DESCRIPTION,
+      ADMINISTRATOR_ONLY_ROUTE,
+    ].join('\n'),
   })
   @AllowedRoles([UserRoleEnum.ADMIN])
   @ApiBearerAuth(JWT_TOKEN)
-  @ApiHeader({
-    name: 'Authorization',
-    description: 'Bearer token for authentication',
-    required: true,
-  })
+  @ApiHeader(JWT_TOKEN_HEADER)
   @ApiOkResponse({
     description: 'Root path deleted successfully',
     type: AdminDeleteRootPathResponseDto,

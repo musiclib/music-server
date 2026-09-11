@@ -1,6 +1,6 @@
 import { ApiOkResponse, ApiOperation, ApiProduces, ApiTags } from '@nestjs/swagger';
+import { BINARY_RESPONSE, GUEST_APIS, IMAGE_MIME_TYPES } from 'src/constants/swagger';
 import { Controller, Get, Query, Req, Res, StreamableFile } from '@nestjs/common';
-import { GUEST_APIS } from 'src/constants/swagger';
 import { GuestGenreCoverQueryDto } from './genre-cover.dto';
 import { GuestGenreCoverService } from './genre-cover.service';
 import { join } from 'node:path';
@@ -23,13 +23,8 @@ export class GuestGenreCoverController {
     summary: 'Retrieves cover images for genres',
     description: ['This endpoint returns a placeholder image for all genres.'].join('\n'),
   })
-  @ApiProduces('image/jpeg', 'image/png', 'image/webp')
-  @ApiOkResponse({
-    schema: {
-      type: 'string',
-      format: 'binary',
-    },
-  })
+  @ApiProduces(...IMAGE_MIME_TYPES)
+  @ApiOkResponse(BINARY_RESPONSE)
   async get(
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     @Query() query: GuestGenreCoverQueryDto,

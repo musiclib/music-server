@@ -2,7 +2,15 @@ import { AccountEntity } from 'src/database/entities';
 import { AllowedRoles, RoleGuard } from 'src/api/role.guard';
 import { ApiBadRequestResponse, ApiBearerAuth, ApiHeader, ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { Controller, Get, Query, UseGuards } from '@nestjs/common';
-import { JWT_TOKEN, USER_APIS } from 'src/constants/swagger';
+import {
+  FILTERED_DATA_DESCRIPTION,
+  JWT_AUTHENTICATED_REQUEST_DESCRIPTION,
+  JWT_TOKEN,
+  JWT_TOKEN_HEADER,
+  PAGINATED_DATA_DESCRIPTION,
+  TRACK_INFORMATION_EXCLUDED,
+  USER_APIS,
+} from 'src/constants/swagger';
 import { User } from 'src/api/user.decorator';
 import {
   UserListAlbumsBadRequestResponseDto,
@@ -23,21 +31,23 @@ export class UserListAlbumsController {
   @Get('list-albums')
   @ApiOperation({
     summary: 'List albums',
-    description: `Retrieves a list of albums for the user based on the provided query parameters.`,
+    description: [
+      `Albums can be filtered by an extensive set of criteria and search terms.`,
+      FILTERED_DATA_DESCRIPTION,
+      TRACK_INFORMATION_EXCLUDED,
+      PAGINATED_DATA_DESCRIPTION,
+      JWT_AUTHENTICATED_REQUEST_DESCRIPTION,
+    ].join('\n'),
   })
   @AllowedRoles([UserRoleEnum.USER, UserRoleEnum.ADMIN])
   @ApiBearerAuth(JWT_TOKEN)
-  @ApiHeader({
-    name: 'Authorization',
-    description: 'Bearer token for authentication',
-    required: true,
-  })
+  @ApiHeader(JWT_TOKEN_HEADER)
   @ApiOkResponse({
-    description: 'Successfully retrieved the list of albums for the user.',
+    description: 'Successful response with an array of data and pagination information.',
     type: UserListAlbumsResponseDto,
   })
   @ApiBadRequestResponse({
-    description: 'The request was invalid or missing required parameters.',
+    description: 'Failure response with error information relating to missing or invalid parameters.',
     type: UserListAlbumsBadRequestResponseDto,
   })
   async get(@User() user: AccountEntity, @Query() query: UserListAlbumsQueryDto): Promise<UserListAlbumsResponseDto> {

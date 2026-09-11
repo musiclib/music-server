@@ -2,7 +2,7 @@ import { AccountEntity } from 'src/database/entities';
 import { AllowedRoles, RoleGuard } from 'src/api/role.guard';
 import { ApiBearerAuth, ApiHeader, ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { Controller, Get, Scope, UseGuards } from '@nestjs/common';
-import { JWT_TOKEN, USER_APIS } from 'src/constants/swagger';
+import { JWT_AUTHENTICATED_REQUEST_DESCRIPTION, JWT_TOKEN, JWT_TOKEN_HEADER, USER_APIS } from 'src/constants/swagger';
 import { User } from 'src/api/user.decorator';
 import { UserListRootPathsResponseDto } from './list-root-paths.dto';
 import { UserListRootPathsService } from './list-root-paths.service';
@@ -19,16 +19,17 @@ export class UserListRootPathsController {
 
   @Get('list-root-paths')
   @ApiOperation({
-    summary: 'List all root paths',
-    description: 'Retrieves a list of all root paths in the system.',
+    summary: `List all sources of music for the user's account`,
+    description: [
+      `Retrieves a list of all root paths associated with the user's account, eg \`/home/<username>/music\`.',
+      'These paths are indexed periodically or when files are changed to build the music library.`,
+      'The indexer works from a single queue so the more root paths the longer the delay between scanning.',
+      JWT_AUTHENTICATED_REQUEST_DESCRIPTION,
+    ].join('\n'),
   })
   @AllowedRoles([UserRoleEnum.USER, UserRoleEnum.ADMIN])
   @ApiBearerAuth(JWT_TOKEN)
-  @ApiHeader({
-    name: 'Authorization',
-    description: 'Bearer token for authentication',
-    required: true,
-  })
+  @ApiHeader(JWT_TOKEN_HEADER)
   @ApiOkResponse({
     type: UserListRootPathsResponseDto,
   })

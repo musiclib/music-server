@@ -86,14 +86,17 @@ async function bootstrap() {
         [
           'API documentation for building your own audio client on Music Server.',
           // eslint-disable-next-line max-len
-          'This API consists of "Standard API" with User, Admin and Guest APIs that allow you to manage your music library and user interactions.  These APIs return JSON (except serving image/audio files) and have their successful and erroneous responses defined.  Each endpoint serves one purpose and has one response format so typed OpenAPI clients won\'t need any typing hints.\n',
-          'The Synology and QNAP APIs are documented here to share learnings, you should not build on them.',
+          'This API consists of "Standard API" with User, Admin and Guest APIs that allow you to manage your music library and user accounts.  These APIs return JSON except where serving image/audio files and each have their successful and erroneous responses defined.\n',
+          'Each endpoint has a single input and response format and URL structure describing its functionality.',
+          'Endpoints map directly to source code, eg `/api/user/list-albums` is found in `/src/api/user/list-albums`.',
+          '\nThe Synology and QNAP APIs are documented here to share learnings, you should not build on them.',
         ].join('\n '),
       )
-      .setExternalDoc('Online link to this information', 'https://musiclib.github.io/music-server')
-      .addTag(GUEST_APIS, 'APIs for guests to sign in or any other unauthenticated actions.')
-      .addTag(USER_APIS, 'WebUI APIs for users to create and manage their collections and other data.')
-      .addTag(ADMIN_APIS, 'WebUI APIs for administrators to manage the platform and its users.')
+      .setExternalDoc('View documentation online', 'https://musiclib.github.io/music-server')
+      .setLicense('Source code repository', 'https://github.com/musiclib/music-server')
+      .addTag(GUEST_APIS, 'Standard APIs for guests to sign in or any other unauthenticated actions.')
+      .addTag(USER_APIS, 'Standard APIs for users to create and manage their collections and other data.')
+      .addTag(ADMIN_APIS, 'Standard APIs for administrators to manage the platform and its users.')
       .addTag(
         SYNOLOGY_AUDIOSTATION_APIS,
         'Compatibility layer emulating Synology AudioStation, for Synology DS Audio smartphone apps.',

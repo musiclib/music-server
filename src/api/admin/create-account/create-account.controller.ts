@@ -1,4 +1,10 @@
-import { ADMIN_APIS, JWT_TOKEN } from 'src/constants/swagger';
+import {
+  ADMINISTRATOR_ONLY_ROUTE,
+  ADMIN_APIS,
+  JWT_AUTHENTICATED_REQUEST_DESCRIPTION,
+  JWT_TOKEN,
+  JWT_TOKEN_HEADER,
+} from 'src/constants/swagger';
 import {
   AdminCreateAccountBadRequestResponseDto,
   AdminCreateAccountBodyDto,
@@ -29,15 +35,15 @@ export class AdminCreateAccountController {
   @Post('create-account')
   @ApiOperation({
     summary: 'Create a new account',
-    description: 'Creates a new account with the specified roles.',
+    description: [
+      'Add a user account with the specified roles.',
+      JWT_AUTHENTICATED_REQUEST_DESCRIPTION,
+      ADMINISTRATOR_ONLY_ROUTE,
+    ].join('\n'),
   })
   @AllowedRoles([UserRoleEnum.ADMIN])
   @ApiBearerAuth(JWT_TOKEN)
-  @ApiHeader({
-    name: 'Authorization',
-    description: 'Bearer token for authentication',
-    required: true,
-  })
+  @ApiHeader(JWT_TOKEN_HEADER)
   @ApiCreatedResponse({
     type: AdminCreateAccountResponseDto,
   })

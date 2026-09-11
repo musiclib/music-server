@@ -1,8 +1,7 @@
-import { AUTHENTICATED_REQUEST_DESCRIPTION } from './consts';
 import { AllowGuest } from '../role.guard';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import { Controller, HttpCode, HttpStatus, Logger, Post, UseGuards } from '@nestjs/common';
-import { SYNOLOGY_AUDIOSTATION_APIS } from 'src/constants/swagger';
+import { SYNOLOGY_AUDIOSTATION_APIS, SYNOLOGY_AUTHENTICATED_REQUEST_DESCRIPTION } from 'src/constants/swagger';
 import { SynologyGuard } from './synology.guard';
 import { SynologyQueryService } from './query.service';
 
@@ -25,7 +24,7 @@ export class SynologyQueryController {
     summary: 'Returns information about the Synology AudioStation API',
     description: [
       `Provides information to Synology DS Audio apps about the server and its capabilities.`,
-      AUTHENTICATED_REQUEST_DESCRIPTION,
+      SYNOLOGY_AUTHENTICATED_REQUEST_DESCRIPTION,
     ].join('\n\n'),
   })
   @AllowGuest()

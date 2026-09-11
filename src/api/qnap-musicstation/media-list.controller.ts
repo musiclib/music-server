@@ -12,7 +12,7 @@ import {
   getSchemaPath,
 } from '@nestjs/swagger';
 import { Body, Controller, Header, HttpCode, HttpStatus, Post, Query, UseGuards } from '@nestjs/common';
-import { QNAP_MUSICSTATION_APIS } from 'src/constants/swagger';
+import { QNAP_AUTHENTICATED_REQUEST_DESCRIPTION, QNAP_MUSICSTATION_APIS, XML_MIME_TYPE } from 'src/constants/swagger';
 import { QnapGuard } from './qnap.guard';
 import {
   QnapMediaListAlbumsResponseDto,
@@ -47,9 +47,16 @@ export class QnapMediaListController {
   @Post('medialist_api.php')
   @AllowedRoles([UserRoleEnum.USER, UserRoleEnum.ADMIN])
   @HttpCode(HttpStatus.OK)
-  @ApiProduces('text/xml')
-  @Header('Content-Type', 'text/xml')
-  @ApiOperation({ summary: 'Handle QNAP Music Station media-list API requests' })
+  @Header('Content-Type', XML_MIME_TYPE)
+  @ApiProduces(XML_MIME_TYPE)
+  @ApiOperation({
+    summary: 'Handle QNAP Music Station media-list API requests',
+    description: [
+      'Returns albums, songs, genres, folders, artist lists and random artist/album lists.',
+      'The response format varies based on what is being requested.',
+      QNAP_AUTHENTICATED_REQUEST_DESCRIPTION,
+    ].join('\n'),
+  })
   @ApiOkResponse({
     description: 'List of songs, artists, albums, genres, folders, or tracks',
     content: {
@@ -103,7 +110,6 @@ export class QnapMediaListController {
       ...variousQueries,
       ...variousBodies,
     };
-    console.log('medialist', 'query', variousQueries, 'body', variousBodies, 'data', data);
     if (data.act === 'random') {
       const query = plainToInstance(QnapMediaListRandomQueryDto, data, {
         enableImplicitConversion: true,
@@ -196,12 +202,10 @@ export class QnapMediaListController {
         // Route #9:  list folders
         if (query.linkid) {
           const folderList = await this.mediaListApiService.listFolders(user.id, query.linkid);
-          console.log('nested folders', query.linkid, folderList.datas.data);
           return objectToXml({ status: 1, ...folderList }, 'QDocRoot version="1.0"', 'QDocRoot');
         }
         // Route #10:  list root folders
         const folderList = await this.mediaListApiService.listRootFolders(user.id);
-        console.log('folders', folderList);
         return objectToXml({ status: 1, ...folderList }, 'QDocRoot version="1.0"', 'QDocRoot');
       }
     }

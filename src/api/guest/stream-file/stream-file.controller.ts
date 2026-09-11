@@ -1,6 +1,6 @@
-import { ApiNotFoundResponse, ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
+import { AUDIO_MIME_TYPES, BINARY_RESPONSE, GUEST_APIS } from 'src/constants/swagger';
+import { ApiNotFoundResponse, ApiOkResponse, ApiOperation, ApiProduces, ApiTags } from '@nestjs/swagger';
 import { Controller, Get, Query, Req, Res, StreamableFile } from '@nestjs/common';
-import { GUEST_APIS } from 'src/constants/swagger';
 import { GuestStreamFileNotFoundResponseDto, GuestStreamFileQueryDto } from './stream-file.dto';
 import { GuestStreamFileService } from './stream-file.service';
 import { getAudioContentType } from 'src/utils/strings';
@@ -25,16 +25,12 @@ export class GuestStreamFileController {
       `Downloads audio files from the music library to the client.  This is used to stream audio files for playback or to download for offline usage.  The audio files are streamed in their original format and the client is responsible for decoding and playing the audio.`,
     ].join('\n\n'),
   })
-  @ApiOkResponse({
-    schema: {
-      type: 'string',
-      format: 'binary',
-    },
-  })
+  @ApiOkResponse(BINARY_RESPONSE)
   @ApiNotFoundResponse({
     description: 'The requested file was not found',
     type: GuestStreamFileNotFoundResponseDto,
   })
+  @ApiProduces(...AUDIO_MIME_TYPES)
   async get(
     @Query() query: GuestStreamFileQueryDto,
     @Req() request: Request,

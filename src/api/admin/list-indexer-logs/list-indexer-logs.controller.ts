@@ -1,4 +1,10 @@
-import { ADMIN_APIS, JWT_TOKEN } from 'src/constants/swagger';
+import {
+  ADMINISTRATOR_ONLY_ROUTE,
+  ADMIN_APIS,
+  JWT_AUTHENTICATED_REQUEST_DESCRIPTION,
+  JWT_TOKEN,
+  JWT_TOKEN_HEADER,
+} from 'src/constants/swagger';
 import {
   AdminListIndexerLogsBadRequestResponseDto,
   AdminListIndexerLogsNotFoundResponseDto,
@@ -29,18 +35,18 @@ export class AdminListIndexerLogsController {
 
   @Get('list-indexer-logs')
   @ApiOperation({
-    summary: 'List indexer logs',
-    description:
-      // eslint-disable-next-line max-len
-      'Retrieves a list of indexer logs based on the provided query parameters which may filter by user or root path or search term.  The logs are only held in memory and will disappear when the server restarts or to stay within the log size specified in the `system_configurations` table.',
+    summary: 'Monitor what the indexer is doing for all libraries',
+    description: [
+      'Retrieves the most recent indexer logs based on any provided query parameters.',
+      `Logs are held in memory and will clear whenever the server restarts.`,
+      'The oldest logs will discard as they accumulate beyond the capacity in the `system_configurations` table.',
+      JWT_AUTHENTICATED_REQUEST_DESCRIPTION,
+      ADMINISTRATOR_ONLY_ROUTE,
+    ].join('\n'),
   })
   @AllowedRoles([UserRoleEnum.ADMIN])
   @ApiBearerAuth(JWT_TOKEN)
-  @ApiHeader({
-    name: 'Authorization',
-    description: 'Bearer token for authentication',
-    required: true,
-  })
+  @ApiHeader(JWT_TOKEN_HEADER)
   @ApiOkResponse({
     type: AdminListIndexerLogsResponseDto,
   })

@@ -1,4 +1,10 @@
-import { ADMIN_APIS, JWT_TOKEN } from 'src/constants/swagger';
+import {
+  ADMINISTRATOR_ONLY_ROUTE,
+  ADMIN_APIS,
+  JWT_AUTHENTICATED_REQUEST_DESCRIPTION,
+  JWT_TOKEN,
+  JWT_TOKEN_HEADER,
+} from 'src/constants/swagger';
 import { AdminIndexerConfigurationResponseDto } from './indexer-configuration.dto';
 import { AdminIndexerConfigurationService } from './indexer-configuration.service';
 import { AllowedRoles, RoleGuard } from 'src/api/role.guard';
@@ -18,15 +24,15 @@ export class AdminIndexerConfigurationController {
   @Get('/indexer-configuration')
   @ApiOperation({
     summary: 'Get the indexer configuration',
-    description: 'Retrieves the current indexer configuration for the platform.',
+    description: [
+      'Retrieves the current indexer configuration for the platform.  This is currently limited to "on" or "off".',
+      JWT_AUTHENTICATED_REQUEST_DESCRIPTION,
+      ADMINISTRATOR_ONLY_ROUTE,
+    ].join('\n'),
   })
   @AllowedRoles([UserRoleEnum.ADMIN])
   @ApiBearerAuth(JWT_TOKEN)
-  @ApiHeader({
-    name: 'Authorization',
-    description: 'Bearer token for authentication',
-    required: true,
-  })
+  @ApiHeader(JWT_TOKEN_HEADER)
   @ApiOkResponse({
     type: AdminIndexerConfigurationResponseDto,
   })

@@ -1,6 +1,6 @@
 import { ApiOkResponse, ApiOperation, ApiProduces, ApiTags } from '@nestjs/swagger';
+import { BINARY_RESPONSE, GUEST_APIS, IMAGE_MIME_TYPES } from 'src/constants/swagger';
 import { Controller, Get, Query, Req, Res, StreamableFile } from '@nestjs/common';
-import { GUEST_APIS } from 'src/constants/swagger';
 import { GuestComposerCoverQueryDto } from './composer-cover.dto';
 import { GuestComposerCoverService } from './composer-cover.service';
 import { join } from 'node:path';
@@ -28,13 +28,8 @@ export class GuestComposerCoverController {
       'The response supports Etag caching to optimize browser performance.',
     ].join('\n'),
   })
-  @ApiProduces('image/jpeg', 'image/png', 'image/webp')
-  @ApiOkResponse({
-    schema: {
-      type: 'string',
-      format: 'binary',
-    },
-  })
+  @ApiProduces(...IMAGE_MIME_TYPES)
+  @ApiOkResponse(BINARY_RESPONSE)
   async get(
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     @Query() query: GuestComposerCoverQueryDto,
