@@ -5,18 +5,34 @@ import xml2js from 'xml2js';
 
 const xmlInterceptor: Middleware = {
   async onResponse({ response }) {
-    const { body, ...resOptions } = response;
-    const bodyData = await body?.getReader().read();
-    const bodyText = bodyData ? new TextDecoder('utf-8').decode(bodyData.value) : '';
-    if (bodyText.startsWith('<?xml')) {
-      const parsedBody = bodyText ? await xml2js.parseStringPromise(bodyText, { explicitArray: false }) : null;
-      // single-item responses are parsed as objects
-      if (parsedBody?.QDocRoot?.datas?.data && !Array.isArray(parsedBody.QDocRoot.datas.data)) {
-        parsedBody.QDocRoot.datas.data = [parsedBody.QDocRoot.datas.data];
-      }
-      return new Response(parsedBody ? JSON.stringify(parsedBody.QDocRoot) : body, { ...resOptions, status: 200 });
+    if (!response.body) {
+      return response;
     }
-    return new Response(bodyText, { ...resOptions, status: 200 });
+    const bodyBuffer = await response.arrayBuffer();
+    const bodyText = new TextDecoder('utf-8').decode(bodyBuffer);
+    const isXml = /^\uFEFF?\s*<\?xml\b/i.test(bodyText);
+    if (!isXml) {
+      return new Response(bodyBuffer, {
+        status: response.status,
+        statusText: response.statusText,
+        headers: response.headers,
+      });
+    }
+    const parsedBody = await xml2js.parseStringPromise(bodyText, {
+      explicitArray: false,
+    });
+    // Single-item responses are parsed as objects.
+    if (parsedBody?.QDocRoot?.datas?.data && !Array.isArray(parsedBody.QDocRoot.datas.data)) {
+      parsedBody.QDocRoot.datas.data = [parsedBody.QDocRoot.datas.data];
+    }
+    const jsonBody = parsedBody?.QDocRoot ? JSON.stringify(parsedBody.QDocRoot) : '';
+    const headers = new Headers(response.headers);
+    headers.set('content-type', 'application/json');
+    return new Response(jsonBody, {
+      status: response.status,
+      statusText: response.statusText,
+      headers,
+    });
   },
   async onError({ error }) {
     // wrap errors thrown by fetch
