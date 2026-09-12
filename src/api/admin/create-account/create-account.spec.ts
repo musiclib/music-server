@@ -12,7 +12,7 @@ describe('/api/admin/create-account', () => {
   });
 
   afterAll(async () => {
-    await adminApi.deleteTestData(deleteAccounts);
+    await adminApi.deleteTestAccounts(deleteAccounts);
   });
 
   describe('authorized access', () => {

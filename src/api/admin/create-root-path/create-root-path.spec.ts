@@ -14,7 +14,7 @@ describe('/api/admin/create-root-path', () => {
   });
 
   afterAll(async () => {
-    await adminApi.deleteTestData(deleteAccounts);
+    await adminApi.deleteTestAccounts(deleteAccounts);
   });
 
   describe('authorized access', () => {
