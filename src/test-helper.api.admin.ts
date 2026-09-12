@@ -41,8 +41,12 @@ async function createRootPath(params: RequestParams, accountId: number, rootPath
   });
 }
 
-async function deleteAccount(params: RequestParams, accountId: number) {
-  return api.DELETE(`/api/admin/delete-account`, {
+async function deleteAccount(params: RequestParams, adminPassword: string, accountId: number) {
+  // @ts-expect-error foo
+  return api.PATCH(`/api/admin/delete-account`, {
+    body: {
+      adminPassword,
+    },
     params: {
       ...params,
       query: {
@@ -180,7 +184,7 @@ export type AdminApi = {
   }>;
   // api
   createRootPath: (accountId: number, rootPath: string) => ReturnType<typeof createRootPath>;
-  deleteAccount: (accountId: number) => ReturnType<typeof deleteAccount>;
+  deleteAccount: (adminPassword: string, accountId: number) => ReturnType<typeof deleteAccount>;
   deleteRootPath: (rootPathId: number) => ReturnType<typeof deleteRootPath>;
   getIndexerConfiguration: () => ReturnType<typeof getIndexerConfiguration>;
   listAccounts: () => ReturnType<typeof listAccounts>;
@@ -231,8 +235,8 @@ export async function createAdminApi(username?: string, password?: string): Prom
     async createRootPath(accountId: number, rootPath: string) {
       return createRootPath(params, accountId, rootPath);
     },
-    async deleteAccount(accountId: number) {
-      return deleteAccount(params, accountId);
+    async deleteAccount(adminPassword: string, accountId: number) {
+      return deleteAccount(params, adminPassword, accountId);
     },
     async deleteRootPath(rootPathId: number) {
       return deleteRootPath(params, rootPathId);
@@ -292,7 +296,7 @@ export async function createAdminApi(username?: string, password?: string): Prom
         const accountId = accountIds[i];
         if (accountId) {
           // eslint-disable-next-line no-await-in-loop
-          await adminApis.deleteAccount(accountId);
+          await adminApis.deleteAccount(ownPassword, accountId);
         }
       }
     },

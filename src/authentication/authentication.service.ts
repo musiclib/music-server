@@ -154,6 +154,12 @@ export class AuthenticationService {
     return bcrypt.hashSync(token, 10);
   }
 
+  // eslint-disable-next-line class-methods-use-this
+  async generatePasswordHash(password: string): Promise<string> {
+    const salt = await bcrypt.genSalt(10);
+    return bcrypt.hash(password, salt);
+  }
+
   /**
    * Hashes a new session token from the session information and account session key and password hash.  This token
    * becomes part of the JWT session information and is used to verify that the session is valid and has not been
@@ -213,6 +219,11 @@ export class AuthenticationService {
     const accountSessionKey = await this.getAccountSessionKey(accountId);
     const token = this.generateDeviceToken(sessionMasterKey, accountSessionKey, userAgent);
     return bcrypt.compareSync(token, deviceToken);
+  }
+
+  async verifyPassword(accountId: number, password: string): Promise<boolean> {
+    const account = await this.getAccount(accountId);
+    return bcrypt.compareSync(password, account.passwordHash);
   }
 
   /**

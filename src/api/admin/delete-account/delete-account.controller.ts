@@ -8,6 +8,7 @@ import {
 import { AccountEntity } from 'src/database/entities';
 import {
   AdminDeleteAccountBadRequestResponseDto,
+  AdminDeleteAccountBodyDto,
   AdminDeleteAccountNotFoundResponseDto,
   AdminDeleteAccountQueryDto,
   AdminDeleteAccountResponseDto,
@@ -23,7 +24,7 @@ import {
   ApiOperation,
   ApiTags,
 } from '@nestjs/swagger';
-import { Controller, Delete, Query, UseGuards } from '@nestjs/common';
+import { Body, Controller, Patch, Query, UseGuards } from '@nestjs/common';
 import { User } from 'src/api/user.decorator';
 import { UserRoleEnum } from 'src/types/enums';
 
@@ -35,7 +36,7 @@ import { UserRoleEnum } from 'src/types/enums';
 export class AdminDeleteAccountController {
   constructor(private readonly deleteAccountService: AdminDeleteAccountService) {}
 
-  @Delete('delete-account')
+  @Patch('delete-account')
   @ApiOperation({
     summary: 'Delete an account',
     description: [
@@ -62,8 +63,9 @@ export class AdminDeleteAccountController {
   async delete(
     @User() user: AccountEntity,
     @Query() query: AdminDeleteAccountQueryDto,
+    @Body() body: AdminDeleteAccountBodyDto,
   ): Promise<AdminDeleteAccountResponseDto> {
-    await this.deleteAccountService.deleteAccount(user.id, query.id);
+    await this.deleteAccountService.deleteAccount(user.id, body.adminPassword, query.id);
     return {
       success: true,
     };

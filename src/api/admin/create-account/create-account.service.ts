@@ -1,5 +1,5 @@
-import * as bcrypt from 'bcryptjs';
 import { AccountEntity } from 'src/database/entities';
+import { AuthenticationService } from 'src/authentication/authentication.service';
 import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { ErrorCodes } from 'src/constants/error-codes';
 import { Guid } from 'typescript-guid';
@@ -11,6 +11,7 @@ export class AdminCreateAccountService {
   constructor(
     @InjectModel(AccountEntity)
     private readonly accountEntity: typeof AccountEntity,
+    private readonly authenticationService: AuthenticationService,
   ) {}
 
   async post(
@@ -21,11 +22,7 @@ export class AdminCreateAccountService {
     roles: UserRoleEnum[],
   ): Promise<void> {
     // verify own password
-    const adminAccount = await this.accountEntity.findByPk(adminAccountId);
-    if (!adminAccount) {
-      throw new NotFoundException(ErrorCodes.ACCOUNT_NOT_FOUND_ERROR);
-    }
-    const isAdminPasswordValid = await bcrypt.compare(adminPassword, adminAccount.passwordHash);
+    const isAdminPasswordValid = await this.authenticationService.verifyPassword(adminAccountId, adminPassword);
     if (!isAdminPasswordValid) {
       throw new NotFoundException(ErrorCodes.INVALID_PASSWORD_ERROR);
     }
@@ -44,8 +41,7 @@ export class AdminCreateAccountService {
       throw new BadRequestException(ErrorCodes.INVALID_USERNAME_NOT_UNIQUE_ERROR);
     }
     // create account
-    const salt = await bcrypt.genSalt(10);
-    const passwordHash = await bcrypt.hash(password, salt);
+    const passwordHash = await this.authenticationService.generatePasswordHash(password);
     await this.accountEntity.create({
       username,
       passwordHash,

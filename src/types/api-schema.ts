@@ -62,6 +62,9 @@ export type paths = {
     get?: never;
     put?: never;
     post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
     /**
      * Delete an account
      * @description Deletes the specified account.  If it is the only admin account a new one account must be created first.
@@ -70,10 +73,7 @@ export type paths = {
      *
      *     Only administrator users can access this route.  An administrator can assign this role to an account in the system settings.
      */
-    delete: operations['AdminDeleteAccountController_delete'];
-    options?: never;
-    head?: never;
-    patch?: never;
+    patch: operations['AdminDeleteAccountController_delete'];
     trace?: never;
   };
   '/api/admin/delete-root-path': {
@@ -1715,6 +1715,10 @@ export type components = {
        * @default false
        */
       success: boolean;
+    };
+    AdminDeleteAccountBodyDto: {
+      /** @description The administrator's password to authorize the change */
+      adminPassword: string;
     };
     /**
      * @description The error message(s) that occurred during the validation of the request data or additional requirements
@@ -7027,7 +7031,11 @@ export interface operations {
       path?: never;
       cookie?: never;
     };
-    requestBody?: never;
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['AdminDeleteAccountBodyDto'];
+      };
+    };
     responses: {
       /** @description Account deleted successfully */
       200: {
@@ -9503,6 +9511,8 @@ export enum AdminDeleteAccountBadRequestErrorMessageEnum {
   invalid_account_id_error = 'invalid-account-id-error',
   invalid_account_error = 'invalid-account-error',
   account_only_admin_error = 'account-only-admin-error',
+  invalid_password_error = 'invalid-password-error',
+  invalid_password_length_error = 'invalid-password-length-error',
 }
 export enum AdminDeleteAccountNotFoundErrorMessageEnum {
   invalid_account_id_error = 'invalid-account-id-error',

@@ -1,15 +1,16 @@
 import { AccountEntity } from 'src/database/entities';
+import { AuthenticationService } from 'src/authentication/authentication.service';
 import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { ErrorCodes } from 'src/constants/error-codes';
 import { InjectModel } from '@nestjs/sequelize';
 import { UserRoleEnum } from 'src/types/enums';
-import bcrypt from 'bcryptjs';
 
 @Injectable()
 export class AdminUpdateUserRolesService {
   constructor(
     @InjectModel(AccountEntity)
     private readonly accountEntity: typeof AccountEntity,
+    private readonly authenticationService: AuthenticationService,
   ) {}
 
   async updateUserRoles(
@@ -19,11 +20,7 @@ export class AdminUpdateUserRolesService {
     roles: UserRoleEnum[],
   ): Promise<void> {
     // verify own password
-    const adminAccount = await this.accountEntity.findByPk(adminAccountId);
-    if (!adminAccount) {
-      throw new NotFoundException(ErrorCodes.ACCOUNT_NOT_FOUND_ERROR);
-    }
-    const isAdminPasswordValid = await bcrypt.compare(adminPassword, adminAccount.passwordHash);
+    const isAdminPasswordValid = await this.authenticationService.verifyPassword(adminAccountId, adminPassword);
     if (!isAdminPasswordValid) {
       throw new BadRequestException(ErrorCodes.INVALID_PASSWORD_ERROR);
     }

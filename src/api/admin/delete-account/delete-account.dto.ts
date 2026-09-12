@@ -2,7 +2,7 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { BadRequestResponseDto, NotFoundResponseDto, SuccessResponseDto } from 'src/api/response.dto';
 import { ErrorCodes } from 'src/constants/error-codes';
-import { IsInt } from 'class-validator';
+import { IsInt, IsNotEmpty, IsString, Length } from 'class-validator';
 
 export class AdminDeleteAccountQueryDto {
   /**
@@ -10,6 +10,16 @@ export class AdminDeleteAccountQueryDto {
    */
   @IsInt({ message: ErrorCodes.INVALID_ACCOUNT_ID_ERROR })
   declare id: number;
+}
+
+export class AdminDeleteAccountBodyDto {
+  /**
+   * The administrator's password to authorize the change
+   */
+  @IsString({ message: ErrorCodes.INVALID_PASSWORD_ERROR })
+  @Length(1, 255, { message: ErrorCodes.INVALID_PASSWORD_LENGTH_ERROR })
+  @IsNotEmpty({ message: ErrorCodes.INVALID_PASSWORD_ERROR })
+  declare adminPassword: string;
 }
 
 export class AdminDeleteAccountResponseDto extends SuccessResponseDto {}
@@ -35,7 +45,13 @@ export class AdminDeleteAccountBadRequestResponseDto extends BadRequestResponseD
    */
   @ApiProperty({
     isArray: true,
-    enum: [ErrorCodes.INVALID_ACCOUNT_ID_ERROR, ErrorCodes.INVALID_ACCOUNT_ERROR, ErrorCodes.ACCOUNT_ONLY_ADMIN_ERROR],
+    enum: [
+      ErrorCodes.INVALID_ACCOUNT_ID_ERROR,
+      ErrorCodes.INVALID_ACCOUNT_ERROR,
+      ErrorCodes.ACCOUNT_ONLY_ADMIN_ERROR,
+      ErrorCodes.INVALID_PASSWORD_ERROR,
+      ErrorCodes.INVALID_PASSWORD_LENGTH_ERROR,
+    ],
     enumName: 'AdminDeleteAccountBadRequestErrorMessageEnum',
     default: ErrorCodes.INVALID_ACCOUNT_ID_ERROR,
   })
