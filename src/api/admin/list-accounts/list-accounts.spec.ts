@@ -1,9 +1,9 @@
-import { ADMIN_USERNAME, USER_PASSWORD, USER_USERNAME, api, createAdminApi } from '../../../test-helper';
+import { ADMIN_USERNAME, AdminApi, USER_PASSWORD, USER_USERNAME, api, createAdminApi } from '../../../test-helper';
 import { ErrorCodes } from '../../../constants/error-codes';
 import { beforeAll, describe, expect, it } from '@jest/globals';
 
 describe('/api/admin/list-accounts', () => {
-  let adminApi;
+  let adminApi: AdminApi;
 
   beforeAll(async () => {
     adminApi = await createAdminApi();

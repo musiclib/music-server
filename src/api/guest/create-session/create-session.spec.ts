@@ -1,10 +1,10 @@
+import { AdminApi, createAdminApi, guestApi } from '../../../test-helper';
 import { ErrorCodes } from '../../../constants/error-codes';
 import { afterAll, beforeAll, describe, expect, it } from '@jest/globals';
-import { createAdminApi, guestApi } from '../../../test-helper';
 
 describe('/api/guest/create-session', () => {
   const deleteAccounts: number[] = [];
-  let adminApi;
+  let adminApi: AdminApi;
 
   beforeAll(async () => {
     adminApi = await createAdminApi();

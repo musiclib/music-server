@@ -1,10 +1,10 @@
+import { AdminApi, USER_PASSWORD, USER_USERNAME, api, createAdminApi } from '../../../test-helper';
 import { ErrorCodes } from '../../../constants/error-codes';
-import { USER_PASSWORD, USER_USERNAME, api, createAdminApi } from '../../../test-helper';
 import { UserRoleEnum } from '../../../types/api-schema';
 import { beforeAll, describe, expect, it } from '@jest/globals';
 
 describe('/api/admin/delete-account', () => {
-  let adminApi;
+  let adminApi: AdminApi;
 
   beforeAll(async () => {
     adminApi = await createAdminApi();
@@ -57,7 +57,7 @@ describe('/api/admin/delete-account', () => {
       // delete it
       const { error, data } = await adminApi.deleteAccount(account.id);
       expect(error).toBeUndefined();
-      expect(data.success).toBe(true);
+      expect(data?.success).toBe(true);
       // verify it
       const users = await adminApi.listAccounts();
       const deletedAccount = users.data?.accounts.find((user) => user.username === account.username);
