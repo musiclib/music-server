@@ -54,6 +54,9 @@ export class FileCustomDataEntity extends Model<FileCustomDataEntity> {
   @ForeignKey(() => FileEntity)
   declare fileId: number;
 
+  @Column(DataType.STRING(1000))
+  declare genres: string;
+
   /**
    * The ID of the table row is an auto-incrementing integer that is assigned by the database when the row is created.
    */
