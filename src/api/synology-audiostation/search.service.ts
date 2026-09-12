@@ -7,10 +7,10 @@ import { replaceDoubleQuotes } from 'src/utils/strings';
 
 function albumToRow(album: LibraryAlbumDto): SynologySearchAlbumDto {
   return {
-    album_artist: replaceDoubleQuotes(album.artists.join(', ')),
-    display_artist: replaceDoubleQuotes(album.artists.join(', ')),
+    album_artist: replaceDoubleQuotes(album.artists.map((artist) => artist.name).join(', ')),
+    display_artist: replaceDoubleQuotes(album.artists.map((artist) => artist.name).join(', ')),
     name: replaceDoubleQuotes(album.title),
-    artist: replaceDoubleQuotes(album.artists.map((artist) => artist).join(', ') || ''),
+    artist: replaceDoubleQuotes(album.artists.map((artist) => artist.name).join(', ') || ''),
     year: album.year,
   };
 }
