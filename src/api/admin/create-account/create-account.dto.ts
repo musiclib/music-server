@@ -7,6 +7,14 @@ import { UserRoleEnum } from 'src/types/enums';
 
 export class AdminCreateAccountBodyDto {
   /**
+   * The administrator's password to authorize the change
+   */
+  @IsString({ message: ErrorCodes.INVALID_PASSWORD_ERROR })
+  @Length(1, 255, { message: ErrorCodes.INVALID_PASSWORD_LENGTH_ERROR })
+  @IsNotEmpty({ message: ErrorCodes.INVALID_PASSWORD_ERROR })
+  declare adminPassword: string;
+
+  /**
    * The username for signing in
    */
   @IsString()

@@ -9,9 +9,16 @@ type RequestParams = {
   };
 };
 
-async function createAccount(params: RequestParams, newUsername: string, newPassword: string, roles: UserRoleEnum[]) {
+async function createAccount(
+  params: RequestParams,
+  adminPassword: string,
+  newUsername: string,
+  newPassword: string,
+  roles: UserRoleEnum[],
+) {
   return api.POST(`/api/admin/create-account`, {
     body: {
+      adminPassword,
       username: newUsername,
       password: newPassword,
       roles,
@@ -97,9 +104,10 @@ async function regenerateUserSessionKey(params: RequestParams, accountId: number
   });
 }
 
-async function resetUserPassword(params: RequestParams, accountId: number, newPassword: string) {
+async function resetUserPassword(params: RequestParams, adminPassword: string, accountId: number, newPassword: string) {
   return api.POST(`/api/admin/reset-user-password`, {
     body: {
+      adminPassword,
       newPassword,
     },
     params: {
@@ -134,9 +142,10 @@ async function updateRootPath(params: RequestParams, rootPathId: number, newPath
   });
 }
 
-async function updateUserRoles(params: RequestParams, accountId: number, roles: UserRoleEnum[]) {
+async function updateUserRoles(params: RequestParams, accountId: number, adminPassword: string, roles: UserRoleEnum[]) {
   return api.PATCH(`/api/admin/update-user-roles`, {
     body: {
+      adminPassword,
       roles,
     },
     params: {
@@ -149,7 +158,27 @@ async function updateUserRoles(params: RequestParams, accountId: number, roles: 
 }
 
 export type AdminApi = {
-  createAccount: (newUsername: string, newPassword: string, roles: UserRoleEnum[]) => ReturnType<typeof createAccount>;
+  createAccount: (
+    adminPassword: string,
+    newUsername: string,
+    newPassword: string,
+    roles: UserRoleEnum[],
+  ) => ReturnType<typeof createAccount>;
+  // helpers
+  createTestAccount: (credentials?: { username?: string; password?: string; roles: UserRoleEnum[] }) => Promise<{
+    id: number;
+    username: string;
+    password: string;
+    roles: UserRoleEnum[];
+  }>;
+  deleteTestAccounts: (accountIds: number[]) => Promise<void>;
+  extraAdminsCleared: () => Promise<boolean>;
+  retrieveAccount: (accountUsername: string) => Promise<{
+    id: number;
+    username: string;
+    roles: UserRoleEnum[];
+  }>;
+  // api
   createRootPath: (accountId: number, rootPath: string) => ReturnType<typeof createRootPath>;
   deleteAccount: (accountId: number) => ReturnType<typeof deleteAccount>;
   deleteRootPath: (rootPathId: number) => ReturnType<typeof deleteRootPath>;
@@ -159,10 +188,18 @@ export type AdminApi = {
   listRootPaths: () => ReturnType<typeof listRootPaths>;
   regenerateMasterSessionKey: () => ReturnType<typeof regenerateMasterSessionKey>;
   regenerateUserSessionKey: (accountId: number) => ReturnType<typeof regenerateUserSessionKey>;
-  resetUserPassword: (accountId: number, newPassword: string) => ReturnType<typeof resetUserPassword>;
+  resetUserPassword: (
+    accountId: number,
+    adminPassword: string,
+    newPassword: string,
+  ) => ReturnType<typeof resetUserPassword>;
   setIndexerStatus: (enabled: boolean) => ReturnType<typeof setIndexerStatus>;
   updateRootPath: (rootPathId: number, newPath: string) => ReturnType<typeof updateRootPath>;
-  updateUserRoles: (accountId: number, roles: UserRoleEnum[]) => ReturnType<typeof updateUserRoles>;
+  updateUserRoles: (
+    accountId: number,
+    adminPassword: string,
+    roles: UserRoleEnum[],
+  ) => ReturnType<typeof updateUserRoles>;
 };
 
 /**
@@ -174,7 +211,9 @@ export type AdminApi = {
  * token of the provided credentials.
  */
 export async function createAdminApi(username?: string, password?: string): Promise<AdminApi> {
-  const session = await guestApi.createSession(username || ADMIN_USERNAME, password || ADMIN_PASSWORD);
+  const ownUsername = username || ADMIN_USERNAME;
+  const ownPassword = password || ADMIN_PASSWORD;
+  const session = await guestApi.createSession(ownUsername, ownPassword);
   expect(session.error).toBeUndefined();
   expect(session.data?.success).toBe(true);
   expect(session.data?.jwtToken).toBeDefined();
@@ -186,8 +225,8 @@ export async function createAdminApi(username?: string, password?: string): Prom
   };
 
   const adminApis = {
-    async createAccount(newUsername: string, newPassword: string, roles: UserRoleEnum[]) {
-      return createAccount(params, newUsername, newPassword, roles);
+    async createAccount(adminPassword: string, newUsername: string, newPassword: string, roles: UserRoleEnum[]) {
+      return createAccount(params, adminPassword, newUsername, newPassword, roles);
     },
     async createRootPath(accountId: number, rootPath: string) {
       return createRootPath(params, accountId, rootPath);
@@ -216,8 +255,8 @@ export async function createAdminApi(username?: string, password?: string): Prom
     async regenerateUserSessionKey(accountId: number) {
       return regenerateUserSessionKey(params, accountId);
     },
-    async resetUserPassword(accountId: number, newPassword: string) {
-      return resetUserPassword(params, accountId, newPassword);
+    async resetUserPassword(accountId: number, adminPassword: string, newPassword: string) {
+      return resetUserPassword(params, adminPassword, accountId, newPassword);
     },
     async setIndexerStatus(enabled: boolean) {
       return setIndexerStatus(params, enabled);
@@ -225,17 +264,17 @@ export async function createAdminApi(username?: string, password?: string): Prom
     async updateRootPath(rootPathId: number, newPath: string) {
       return updateRootPath(params, rootPathId, newPath);
     },
-    async updateUserRoles(accountId: number, roles: UserRoleEnum[]) {
-      return updateUserRoles(params, accountId, roles);
+    async updateUserRoles(accountId: number, adminPassword: string, roles: UserRoleEnum[]) {
+      return updateUserRoles(params, accountId, adminPassword, roles);
     },
   };
 
-  const helpers = {
+  const helperApis = {
     async createTestAccount(credentials?: { username?: string; password?: string; roles: UserRoleEnum[] }) {
       const accountUsername = credentials?.username || `testuser-${Date.now()}`;
       const accountPassword = credentials?.password || `testpassword-${Date.now()}`;
       const accountRoles = credentials?.roles || [UserRoleEnum.user];
-      await adminApis.createAccount(accountUsername, accountPassword, accountRoles);
+      await adminApis.createAccount(ownPassword, accountUsername, accountPassword, accountRoles);
       const { data } = await adminApis.listAccounts();
       const account = data?.accounts.find((user) => user.username === accountUsername);
       if (!account) {
@@ -266,11 +305,23 @@ export async function createAdminApi(username?: string, password?: string): Prom
       await new Promise((resolve) => {
         setTimeout(resolve, 1000);
       });
-      return helpers.extraAdminsCleared();
+      return helperApis.extraAdminsCleared();
+    },
+    retrieveAccount: async (accountUsername: string) => {
+      const { data } = await adminApis.listAccounts();
+      const account = data?.accounts.find((user) => user.username === accountUsername);
+      if (!account) {
+        throw new Error('No account found');
+      }
+      return {
+        id: account.id,
+        username: accountUsername,
+        roles: account.roles,
+      };
     },
   };
   return {
     ...adminApis,
-    ...helpers,
+    ...helperApis,
   };
 }

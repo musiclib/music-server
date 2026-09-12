@@ -1625,6 +1625,8 @@ export type components = {
       success: boolean;
     };
     AdminCreateAccountBodyDto: {
+      /** @description The administrator's password to authorize the change */
+      adminPassword: string;
       /** @description The plain-text password the user will enter to sign in.  It will be hashed and securely-stored in the database. */
       password: string;
       roles: components['schemas']['UserRoleEnum'][];
@@ -1927,6 +1929,8 @@ export type components = {
       success: boolean;
     };
     AdminResetUserPasswordBodyDto: {
+      /** @description The administrator's password to authorize the change */
+      adminPassword: string;
       newPassword: string;
     };
     /**
@@ -2074,6 +2078,8 @@ export type components = {
       success: boolean;
     };
     AdminUpdateUserRolesBodyDto: {
+      /** @description The administrator's password to authorize the change */
+      adminPassword: string;
       roles: components['schemas']['UserRoleEnum'][];
     };
     /**
@@ -9520,6 +9526,8 @@ export enum AdminRegenerateUserSessionKeyNotFoundErrorMessageEnum {
 export enum AdminResetUserPasswordBadRequestErrorMessageEnum {
   invalid_password_error = 'invalid-password-error',
   invalid_password_length_error = 'invalid-password-length-error',
+  invalid_new_password_error = 'invalid-new-password-error',
+  invalid_new_password_length_error = 'invalid-new-password-length-error',
 }
 export enum AdminResetUserPasswordNotFoundErrorMessageEnum {
   account_not_found_error = 'account-not-found-error',

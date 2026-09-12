@@ -13,9 +13,17 @@ export class AdminResetUserPasswordQueryDto {
 }
 
 export class AdminResetUserPasswordBodyDto {
+  /**
+   * The administrator's password to authorize the change
+   */
   @IsString({ message: ErrorCodes.INVALID_PASSWORD_ERROR })
   @Length(1, 255, { message: ErrorCodes.INVALID_PASSWORD_LENGTH_ERROR })
   @IsNotEmpty({ message: ErrorCodes.INVALID_PASSWORD_ERROR })
+  declare adminPassword: string;
+
+  @IsString({ message: ErrorCodes.INVALID_NEW_PASSWORD_ERROR })
+  @Length(1, 255, { message: ErrorCodes.INVALID_NEW_PASSWORD_LENGTH_ERROR })
+  @IsNotEmpty({ message: ErrorCodes.INVALID_NEW_PASSWORD_ERROR })
   declare newPassword: string;
 }
 
@@ -42,7 +50,12 @@ export class AdminResetUserPasswordBadRequestResponseDto extends BadRequestRespo
    */
   @ApiProperty({
     isArray: true,
-    enum: [ErrorCodes.INVALID_PASSWORD_ERROR, ErrorCodes.INVALID_PASSWORD_LENGTH_ERROR],
+    enum: [
+      ErrorCodes.INVALID_PASSWORD_ERROR,
+      ErrorCodes.INVALID_PASSWORD_LENGTH_ERROR,
+      ErrorCodes.INVALID_NEW_PASSWORD_ERROR,
+      ErrorCodes.INVALID_NEW_PASSWORD_LENGTH_ERROR,
+    ],
     enumName: 'AdminResetUserPasswordBadRequestErrorMessageEnum',
     default: ErrorCodes.INVALID_PASSWORD_ERROR,
   })
