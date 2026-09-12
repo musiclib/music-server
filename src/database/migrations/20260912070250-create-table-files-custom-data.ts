@@ -13,7 +13,6 @@ export async function up(queryInterface: QueryInterface) {
       defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
     },
     disc_number: DataTypes.INTEGER,
-    duration: DataTypes.FLOAT,
     file_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
@@ -24,9 +23,10 @@ export async function up(queryInterface: QueryInterface) {
     },
     genres: DataTypes.STRING(1000),
     id: {
+      comment: 'This ID is not auto-generating, it must be set manually and should be the corresponding file ID.',
       type: DataTypes.INTEGER,
       primaryKey: true,
-      autoIncrement: true,
+      autoIncrement: false,
       allowNull: false,
     },
     title: DataTypes.STRING(255),

@@ -2,6 +2,7 @@
 import { GuestGenreCoverModule } from '../guest/genre-cover/genre-cover.module';
 import { Module } from '@nestjs/common';
 import { UserCreateRootPathModule } from './create-root-path/create-root-path.module';
+import { UserDeleteCustomFileDataModule } from './delete-custom-file-data/delete-custom-file-data.module';
 import { UserDeleteRootPathModule } from './delete-root-path/delete-root-path.module';
 import { UserEndSessionModule } from './end-session/end-session.module';
 import { UserFolderStructureModule } from './folder-structure/folder-structure.module';
@@ -20,11 +21,13 @@ import { UserListTrackGenresWithTracksModule } from './list-track-genres-with-tr
 import { UserListTracksModule } from './list-tracks/list-tracks.module';
 import { UserRegenerateSessionKeyModule } from './regenerate-session-key/regenerate-session-key.module';
 import { UserRetrieveAlbumModule } from './retrieve-album/retrieve-album.module';
+import { UserSetCustomFileDataModule } from './set-custom-file-data/set-custom-file-data.module';
 import { UserUpdatePasswordModule } from './update-password/update-password.module';
 
 @Module({
   imports: [
     UserCreateRootPathModule,
+    UserDeleteCustomFileDataModule,
     UserDeleteRootPathModule,
     UserEndSessionModule,
     UserFolderStructureModule,
@@ -44,6 +47,7 @@ import { UserUpdatePasswordModule } from './update-password/update-password.modu
     UserListTracksModule,
     UserRegenerateSessionKeyModule,
     UserRetrieveAlbumModule,
+    UserSetCustomFileDataModule,
     UserUpdatePasswordModule,
   ],
 })

@@ -15,7 +15,11 @@ export type paths = {
     put?: never;
     /**
      * Create a new account
-     * @description Creates a new account with the specified roles.
+     * @description Add a user account with the specified roles.
+     *
+     *     The request must include a valid JWT token for the user, which can be created by authenticating via the `/guest/create-session` endpoint.
+     *
+     *     Only administrator users can access this route.  An administrator can assign this role to an account in the system settings.
      */
     post: operations['AdminCreateAccountController_post'];
     delete?: never;
@@ -34,8 +38,12 @@ export type paths = {
     get?: never;
     put?: never;
     /**
-     * Create a new root path
-     * @description Creates a new root path for the specified account.
+     * Add new root path to account
+     * @description Add a library root path to an account.  This will add media in the path when the indexer reaches it.
+     *
+     *     The request must include a valid JWT token for the user, which can be created by authenticating via the `/guest/create-session` endpoint.
+     *
+     *     Only administrator users can access this route.  An administrator can assign this role to an account in the system settings.
      */
     post: operations['AdminCreateRootPathController_post'];
     delete?: never;
@@ -57,6 +65,10 @@ export type paths = {
     /**
      * Delete an account
      * @description Deletes the specified account.  If it is the only admin account a new one account must be created first.
+     *
+     *     The request must include a valid JWT token for the user, which can be created by authenticating via the `/guest/create-session` endpoint.
+     *
+     *     Only administrator users can access this route.  An administrator can assign this role to an account in the system settings.
      */
     delete: operations['AdminDeleteAccountController_delete'];
     options?: never;
@@ -76,7 +88,12 @@ export type paths = {
     post?: never;
     /**
      * Delete a root path
-     * @description Deletes the specified root path.  This will delete all associated information in the database immediately, the songs and folders will no longer be present in their data.  This will not affect any files on the file system.
+     * @description Deletes the specified root path for a user and immediately deletes all associated information in the database.
+     *     This will not affect any files on the file system but they will no longer be present in the user's library.
+     *
+     *     The request must include a valid JWT token for the user, which can be created by authenticating via the `/guest/create-session` endpoint.
+     *
+     *     Only administrator users can access this route.  An administrator can assign this role to an account in the system settings.
      */
     delete: operations['AdminDeleteRootPathController_delete'];
     options?: never;
@@ -93,7 +110,11 @@ export type paths = {
     };
     /**
      * Get the indexer configuration
-     * @description Retrieves the current indexer configuration for the platform.
+     * @description Retrieves the current indexer configuration for the platform.  This is currently limited to "on" or "off".
+     *
+     *     The request must include a valid JWT token for the user, which can be created by authenticating via the `/guest/create-session` endpoint.
+     *
+     *     Only administrator users can access this route.  An administrator can assign this role to an account in the system settings.
      */
     get: operations['AdminIndexerConfigurationController_get'];
     put?: never;
@@ -114,6 +135,10 @@ export type paths = {
     /**
      * List all accounts
      * @description Retrieves a list of all accounts in the system.
+     *
+     *     The request must include a valid JWT token for the user, which can be created by authenticating via the `/guest/create-session` endpoint.
+     *
+     *     Only administrator users can access this route.  An administrator can assign this role to an account in the system settings.
      */
     get: operations['AdminListAccountsController_get'];
     put?: never;
@@ -132,8 +157,14 @@ export type paths = {
       cookie?: never;
     };
     /**
-     * List indexer logs
-     * @description Retrieves a list of indexer logs based on the provided query parameters which may filter by user or root path or search term.  The logs are only held in memory and will disappear when the server restarts or to stay within the log size specified in the `system_configurations` table.
+     * Monitor what the indexer is doing for all libraries
+     * @description Retrieves the most recent indexer logs based on any provided query parameters.
+     *     Logs are held in memory and will clear whenever the server restarts.
+     *     The oldest logs will discard as they accumulate beyond the capacity in the `system_configurations` table.
+     *
+     *     The request must include a valid JWT token for the user, which can be created by authenticating via the `/guest/create-session` endpoint.
+     *
+     *     Only administrator users can access this route.  An administrator can assign this role to an account in the system settings.
      */
     get: operations['AdminListIndexerLogsController_get'];
     put?: never;
@@ -152,8 +183,14 @@ export type paths = {
       cookie?: never;
     };
     /**
-     * List all root paths
-     * @description Retrieves a list of all root paths in the system.
+     * List all sources of music for all users
+     * @description Retrieves a list of all root paths for all user accounts, eg `/home/<username>/music`.',
+     *           'These paths are indexed periodically or when files are changed to build the music library.
+     *     The indexer works from a single queue so the more root paths the longer the delay between scanning.
+     *
+     *     The request must include a valid JWT token for the user, which can be created by authenticating via the `/guest/create-session` endpoint.
+     *
+     *     Only administrator users can access this route.  An administrator can assign this role to an account in the system settings.
      */
     get: operations['AdminListRootPathsController_get'];
     put?: never;
@@ -175,7 +212,11 @@ export type paths = {
     put?: never;
     /**
      * Invalidate all user sessions
-     * @description Regenerates the master session key for the platform.  This will invalidate all existing sessions and require users to log in again.
+     * @description Regenerates the master session key for the entire platform, invalidating all sessions for all users.
+     *
+     *     The request must include a valid JWT token for the user, which can be created by authenticating via the `/guest/create-session` endpoint.
+     *
+     *     Only administrator users can access this route.  An administrator can assign this role to an account in the system settings.
      */
     post: operations['AdminRegenerateMasterSessionKeyController_post'];
     delete?: never;
@@ -195,7 +236,11 @@ export type paths = {
     put?: never;
     /**
      * Invalidate a user's sessions
-     * @description Regenerates the session key for a specified user account. This operation is typically used when a user needs to reset their session key for security reasons.
+     * @description Regenerates the master session key for a specific user, invalidating all sessions for that user.
+     *
+     *     The request must include a valid JWT token for the user, which can be created by authenticating via the `/guest/create-session` endpoint.
+     *
+     *     Only administrator users can access this route.  An administrator can assign this role to an account in the system settings.
      */
     post: operations['AdminRegenerateUserSessionKeyController_post'];
     delete?: never;
@@ -215,7 +260,11 @@ export type paths = {
     put?: never;
     /**
      * Reset user password
-     * @description Resets the password for a specified user account. This operation is typically used when an administrator needs to reset a user's password for security or account recovery purposes.
+     * @description Resets the password for a specified user account and invalidates their prior sessions.
+     *
+     *     The request must include a valid JWT token for the user, which can be created by authenticating via the `/guest/create-session` endpoint.
+     *
+     *     Only administrator users can access this route.  An administrator can assign this role to an account in the system settings.
      */
     post: operations['AdminResetUserPasswordController_post'];
     delete?: never;
@@ -240,6 +289,10 @@ export type paths = {
     /**
      * Set the indexer status
      * @description Enables or disables the indexer to allow moving root paths or to preserve system resources.
+     *
+     *     The request must include a valid JWT token for the user, which can be created by authenticating via the `/guest/create-session` endpoint.
+     *
+     *     Only administrator users can access this route.  An administrator can assign this role to an account in the system settings.
      */
     patch: operations['AdminSetIndexerStatusController_patch'];
     trace?: never;
@@ -259,7 +312,13 @@ export type paths = {
     head?: never;
     /**
      * Update a root path
-     * @description Updates the specified root path with a new path. If the scanner is running then all previous data will be removed and recreated when it indexes the new path.  If the scanner is paued you may move the files to the new path and then resume the scanner to continue indexing.
+     * @description Updates the specified root path with a new path.
+     *     If the scanner is running then all previous data will be removed and recreated when it indexes the new path.
+     *     If the scanner is paused you may move files then resume the scanner to retain their data.
+     *
+     *     The request must include a valid JWT token for the user, which can be created by authenticating via the `/guest/create-session` endpoint.
+     *
+     *     Only administrator users can access this route.  An administrator can assign this role to an account in the system settings.
      */
     patch: operations['AdminUpdateRootPathController_patch'];
     trace?: never;
@@ -279,7 +338,13 @@ export type paths = {
     head?: never;
     /**
      * Update user roles
-     * @description Updates the roles of a specified user account.  There must be at least one administrator account so if the last administrator account is having the `admin` role removed a new administrator account must be created first.
+     * @description Updates the roles of a specified user account
+     *     There must always be at least one administrator account so you cannot remove the only `admin` role.
+     *     To remove the only admin role, create a new administrator account first.
+     *
+     *     The request must include a valid JWT token for the user, which can be created by authenticating via the `/guest/create-session` endpoint.
+     *
+     *     Only administrator users can access this route.  An administrator can assign this role to an account in the system settings.
      */
     patch: operations['AdminUpdateUserRolesController_patch'];
     trace?: never;
@@ -291,7 +356,13 @@ export type paths = {
       path?: never;
       cookie?: never;
     };
-    /** Cover images for albums, this route is guest-accessible for better browser handling */
+    /**
+     * Retrieves cover images for albums
+     * @description This endpoint retrieves the cover image for a specified album.
+     *     The image comes from the first song in the album that contains an embedded image.
+     *     If the album has no cover image a default blank cover is returned.
+     *     The response supports Etag caching to optimize browser performance.
+     */
     get: operations['GuestAlbumCoverController_get'];
     put?: never;
     post?: never;
@@ -308,7 +379,13 @@ export type paths = {
       path?: never;
       cookie?: never;
     };
-    /** Cover images for artists.  This route is guest-accessible for better browser-handling. */
+    /**
+     * Retrieves cover images for artists
+     * @description This endpoint retrieves the cover image for a specified artist.
+     *     The image comes from the first track that contains a cover and credits them as an album artist, falling back to the first track crediting them as a track artist.
+     *     If the artist has no cover image a default blank cover is returned.
+     *     The response supports Etag caching to optimize browser performance.
+     */
     get: operations['GuestArtistCoverController_get'];
     put?: never;
     post?: never;
@@ -325,7 +402,13 @@ export type paths = {
       path?: never;
       cookie?: never;
     };
-    /** Cover images for composers.  This route is guest-accessible for better browser-handling. */
+    /**
+     * Retrieves cover images for composers
+     * @description This endpoint retrieves the cover image for a specified composer.
+     *     The image comes from the first song crediting them as a composer that contains an embedded image.
+     *     If the composer has no cover image a default blank cover is returned.
+     *     The response supports Etag caching to optimize browser performance.
+     */
     get: operations['GuestComposerCoverController_get'];
     put?: never;
     post?: never;
@@ -345,8 +428,10 @@ export type paths = {
     get?: never;
     put?: never;
     /**
-     * Signs in
-     * @description Creates a user session and returns a JWT token used for authenticating and accessing APIs requiring authentication.
+     * Sign in
+     * @description Creates a user session and returns a JWT token used for authenticated API requests.
+     *     The session can be lasting or temporary.
+     *     Sessions are locked to the APIs that created them, these tokens cannot access QNAP or Synology APIs.
      */
     post: operations['GuestCreateSessionController_post'];
     delete?: never;
@@ -362,24 +447,11 @@ export type paths = {
       path?: never;
       cookie?: never;
     };
-    /** Cover images for genres */
+    /**
+     * Retrieves cover images for genres
+     * @description This endpoint returns a placeholder image for all genres.
+     */
     get: operations['GuestGenreCoverController_get'];
-    put?: never;
-    post?: never;
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/guest/healthcheck': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get: operations['GuestHealthcheckController_healthcheck'];
     put?: never;
     post?: never;
     delete?: never;
@@ -396,8 +468,8 @@ export type paths = {
       cookie?: never;
     };
     /**
-     * Streams audio files.  This route is guest-accessible for better browser handling.
-     * @description Downloads audio files from the music library to the client.  This is used to stream audio files for playback or to download for offline usage.  The audio files are streamed in their original format, and the client is responsible for decoding and playing the audio.  Synology implements transcoding for certain formats, but this is not supported in this server.
+     * Serves audio files
+     * @description Downloads audio files from the music library to the client.  This is used to stream audio files for playback or to download for offline usage.  The audio files are streamed in their original format and the client is responsible for decoding and playing the audio.
      */
     get: operations['GuestStreamFileController_get'];
     put?: never;
@@ -418,11 +490,38 @@ export type paths = {
     get?: never;
     put?: never;
     /**
-     * Create a new root path
-     * @description Creates a new root path for the specified account.
+     * Add a new source of music to the user's account
+     * @description Creates a new root path for the specified account, a folder containing music eg `/home/<username>/music`.
+     *     Users can have multiple root paths however indexing uses a single queue so the more paths the longer it takes.
+     *     Ensure that the specified path is accessible and has read access.
+     *
+     *     The request must include a valid JWT token for the user, which can be created by authenticating via the `/guest/create-session` endpoint.
      */
     post: operations['UserCreateRootPathController_post'];
     delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/user/delete-custom-file-data': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    put?: never;
+    post?: never;
+    /**
+     * Remove custom data from a file in the user's account
+     * @description Deletes the specified custom data in the database immediately.
+     *     The file this data is for will revert to its embedded data on its next indexing.
+     *
+     *     The request must include a valid JWT token for the user, which can be created by authenticating via the `/guest/create-session` endpoint.
+     */
+    delete: operations['UserDeleteCustomFileDataController_delete'];
     options?: never;
     head?: never;
     patch?: never;
@@ -439,8 +538,11 @@ export type paths = {
     put?: never;
     post?: never;
     /**
-     * Delete a root path
-     * @description Deletes the specified root path.  This will delete all associated information in the database immediately, the songs and folders will no longer be present in their data.  This will not affect any files on the file system.
+     * Remove a music source from the user's account
+     * @description Deletes the specified root path and all associated information in the database immediately.
+     *     The songs and folders will no longer be present in your librariy but the files will remain on the file system.
+     *
+     *     The request must include a valid JWT token for the user, which can be created by authenticating via the `/guest/create-session` endpoint.
      */
     delete: operations['UserDeleteRootPathController_delete'];
     options?: never;
@@ -459,8 +561,10 @@ export type paths = {
     put?: never;
     post?: never;
     /**
-     * Signs out
-     * @description Ends a user session and invalidates the associated JWT token.
+     * Terminate the session
+     * @description Ends a user session and invalidates the JWT token provided in the `Authorization` header.
+     *
+     *     The request must include a valid JWT token for the user, which can be created by authenticating via the `/guest/create-session` endpoint.
      */
     delete: operations['UserEndSessionController_delete'];
     options?: never;
@@ -477,7 +581,10 @@ export type paths = {
     };
     /**
      * Retrieve library folder structure
-     * @description Returns the folder and file structure of the library.
+     * @description Returns a tree structure starting with the root folders and nesting their folder and music file contents.
+     *     This is used for browsing libraries by folder which can be helpful when metadata is ambiguous or incomplete.
+     *
+     *     The request must include a valid JWT token for the user, which can be created by authenticating via the `/guest/create-session` endpoint.
      */
     get: operations['UserFolderStructureController_get'];
     put?: never;
@@ -496,8 +603,16 @@ export type paths = {
       cookie?: never;
     };
     /**
-     * List album artists
-     * @description Retrieves a list of album artists for the user based on the provided query parameters.
+     * List artists credited to albums
+     * @description Album artists are the artists attributed directly to the album, usually a subset of artists credited to tracks.
+     *
+     *     The data can be filtered based on various criteria and search terms allowing for more precise queries.
+     *
+     *     The track information is not included in the response, if necessary use the sibling `-with-tracks` version of this endpoint.
+     *
+     *     The data is returned in a paginated format with the ability to specify an offset and limit for the results, where the offset indicates the starting point in the raw results and the limit specifies the maximum number of items to return.
+     *
+     *     The request must include a valid JWT token for the user, which can be created by authenticating via the `/guest/create-session` endpoint.
      */
     get: operations['UserListAlbumArtistsController_get'];
     put?: never;
@@ -516,8 +631,16 @@ export type paths = {
       cookie?: never;
     };
     /**
-     * List album artists with tracks
-     * @description Retrieves a list of album artists for the user with their tracks for the user based on the provided query parameters.
+     * List artists credited to albums and return album/track data
+     * @description Album artists are the artists attributed directly to the album, usually a subset of artists credited to tracks.
+     *
+     *     The data can be filtered based on various criteria and search terms allowing for more precise queries.
+     *
+     *     The track information includes all the data required for your media player to display or play the music.  This can add significant data to the response but saves additional requests being made.  If the track data is unnecessary use the sibling version of this endpoint that omits it.
+     *
+     *     The data is returned in a paginated format with the ability to specify an offset and limit for the results, where the offset indicates the starting point in the raw results and the limit specifies the maximum number of items to return.
+     *
+     *     The request must include a valid JWT token for the user, which can be created by authenticating via the `/guest/create-session` endpoint.
      */
     get: operations['UserListAlbumArtistsWithTracksController_get'];
     put?: never;
@@ -537,7 +660,15 @@ export type paths = {
     };
     /**
      * List albums
-     * @description Retrieves a list of albums for the user based on the provided query parameters.
+     * @description Albums can be filtered by an extensive set of criteria and search terms.
+     *
+     *     The data can be filtered based on various criteria and search terms allowing for more precise queries.
+     *
+     *     The track information is not included in the response, if necessary use the sibling `-with-tracks` version of this endpoint.
+     *
+     *     The data is returned in a paginated format with the ability to specify an offset and limit for the results, where the offset indicates the starting point in the raw results and the limit specifies the maximum number of items to return.
+     *
+     *     The request must include a valid JWT token for the user, which can be created by authenticating via the `/guest/create-session` endpoint.
      */
     get: operations['UserListAlbumsController_get'];
     put?: never;
@@ -556,8 +687,16 @@ export type paths = {
       cookie?: never;
     };
     /**
-     * List albums with tracks
-     * @description Retrieves a list of albums with their tracks for the user based on the provided query parameters.
+     * List albums and include their track data
+     * @description Albums can be filtered by an extensive set of criteria and search terms.
+     *
+     *     The data can be filtered based on various criteria and search terms allowing for more precise queries.
+     *
+     *     The track information includes all the data required for your media player to display or play the music.  This can add significant data to the response but saves additional requests being made.  If the track data is unnecessary use the sibling version of this endpoint that omits it.
+     *
+     *     The data is returned in a paginated format with the ability to specify an offset and limit for the results, where the offset indicates the starting point in the raw results and the limit specifies the maximum number of items to return.
+     *
+     *     The request must include a valid JWT token for the user, which can be created by authenticating via the `/guest/create-session` endpoint.
      */
     get: operations['UserListAlbumsWithTracksController_get'];
     put?: never;
@@ -576,8 +715,13 @@ export type paths = {
       cookie?: never;
     };
     /**
-     * List indexer logs
-     * @description Retrieves a list of indexer logs based on the provided query parameters which may filter by root path or search term.  The logs are only held in memory and will disappear when the server restarts or to stay within the log size specified in the `system_configurations` table.
+     * Monitor what the indexer is doing for your library
+     * @description Retrieves the most recent indexer logs based on any provided query parameters.
+     *     Logs are held in memory and will clear whenever the server restarts.
+     *     The oldest logs will discard as they accumulate beyond the capacity in the `system_configurations` table.
+     *     If you have multiple users it may be common for this to be empty as the capacity is filled by other users.
+     *
+     *     The request must include a valid JWT token for the user, which can be created by authenticating via the `/guest/create-session` endpoint.
      */
     get: operations['UserListIndexerLogsController_get'];
     put?: never;
@@ -596,8 +740,12 @@ export type paths = {
       cookie?: never;
     };
     /**
-     * List all root paths
-     * @description Retrieves a list of all root paths in the system.
+     * List all sources of music for the user's account
+     * @description Retrieves a list of all root paths associated with the user's account, eg `/home/<username>/music`.',
+     *           'These paths are indexed periodically or when files are changed to build the music library.
+     *     The indexer works from a single queue so the more root paths the longer the delay between scanning.
+     *
+     *     The request must include a valid JWT token for the user, which can be created by authenticating via the `/guest/create-session` endpoint.
      */
     get: operations['UserListRootPathsController_get'];
     put?: never;
@@ -616,8 +764,16 @@ export type paths = {
       cookie?: never;
     };
     /**
-     * List artists
-     * @description Retrieves a list of artists for the user based on the provided query parameters.
+     * List artists credited to tracks
+     * @description Track artists are attributed directly to the tracks, there can be many credited to a single track.
+     *
+     *     The data can be filtered based on various criteria and search terms allowing for more precise queries.
+     *
+     *     The track information is not included in the response, if necessary use the sibling `-with-tracks` version of this endpoint.
+     *
+     *     The data is returned in a paginated format with the ability to specify an offset and limit for the results, where the offset indicates the starting point in the raw results and the limit specifies the maximum number of items to return.
+     *
+     *     The request must include a valid JWT token for the user, which can be created by authenticating via the `/guest/create-session` endpoint.
      */
     get: operations['UserListTrackArtistsController_get'];
     put?: never;
@@ -636,9 +792,16 @@ export type paths = {
       cookie?: never;
     };
     /**
-     * List artists with tracks
-     * @description Retrieves a list of artists along with their tracks for the user based on the
-     *         provided query parameters.
+     * List artists credited to tracks and return album/track data
+     * @description Track artists are attributed directly to the tracks, there can be many credited to a single track.
+     *
+     *     The data can be filtered based on various criteria and search terms allowing for more precise queries.
+     *
+     *     The track information includes all the data required for your media player to display or play the music.  This can add significant data to the response but saves additional requests being made.  If the track data is unnecessary use the sibling version of this endpoint that omits it.
+     *
+     *     The data is returned in a paginated format with the ability to specify an offset and limit for the results, where the offset indicates the starting point in the raw results and the limit specifies the maximum number of items to return.
+     *
+     *     The request must include a valid JWT token for the user, which can be created by authenticating via the `/guest/create-session` endpoint.
      */
     get: operations['UserListTrackArtistsWithTracksController_get'];
     put?: never;
@@ -657,8 +820,16 @@ export type paths = {
       cookie?: never;
     };
     /**
-     * List composers
-     * @description Retrieves a list of composers for the user based on the provided query parameters.
+     * List composers credited to tracks
+     * @description Track composers are attributed directly to the tracks, there can be many credited to a single track.
+     *
+     *     The data can be filtered based on various criteria and search terms allowing for more precise queries.
+     *
+     *     The track information is not included in the response, if necessary use the sibling `-with-tracks` version of this endpoint.
+     *
+     *     The data is returned in a paginated format with the ability to specify an offset and limit for the results, where the offset indicates the starting point in the raw results and the limit specifies the maximum number of items to return.
+     *
+     *     The request must include a valid JWT token for the user, which can be created by authenticating via the `/guest/create-session` endpoint.
      */
     get: operations['UserListTrackComposersController_get'];
     put?: never;
@@ -677,8 +848,15 @@ export type paths = {
       cookie?: never;
     };
     /**
-     * List composers
-     * @description Retrieves a list of composers for the user based on the provided query parameters.
+     * List composers credited to tracks and return album/track data
+     * @description Track composers are attributed directly to the tracks, there can be many credited to a single track.
+     *     There are a variety of filtering options available for querying track composers.
+     *
+     *     The track information includes all the data required for your media player to display or play the music.  This can add significant data to the response but saves additional requests being made.  If the track data is unnecessary use the sibling version of this endpoint that omits it.
+     *
+     *     The data is returned in a paginated format with the ability to specify an offset and limit for the results, where the offset indicates the starting point in the raw results and the limit specifies the maximum number of items to return.
+     *
+     *     The request must include a valid JWT token for the user, which can be created by authenticating via the `/guest/create-session` endpoint.
      */
     get: operations['UserListTrackComposersWithTracksController_get'];
     put?: never;
@@ -697,8 +875,14 @@ export type paths = {
       cookie?: never;
     };
     /**
-     * List genres
-     * @description Retrieves a list of genres for the user based on the provided query parameters.
+     * List genres associated with tracks
+     * @description Track genres are attributed directly to the tracks, there can be many credited to a single track.
+     *
+     *     The track information includes all the data required for your media player to display or play the music.  This can add significant data to the response but saves additional requests being made.  If the track data is unnecessary use the sibling version of this endpoint that omits it.
+     *
+     *     The data is returned in a paginated format with the ability to specify an offset and limit for the results, where the offset indicates the starting point in the raw results and the limit specifies the maximum number of items to return.
+     *
+     *     The request must include a valid JWT token for the user, which can be created by authenticating via the `/guest/create-session` endpoint.
      */
     get: operations['UserListTrackGenresController_get'];
     put?: never;
@@ -717,8 +901,14 @@ export type paths = {
       cookie?: never;
     };
     /**
-     * List genres
-     * @description Retrieves a list of genres for the user based on the provided query parameters.
+     * List genres associated with tracks and return album/track data
+     * @description Track genres are attributed directly to the tracks, there can be many credited to a single track.
+     *
+     *     The track information includes all the data required for your media player to display or play the music.  This can add significant data to the response but saves additional requests being made.  If the track data is unnecessary use the sibling version of this endpoint that omits it.
+     *
+     *     The data is returned in a paginated format with the ability to specify an offset and limit for the results, where the offset indicates the starting point in the raw results and the limit specifies the maximum number of items to return.
+     *
+     *     The request must include a valid JWT token for the user, which can be created by authenticating via the `/guest/create-session` endpoint.
      */
     get: operations['UserListTrackGenresWithTracksController_get'];
     put?: never;
@@ -738,7 +928,11 @@ export type paths = {
     };
     /**
      * List tracks
-     * @description Retrieves a list of tracks for the user based on the provided query parameters.
+     * @description The data can be filtered based on various criteria and search terms allowing for more precise queries.
+     *
+     *     The data is returned in a paginated format with the ability to specify an offset and limit for the results, where the offset indicates the starting point in the raw results and the limit specifies the maximum number of items to return.
+     *
+     *     The request must include a valid JWT token for the user, which can be created by authenticating via the `/guest/create-session` endpoint.
      */
     get: operations['UserListTracksController_get'];
     put?: never;
@@ -760,7 +954,11 @@ export type paths = {
     put?: never;
     /**
      * Invalidate a user's sessions
-     * @description Regenerates the session key for the user invalidating all existing sessions for their account.
+     * @description Regenerates the session key for the user.  This key is used to sign their session tokens.
+     *     When a new key is generated any previous sessions of the user become invalid including their current session.
+     *     The user will need to authenticate again to continue accessing protected APIs.
+     *
+     *     The request must include a valid JWT token for the user, which can be created by authenticating via the `/guest/create-session` endpoint.
      */
     post: operations['UserRegenerateSessionKeyController_post'];
     delete?: never;
@@ -777,11 +975,36 @@ export type paths = {
       cookie?: never;
     };
     /**
-     * Retrieve album
-     * @description Retrieves an album with all of its information necessary for viewing and playing-back the tracks.
+     * Retrieves single albums
+     * @description Retrieves an album and its complete track list with all information necessary for viewing and playback.
+     *
+     *     The request must include a valid JWT token for the user, which can be created by authenticating via the `/guest/create-session` endpoint.
      */
     get: operations['UserRetrieveAlbumController_get'];
     put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/user/set-custom-file-data': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    /**
+     * Set custom data for a file in the user's account
+     * @description Assigns custom data to a file, overriding the embedded data within it.
+     *     The next indexing pass of the file will reflect the newly set custom data.
+     *
+     *     The request must include a valid JWT token for the user, which can be created by authenticating via the `/guest/create-session` endpoint.
+     */
+    put: operations['UserSetCustomFileDataController_put'];
     post?: never;
     delete?: never;
     options?: never;
@@ -800,7 +1023,10 @@ export type paths = {
     put?: never;
     /**
      * Reset password
-     * @description Resets the user's password to a new value.
+     * @description Resets the user's password to a new value and invalidates all previous sessions.
+     *     The user will need to authenticate again to continue accessing protected APIs.
+     *
+     *     The request must include a valid JWT token for the user, which can be created by authenticating via the `/guest/create-session` endpoint.
      */
     post: operations['UserUpdatePasswordController_post'];
     delete?: never;
@@ -816,8 +1042,26 @@ export type paths = {
       path?: never;
       cookie?: never;
     };
+    /**
+     * QNAP authentication handler (Android)
+     * @description Handles various QNAP Music Station authentication requests.
+     *     Preauthentication requests return password configuration and system information.
+     *     Authentication requests validate the username and password, which is sent base-64 encoded.
+     *     Validating sessions confirms a JWT token and returns system configuration information.
+     *     Resuming sessions does not validate the JWT token and returns system configuration information.
+     *     The Android QMusic app uses `GET` and querystring parameters, the iPhone app `POSTS` and uses the `POST` body.
+     */
     get: operations['QnapAuthLoginController_routeRequest'];
     put?: never;
+    /**
+     * QNAP authentication handler (iPhone)
+     * @description Handles various QNAP Music Station authentication requests.
+     *     Preauthentication requests return password configuration and system information.
+     *     Authentication requests validate the username and password, which is sent base-64 encoded.
+     *     Validating sessions confirms a JWT token and returns system configuration information.
+     *     Resuming sessions does not validate the JWT token and returns system configuration information.
+     *     This is the same as the GET handler except the data is provided in the POST body by the iPhone app. The backend consolidates handling these requests.
+     */
     post: operations['QnapAuthLoginController_postRequest'];
     delete?: never;
     options?: never;
@@ -832,6 +1076,11 @@ export type paths = {
       path?: never;
       cookie?: never;
     };
+    /**
+     * System configuration for iPhone
+     * @description Part of the QNAP authentication chain
+     *     This endpoint returns information to the QMusic iPhone app as part of the authentication process.
+     */
     get: operations['QnapSysRequestController_routeRequest'];
     put?: never;
     post?: never;
@@ -848,25 +1097,15 @@ export type paths = {
       path?: never;
       cookie?: never;
     };
+    /**
+     * Streams a music file to QMusic clients
+     * @description Streams a music file for playback.
+     *
+     *     The request must be authenticated using a valid JWT token passed as a URL parameter `sid`.
+     */
     get: operations['QnapAsGetFileController_get'];
     put?: never;
     post?: never;
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/musicstation/api/as_localplayback.php': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get?: never;
-    put?: never;
-    post: operations['QnapAsLocalPlaybackController_post'];
     delete?: never;
     options?: never;
     head?: never;
@@ -882,6 +1121,12 @@ export type paths = {
     };
     get?: never;
     put?: never;
+    /**
+     * System configuration for iPhone
+     * @description Part of the QNAP authentication chain
+     *     This endpoint returns information to the iPhone and Android apps as part of the authentication process.
+     *     The JWT token is sent as `ssid` in the querystring by the Android app and in the POST body by the iOS app.
+     */
     post: operations['QnapAsLoginController_post'];
     delete?: never;
     options?: never;
@@ -896,6 +1141,16 @@ export type paths = {
       path?: never;
       cookie?: never;
     };
+    /**
+     * Retrieves cover images
+     * @description This endpoint retrieves the cover image for a specified album, artist, or folder.
+     *     The image comes from the first song in the album that contains an embedded image.
+     *     If the album has no cover image a default blank cover is returned.
+     *     The response supports Etag caching to optimize browser performance.
+     *     The asset ID may be provided as an `imagepath` value like `api/mediacover_api.php?id=123` or as an ID value.
+     *
+     *     The request must be authenticated using a valid JWT token passed as a URL parameter `sid`.
+     */
     get: operations['QnapMediaCoverController_get'];
     put?: never;
     post?: never;
@@ -914,7 +1169,13 @@ export type paths = {
     };
     get?: never;
     put?: never;
-    /** Handle QNAP Music Station media-list API requests */
+    /**
+     * Handle QNAP Music Station media-list API requests
+     * @description Returns albums, songs, genres, folders, artist lists and random artist/album lists.
+     *     The response format varies based on what is being requested.
+     *
+     *     The request must be authenticated using a valid JWT token passed as a URL parameter `sid`.
+     */
     post: operations['QnapMediaListController_post'];
     delete?: never;
     options?: never;
@@ -931,6 +1192,12 @@ export type paths = {
     };
     get?: never;
     put?: never;
+    /**
+     * Reports IP addresses to mobile apps
+     * @description This endpoint reports the LAN and WAN IP addresses and ports to mobile clients.
+     *
+     *     The request must be authenticated using a valid JWT token passed as a URL parameter `sid`.
+     */
     post: operations['QnapMediaToolController_get'];
     delete?: never;
     options?: never;
@@ -951,9 +1218,11 @@ export type paths = {
      * Lists albums in the music library
      * @description Lists albums found in the music library.  The albums can be filtered by artist, composer or genre.
      *
-     *     The data is returned in a paginated format, with the ability to specify an offset and limit for the results, where the offset indicates the starting point in the list and the limit specifies the maximum number of items to return.
      *
-     *     The request must be authenticated using a valid Synology session ID and device ID cookie for the user, which can be obtained by signing in via the `entry.cgi` endpoint, a two-step process requesting the encryption public key from `/certs` and then  submitting credentials encrypted with it.
+     *     The data is returned in a paginated format with the ability to specify an offset and limit for the results, where the offset indicates the starting point in the raw results and the limit specifies the maximum number of items to return.
+     *
+     *
+     *     The request must be authenticated using a valid Synology session ID and device ID cookie for the user, which can be obtained by signing in via the `/entry.cgi` endpoint, a two-step process requesting the encryption public key from `/certs` and then  submitting credentials encrypted with it.
      */
     post: operations['SynologyAlbumController_route'];
     delete?: never;
@@ -975,9 +1244,11 @@ export type paths = {
      * Lists artists in the music library
      * @description Lists artists found in the music library.  The artists can be filtered by genre.
      *
-     *     The data is returned in a paginated format, with the ability to specify an offset and limit for the results, where the offset indicates the starting point in the list and the limit specifies the maximum number of items to return.
      *
-     *     The request must be authenticated using a valid Synology session ID and device ID cookie for the user, which can be obtained by signing in via the `entry.cgi` endpoint, a two-step process requesting the encryption public key from `/certs` and then  submitting credentials encrypted with it.
+     *     The data is returned in a paginated format with the ability to specify an offset and limit for the results, where the offset indicates the starting point in the raw results and the limit specifies the maximum number of items to return.
+     *
+     *
+     *     The request must be authenticated using a valid Synology session ID and device ID cookie for the user, which can be obtained by signing in via the `/entry.cgi` endpoint, a two-step process requesting the encryption public key from `/certs` and then  submitting credentials encrypted with it.
      */
     post: operations['SynologyArtistController_route'];
     delete?: never;
@@ -1001,9 +1272,11 @@ export type paths = {
      *
      *     When a track is recognized as having multiple composers, each composer is counted as a separate composer.  For  instance, a track with the composer "Composer 1, Composer 2" will be counted as both "Composer 1" and "Composer 2".
      *
-     *     The data is returned in a paginated format, with the ability to specify an offset and limit for the results, where the offset indicates the starting point in the list and the limit specifies the maximum number of items to return.
      *
-     *     The request must be authenticated using a valid Synology session ID and device ID cookie for the user, which can be obtained by signing in via the `entry.cgi` endpoint, a two-step process requesting the encryption public key from `/certs` and then  submitting credentials encrypted with it.
+     *     The data is returned in a paginated format with the ability to specify an offset and limit for the results, where the offset indicates the starting point in the raw results and the limit specifies the maximum number of items to return.
+     *
+     *
+     *     The request must be authenticated using a valid Synology session ID and device ID cookie for the user, which can be obtained by signing in via the `/entry.cgi` endpoint, a two-step process requesting the encryption public key from `/certs` and then  submitting credentials encrypted with it.
      */
     post: operations['SynologyComposerController_route'];
     delete?: never;
@@ -1023,7 +1296,8 @@ export type paths = {
      * Retrieves the cover image for an album, artist, composer or song
      * @description Retrieves the cover image for an album, artist, composer or song.  The cover image can be retrieved by specifying the appropriate query parameters in the request.  If an image is not found a default blank cover image will be returned.
      *
-     *     The request must be authenticated using a valid Synology session ID and device ID cookie for the user, which can be obtained by signing in via the `entry.cgi` endpoint, a two-step process requesting the encryption public key from `/certs` and then  submitting credentials encrypted with it.
+     *
+     *     The request must be authenticated using a valid Synology session ID and device ID cookie for the user, which can be obtained by signing in via the `/entry.cgi` endpoint, a two-step process requesting the encryption public key from `/certs` and then  submitting credentials encrypted with it.
      */
     get: operations['SynologyCoverImageController_route'];
     put?: never;
@@ -1049,7 +1323,8 @@ export type paths = {
      *
      *     The folders are returned in a paginated format, with the ability to specify an offset and limit for the results, where the offset indicates the starting point in the list and the limit specifies the maximum number of folders to return.
      *
-     *     The request must be authenticated using a valid Synology session ID and device ID cookie for the user, which can be obtained by signing in via the `entry.cgi` endpoint, a two-step process requesting the encryption public key from `/certs` and then  submitting credentials encrypted with it.
+     *
+     *     The request must be authenticated using a valid Synology session ID and device ID cookie for the user, which can be obtained by signing in via the `/entry.cgi` endpoint, a two-step process requesting the encryption public key from `/certs` and then  submitting credentials encrypted with it.
      */
     post: operations['SynologyFolderController_route'];
     delete?: never;
@@ -1073,9 +1348,11 @@ export type paths = {
      *
      *     Each track can have one or more genres separated by `,` and they will each be counted as a separate genre.  For instance, a track with the genre "Rock, Pop" will be counted as both "Rock" and "Pop".
      *
-     *     The data is returned in a paginated format, with the ability to specify an offset and limit for the results, where the offset indicates the starting point in the list and the limit specifies the maximum number of items to return.
      *
-     *     The request must be authenticated using a valid Synology session ID and device ID cookie for the user, which can be obtained by signing in via the `entry.cgi` endpoint, a two-step process requesting the encryption public key from `/certs` and then  submitting credentials encrypted with it.
+     *     The data is returned in a paginated format with the ability to specify an offset and limit for the results, where the offset indicates the starting point in the raw results and the limit specifies the maximum number of items to return.
+     *
+     *
+     *     The request must be authenticated using a valid Synology session ID and device ID cookie for the user, which can be obtained by signing in via the `/entry.cgi` endpoint, a two-step process requesting the encryption public key from `/certs` and then  submitting credentials encrypted with it.
      */
     post: operations['SynologyGenreController_route'];
     delete?: never;
@@ -1099,41 +1376,10 @@ export type paths = {
      *
      *     The request must be authenticated using a valid Synology session ID and device ID cookie for the user, which can be obtained by signing in via the `entry.cgi` endpoint, a two-step process requesting the encryption public key from `/certs` and then submitting credentials encrypted with it.
      *
-     *     The request must be authenticated using a valid Synology session ID and device ID cookie for the user, which can be obtained by signing in via the `entry.cgi` endpoint, a two-step process requesting the encryption public key from `/certs` and then  submitting credentials encrypted with it.
+     *
+     *     The request must be authenticated using a valid Synology session ID and device ID cookie for the user, which can be obtained by signing in via the `/entry.cgi` endpoint, a two-step process requesting the encryption public key from `/certs` and then  submitting credentials encrypted with it.
      */
     post: operations['SynologyInfoController_route'];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/webapi/AudioStation/lyrics_search.cgi': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get?: never;
-    put?: never;
-    post: operations['SynologyLyricsController_routeSearch'];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/webapi/AudioStation/lyrics.cgi': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get?: never;
-    put?: never;
-    post: operations['SynologyLyricsController_route'];
     delete?: never;
     options?: never;
     head?: never;
@@ -1157,9 +1403,11 @@ export type paths = {
      *
      *     Listing playlists are not returned in a paginated format, but the tracks and radio stations within them are.
      *
-     *     The data is returned in a paginated format, with the ability to specify an offset and limit for the results, where the offset indicates the starting point in the list and the limit specifies the maximum number of items to return.
      *
-     *     The request must be authenticated using a valid Synology session ID and device ID cookie for the user, which can be obtained by signing in via the `entry.cgi` endpoint, a two-step process requesting the encryption public key from `/certs` and then  submitting credentials encrypted with it.
+     *     The data is returned in a paginated format with the ability to specify an offset and limit for the results, where the offset indicates the starting point in the raw results and the limit specifies the maximum number of items to return.
+     *
+     *
+     *     The request must be authenticated using a valid Synology session ID and device ID cookie for the user, which can be obtained by signing in via the `/entry.cgi` endpoint, a two-step process requesting the encryption public key from `/certs` and then  submitting credentials encrypted with it.
      */
     post: operations['SynologyPlaylistController_routeRequest'];
     delete?: never;
@@ -1185,7 +1433,8 @@ export type paths = {
      * Proxies SHOUTcast radio streams
      * @description Creates and terminates a basic HTTP proxy to a SHOUTcast radio stream.
      *
-     *     The request must be authenticated using a valid Synology session ID and device ID cookie for the user, which can be obtained by signing in via the `entry.cgi` endpoint, a two-step process requesting the encryption public key from `/certs` and then  submitting credentials encrypted with it.
+     *
+     *     The request must be authenticated using a valid Synology session ID and device ID cookie for the user, which can be obtained by signing in via the `/entry.cgi` endpoint, a two-step process requesting the encryption public key from `/certs` and then  submitting credentials encrypted with it.
      */
     post: operations['SynologyProxyController_route'];
     delete?: never;
@@ -1211,25 +1460,10 @@ export type paths = {
      *
      *     The integration does not require a SHOUTcast account, but it does require an active internet connection.
      *
-     *     The request must be authenticated using a valid Synology session ID and device ID cookie for the user, which can be obtained by signing in via the `entry.cgi` endpoint, a two-step process requesting the encryption public key from `/certs` and then  submitting credentials encrypted with it.
+     *
+     *     The request must be authenticated using a valid Synology session ID and device ID cookie for the user, which can be obtained by signing in via the `/entry.cgi` endpoint, a two-step process requesting the encryption public key from `/certs` and then  submitting credentials encrypted with it.
      */
     post: operations['SynologyRadioController_routeRequests'];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/webapi/AudioStation/remote_player.cgi': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get?: never;
-    put?: never;
-    post: operations['SynologyRemotePlayerController_route'];
     delete?: never;
     options?: never;
     head?: never;
@@ -1251,7 +1485,8 @@ export type paths = {
      *
      *     The search results are unpaginated.
      *
-     *     The request must be authenticated using a valid Synology session ID and device ID cookie for the user, which can be obtained by signing in via the `entry.cgi` endpoint, a two-step process requesting the encryption public key from `/certs` and then  submitting credentials encrypted with it.
+     *
+     *     The request must be authenticated using a valid Synology session ID and device ID cookie for the user, which can be obtained by signing in via the `/entry.cgi` endpoint, a two-step process requesting the encryption public key from `/certs` and then  submitting credentials encrypted with it.
      */
     post: operations['SynologySearchController_route'];
     delete?: never;
@@ -1273,9 +1508,11 @@ export type paths = {
      * Lists songs in the music library
      * @description Lists songs found in the music library.  The songs can be filtered by album, artist, composer, or genre.
      *
-     *     The data is returned in a paginated format, with the ability to specify an offset and limit for the results, where the offset indicates the starting point in the list and the limit specifies the maximum number of items to return.
      *
-     *     The request must be authenticated using a valid Synology session ID and device ID cookie for the user, which can be obtained by signing in via the `entry.cgi` endpoint, a two-step process requesting the encryption public key from `/certs` and then  submitting credentials encrypted with it.
+     *     The data is returned in a paginated format with the ability to specify an offset and limit for the results, where the offset indicates the starting point in the raw results and the limit specifies the maximum number of items to return.
+     *
+     *
+     *     The request must be authenticated using a valid Synology session ID and device ID cookie for the user, which can be obtained by signing in via the `/entry.cgi` endpoint, a two-step process requesting the encryption public key from `/certs` and then  submitting credentials encrypted with it.
      */
     post: operations['SynologySongController_route'];
     delete?: never;
@@ -1295,7 +1532,8 @@ export type paths = {
      * Streams audio files
      * @description Downloads audio files from the music library to the client.  This is used to stream audio files for playback or to download for offline usage.  The audio files are streamed in their original format, and the client is responsible for decoding and playing the audio.  Synology implements transcoding for certain formats, but this is not supported in this server.
      *
-     *     The request must be authenticated using a valid Synology session ID and device ID cookie for the user, which can be obtained by signing in via the `entry.cgi` endpoint, a two-step process requesting the encryption public key from `/certs` and then  submitting credentials encrypted with it.
+     *
+     *     The request must be authenticated using a valid Synology session ID and device ID cookie for the user, which can be obtained by signing in via the `/entry.cgi` endpoint, a two-step process requesting the encryption public key from `/certs` and then  submitting credentials encrypted with it.
      */
     get: operations['SynologyStreamController_getStreamCgi'];
     put?: never;
@@ -1323,7 +1561,8 @@ export type paths = {
      *
      *     For the actions requiring authentication, the request must be authenticated using a valid Synology session ID and device ID cookie for the user, which can be obtained by signing in via the `entry.cgi` endpoint, a two-step process requesting the encryption public key from `/certs` and then submitting credentials encrypted with it.
      *
-     *     The request must be authenticated using a valid Synology session ID and device ID cookie for the user, which can be obtained by signing in via the `entry.cgi` endpoint, a two-step process requesting the encryption public key from `/certs` and then  submitting credentials encrypted with it.
+     *
+     *     The request must be authenticated using a valid Synology session ID and device ID cookie for the user, which can be obtained by signing in via the `/entry.cgi` endpoint, a two-step process requesting the encryption public key from `/certs` and then  submitting credentials encrypted with it.
      */
     post: operations['SynologyEntryController_route'];
     delete?: never;
@@ -1345,7 +1584,8 @@ export type paths = {
      * Returns information about the Synology AudioStation API
      * @description Provides information to Synology DS Audio apps about the server and its capabilities.
      *
-     *     The request must be authenticated using a valid Synology session ID and device ID cookie for the user, which can be obtained by signing in via the `entry.cgi` endpoint, a two-step process requesting the encryption public key from `/certs` and then  submitting credentials encrypted with it.
+     *
+     *     The request must be authenticated using a valid Synology session ID and device ID cookie for the user, which can be obtained by signing in via the `/entry.cgi` endpoint, a two-step process requesting the encryption public key from `/certs` and then  submitting credentials encrypted with it.
      */
     post: operations['SynologyQueryController_route'];
     delete?: never;
@@ -1365,7 +1605,7 @@ export type components = {
     };
     /**
      * @description The error message(s) that occurred during the validation of the request data or additional requirements
-     *     applied during the execution of the request
+     *     applied while serving the request
      * @enum {string}
      */
     AdminCreateAccountBadRequestErrorMessageEnum: AdminCreateAccountBadRequestErrorMessageEnum;
@@ -1374,7 +1614,7 @@ export type components = {
       error: string;
       /**
        * @description The error message(s) that occurred during the validation of the request data or additional requirements
-       *     applied during the execution of the request
+       *     applied while serving the request
        * @default bad-request-error
        */
       message: components['schemas']['AdminCreateAccountBadRequestErrorMessageEnum'][];
@@ -1401,7 +1641,7 @@ export type components = {
     };
     /**
      * @description The error message(s) that occurred during the validation of the request data or additional requirements
-     *     applied during the execution of the request
+     *     applied while serving the request
      * @enum {string}
      */
     AdminCreateRootPathBadRequestErrorMessageEnum: AdminCreateRootPathBadRequestErrorMessageEnum;
@@ -1410,7 +1650,7 @@ export type components = {
       error: string;
       /**
        * @description The error message(s) that occurred during the validation of the request data or additional requirements
-       *     applied during the execution of the request
+       *     applied while serving the request
        * @default root-path-does-not-exist-error
        */
       message: components['schemas']['AdminCreateRootPathBadRequestErrorMessageEnum'][];
@@ -1426,7 +1666,7 @@ export type components = {
     };
     /**
      * @description The error message(s) that occurred during the validation of the request data or additional requirements
-     *     applied during the execution of the request
+     *     applied while serving the request
      * @enum {string}
      */
     AdminCreateRootPathNotFoundErrorMessageEnum: AdminCreateRootPathNotFoundErrorMessageEnum;
@@ -1435,7 +1675,7 @@ export type components = {
       error: string;
       /**
        * @description The error message(s) that occurred during the validation of the request data or additional requirements
-       *     applied during the execution of the request
+       *     applied while serving the request
        * @default account-not-found-error
        */
       message: components['schemas']['AdminCreateRootPathNotFoundErrorMessageEnum'][];
@@ -1455,7 +1695,7 @@ export type components = {
     };
     /**
      * @description The error message(s) that occurred during the validation of the request data or additional requirements
-     *     applied during the execution of the request
+     *     applied while serving the request
      * @enum {string}
      */
     AdminDeleteAccountBadRequestErrorMessageEnum: AdminDeleteAccountBadRequestErrorMessageEnum;
@@ -1464,7 +1704,7 @@ export type components = {
       error: string;
       /**
        * @description The error message(s) that occurred during the validation of the request data or additional requirements
-       *     applied during the execution of the request
+       *     applied while serving the request
        * @default invalid-account-id-error
        */
       message: components['schemas']['AdminDeleteAccountBadRequestErrorMessageEnum'][];
@@ -1476,7 +1716,7 @@ export type components = {
     };
     /**
      * @description The error message(s) that occurred during the validation of the request data or additional requirements
-     *     applied during the execution of the request
+     *     applied while serving the request
      * @enum {string}
      */
     AdminDeleteAccountNotFoundErrorMessageEnum: AdminDeleteAccountNotFoundErrorMessageEnum;
@@ -1485,7 +1725,7 @@ export type components = {
       error: string;
       /**
        * @description The error message(s) that occurred during the validation of the request data or additional requirements
-       *     applied during the execution of the request
+       *     applied while serving the request
        * @default invalid-account-id-error
        */
       message: components['schemas']['AdminDeleteAccountNotFoundErrorMessageEnum'][];
@@ -1505,7 +1745,7 @@ export type components = {
     };
     /**
      * @description The error message(s) that occurred during the validation of the request data or additional requirements
-     *     applied during the execution of the request
+     *     applied while serving the request
      * @enum {string}
      */
     AdminDeleteRootPathNotFoundErrorMessageEnum: AdminDeleteRootPathNotFoundErrorMessageEnum;
@@ -1514,7 +1754,7 @@ export type components = {
       error: string;
       /**
        * @description The error message(s) that occurred during the validation of the request data or additional requirements
-       *     applied during the execution of the request
+       *     applied while serving the request
        * @default root-path-not-found-error
        */
       message: components['schemas']['AdminDeleteRootPathNotFoundErrorMessageEnum'][];
@@ -1560,7 +1800,7 @@ export type components = {
     };
     /**
      * @description The error message(s) that occurred during the validation of the request data or additional requirements
-     *     applied during the execution of the request
+     *     applied while serving the request
      * @enum {string}
      */
     AdminListIndexerLogsBadRequestErrorMessageEnum: AdminListIndexerLogsBadRequestErrorMessageEnum;
@@ -1569,7 +1809,7 @@ export type components = {
       error: string;
       /**
        * @description The error message(s) that occurred during the validation of the request data or additional requirements
-       *     applied during the execution of the request
+       *     applied while serving the request
        * @default invalid-account-id-error
        */
       message: components['schemas']['AdminListIndexerLogsBadRequestErrorMessageEnum'][];
@@ -1581,7 +1821,7 @@ export type components = {
     };
     /**
      * @description The error message(s) that occurred during the validation of the request data or additional requirements
-     *     applied during the execution of the request
+     *     applied while serving the request
      * @enum {string}
      */
     AdminListIndexerLogsNotFoundErrorMessageEnum: AdminListIndexerLogsNotFoundErrorMessageEnum;
@@ -1590,7 +1830,7 @@ export type components = {
       error: string;
       /**
        * @description The error message(s) that occurred during the validation of the request data or additional requirements
-       *     applied during the execution of the request
+       *     applied while serving the request
        * @default invalid-account-id-error
        */
       message: components['schemas']['AdminListIndexerLogsNotFoundErrorMessageEnum'][];
@@ -1638,7 +1878,7 @@ export type components = {
     };
     /**
      * @description The error message(s) that occurred during the validation of the request data or additional requirements
-     *     applied during the execution of the request
+     *     applied while serving the request
      * @enum {string}
      */
     AdminRegenerateUserSessionKeyNotFoundErrorMessageEnum: AdminRegenerateUserSessionKeyNotFoundErrorMessageEnum;
@@ -1647,7 +1887,7 @@ export type components = {
       error: string;
       /**
        * @description The error message(s) that occurred during the validation of the request data or additional requirements
-       *     applied during the execution of the request
+       *     applied while serving the request
        * @default account-not-found-error
        */
       message: components['schemas']['AdminRegenerateUserSessionKeyNotFoundErrorMessageEnum'][];
@@ -1667,7 +1907,7 @@ export type components = {
     };
     /**
      * @description The error message(s) that occurred during the validation of the request data or additional requirements
-     *     applied during the execution of the request
+     *     applied while serving the request
      * @enum {string}
      */
     AdminResetUserPasswordBadRequestErrorMessageEnum: AdminResetUserPasswordBadRequestErrorMessageEnum;
@@ -1676,7 +1916,7 @@ export type components = {
       error: string;
       /**
        * @description The error message(s) that occurred during the validation of the request data or additional requirements
-       *     applied during the execution of the request
+       *     applied while serving the request
        * @default invalid-password-error
        */
       message: components['schemas']['AdminResetUserPasswordBadRequestErrorMessageEnum'][];
@@ -1691,7 +1931,7 @@ export type components = {
     };
     /**
      * @description The error message(s) that occurred during the validation of the request data or additional requirements
-     *     applied during the execution of the request
+     *     applied while serving the request
      * @enum {string}
      */
     AdminResetUserPasswordNotFoundErrorMessageEnum: AdminResetUserPasswordNotFoundErrorMessageEnum;
@@ -1700,7 +1940,7 @@ export type components = {
       error: string;
       /**
        * @description The error message(s) that occurred during the validation of the request data or additional requirements
-       *     applied during the execution of the request
+       *     applied while serving the request
        * @default account-not-found-error
        */
       message: components['schemas']['AdminResetUserPasswordNotFoundErrorMessageEnum'][];
@@ -1760,7 +2000,7 @@ export type components = {
     };
     /**
      * @description The error message(s) that occurred during the validation of the request data or additional requirements
-     *     applied during the execution of the request
+     *     applied while serving the request
      * @enum {string}
      */
     AdminUpdateRootPathBadRequestErrorMessageEnum: AdminUpdateRootPathBadRequestErrorMessageEnum;
@@ -1769,7 +2009,7 @@ export type components = {
       error: string;
       /**
        * @description The error message(s) that occurred during the validation of the request data or additional requirements
-       *     applied during the execution of the request
+       *     applied while serving the request
        * @default root-path-does-not-exist-error
        */
       message: components['schemas']['AdminUpdateRootPathBadRequestErrorMessageEnum'][];
@@ -1785,7 +2025,7 @@ export type components = {
     };
     /**
      * @description The error message(s) that occurred during the validation of the request data or additional requirements
-     *     applied during the execution of the request
+     *     applied while serving the request
      * @enum {string}
      */
     AdminUpdateRootPathNotFoundErrorMessageEnum: AdminUpdateRootPathNotFoundErrorMessageEnum;
@@ -1794,7 +2034,7 @@ export type components = {
       error: string;
       /**
        * @description The error message(s) that occurred during the validation of the request data or additional requirements
-       *     applied during the execution of the request
+       *     applied while serving the request
        * @default root-path-not-found-error
        */
       message: components['schemas']['AdminUpdateRootPathNotFoundErrorMessageEnum'][];
@@ -1814,7 +2054,7 @@ export type components = {
     };
     /**
      * @description The error message(s) that occurred during the validation of the request data or additional requirements
-     *     applied during the execution of the request
+     *     applied while serving the request
      * @enum {string}
      */
     AdminUpdateUserRolesBadRequestErrorMessageEnum: AdminUpdateUserRolesBadRequestErrorMessageEnum;
@@ -1823,7 +2063,7 @@ export type components = {
       error: string;
       /**
        * @description The error message(s) that occurred during the validation of the request data or additional requirements
-       *     applied during the execution of the request
+       *     applied while serving the request
        * @default invalid-user-role-error
        */
       message: components['schemas']['AdminUpdateUserRolesBadRequestErrorMessageEnum'][];
@@ -1838,7 +2078,7 @@ export type components = {
     };
     /**
      * @description The error message(s) that occurred during the validation of the request data or additional requirements
-     *     applied during the execution of the request
+     *     applied while serving the request
      * @enum {string}
      */
     AdminUpdateUserRolesNotFoundErrorMessageEnum: AdminUpdateUserRolesNotFoundErrorMessageEnum;
@@ -1847,7 +2087,7 @@ export type components = {
       error: string;
       /**
        * @description The error message(s) that occurred during the validation of the request data or additional requirements
-       *     applied during the execution of the request
+       *     applied while serving the request
        * @default account-not-found-error
        */
       message: components['schemas']['AdminUpdateUserRolesNotFoundErrorMessageEnum'][];
@@ -1901,7 +2141,7 @@ export type components = {
     GenreSortFieldEnum: GenreSortFieldEnum;
     /**
      * @description The error message(s) that occurred during the validation of the request data or additional requirements
-     *     applied during the execution of the request
+     *     applied while serving the request
      * @enum {string}
      */
     GuestCreateSessionBadRequestErrorMessageEnum: GuestCreateSessionBadRequestErrorMessageEnum;
@@ -1910,7 +2150,7 @@ export type components = {
       error: string;
       /**
        * @description The error message(s) that occurred during the validation of the request data or additional requirements
-       *     applied during the execution of the request
+       *     applied while serving the request
        * @default bad-request-error
        */
       message: components['schemas']['GuestCreateSessionBadRequestErrorMessageEnum'][];
@@ -1940,7 +2180,7 @@ export type components = {
     };
     /**
      * @description The error message(s) that occurred during the validation of the request data or additional requirements
-     *     applied during the execution of the request
+     *     applied while serving the request
      * @enum {string}
      */
     GuestStreamFileNotFoundErrorMessage: GuestStreamFileNotFoundErrorMessage;
@@ -1949,7 +2189,7 @@ export type components = {
       error: string;
       /**
        * @description The error message(s) that occurred during the validation of the request data or additional requirements
-       *     applied during the execution of the request
+       *     applied while serving the request
        * @default file-not-found-error
        */
       message: components['schemas']['GuestStreamFileNotFoundErrorMessage'][];
@@ -2222,7 +2462,6 @@ export type components = {
       Title: string;
     };
     QnapArtistDto: {
-      Albumartist: string;
       FileName: string;
       FileType: string;
       ImagePath: string;
@@ -2536,6 +2775,7 @@ export type components = {
       ImagePath: string;
       LinkID: number;
       prefix: string;
+      Title: string;
     };
     QnapGenreDto: {
       FileName: string;
@@ -5938,7 +6178,7 @@ export type components = {
     TrackSortFieldEnum: TrackSortFieldEnum;
     /**
      * @description The error message(s) that occurred during the validation of the request data or additional requirements
-     *     applied during the execution of the request
+     *     applied while serving the request
      * @enum {string}
      */
     UserCreateRootPathBadRequestErrorMessageEnum: UserCreateRootPathBadRequestErrorMessageEnum;
@@ -5947,7 +6187,7 @@ export type components = {
       error: string;
       /**
        * @description The error message(s) that occurred during the validation of the request data or additional requirements
-       *     applied during the execution of the request
+       *     applied while serving the request
        * @default root-path-does-not-exist-error
        */
       message: components['schemas']['UserCreateRootPathBadRequestErrorMessageEnum'][];
@@ -5974,13 +6214,42 @@ export type components = {
      *     applied during the execution of the request
      * @enum {string}
      */
+    UserDeleteCustomFileDataNotFoundErrorMessage: UserDeleteCustomFileDataNotFoundErrorMessage;
+    UserDeleteCustomFileDataNotFoundResponseDto: {
+      /** @description General description of the error class */
+      error: string;
+      /**
+       * @description The error message(s) that occurred during the validation of the request data or additional requirements
+       *     applied during the execution of the request
+       * @default file-not-found-error
+       */
+      message: components['schemas']['UserDeleteCustomFileDataNotFoundErrorMessage'][];
+      /**
+       * @description The success being "false" indicates that the request failed to complete.
+       * @default false
+       */
+      success: boolean;
+    };
+    UserDeleteCustomFileDataResponseDto: {
+      /**
+       * Format: constant
+       * @description The success being "true" indicates that the request completed.
+       * @default true
+       */
+      success: boolean;
+    };
+    /**
+     * @description The error message(s) that occurred during the validation of the request data or additional requirements
+     *     applied while serving the request
+     * @enum {string}
+     */
     UserDeleteRootPathNotFoundErrorMessageEnum: UserDeleteRootPathNotFoundErrorMessageEnum;
     UserDeleteRootPathNotFoundResponseDto: {
       /** @description General description of the error class */
       error: string;
       /**
        * @description The error message(s) that occurred during the validation of the request data or additional requirements
-       *     applied during the execution of the request
+       *     applied while serving the request
        * @default root-path-not-found-error
        */
       message: components['schemas']['UserDeleteRootPathNotFoundErrorMessageEnum'][];
@@ -6012,7 +6281,7 @@ export type components = {
       error: string;
       /**
        * @description The error message(s) that occurred during the validation of the request data or additional requirements
-       *     applied during the execution of the request
+       *     applied while serving the request
        * @default invalid-added-after-error
        */
       message: components['schemas']['UserListTrackArtistsBadRequestErrorMessage'][];
@@ -6047,7 +6316,7 @@ export type components = {
       error: string;
       /**
        * @description The error message(s) that occurred during the validation of the request data or additional requirements
-       *     applied during the execution of the request
+       *     applied while serving the request
        * @default invalid-added-after-error
        */
       message: components['schemas']['UserListTrackArtistsBadRequestErrorMessage'][];
@@ -6079,7 +6348,7 @@ export type components = {
     };
     /**
      * @description The error message(s) that occurred during the validation of the request data or additional requirements
-     *     applied during the execution of the request.
+     *     applied while serving the request.
      * @enum {string}
      */
     UserListAlbumsBadRequestErrorMessages: UserListAlbumsBadRequestErrorMessages;
@@ -6088,7 +6357,7 @@ export type components = {
       error: string;
       /**
        * @description The error message(s) that occurred during the validation of the request data or additional requirements
-       *     applied during the execution of the request.
+       *     applied while serving the request.
        * @default invalid-added-after-error
        */
       message: components['schemas']['UserListAlbumsBadRequestErrorMessages'][];
@@ -6120,7 +6389,7 @@ export type components = {
     };
     /**
      * @description The error message(s) that occurred during the validation of the request data or additional requirements
-     *     applied during the execution of the request.
+     *     applied while serving the request.
      * @enum {string}
      */
     UserListAlbumsWithTracksBadRequestErrorMessages: UserListAlbumsWithTracksBadRequestErrorMessages;
@@ -6129,7 +6398,7 @@ export type components = {
       error: string;
       /**
        * @description The error message(s) that occurred during the validation of the request data or additional requirements
-       *     applied during the execution of the request.
+       *     applied while serving the request.
        * @default invalid-added-after-error
        */
       message: components['schemas']['UserListAlbumsWithTracksBadRequestErrorMessages'][];
@@ -6161,7 +6430,7 @@ export type components = {
     };
     /**
      * @description The error message(s) that occurred during the validation of the request data or additional requirements
-     *     applied during the execution of the request
+     *     applied while serving the request
      * @enum {string}
      */
     UserListIndexerLogsBadRequestErrorMessageEnum: UserListIndexerLogsBadRequestErrorMessageEnum;
@@ -6170,7 +6439,7 @@ export type components = {
       error: string;
       /**
        * @description The error message(s) that occurred during the validation of the request data or additional requirements
-       *     applied during the execution of the request
+       *     applied while serving the request
        * @default invalid-account-id-error
        */
       message: components['schemas']['UserListIndexerLogsBadRequestErrorMessageEnum'][];
@@ -6182,7 +6451,7 @@ export type components = {
     };
     /**
      * @description The error message(s) that occurred during the validation of the request data or additional requirements
-     *     applied during the execution of the request
+     *     applied while serving the request
      * @enum {string}
      */
     UserListIndexerLogsNotFoundErrorMessageEnum: UserListIndexerLogsNotFoundErrorMessageEnum;
@@ -6191,7 +6460,7 @@ export type components = {
       error: string;
       /**
        * @description The error message(s) that occurred during the validation of the request data or additional requirements
-       *     applied during the execution of the request
+       *     applied while serving the request
        * @default invalid-account-id-error
        */
       message: components['schemas']['UserListIndexerLogsNotFoundErrorMessageEnum'][];
@@ -6222,7 +6491,7 @@ export type components = {
     };
     /**
      * @description The error message(s) that occurred during the validation of the request data or additional requirements
-     *     applied during the execution of the request
+     *     applied while serving the request
      * @enum {string}
      */
     UserListTrackArtistsBadRequestErrorMessage: UserListTrackArtistsBadRequestErrorMessage;
@@ -6231,7 +6500,7 @@ export type components = {
       error: string;
       /**
        * @description The error message(s) that occurred during the validation of the request data or additional requirements
-       *     applied during the execution of the request
+       *     applied while serving the request
        * @default invalid-added-after-error
        */
       message: components['schemas']['UserListTrackArtistsBadRequestErrorMessage'][];
@@ -6266,7 +6535,7 @@ export type components = {
       error: string;
       /**
        * @description The error message(s) that occurred during the validation of the request data or additional requirements
-       *     applied during the execution of the request
+       *     applied while serving the request
        * @default invalid-added-after-error
        */
       message: components['schemas']['UserListTrackArtistsBadRequestErrorMessage'][];
@@ -6298,7 +6567,7 @@ export type components = {
     };
     /**
      * @description The error message(s) that occurred during the validation of the request data or additional requirements
-     *     applied during the execution of the request
+     *     applied while serving the request
      * @enum {string}
      */
     UserListTrackComposersBadRequestErrorMessages: UserListTrackComposersBadRequestErrorMessages;
@@ -6307,7 +6576,7 @@ export type components = {
       error: string;
       /**
        * @description The error message(s) that occurred during the validation of the request data or additional requirements
-       *     applied during the execution of the request
+       *     applied while serving the request
        * @default invalid-added-after-error
        */
       message: components['schemas']['UserListTrackComposersBadRequestErrorMessages'][];
@@ -6342,7 +6611,7 @@ export type components = {
       error: string;
       /**
        * @description The error message(s) that occurred during the validation of the request data or additional requirements
-       *     applied during the execution of the request
+       *     applied while serving the request
        * @default invalid-added-after-error
        */
       message: components['schemas']['UserListTrackComposersBadRequestErrorMessages'][];
@@ -6374,7 +6643,7 @@ export type components = {
     };
     /**
      * @description The error message(s) that occurred during the validation of the request data or additional requirements
-     *     applied during the execution of the request
+     *     applied while serving the request
      * @enum {string}
      */
     UserListTrackGenresBadRequestErrorMessages: UserListTrackGenresBadRequestErrorMessages;
@@ -6383,7 +6652,7 @@ export type components = {
       error: string;
       /**
        * @description The error message(s) that occurred during the validation of the request data or additional requirements
-       *     applied during the execution of the request
+       *     applied while serving the request
        * @default invalid-limit-error
        */
       message: components['schemas']['UserListTrackGenresBadRequestErrorMessages'][];
@@ -6415,7 +6684,7 @@ export type components = {
     };
     /**
      * @description The error message(s) that occurred during the validation of the request data or additional requirements
-     *     applied during the execution of the request
+     *     applied while serving the request
      * @enum {string}
      */
     UserListTrackGenresWithTracksBadRequestErrorMessages: UserListTrackGenresWithTracksBadRequestErrorMessages;
@@ -6424,7 +6693,7 @@ export type components = {
       error: string;
       /**
        * @description The error message(s) that occurred during the validation of the request data or additional requirements
-       *     applied during the execution of the request
+       *     applied while serving the request
        * @default invalid-limit-error
        */
       message: components['schemas']['UserListTrackGenresWithTracksBadRequestErrorMessages'][];
@@ -6456,7 +6725,7 @@ export type components = {
     };
     /**
      * @description The error message(s) that occurred during the validation of the request data or additional requirements
-     *     applied during the execution of the request
+     *     applied while serving the request
      * @enum {string}
      */
     UserListTracksBadRequestErrorMessages: UserListTracksBadRequestErrorMessages;
@@ -6465,7 +6734,7 @@ export type components = {
       error: string;
       /**
        * @description The error message(s) that occurred during the validation of the request data or additional requirements
-       *     applied during the execution of the request
+       *     applied while serving the request
        * @default invalid-added-after-error
        */
       message: components['schemas']['UserListTracksBadRequestErrorMessages'][];
@@ -6512,7 +6781,7 @@ export type components = {
     };
     /**
      * @description The error message(s) that occurred during the validation of the request data or additional requirements
-     *     applied during the execution of the request
+     *     applied while serving the request
      * @enum {string}
      */
     UserRetrieveAlbumNotFoundErrorMessage: UserRetrieveAlbumNotFoundErrorMessage;
@@ -6521,7 +6790,7 @@ export type components = {
       error: string;
       /**
        * @description The error message(s) that occurred during the validation of the request data or additional requirements
-       *     applied during the execution of the request
+       *     applied while serving the request
        * @default album-not-found-error
        */
       message: components['schemas']['UserRetrieveAlbumNotFoundErrorMessage'][];
@@ -6567,7 +6836,49 @@ export type components = {
        */
       updatedAt?: string;
     };
+    /**
+     * @description The error message(s) that occurred during the validation of the request data or additional requirements
+     *     applied during the execution of the request
+     * @enum {string}
+     */
+    UserSetCustomFileDataBadRequestErrorMessage: UserSetCustomFileDataBadRequestErrorMessage;
+    UserSetCustomFileDataBadRequestResponseDto: {
+      /** @description General description of the error class */
+      error: string;
+      /**
+       * @description The error message(s) that occurred during the validation of the request data or additional requirements
+       *     applied during the execution of the request
+       * @default internal-server-error
+       */
+      message: components['schemas']['UserSetCustomFileDataBadRequestErrorMessage'][];
+      /**
+       * @description The success being "false" indicates that the request failed to complete.
+       * @default false
+       */
+      success: boolean;
+    };
+    UserSetCustomFileDataBodyDto: {
+      albumArtists: string;
+      albumTitle: string;
+      artists: string;
+      comment: string;
+      composers: string;
+      discNumber: number;
+      genres: string;
+      title?: string;
+      trackNumber: number;
+      year?: number;
+    };
     UserTreeItemDto: {
+      /**
+       * @example [
+       *       {
+       *         "folder": "sub-folder",
+       *         "fullPath": "/path/to/sub-folder",
+       *         "id": 123
+       *       }
+       *     ]
+       */
       children?: components['schemas']['UserTreeItemDto'][];
       file?: string;
       folder?: string;
@@ -6576,7 +6887,7 @@ export type components = {
     };
     /**
      * @description The error message(s) that occurred during the validation of the request data or additional requirements
-     *     applied during the execution of the request
+     *     applied while serving the request
      * @enum {string}
      */
     UserUpdatePasswordBadRequestErrorMessageEnum: UserUpdatePasswordBadRequestErrorMessageEnum;
@@ -6585,7 +6896,7 @@ export type components = {
       error: string;
       /**
        * @description The error message(s) that occurred during the validation of the request data or additional requirements
-       *     applied during the execution of the request
+       *     applied while serving the request
        * @default invalid-password-error
        */
       message: components['schemas']['UserUpdatePasswordBadRequestErrorMessageEnum'][];
@@ -6619,7 +6930,7 @@ export interface operations {
     parameters: {
       query?: never;
       header: {
-        /** @description Bearer token for authentication */
+        /** @description JWT token for authentication */
         Authorization: string;
       };
       path?: never;
@@ -6656,7 +6967,7 @@ export interface operations {
         id: number;
       };
       header: {
-        /** @description Bearer token for authentication */
+        /** @description JWT token for authentication */
         Authorization: string;
       };
       path?: never;
@@ -6704,7 +7015,7 @@ export interface operations {
         id: number;
       };
       header: {
-        /** @description Bearer token for authentication */
+        /** @description JWT token for authentication */
         Authorization: string;
       };
       path?: never;
@@ -6748,7 +7059,7 @@ export interface operations {
         id: number;
       };
       header: {
-        /** @description Bearer token for authentication */
+        /** @description JWT token for authentication */
         Authorization: string;
       };
       path?: never;
@@ -6780,7 +7091,7 @@ export interface operations {
     parameters: {
       query?: never;
       header: {
-        /** @description Bearer token for authentication */
+        /** @description JWT token for authentication */
         Authorization: string;
       };
       path?: never;
@@ -6802,7 +7113,7 @@ export interface operations {
     parameters: {
       query?: never;
       header: {
-        /** @description Bearer token for authentication */
+        /** @description JWT token for authentication */
         Authorization: string;
       };
       path?: never;
@@ -6829,7 +7140,7 @@ export interface operations {
         search?: string;
       };
       header: {
-        /** @description Bearer token for authentication */
+        /** @description JWT token for authentication */
         Authorization: string;
       };
       path?: never;
@@ -6867,7 +7178,7 @@ export interface operations {
     parameters: {
       query?: never;
       header: {
-        /** @description Bearer token for authentication */
+        /** @description JWT token for authentication */
         Authorization: string;
       };
       path?: never;
@@ -6889,7 +7200,7 @@ export interface operations {
     parameters: {
       query?: never;
       header: {
-        /** @description Bearer token for authentication */
+        /** @description JWT token for authentication */
         Authorization: string;
       };
       path?: never;
@@ -6915,7 +7226,7 @@ export interface operations {
         id: number;
       };
       header: {
-        /** @description Bearer token for authentication */
+        /** @description JWT token for authentication */
         Authorization: string;
       };
       path?: never;
@@ -6958,7 +7269,7 @@ export interface operations {
         id: number;
       };
       header: {
-        /** @description Bearer token for authentication */
+        /** @description JWT token for authentication */
         Authorization: string;
       };
       path?: never;
@@ -7011,7 +7322,7 @@ export interface operations {
     parameters: {
       query?: never;
       header: {
-        /** @description Bearer token for authentication */
+        /** @description JWT token for authentication */
         Authorization: string;
       };
       path?: never;
@@ -7041,7 +7352,7 @@ export interface operations {
         id: number;
       };
       header: {
-        /** @description Bearer token for authentication */
+        /** @description JWT token for authentication */
         Authorization: string;
       };
       path?: never;
@@ -7088,7 +7399,7 @@ export interface operations {
         id: number;
       };
       header: {
-        /** @description Bearer token for authentication */
+        /** @description JWT token for authentication */
         Authorization: string;
       };
       path?: never;
@@ -7271,23 +7582,6 @@ export interface operations {
       };
     };
   };
-  GuestHealthcheckController_healthcheck: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content?: never;
-      };
-    };
-  };
   GuestStreamFileController_get: {
     parameters: {
       query: {
@@ -7305,7 +7599,10 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          'application/json': string;
+          'audio/flac': string;
+          'audio/mpeg': string;
+          'audio/ogg': string;
+          'audio/wav': string;
         };
       };
       /** @description The requested file was not found */
@@ -7314,7 +7611,10 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          'application/json': components['schemas']['GuestStreamFileNotFoundResponseDto'];
+          'audio/flac': components['schemas']['GuestStreamFileNotFoundResponseDto'];
+          'audio/mpeg': components['schemas']['GuestStreamFileNotFoundResponseDto'];
+          'audio/ogg': components['schemas']['GuestStreamFileNotFoundResponseDto'];
+          'audio/wav': components['schemas']['GuestStreamFileNotFoundResponseDto'];
         };
       };
     };
@@ -7323,7 +7623,7 @@ export interface operations {
     parameters: {
       query?: never;
       header: {
-        /** @description Bearer token for authentication */
+        /** @description JWT token for authentication */
         Authorization: string;
       };
       path?: never;
@@ -7355,6 +7655,41 @@ export interface operations {
       };
     };
   };
+  UserDeleteCustomFileDataController_delete: {
+    parameters: {
+      query: {
+        /** @description The ID of the file */
+        id: number;
+      };
+      header: {
+        /** @description JWT token for authentication */
+        Authorization: string;
+      };
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description Custom data deleted successfully */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['UserDeleteCustomFileDataResponseDto'];
+        };
+      };
+      /** @description File not found */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['UserDeleteCustomFileDataNotFoundResponseDto'];
+        };
+      };
+    };
+  };
   UserDeleteRootPathController_delete: {
     parameters: {
       query: {
@@ -7362,7 +7697,7 @@ export interface operations {
         id: number;
       };
       header: {
-        /** @description Bearer token for authentication */
+        /** @description JWT token for authentication */
         Authorization: string;
       };
       path?: never;
@@ -7394,7 +7729,7 @@ export interface operations {
     parameters: {
       query?: never;
       header: {
-        /** @description Bearer token for authentication */
+        /** @description JWT token for authentication */
         Authorization: string;
       };
       path?: never;
@@ -7440,7 +7775,7 @@ export interface operations {
     parameters: {
       query?: never;
       header: {
-        /** @description Bearer token for authentication */
+        /** @description JWT token for authentication */
         Authorization: string;
       };
       path?: never;
@@ -7490,7 +7825,7 @@ export interface operations {
         sortField?: components['schemas']['ArtistSortFieldEnum'];
       };
       header: {
-        /** @description Bearer token for authentication */
+        /** @description JWT token for authentication */
         Authorization: string;
       };
       path?: never;
@@ -7498,7 +7833,7 @@ export interface operations {
     };
     requestBody?: never;
     responses: {
-      /** @description Successfully retrieved the list of album artists for the user. */
+      /** @description Successful response with an array of data and pagination information. */
       200: {
         headers: {
           [name: string]: unknown;
@@ -7507,7 +7842,7 @@ export interface operations {
           'application/json': components['schemas']['UserListAlbumArtistsResponseDto'];
         };
       };
-      /** @description The request was invalid or missing required parameters. */
+      /** @description Failure response with error information relating to missing or invalid parameters. */
       400: {
         headers: {
           [name: string]: unknown;
@@ -7549,7 +7884,7 @@ export interface operations {
         sortField?: components['schemas']['ArtistSortFieldEnum'];
       };
       header: {
-        /** @description Bearer token for authentication */
+        /** @description JWT token for authentication */
         Authorization: string;
       };
       path?: never;
@@ -7557,7 +7892,7 @@ export interface operations {
     };
     requestBody?: never;
     responses: {
-      /** @description Successfully retrieved the list of album artists with tracks for the user. */
+      /** @description Successful response with an array of data and pagination information. */
       200: {
         headers: {
           [name: string]: unknown;
@@ -7566,7 +7901,7 @@ export interface operations {
           'application/json': components['schemas']['UserListAlbumArtistsWithTracksResponseDto'];
         };
       };
-      /** @description The request was invalid or missing required parameters. */
+      /** @description Failure response with error information relating to missing or invalid parameters. */
       400: {
         headers: {
           [name: string]: unknown;
@@ -7643,7 +7978,7 @@ export interface operations {
         year?: number;
       };
       header: {
-        /** @description Bearer token for authentication */
+        /** @description JWT token for authentication */
         Authorization: string;
       };
       path?: never;
@@ -7651,7 +7986,7 @@ export interface operations {
     };
     requestBody?: never;
     responses: {
-      /** @description Successfully retrieved the list of albums for the user. */
+      /** @description Successful response with an array of data and pagination information. */
       200: {
         headers: {
           [name: string]: unknown;
@@ -7660,7 +7995,7 @@ export interface operations {
           'application/json': components['schemas']['UserListAlbumsResponseDto'];
         };
       };
-      /** @description The request was invalid or missing required parameters. */
+      /** @description Failure response with error information relating to missing or invalid parameters. */
       400: {
         headers: {
           [name: string]: unknown;
@@ -7737,7 +8072,7 @@ export interface operations {
         year?: number;
       };
       header: {
-        /** @description Bearer token for authentication */
+        /** @description JWT token for authentication */
         Authorization: string;
       };
       path?: never;
@@ -7745,7 +8080,7 @@ export interface operations {
     };
     requestBody?: never;
     responses: {
-      /** @description Successfully retrieved the list of albums with their tracks for the user. */
+      /** @description Successful response with an array of data and pagination information. */
       200: {
         headers: {
           [name: string]: unknown;
@@ -7754,7 +8089,7 @@ export interface operations {
           'application/json': components['schemas']['UserListAlbumsWithTracksResponseDto'];
         };
       };
-      /** @description The request was invalid or missing required parameters. */
+      /** @description Failure response with error information relating to missing or invalid parameters. */
       400: {
         headers: {
           [name: string]: unknown;
@@ -7772,7 +8107,7 @@ export interface operations {
         search?: string;
       };
       header: {
-        /** @description Bearer token for authentication */
+        /** @description JWT token for authentication */
         Authorization: string;
       };
       path?: never;
@@ -7780,6 +8115,7 @@ export interface operations {
     };
     requestBody?: never;
     responses: {
+      /** @description Successful response with an array of data and pagination information. */
       200: {
         headers: {
           [name: string]: unknown;
@@ -7810,7 +8146,7 @@ export interface operations {
     parameters: {
       query?: never;
       header: {
-        /** @description Bearer token for authentication */
+        /** @description JWT token for authentication */
         Authorization: string;
       };
       path?: never;
@@ -7859,7 +8195,7 @@ export interface operations {
         sortField?: components['schemas']['ArtistSortFieldEnum'];
       };
       header: {
-        /** @description Bearer token for authentication */
+        /** @description JWT token for authentication */
         Authorization: string;
       };
       path?: never;
@@ -7867,7 +8203,7 @@ export interface operations {
     };
     requestBody?: never;
     responses: {
-      /** @description Successfully retrieved the list of artists for the user. */
+      /** @description Successful response with an array of data and pagination information. */
       200: {
         headers: {
           [name: string]: unknown;
@@ -7876,7 +8212,7 @@ export interface operations {
           'application/json': components['schemas']['UserListTrackArtistsResponseDto'];
         };
       };
-      /** @description The request was invalid or missing required parameters. */
+      /** @description Failure response with error information relating to missing or invalid parameters. */
       400: {
         headers: {
           [name: string]: unknown;
@@ -7918,7 +8254,7 @@ export interface operations {
         sortField?: components['schemas']['ArtistSortFieldEnum'];
       };
       header: {
-        /** @description Bearer token for authentication */
+        /** @description JWT token for authentication */
         Authorization: string;
       };
       path?: never;
@@ -7926,7 +8262,7 @@ export interface operations {
     };
     requestBody?: never;
     responses: {
-      /** @description Successfully retrieved the list of artists along with their tracks for the user. */
+      /** @description Successful response with an array of data and pagination information. */
       200: {
         headers: {
           [name: string]: unknown;
@@ -7935,7 +8271,7 @@ export interface operations {
           'application/json': components['schemas']['UserListTrackArtistsWithTracksResponseDto'];
         };
       };
-      /** @description The request was invalid or missing required parameters. */
+      /** @description Failure response with error information relating to missing or invalid parameters. */
       400: {
         headers: {
           [name: string]: unknown;
@@ -7977,7 +8313,7 @@ export interface operations {
         sortField?: components['schemas']['ComposerSortFieldEnum'];
       };
       header: {
-        /** @description Bearer token for authentication */
+        /** @description JWT token for authentication */
         Authorization: string;
       };
       path?: never;
@@ -7985,7 +8321,7 @@ export interface operations {
     };
     requestBody?: never;
     responses: {
-      /** @description Successfully retrieved the list of composers for the user. */
+      /** @description Successful response with an array of data and pagination information. */
       200: {
         headers: {
           [name: string]: unknown;
@@ -7994,7 +8330,7 @@ export interface operations {
           'application/json': components['schemas']['UserListTrackComposersResponseDto'];
         };
       };
-      /** @description The request was invalid or missing required parameters. */
+      /** @description Failure response with error information relating to missing or invalid parameters. */
       400: {
         headers: {
           [name: string]: unknown;
@@ -8036,7 +8372,7 @@ export interface operations {
         sortField?: components['schemas']['ComposerSortFieldEnum'];
       };
       header: {
-        /** @description Bearer token for authentication */
+        /** @description JWT token for authentication */
         Authorization: string;
       };
       path?: never;
@@ -8044,7 +8380,7 @@ export interface operations {
     };
     requestBody?: never;
     responses: {
-      /** @description Successfully retrieved the list of composers for the user. */
+      /** @description Successful response with an array of data and pagination information. */
       200: {
         headers: {
           [name: string]: unknown;
@@ -8053,7 +8389,7 @@ export interface operations {
           'application/json': components['schemas']['UserListTrackComposersWithTracksResponseDto'];
         };
       };
-      /** @description The request was invalid or missing required parameters. */
+      /** @description Failure response with error information relating to missing or invalid parameters. */
       400: {
         headers: {
           [name: string]: unknown;
@@ -8075,7 +8411,7 @@ export interface operations {
         sortField?: components['schemas']['GenreSortFieldEnum'];
       };
       header: {
-        /** @description Bearer token for authentication */
+        /** @description JWT token for authentication */
         Authorization: string;
       };
       path?: never;
@@ -8083,7 +8419,7 @@ export interface operations {
     };
     requestBody?: never;
     responses: {
-      /** @description Successfully retrieved the list of genres for the user. */
+      /** @description Successful response with an array of data and pagination information. */
       200: {
         headers: {
           [name: string]: unknown;
@@ -8092,7 +8428,7 @@ export interface operations {
           'application/json': components['schemas']['UserListTrackGenresResponseDto'];
         };
       };
-      /** @description The request was invalid or missing required parameters. */
+      /** @description Failure response with error information relating to missing or invalid parameters. */
       400: {
         headers: {
           [name: string]: unknown;
@@ -8114,7 +8450,7 @@ export interface operations {
         sortField?: components['schemas']['GenreSortFieldEnum'];
       };
       header: {
-        /** @description Bearer token for authentication */
+        /** @description JWT token for authentication */
         Authorization: string;
       };
       path?: never;
@@ -8122,7 +8458,7 @@ export interface operations {
     };
     requestBody?: never;
     responses: {
-      /** @description Successfully retrieved the list of genres for the user. */
+      /** @description Successful response with an array of data and pagination information. */
       200: {
         headers: {
           [name: string]: unknown;
@@ -8131,7 +8467,7 @@ export interface operations {
           'application/json': components['schemas']['UserListTrackGenresWithTracksResponseDto'];
         };
       };
-      /** @description The request was invalid or missing required parameters. */
+      /** @description Failure response with error information relating to missing or invalid parameters. */
       400: {
         headers: {
           [name: string]: unknown;
@@ -8208,7 +8544,7 @@ export interface operations {
         year?: number;
       };
       header: {
-        /** @description Bearer token for authentication */
+        /** @description JWT token for authentication */
         Authorization: string;
       };
       path?: never;
@@ -8216,7 +8552,7 @@ export interface operations {
     };
     requestBody?: never;
     responses: {
-      /** @description Successfully retrieved the list of tracks for the user. */
+      /** @description Successful response with an array of data and pagination information. */
       200: {
         headers: {
           [name: string]: unknown;
@@ -8225,7 +8561,7 @@ export interface operations {
           'application/json': components['schemas']['UserListTracksResponseDto'];
         };
       };
-      /** @description The request was invalid or missing required parameters. */
+      /** @description Failure response with error information relating to missing or invalid parameters. */
       400: {
         headers: {
           [name: string]: unknown;
@@ -8240,7 +8576,7 @@ export interface operations {
     parameters: {
       query?: never;
       header: {
-        /** @description Bearer token for authentication */
+        /** @description JWT token for authentication */
         Authorization: string;
       };
       path?: never;
@@ -8266,7 +8602,7 @@ export interface operations {
         id: number;
       };
       header: {
-        /** @description Bearer token for authentication */
+        /** @description JWT token for authentication */
         Authorization: string;
       };
       path?: never;
@@ -8294,11 +8630,59 @@ export interface operations {
       };
     };
   };
+  UserSetCustomFileDataController_put: {
+    parameters: {
+      query: {
+        /** @description The ID of the file */
+        id: number;
+      };
+      header: {
+        /** @description JWT token for authentication */
+        Authorization: string;
+      };
+      path?: never;
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['UserSetCustomFileDataBodyDto'];
+      };
+    };
+    responses: {
+      /** @description Custom data set successfully */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['UserDeleteCustomFileDataResponseDto'];
+        };
+      };
+      /** @description Request failed */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['UserSetCustomFileDataBadRequestResponseDto'];
+        };
+      };
+      /** @description File not found */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['UserDeleteCustomFileDataNotFoundResponseDto'];
+        };
+      };
+    };
+  };
   UserUpdatePasswordController_post: {
     parameters: {
       query?: never;
       header: {
-        /** @description Bearer token for authentication */
+        /** @description JWT token for authentication */
         Authorization: string;
       };
       path?: never;
@@ -8430,10 +8814,10 @@ export interface operations {
   QnapAsGetFileController_get: {
     parameters: {
       query: {
-        addcounts: number;
+        addcounts?: number;
         ext: string;
         f: number;
-        from: string;
+        from?: string;
       };
       header?: never;
       path?: never;
@@ -8446,28 +8830,10 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          'application/json': string;
-        };
-      };
-    };
-  };
-  QnapAsLocalPlaybackController_post: {
-    parameters: {
-      query: {
-        act: string;
-      };
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'text/xml': string;
+          'audio/flac': string;
+          'audio/mpeg': string;
+          'audio/ogg': string;
+          'audio/wav': string;
         };
       };
     };
@@ -8501,9 +8867,11 @@ export interface operations {
   };
   QnapMediaCoverController_get: {
     parameters: {
-      query: {
-        /** @description The action (always "list") */
-        imagepath: string;
+      query?: {
+        albumId?: number;
+        artistId?: number;
+        folderId?: number;
+        imagepath?: string;
       };
       header?: never;
       path?: never;
@@ -8771,40 +9139,6 @@ export interface operations {
       };
     };
   };
-  SynologyLyricsController_routeSearch: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      201: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content?: never;
-      };
-    };
-  };
-  SynologyLyricsController_route: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      201: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content?: never;
-      };
-    };
-  };
   SynologyPlaylistController_routeRequest: {
     parameters: {
       query?: never;
@@ -8959,23 +9293,6 @@ export interface operations {
       };
     };
   };
-  SynologyRemotePlayerController_route: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      201: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content?: never;
-      };
-    };
-  };
   SynologySearchController_route: {
     parameters: {
       query?: never;
@@ -9092,7 +9409,10 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          'application/json': string;
+          'audio/flac': string;
+          'audio/mpeg': string;
+          'audio/ogg': string;
+          'audio/wav': string;
         };
       };
     };
@@ -9380,6 +9700,9 @@ export enum UserCreateRootPathBadRequestErrorMessageEnum {
   root_path_does_not_exist_error = 'root-path-does-not-exist-error',
   duplicate_root_path_error = 'duplicate-root-path-error',
 }
+export enum UserDeleteCustomFileDataNotFoundErrorMessage {
+  file_not_found_error = 'file-not-found-error',
+}
 export enum UserDeleteRootPathNotFoundErrorMessageEnum {
   root_path_not_found_error = 'root-path-not-found-error',
 }
@@ -9511,6 +9834,29 @@ export enum UserRetrieveAlbumNotFoundErrorMessage {
 export enum UserRoleEnum {
   user = 'user',
   admin = 'admin',
+}
+export enum UserSetCustomFileDataBadRequestErrorMessage {
+  invalid_file_id_error = 'invalid-file-id-error',
+  invalid_album_artists_error = 'invalid-album-artists-error',
+  invalid_album_artists_length_error = 'invalid-album-artists-length-error',
+  invalid_album_title_error = 'invalid-album-title-error',
+  invalid_album_title_length_error = 'invalid-album-title-length-error',
+  invalid_artists_error = 'invalid-artists-error',
+  invalid_artists_length_error = 'invalid-artists-length-error',
+  invalid_comment_error = 'invalid-comment-error',
+  invalid_comment_length_error = 'invalid-comment-length-error',
+  invalid_composers_error = 'invalid-composers-error',
+  invalid_composers_length_error = 'invalid-composers-length-error',
+  invalid_disc_number_error = 'invalid-disc-number-error',
+  invalid_disc_number_range_error = 'invalid-disc-number-range-error',
+  invalid_genres_error = 'invalid-genres-error',
+  invalid_genres_length_error = 'invalid-genres-length-error',
+  invalid_title_error = 'invalid-title-error',
+  invalid_title_length_error = 'invalid-title-length-error',
+  invalid_track_number_error = 'invalid-track-number-error',
+  invalid_track_number_range_error = 'invalid-track-number-range-error',
+  invalid_year_error = 'invalid-year-error',
+  invalid_year_range_error = 'invalid-year-range-error',
 }
 export enum UserUpdatePasswordBadRequestErrorMessageEnum {
   invalid_password_error = 'invalid-password-error',

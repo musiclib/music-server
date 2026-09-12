@@ -25,7 +25,6 @@ export class UserDeleteRootPathController {
   @ApiOperation({
     summary: `Remove a music source from the user's account`,
     description: [
-      // eslint-disable-next-line max-len
       `Deletes the specified root path and all associated information in the database immediately.`,
       `The songs and folders will no longer be present in your librariy but the files will remain on the file system.`,
       JWT_AUTHENTICATED_REQUEST_DESCRIPTION,
