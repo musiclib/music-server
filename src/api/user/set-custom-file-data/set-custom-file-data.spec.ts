@@ -1,13 +1,23 @@
-import { ADMIN_PASSWORD, ADMIN_USERNAME, UserApi, api, createUserApi } from '../../../test-helper';
 import { ErrorCodes } from '../../../constants/error-codes';
+import { USER_PASSWORD, USER_USERNAME, UserApi, api, createUserApi } from '../../../test-helper';
 import { afterAll, beforeAll, describe, expect, it } from '@jest/globals';
 
-describe.skip('/api/user/set-custom-file-data', () => {
+describe('/api/user/set-custom-file-data', () => {
   const deleteCustomData: number[] = [];
   let userApi: UserApi;
+  let trackId: number;
 
   beforeAll(async () => {
-    userApi = await createUserApi(ADMIN_USERNAME, ADMIN_PASSWORD);
+    userApi = await createUserApi(USER_USERNAME, USER_PASSWORD);
+    const { data: trackData } = await userApi.listTracks({
+      offset: 0,
+      limit: 100_000,
+    });
+    const track = trackData?.tracks[0];
+    if (!track) {
+      throw new Error('Track not found');
+    }
+    trackId = track.id;
   });
 
   afterAll(async () => {
@@ -67,7 +77,7 @@ describe.skip('/api/user/set-custom-file-data', () => {
     });
 
     it('should reject invalid album artists length', async () => {
-      const { error } = await userApi.setCustomFileData(1, {
+      const { error } = await userApi.setCustomFileData(trackId, {
         albumArtists: 'a'.repeat(1001),
         albumTitle: 'Custom albumTitle',
         title: 'Custom title',
@@ -83,7 +93,7 @@ describe.skip('/api/user/set-custom-file-data', () => {
     });
 
     it('should reject invalid album title length', async () => {
-      const { error } = await userApi.setCustomFileData(1, {
+      const { error } = await userApi.setCustomFileData(trackId, {
         albumArtists: 'Custom albumArtists',
         albumTitle: 'a'.repeat(1001),
         title: 'Custom title',
@@ -99,7 +109,7 @@ describe.skip('/api/user/set-custom-file-data', () => {
     });
 
     it('should reject invalid artists length', async () => {
-      const { error } = await userApi.setCustomFileData(1, {
+      const { error } = await userApi.setCustomFileData(trackId, {
         albumArtists: 'Custom albumArtists',
         albumTitle: 'Custom albumTitle',
         title: 'Custom title',
@@ -115,7 +125,7 @@ describe.skip('/api/user/set-custom-file-data', () => {
     });
 
     it('should reject invalid comment length', async () => {
-      const { error } = await userApi.setCustomFileData(1, {
+      const { error } = await userApi.setCustomFileData(trackId, {
         albumArtists: 'Custom albumArtists',
         albumTitle: 'Custom albumTitle',
         title: 'Custom title',
@@ -131,7 +141,7 @@ describe.skip('/api/user/set-custom-file-data', () => {
     });
 
     it('should reject invalid composers length', async () => {
-      const { error } = await userApi.setCustomFileData(1, {
+      const { error } = await userApi.setCustomFileData(trackId, {
         albumArtists: 'Custom albumArtists',
         albumTitle: 'Custom albumTitle',
         title: 'Custom title',
@@ -147,7 +157,7 @@ describe.skip('/api/user/set-custom-file-data', () => {
     });
 
     it('should reject invalid disc number', async () => {
-      const { error } = await userApi.setCustomFileData(1, {
+      const { error } = await userApi.setCustomFileData(trackId, {
         albumArtists: 'Custom albumArtists',
         albumTitle: 'Custom albumTitle',
         title: 'Custom title',
@@ -163,7 +173,7 @@ describe.skip('/api/user/set-custom-file-data', () => {
     });
 
     it('should reject invalid disc number range', async () => {
-      const { error } = await userApi.setCustomFileData(1, {
+      const { error } = await userApi.setCustomFileData(trackId, {
         albumArtists: 'Custom albumArtists',
         albumTitle: 'Custom albumTitle',
         title: 'Custom title',
@@ -179,7 +189,7 @@ describe.skip('/api/user/set-custom-file-data', () => {
     });
 
     it('should reject invalid genres length', async () => {
-      const { error } = await userApi.setCustomFileData(1, {
+      const { error } = await userApi.setCustomFileData(trackId, {
         albumArtists: 'Custom albumArtists',
         albumTitle: 'Custom albumTitle',
         title: 'Custom title',
@@ -195,7 +205,7 @@ describe.skip('/api/user/set-custom-file-data', () => {
     });
 
     it('should reject invalid title length', async () => {
-      const { error } = await userApi.setCustomFileData(1, {
+      const { error } = await userApi.setCustomFileData(trackId, {
         albumArtists: 'Custom albumArtists',
         albumTitle: 'Custom albumTitle',
         title: 'a'.repeat(256),
@@ -211,7 +221,7 @@ describe.skip('/api/user/set-custom-file-data', () => {
     });
 
     it('should reject invalid track number range', async () => {
-      const { error } = await userApi.setCustomFileData(1, {
+      const { error } = await userApi.setCustomFileData(trackId, {
         albumArtists: 'Custom albumArtists',
         albumTitle: 'Custom albumTitle',
         title: 'Custom title',
@@ -227,7 +237,7 @@ describe.skip('/api/user/set-custom-file-data', () => {
     });
 
     it('should reject invalid year range', async () => {
-      const { error } = await userApi.setCustomFileData(1, {
+      const { error } = await userApi.setCustomFileData(trackId, {
         albumArtists: 'Custom albumArtists',
         albumTitle: 'Custom albumTitle',
         title: 'Custom title',
@@ -244,8 +254,16 @@ describe.skip('/api/user/set-custom-file-data', () => {
   });
 
   describe('success', () => {
-    it.only('should create custom data for the file', async () => {
-      const { error, data } = await userApi.setCustomFileData(1, {
+    it('should create custom data for the file', async () => {
+      const { data: trackDataBefore } = await userApi.listTracks({
+        offset: 0,
+        limit: 100_000,
+      });
+      const trackBeforeDelete = trackDataBefore?.tracks.find((t) => t.id === trackId);
+      if (!trackBeforeDelete) {
+        throw new Error('Track not found before delete');
+      }
+      const { error, data } = await userApi.setCustomFileData(trackId, {
         albumArtists: 'Custom albumArtists',
         albumTitle: 'Custom albumTitle',
         title: 'Custom title',
@@ -264,7 +282,7 @@ describe.skip('/api/user/set-custom-file-data', () => {
         offset: 0,
         limit: 100_000,
       });
-      const track = trackData?.tracks.find((t) => t.id === 1);
+      const track = trackData?.tracks.find((t) => t.id === trackId);
       if (!track) {
         throw new Error('Track not found');
       }
@@ -278,7 +296,7 @@ describe.skip('/api/user/set-custom-file-data', () => {
       expect(track.genres.map((genre) => genre.name).join(', ')).toBe('Custom genres');
       expect(track.trackNumber).toBe(7);
       expect(track.year).toBe(1950);
-      deleteCustomData.push(1);
+      deleteCustomData.push(trackId);
     });
   });
 });

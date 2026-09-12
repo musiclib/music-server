@@ -58,14 +58,16 @@ export class IndexFileService {
 
   /**
    * Returns a file by path with the specified attributes, including any custom data overrides if available.
+   * @param {number} accountId The ID of the account owning the file
    * @param {string} filePath The path to the file on disk
    * @param {Transaction} [transaction] Optional Sequelize transaction to use
    * @returns {Promise<FileEntity | undefined>} The file entity with potential data overrides
    */
-  async retrieveFileLastModified(filePath: string, transaction?: Transaction) {
+  async retrieveFileLastModified(accountId: number, filePath: string, transaction?: Transaction) {
     const file = await this.fileEntity.findOne({
       where: {
         filePath,
+        accountId,
       },
       attributes: ['id', 'fileMtime'],
       transaction,
@@ -75,7 +77,7 @@ export class IndexFileService {
     }
     const customData = await this.fileCustomDataEntity.findOne({
       where: {
-        fileId: file.id,
+        id: file.id,
       },
       attributes: ['id', 'updatedAt'],
       transaction,
