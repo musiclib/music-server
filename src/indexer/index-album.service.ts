@@ -31,6 +31,7 @@ export class IndexAlbumService {
     const existing = await this.albumEntity.findOne({
       where: {
         folderPath,
+        accountId,
       },
       transaction,
     });
