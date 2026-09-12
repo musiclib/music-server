@@ -22,6 +22,7 @@ export async function up(queryInterface: QueryInterface) {
         key: 'id',
       },
     },
+    genres: DataTypes.STRING(1000),
     id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
