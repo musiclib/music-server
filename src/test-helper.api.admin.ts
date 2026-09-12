@@ -42,7 +42,6 @@ async function createRootPath(params: RequestParams, accountId: number, rootPath
 }
 
 async function deleteAccount(params: RequestParams, adminPassword: string, accountId: number) {
-  // @ts-expect-error foo
   return api.PATCH(`/api/admin/delete-account`, {
     body: {
       adminPassword,
