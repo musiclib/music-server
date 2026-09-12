@@ -20,12 +20,6 @@ export class FileCustomDataEntity extends Model<FileCustomDataEntity> {
   @Column(DataType.STRING(1000))
   declare artists: string;
 
-  @Column(DataType.INTEGER)
-  declare bitRate: number;
-
-  @Column(DataType.INTEGER)
-  declare channels: number;
-
   @Column(DataType.STRING(255))
   declare comment: string;
 
@@ -59,27 +53,6 @@ export class FileCustomDataEntity extends Model<FileCustomDataEntity> {
   })
   @ForeignKey(() => FileEntity)
   declare fileId: number;
-
-  /**
-   * The absolute path to the file relative to the root path
-   */
-  @Column(DataType.STRING(255))
-  declare filePath: string;
-
-  /**
-   * The file size for the music file
-   */
-  @Column(DataType.INTEGER)
-  declare fileSize: number;
-
-  /**
-   * The file modification time for the music file
-   */
-  @Column(DataType.DATE)
-  declare fileMtime: Date;
-
-  @Column(DataType.INTEGER)
-  declare frequency: number;
 
   /**
    * The ID of the table row is an auto-incrementing integer that is assigned by the database when the row is created.

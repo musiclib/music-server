@@ -4,9 +4,7 @@ export async function up(queryInterface: QueryInterface) {
   await queryInterface.createTable('files_custom_data', {
     album_artists: DataTypes.STRING(1000),
     album_title: DataTypes.STRING(255),
-    artists: DataTypes.STRING(500),
-    bit_rate: DataTypes.INTEGER,
-    channels: DataTypes.INTEGER,
+    artists: DataTypes.STRING(1000),
     comment: DataTypes.STRING(255),
     composers: DataTypes.STRING(1000),
     created_at: {
@@ -24,13 +22,6 @@ export async function up(queryInterface: QueryInterface) {
         key: 'id',
       },
     },
-    file_mtime: DataTypes.DATE,
-    file_path: {
-      comment: 'The path to the file relative to the root folder path',
-      type: DataTypes.STRING(255),
-    },
-    file_size: DataTypes.INTEGER,
-    frequency: DataTypes.INTEGER,
     id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
