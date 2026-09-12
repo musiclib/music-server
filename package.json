@@ -114,5 +114,5 @@
     "start:test": "npx dotenv -e .env.test -- npx nest start",
     "test": "npx dotenv -e .env.test npx jest"
   },
-  "version": "0.0.1"
+  "version": "0.0.2"
 }
