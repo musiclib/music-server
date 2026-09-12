@@ -343,6 +343,7 @@ export class LibraryTrackService {
         'albumId',
         'bitRate',
         'channels',
+        'comment',
         'createdAt',
         'discNumber',
         'duration',

@@ -11,7 +11,7 @@ describe('/api/admin/reset-user-password', () => {
   });
 
   afterAll(async () => {
-    await adminApi.deleteTestData(deleteAccounts);
+    await adminApi.deleteTestAccounts(deleteAccounts);
   });
 
   describe('authorized access', () => {

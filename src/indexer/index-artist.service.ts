@@ -3,7 +3,7 @@ import { ArtistEntity, FileEntity, LinkedArtistEntity } from 'src/database/entit
 import { IAudioMetadata } from 'src/types/music-metadata';
 import { InjectModel } from '@nestjs/sequelize';
 import { Injectable, Logger } from '@nestjs/common';
-import { Transaction } from 'sequelize';
+import { Op, Transaction } from 'sequelize';
 import { normalizeString, sanitizeString, splitArray } from 'src/utils/strings';
 
 @Injectable()
@@ -43,6 +43,7 @@ export class IndexArtistService {
   async updateArtists(embeddedData: IAudioMetadata, fileDetail: FileEntity, transaction?: Transaction) {
     const artists =
       embeddedData?.common.artists || splitArray(embeddedData?.common.artist ? [embeddedData?.common.artist] : []);
+    const validAssociationIds: number[] = [];
     for (let i = 0; i < artists.length; i += 1) {
       const name = artists[i]?.trim();
       if (name) {
@@ -55,7 +56,7 @@ export class IndexArtistService {
           transaction,
         });
         if (!existingAssociation) {
-          await this.linkedArtistEntity.create(
+          const newAssociation = await this.linkedArtistEntity.create(
             {
               artistId,
               fileId: fileDetail.id,
@@ -64,8 +65,21 @@ export class IndexArtistService {
               transaction,
             },
           );
+          validAssociationIds.push(newAssociation.id);
+        } else {
+          validAssociationIds.push(existingAssociation.id);
         }
       }
     }
+    // remove any associations that are no longer valid
+    await this.linkedArtistEntity.destroy({
+      where: {
+        fileId: fileDetail.id,
+        id: {
+          [Op.notIn]: validAssociationIds,
+        },
+      },
+      transaction,
+    });
   }
 }

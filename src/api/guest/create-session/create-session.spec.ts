@@ -11,7 +11,7 @@ describe('/api/guest/create-session', () => {
   });
 
   afterAll(async () => {
-    await adminApi.deleteTestData(deleteAccounts);
+    await adminApi.deleteTestAccounts(deleteAccounts);
   });
 
   describe('errors', () => {

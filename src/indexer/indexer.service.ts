@@ -303,6 +303,44 @@ export class IndexerService {
   }
 
   /**
+   * Manually rescan a single specific file after changes to its custom data
+   * @param {number} fileId The ID of the file
+   */
+  async scanFile(fileId: number) {
+    const file = await this.fileEntity.findByPk(fileId, {
+      attributes: ['filePath', 'rootPathId', 'fileSize'],
+    });
+    if (!file) {
+      throw new Error(ErrorCodes.FILE_NOT_FOUND_ERROR);
+    }
+    const rootPath = await this.rootPathEntity.findByPk(file.rootPathId);
+    if (!rootPath) {
+      throw new Error(ErrorCodes.ROOT_PATH_NOT_FOUND_ERROR);
+    }
+    const filePath = join(rootPath.rootPath, file.filePath);
+    const filesToScan = [
+      {
+        path: filePath,
+        lastModified: new Date(),
+        size: file.fileSize,
+      },
+    ];
+    const filesToUpdate: FileUpdateItem[] = [];
+    await this.checkFile(rootPath, filesToScan, filesToUpdate);
+    const fileToUpdate = filesToUpdate[0];
+    if (!fileToUpdate) {
+      throw new Error(ErrorCodes.FILE_NOT_FOUND_ERROR);
+    }
+    const { embeddedData } = fileToUpdate;
+    const albumPath = filePath.replace(rootPath.rootPath, '').split(sep).slice(0, 3).join(sep);
+    await this.indexAlbumService.updateAlbum(rootPath, embeddedData, albumPath, rootPath.accountId);
+    const fileDetail = await this.indexFileService.updateFile(embeddedData, fileId, rootPath.accountId);
+    await this.indexArtistService.updateArtists(embeddedData, fileDetail);
+    await this.indexComposerService.updateComposers(embeddedData, fileDetail);
+    await this.indexGenreService.updateGenres(embeddedData, rootPath.accountId, fileDetail);
+  }
+
+  /**
    * Recursively scans the root path and any subfolders for audio files
    * @param {RootPathEntity} rootPath The indexer root path being scanned
    * @param {string[]} foldersToScan Array of folders identified during the scan
@@ -379,7 +417,7 @@ export class IndexerService {
     const fileName = basename(filePath);
     const albumPath = filePath.replace(rootPath.rootPath, '').split(sep).slice(0, 3).join(sep);
     // check if the file exists in the database and is up to date
-    const existingFile = await this.indexFileService.retrieveFileByPath(relativePath, ['id', 'fileMtime']);
+    const existingFile = await this.indexFileService.retrieveFileLastModified(relativePath);
     if (!existingFile || existingFile.fileMtime.getTime() !== lastModified.getTime()) {
       // get the idv3 information from the file
       let embeddedData: IAudioMetadata;

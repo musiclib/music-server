@@ -11,7 +11,7 @@ describe('/api/user/regenerate-session-key', () => {
   });
 
   afterAll(async () => {
-    await adminApi.deleteTestData(deleteAccounts);
+    await adminApi.deleteTestAccounts(deleteAccounts);
   });
 
   describe('authorized access', () => {

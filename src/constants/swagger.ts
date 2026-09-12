@@ -49,8 +49,7 @@ export const JWT_TOKEN_HEADER = {
  */
 export const SYNOLOGY_COOKIE_HEADER = {
   name: 'cookie',
-  description: 'The session ID and device ID cookies for the user',
-  example: 'id={sessionId}; did={deviceId}',
+  description: 'The session ID and device ID cookies for the user `id={sessionId}; did={deviceId}`',
 };
 
 /**

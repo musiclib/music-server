@@ -40,9 +40,6 @@ export class FileCustomDataEntity extends Model<FileCustomDataEntity> {
   @Column(DataType.INTEGER)
   declare discNumber: number;
 
-  @Column(DataType.FLOAT)
-  declare duration: number;
-
   @Column({
     type: DataType.INTEGER,
     allowNull: false,
@@ -58,13 +55,13 @@ export class FileCustomDataEntity extends Model<FileCustomDataEntity> {
   declare genres: string;
 
   /**
-   * The ID of the table row is an auto-incrementing integer that is assigned by the database when the row is created.
+   * The ID of the table row is always aligned with the file ID
    */
   @Column({
     type: DataType.INTEGER,
     primaryKey: true,
     allowNull: false,
-    autoIncrement: true,
+    autoIncrement: false,
   })
   declare id: number;
 

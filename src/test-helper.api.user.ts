@@ -17,6 +17,17 @@ async function createRootPath(params: RequestParams, rootPath: string) {
   });
 }
 
+async function deleteCustomFileData(params: RequestParams, customFileDataId: number) {
+  return api.DELETE(`/api/user/delete-custom-file-data`, {
+    params: {
+      ...params,
+      query: {
+        id: customFileDataId,
+      },
+    },
+  });
+}
+
 async function deleteRootPath(params: RequestParams, rootPathId: number) {
   return api.DELETE(`/api/user/delete-root-path`, {
     params: {
@@ -182,6 +193,21 @@ async function regenerateSessionKey(params: RequestParams) {
   });
 }
 
+type SetCustomFileDataBodyDto =
+  paths['/api/user/set-custom-file-data']['put']['requestBody']['content']['application/json'];
+
+async function setCustomFileData(params: RequestParams, customFileDataId: number, body: SetCustomFileDataBodyDto) {
+  return api.PUT(`/api/user/set-custom-file-data`, {
+    body,
+    params: {
+      ...params,
+      query: {
+        id: customFileDataId,
+      },
+    },
+  });
+}
+
 async function updatePassword(params: RequestParams, newPassword: string) {
   return api.POST(`/api/user/update-password`, {
     body: {
@@ -193,6 +219,7 @@ async function updatePassword(params: RequestParams, newPassword: string) {
 
 export type UserApi = {
   createRootPath: (rootPath: string) => ReturnType<typeof createRootPath>;
+  deleteCustomFileData: (customFileDataId: number) => ReturnType<typeof deleteCustomFileData>;
   deleteRootPath: (rootPathId: number) => ReturnType<typeof deleteRootPath>;
   endSession: () => ReturnType<typeof endSession>;
   listAlbums: (query?: ListAlbumsQueryDto) => ReturnType<typeof listAlbums>;
@@ -218,6 +245,7 @@ export type UserApi = {
   ) => ReturnType<typeof listTrackGenresWithTracks>;
   listTracks: (query?: ListTracksQueryDto) => ReturnType<typeof listTracks>;
   regenerateSessionKey: () => ReturnType<typeof regenerateSessionKey>;
+  setCustomFileData: (customFileDataId: number, data: SetCustomFileDataBodyDto) => ReturnType<typeof setCustomFileData>;
   updatePassword: (newPassword: string) => ReturnType<typeof updatePassword>;
 };
 
@@ -241,6 +269,9 @@ export async function createUserApi(username?: string, password?: string): Promi
   return {
     async createRootPath(rootPath: string) {
       return createRootPath(params, rootPath);
+    },
+    async deleteCustomFileData(customFileDataId: number) {
+      return deleteCustomFileData(params, customFileDataId);
     },
     async deleteRootPath(rootPathId: number) {
       return deleteRootPath(params, rootPathId);
@@ -292,6 +323,9 @@ export async function createUserApi(username?: string, password?: string): Promi
     },
     async regenerateSessionKey() {
       return regenerateSessionKey(params);
+    },
+    async setCustomFileData(customFileDataId: number, data: SetCustomFileDataBodyDto) {
+      return setCustomFileData(params, customFileDataId, data);
     },
     async updatePassword(newPassword: string) {
       return updatePassword(params, newPassword);

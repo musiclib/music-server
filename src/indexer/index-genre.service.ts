@@ -3,7 +3,7 @@ import { FileEntity, GenreEntity, LinkedGenreEntity } from 'src/database/entitie
 import { IAudioMetadata } from 'src/types/music-metadata';
 import { InjectModel } from '@nestjs/sequelize';
 import { Injectable, Logger } from '@nestjs/common';
-import { Transaction } from 'sequelize';
+import { Op, Transaction } from 'sequelize';
 import { normalizeString, sanitizeString, splitArray } from 'src/utils/strings';
 
 @Injectable()
@@ -51,6 +51,7 @@ export class IndexGenreService {
     transaction?: Transaction,
   ) {
     const genres = splitArray(embeddedData?.common.genre || []);
+    const validAssociationIds: number[] = [];
     for (let i = 0; i < genres.length; i += 1) {
       const name = genres[i]?.trim();
       if (name) {
@@ -63,7 +64,7 @@ export class IndexGenreService {
           transaction,
         });
         if (!existingAssociation) {
-          await this.linkedGenreEntity.create(
+          const newAssociation = await this.linkedGenreEntity.create(
             {
               genreId,
               fileId: fileDetail.id,
@@ -72,8 +73,21 @@ export class IndexGenreService {
               transaction,
             },
           );
+          validAssociationIds.push(newAssociation.id);
+        } else {
+          validAssociationIds.push(existingAssociation.id);
         }
       }
     }
+    // remove any associations that are no longer valid
+    await this.linkedGenreEntity.destroy({
+      where: {
+        fileId: fileDetail.id,
+        id: {
+          [Op.notIn]: validAssociationIds,
+        },
+      },
+      transaction,
+    });
   }
 }

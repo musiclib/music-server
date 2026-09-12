@@ -4,7 +4,7 @@ import { IAudioMetadata } from 'src/types/music-metadata';
 import { IndexArtistService } from './index-artist.service';
 import { InjectModel } from '@nestjs/sequelize';
 import { Injectable, Logger } from '@nestjs/common';
-import { Transaction } from 'sequelize';
+import { Op, Transaction } from 'sequelize';
 import { Vibrant } from 'node-vibrant/node';
 import { normalizeString, sanitizeString, splitArray } from 'src/utils/strings';
 import sharp from 'sharp';
@@ -34,10 +34,8 @@ export class IndexAlbumService {
       },
       transaction,
     });
-    if (existing) {
-      return existing;
-    }
-    // insert the album
+
+    // get the album color details
     let coverImage = embeddedData.common.picture?.[0]?.data ? Buffer.from(embeddedData.common.picture[0].data) : null;
     const coverImageMimeType = embeddedData.common.picture?.[0]?.format || null;
     let coverImageLightVibrant: string | null = null;
@@ -63,56 +61,109 @@ export class IndexAlbumService {
       coverImageDarkMuted = palette?.DarkMuted?.hex || null;
       coverImageLightMuted = palette?.LightMuted?.hex || null;
     }
-
-    const album = await this.albumEntity.create(
-      {
-        accountId,
-        coverImage,
-        coverImageMimeType,
-        coverImageLightVibrant,
-        coverImageDarkVibrant,
-        coverImageMuted,
-        coverImageVibrant,
-        coverImageDarkMuted,
-        coverImageLightMuted,
-        folderPath,
-        rootPathId: rootPath.id,
-        title: sanitizeString(embeddedData?.common.album || '') || '',
-        titleNormalized: normalizeString(embeddedData?.common.album || '') || '',
-        year: embeddedData?.common.year || 0,
-      } as AlbumEntity,
-      {
-        transaction,
-      },
-    );
+    let albumId;
+    if (existing) {
+      albumId = existing.id;
+      // update the existing album
+      await this.albumEntity.update(
+        {
+          coverImage,
+          coverImageMimeType,
+          coverImageLightVibrant,
+          coverImageDarkVibrant,
+          coverImageMuted,
+          coverImageVibrant,
+          coverImageDarkMuted,
+          coverImageLightMuted,
+          folderPath,
+          rootPathId: rootPath.id,
+          title: sanitizeString(embeddedData?.common.album || '') || '',
+          titleNormalized: normalizeString(embeddedData?.common.album || '') || '',
+          year: embeddedData?.common.year || 0,
+        } as AlbumEntity,
+        {
+          where: {
+            id: existing.id,
+          },
+          transaction,
+        },
+      );
+    } else {
+      // insert new album
+      const album = await this.albumEntity.create(
+        {
+          accountId,
+          coverImage,
+          coverImageMimeType,
+          coverImageLightVibrant,
+          coverImageDarkVibrant,
+          coverImageMuted,
+          coverImageVibrant,
+          coverImageDarkMuted,
+          coverImageLightMuted,
+          folderPath,
+          rootPathId: rootPath.id,
+          title: sanitizeString(embeddedData?.common.album || '') || '',
+          titleNormalized: normalizeString(embeddedData?.common.album || '') || '',
+          year: embeddedData?.common.year || 0,
+        } as AlbumEntity,
+        {
+          transaction,
+        },
+      );
+      albumId = album.id;
+    }
     // insert the album artists
     const albumArtists = embeddedData.common.albumartist
       ? [embeddedData.common.albumartist]
       : splitArray(embeddedData.common.albumartists || [embeddedData.common.artist || 'Unknown Artist']);
+    const validAssociationIds: number[] = [];
     for (let i = 0, len = albumArtists.length; i < len; i += 1) {
       const artist = albumArtists[i];
       if (artist) {
         const artistId = await this.indexArtistService.insertOrRetrieveArtist(artist, transaction);
         const existingAssociation = await this.albumArtistEntity.findOne({
           where: {
-            albumId: album.id,
+            albumId,
             artistId,
           },
           transaction,
         });
         if (!existingAssociation) {
-          await this.albumArtistEntity.create(
+          const newAssociation = await this.albumArtistEntity.create(
             {
-              albumId: album.id,
+              albumId,
               artistId,
             } as AlbumArtistEntity,
             {
               transaction,
             },
           );
+          validAssociationIds.push(newAssociation.id);
+        } else {
+          validAssociationIds.push(existingAssociation.id);
         }
       }
     }
-    return album;
+    // delete obsolete album-artist associations
+    await this.albumArtistEntity.destroy({
+      where: {
+        albumId,
+        id: {
+          [Op.notIn]: validAssociationIds,
+        },
+      },
+      transaction,
+    });
+    // return the album
+    const updatedAlbum = await this.albumEntity.findOne({
+      where: {
+        id: albumId,
+      },
+    });
+    if (!updatedAlbum) {
+      throw new Error('Album not found');
+    }
+    return updatedAlbum;
   }
 }

@@ -248,7 +248,7 @@ export async function createAdminApi(username?: string, password?: string): Prom
         roles: accountRoles,
       };
     },
-    async deleteTestData(accountIds: number[]) {
+    async deleteTestAccounts(accountIds: number[]) {
       for (let i = 0; i < accountIds.length; i += 1) {
         const accountId = accountIds[i];
         if (accountId) {

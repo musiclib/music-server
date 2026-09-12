@@ -32,11 +32,12 @@ export class IndexFileService {
     if (!customData) {
       return embeddedData;
     }
-    const combined = {
-      ...embeddedData,
-    };
-    combined.common.albumartist = customData.albumArtists ?? embeddedData.common?.albumartist;
-    combined.common.artist = customData.artists ?? embeddedData.common?.artist;
+    const combined = embeddedData;
+    combined.common.album = customData.albumTitle || embeddedData.common?.album;
+    combined.common.albumartists = customData.albumArtists?.split(',') || embeddedData.common?.albumartists;
+    combined.common.albumartist = combined.common.albumartists.join(', ');
+    combined.common.artists = customData.artists?.split(',') || embeddedData.common?.artists || [];
+    combined.common.artist = combined.common.artists.join(', ');
     combined.common.comment =
       customData.comment?.split('\n').map((comment) => {
         return { text: comment.trim() };
@@ -58,34 +59,15 @@ export class IndexFileService {
   /**
    * Returns a file by path with the specified attributes, including any custom data overrides if available.
    * @param {string} filePath The path to the file on disk
-   * @param {(keyof FileEntity)[]} [attributes] The attributes to retrieve from the file entity
-   * @param {Transaction} [transaction] The Sequelize transaction to use
+   * @param {Transaction} [transaction] Optional Sequelize transaction to use
    * @returns {Promise<FileEntity | undefined>} The file entity with potential data overrides
    */
-  async retrieveFileByPath(filePath: string, attributes?: (keyof FileEntity)[], transaction?: Transaction) {
+  async retrieveFileLastModified(filePath: string, transaction?: Transaction) {
     const file = await this.fileEntity.findOne({
       where: {
         filePath,
       },
-      attributes: ['id'],
-      transaction,
-    });
-    if (!file) {
-      return undefined;
-    }
-    return this.retrieveFile(file.id, attributes, transaction);
-  }
-
-  /**
-   * Returns a file by its ID with the specified attributes, including any custom data overrides if available.
-   * @param {number} fileId The ID of the file in the database
-   * @param {(keyof FileEntity)[]} [attributes] The attributes to retrieve from the file entity
-   * @param {Transaction} [transaction] The Sequelize transaction to use
-   * @returns {Promise<FileEntity | undefined>} The file entity with potential data overrides
-   */
-  async retrieveFile(fileId: number, attributes?: (keyof FileEntity)[], transaction?: Transaction) {
-    const file = await this.fileEntity.findByPk(fileId, {
-      attributes,
+      attributes: ['id', 'fileMtime'],
       transaction,
     });
     if (!file) {
@@ -93,30 +75,18 @@ export class IndexFileService {
     }
     const customData = await this.fileCustomDataEntity.findOne({
       where: {
-        fileId,
+        fileId: file.id,
       },
-      attributes,
+      attributes: ['id', 'updatedAt'],
       transaction,
     });
     if (!customData) {
       return file;
     }
-    const result = new FileEntity();
-    if (attributes?.length) {
-      for (let i = 0, len = attributes.length; i < len; i += 1) {
-        const attribute = attributes[i];
-        if (attribute) {
-          result.set(attribute, file?.[attribute] ?? customData?.[attribute] ?? null);
-        }
-      }
-    } else {
-      const allAttributes = Object.keys(file?.get({ plain: true }));
-      for (let i = 0, len = allAttributes.length; i < len; i += 1) {
-        const attribute = allAttributes[i] as keyof FileEntity;
-        result.set(attribute, file?.[attribute] ?? customData?.[attribute] ?? null);
-      }
-    }
-    return result;
+    return {
+      id: file.id,
+      fileMtime: customData?.updatedAt || customData?.createdAt || file.fileMtime,
+    };
   }
 
   async updateFile(embeddedData: IAudioMetadata, fileId: number, accountId: number, transaction?: Transaction) {
@@ -124,25 +94,22 @@ export class IndexFileService {
     if (!file) {
       throw new Error(`File with id ${fileId} not found`);
     }
-    let commentText: string | undefined;
-    if (embeddedData.common.comment) {
-      commentText = embeddedData.common.comment
-        .map((comment) => comment.text?.trim() || '')
-        .join('\n')
-        .trim();
-    }
+    const commentText = embeddedData.common.comment
+      ?.map((comment) => comment.text?.trim() || '')
+      .join('\n')
+      .trim();
     await this.fileEntity.update(
       {
         accountId,
-        bitRate: embeddedData.format.bitrate || file.bitRate || 0,
-        channels: embeddedData.format.numberOfChannels || file.channels || 0,
-        comment: commentText || file.comment || '',
-        discNumber: embeddedData.common.disk?.no || file.discNumber || 0,
-        duration: embeddedData.format.duration || file.duration || 0,
-        frequency: embeddedData.format.sampleRate || file.frequency || 0,
-        title: sanitizeString(embeddedData.common.title || '') || file.title || '',
-        trackNumber: embeddedData.common.track?.no || file.trackNumber || 0,
-        year: embeddedData.common.year || file.year || 0,
+        bitRate: embeddedData.format.bitrate || 0,
+        channels: embeddedData.format.numberOfChannels || 0,
+        comment: commentText ?? '',
+        discNumber: embeddedData.common.disk?.no || 0,
+        duration: embeddedData.format.duration || 0,
+        frequency: embeddedData.format.sampleRate || 0,
+        title: sanitizeString(embeddedData.common.title || '') || '',
+        trackNumber: embeddedData.common.track?.no || 0,
+        year: embeddedData.common.year || 0,
       },
       {
         where: {

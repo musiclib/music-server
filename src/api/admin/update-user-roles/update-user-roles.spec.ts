@@ -12,7 +12,7 @@ describe('/api/admin/update-user-roles', () => {
   });
 
   afterAll(async () => {
-    await adminApi.deleteTestData(deleteAccounts);
+    await adminApi.deleteTestAccounts(deleteAccounts);
   });
 
   describe('authorized access', () => {

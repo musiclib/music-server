@@ -3,7 +3,7 @@ import { ComposerEntity, FileEntity, LinkedComposerEntity } from 'src/database/e
 import { IAudioMetadata } from 'src/types/music-metadata';
 import { InjectModel } from '@nestjs/sequelize';
 import { Injectable, Logger } from '@nestjs/common';
-import { Transaction } from 'sequelize';
+import { Op, Transaction } from 'sequelize';
 import { normalizeString, sanitizeString, splitArray } from 'src/utils/strings';
 
 @Injectable()
@@ -45,6 +45,7 @@ export class IndexComposerService {
 
   async updateComposers(embeddedData: IAudioMetadata, fileDetail: FileEntity, transaction?: Transaction) {
     const composers = splitArray(embeddedData?.common.composer || []);
+    const validAssociationIds: number[] = [];
     for (let i = 0; i < composers.length; i += 1) {
       const name = composers[i]?.trim();
       if (name) {
@@ -57,7 +58,7 @@ export class IndexComposerService {
           transaction,
         });
         if (!existingAssociation) {
-          await this.linkedComposerEntity.create(
+          const newAssociation = await this.linkedComposerEntity.create(
             {
               composerId,
               fileId: fileDetail.id,
@@ -66,8 +67,21 @@ export class IndexComposerService {
               transaction,
             },
           );
+          validAssociationIds.push(newAssociation.id);
+        } else {
+          validAssociationIds.push(existingAssociation.id);
         }
       }
     }
+    // remove any associations that are no longer valid
+    await this.linkedComposerEntity.destroy({
+      where: {
+        fileId: fileDetail.id,
+        id: {
+          [Op.notIn]: validAssociationIds,
+        },
+      },
+      transaction,
+    });
   }
 }
