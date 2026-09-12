@@ -39,7 +39,7 @@ jobs:
         run: npm run prettier -- --check
 
       - name: Start backend
-        run: npm run start:test # "$RUNNER_TEMP/backend.log" 2>&1 &
+        run: npm run start:test > "$RUNNER_TEMP/backend.log" 2>&1 &
 
       - name: Wait for backend to start
         run: |
