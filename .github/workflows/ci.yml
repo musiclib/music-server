@@ -10,10 +10,6 @@ jobs:
   test:
     runs-on: ubuntu-latest
 
-    strategy:
-      matrix:
-        node-version: [24.x]
-
     steps:
       - uses: actions/checkout@v4
 
@@ -23,6 +19,12 @@ jobs:
           node-version: 24
           cache: npm
           cache-dependency-path: package-lock.json
+
+      - name: Cache node_modules
+        uses: actions/cache@v4
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-node-${{ matrix.node-version }}-${{ hashFiles('package-lock.json') }}
 
       - name: Install dependencies
         run: npm ci
@@ -37,12 +39,12 @@ jobs:
         run: npm run prettier -- --check
 
       - name: Start backend
-        run: npm run start:test // > "$RUNNER_TEMP/backend.log" 2>&1 &
+        run: npm run start:test # "$RUNNER_TEMP/backend.log" 2>&1 &
 
       - name: Wait for backend to start
         run: |
           LOG_FILE="$RUNNER_TEMP/backend.log"
-          EXPECTED='LOG [IndexerService] [accountId: 2 rootPathId: 2] adding folder'
+          EXPECTED='LOG [IndexerService] [accountId: 2 rootPathId: 4] adding folder'
           for i in $(seq 1 120); do
             if sed -E 's/\x1B\[[0-9;]*[[:alpha:]]//g' "$LOG_FILE" 2>/dev/null |
               grep -Fq "$EXPECTED"; then
