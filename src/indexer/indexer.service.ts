@@ -379,18 +379,15 @@ export class IndexerService {
     const fileName = basename(filePath);
     const albumPath = filePath.replace(rootPath.rootPath, '').split(sep).slice(0, 3).join(sep);
     // check if the file exists in the database and is up to date
-    const existingFile = await this.fileEntity.findOne({
-      attributes: ['id', 'fileMtime'],
-      where: {
-        filePath: relativePath,
-        accountId: rootPath.accountId,
-      },
-    });
+    const existingFile = await this.indexFileService.retrieveFileByPath(relativePath, ['id', 'fileMtime']);
     if (!existingFile || existingFile.fileMtime.getTime() !== lastModified.getTime()) {
       // get the idv3 information from the file
       let embeddedData: IAudioMetadata;
       try {
         embeddedData = await this.parseMetaData(filePath);
+        if (existingFile) {
+          embeddedData = await this.indexFileService.applyCustomFileData(existingFile.id, embeddedData);
+        }
       } catch (error) {
         this.logger.error(`error reading metadata ${filePath}`, error);
         return;
