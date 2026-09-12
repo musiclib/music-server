@@ -1,12 +1,12 @@
-import { ADMIN_PASSWORD, ADMIN_USERNAME, UserApi, api, createUserApi } from '../../../test-helper';
 import { ErrorCodes } from '../../../constants/error-codes';
+import { USER_PASSWORD, USER_USERNAME, UserApi, api, createUserApi } from '../../../test-helper';
 import { beforeAll, describe, expect, it } from '@jest/globals';
 
 describe('/api/user/delete-custom-file-data', () => {
   let userApi: UserApi;
 
   beforeAll(async () => {
-    userApi = await createUserApi(ADMIN_USERNAME, ADMIN_PASSWORD);
+    userApi = await createUserApi(USER_USERNAME, USER_PASSWORD);
   });
 
   describe('authorized access', () => {
@@ -37,13 +37,14 @@ describe('/api/user/delete-custom-file-data', () => {
       // get the track information before deleting
       const { data: trackDataBeforeDelete } = await userApi.listTracks({
         offset: 0,
-        limit: 100_000,
+        limit: 1,
       });
-      const trackBeforeDelete = trackDataBeforeDelete?.tracks.find((t) => t.id === 1);
+      const trackBeforeDelete = trackDataBeforeDelete?.tracks[0];
       if (!trackBeforeDelete) {
         throw new Error('Track not found before delete');
       }
-      const { error, data } = await userApi.setCustomFileData(1, {
+      const trackId = trackBeforeDelete.id;
+      const { error, data } = await userApi.setCustomFileData(trackId, {
         albumArtists: 'Custom albumArtists',
         albumTitle: 'Custom albumTitle',
         title: 'Custom title',
@@ -62,7 +63,7 @@ describe('/api/user/delete-custom-file-data', () => {
         offset: 0,
         limit: 100_000,
       });
-      const track = trackData?.tracks.find((t) => t.id === 1);
+      const track = trackData?.tracks.find((t) => t.id === trackId);
       if (!track) {
         throw new Error('Track not found');
       }
@@ -77,7 +78,7 @@ describe('/api/user/delete-custom-file-data', () => {
       expect(track.trackNumber).toBe(7);
       expect(track.year).toBe(1950);
       // delete the data
-      const { error: deleteError, data: deleteData } = await userApi.deleteCustomFileData(1);
+      const { error: deleteError, data: deleteData } = await userApi.deleteCustomFileData(trackId);
       expect(deleteError).toBeUndefined();
       expect(deleteData?.success).toBe(true);
       // confirm the track no longer uses custom data
@@ -85,7 +86,7 @@ describe('/api/user/delete-custom-file-data', () => {
         offset: 0,
         limit: 100_000,
       });
-      const trackAfterDelete = trackDataAfterDelete?.tracks.find((t) => t.id === 1);
+      const trackAfterDelete = trackDataAfterDelete?.tracks.find((t) => t.id === trackId);
       if (!trackAfterDelete) {
         throw new Error('Track not found after delete');
       }

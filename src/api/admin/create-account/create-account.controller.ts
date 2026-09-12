@@ -5,6 +5,7 @@ import {
   JWT_TOKEN,
   JWT_TOKEN_HEADER,
 } from 'src/constants/swagger';
+import { AccountEntity } from 'src/database/entities';
 import {
   AdminCreateAccountBadRequestResponseDto,
   AdminCreateAccountBodyDto,
@@ -21,6 +22,7 @@ import {
   ApiTags,
 } from '@nestjs/swagger';
 import { Body, Controller, Post, Scope, UseGuards } from '@nestjs/common';
+import { User } from 'src/api/user.decorator';
 import { UserRoleEnum } from 'src/types/enums';
 
 @Controller({
@@ -50,8 +52,11 @@ export class AdminCreateAccountController {
   @ApiBadRequestResponse({
     type: AdminCreateAccountBadRequestResponseDto,
   })
-  async post(@Body() body: AdminCreateAccountBodyDto): Promise<AdminCreateAccountResponseDto> {
-    await this.createAccountService.post(body.username, body.password, body.roles);
+  async post(
+    @User() user: AccountEntity,
+    @Body() body: AdminCreateAccountBodyDto,
+  ): Promise<AdminCreateAccountResponseDto> {
+    await this.createAccountService.post(user.id, body.adminPassword, body.username, body.password, body.roles);
     return {
       success: true,
     };

@@ -48,6 +48,8 @@ export enum ErrorCodes {
   INVALID_EXPIRES_AT_RANGE_ERROR = 'invalid-expires-at-range-error',
   INVALID_PASSWORD_ERROR = 'invalid-password-error',
   INVALID_PASSWORD_LENGTH_ERROR = 'invalid-password-length-error',
+  INVALID_NEW_PASSWORD_ERROR = 'invalid-new-password-error',
+  INVALID_NEW_PASSWORD_LENGTH_ERROR = 'invalid-new-password-length-error',
   INVALID_ROOT_PATH_ERROR = 'invalid-root-path-error',
   INVALID_SEARCH_LENGTH_ERROR = 'invalid-search-length-error',
   INVALID_USERNAME_ERROR = 'invalid-username-error',

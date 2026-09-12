@@ -62,6 +62,9 @@ export type paths = {
     get?: never;
     put?: never;
     post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
     /**
      * Delete an account
      * @description Deletes the specified account.  If it is the only admin account a new one account must be created first.
@@ -70,10 +73,7 @@ export type paths = {
      *
      *     Only administrator users can access this route.  An administrator can assign this role to an account in the system settings.
      */
-    delete: operations['AdminDeleteAccountController_delete'];
-    options?: never;
-    head?: never;
-    patch?: never;
+    patch: operations['AdminDeleteAccountController_delete'];
     trace?: never;
   };
   '/api/admin/delete-root-path': {
@@ -1625,6 +1625,8 @@ export type components = {
       success: boolean;
     };
     AdminCreateAccountBodyDto: {
+      /** @description The administrator's password to authorize the change */
+      adminPassword: string;
       /** @description The plain-text password the user will enter to sign in.  It will be hashed and securely-stored in the database. */
       password: string;
       roles: components['schemas']['UserRoleEnum'][];
@@ -1713,6 +1715,10 @@ export type components = {
        * @default false
        */
       success: boolean;
+    };
+    AdminDeleteAccountBodyDto: {
+      /** @description The administrator's password to authorize the change */
+      adminPassword: string;
     };
     /**
      * @description The error message(s) that occurred during the validation of the request data or additional requirements
@@ -1927,6 +1933,8 @@ export type components = {
       success: boolean;
     };
     AdminResetUserPasswordBodyDto: {
+      /** @description The administrator's password to authorize the change */
+      adminPassword: string;
       newPassword: string;
     };
     /**
@@ -2074,6 +2082,8 @@ export type components = {
       success: boolean;
     };
     AdminUpdateUserRolesBodyDto: {
+      /** @description The administrator's password to authorize the change */
+      adminPassword: string;
       roles: components['schemas']['UserRoleEnum'][];
     };
     /**
@@ -7021,7 +7031,11 @@ export interface operations {
       path?: never;
       cookie?: never;
     };
-    requestBody?: never;
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['AdminDeleteAccountBodyDto'];
+      };
+    };
     responses: {
       /** @description Account deleted successfully */
       200: {
@@ -9497,6 +9511,8 @@ export enum AdminDeleteAccountBadRequestErrorMessageEnum {
   invalid_account_id_error = 'invalid-account-id-error',
   invalid_account_error = 'invalid-account-error',
   account_only_admin_error = 'account-only-admin-error',
+  invalid_password_error = 'invalid-password-error',
+  invalid_password_length_error = 'invalid-password-length-error',
 }
 export enum AdminDeleteAccountNotFoundErrorMessageEnum {
   invalid_account_id_error = 'invalid-account-id-error',
@@ -9520,6 +9536,8 @@ export enum AdminRegenerateUserSessionKeyNotFoundErrorMessageEnum {
 export enum AdminResetUserPasswordBadRequestErrorMessageEnum {
   invalid_password_error = 'invalid-password-error',
   invalid_password_length_error = 'invalid-password-length-error',
+  invalid_new_password_error = 'invalid-new-password-error',
+  invalid_new_password_length_error = 'invalid-new-password-length-error',
 }
 export enum AdminResetUserPasswordNotFoundErrorMessageEnum {
   account_not_found_error = 'account-not-found-error',

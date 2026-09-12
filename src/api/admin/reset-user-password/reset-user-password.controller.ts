@@ -5,6 +5,7 @@ import {
   JWT_TOKEN,
   JWT_TOKEN_HEADER,
 } from 'src/constants/swagger';
+import { AccountEntity } from 'src/database/entities';
 import {
   AdminResetUserPasswordBadRequestResponseDto,
   AdminResetUserPasswordBodyDto,
@@ -24,6 +25,7 @@ import {
   ApiTags,
 } from '@nestjs/swagger';
 import { Body, Controller, Post, Query, Scope, UseGuards } from '@nestjs/common';
+import { User } from 'src/api/user.decorator';
 import { UserRoleEnum } from 'src/types/enums';
 
 @Controller({
@@ -60,10 +62,11 @@ export class AdminResetUserPasswordController {
     description: 'Account not found',
   })
   async post(
+    @User() user: AccountEntity,
     @Query() query: AdminResetUserPasswordQueryDto,
     @Body() body: AdminResetUserPasswordBodyDto,
   ): Promise<AdminResetUserPasswordResponseDto> {
-    await this.resetPasswordService.resetUserPassword(query.id, body.newPassword);
+    await this.resetPasswordService.resetUserPassword(user.id, body.adminPassword, query.id, body.newPassword);
     return {
       success: true,
     };

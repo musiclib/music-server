@@ -21,8 +21,7 @@ export class UserDeleteCustomFileDataService {
     if (!file) {
       throw new NotFoundException(ErrorCodes.FILE_NOT_FOUND_ERROR);
     }
-    const deleted = await this.fileCustomDataEntity.destroy({ where: { id: fileId } });
-    console.log('deleted', deleted);
+    await this.fileCustomDataEntity.destroy({ where: { id: fileId } });
     await this.indexerService.scanFile(fileId);
   }
 }

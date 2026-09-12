@@ -1,5 +1,5 @@
+import { AdminApi, USER_PASSWORD, USER_USERNAME, api, createAdminApi } from '../../../test-helper';
 import { ErrorCodes } from '../../../constants/error-codes';
-import { USER_PASSWORD, USER_USERNAME, api, createAdminApi } from '../../../test-helper';
 import { afterAll, beforeAll, describe, expect, it } from '@jest/globals';
 import { join } from 'node:path';
 import { mkdirSync } from 'node:fs';
@@ -7,7 +7,7 @@ import { tmpdir } from 'node:os';
 
 describe('/api/admin/update-root-path', () => {
   const deleteAccounts: number[] = [];
-  let adminApi;
+  let adminApi: AdminApi;
 
   beforeAll(async () => {
     adminApi = await createAdminApi();
