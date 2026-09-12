@@ -27,7 +27,7 @@
     "typescript-guid": "^1.0.3",
     "umzug": "2.3"
   },
-  "description": "",
+  "description": "Streamish Music Server; a REST API for managing and streaming music libraries with compatible interfaces for various smartphone apps.",
   "devDependencies": {
     "@golevelup/ts-jest": "^3.0.0",
     "@nestjs/cli": "^11.0.0",
@@ -81,7 +81,16 @@
     "verbose": true
   },
   "license": "UNLICENSED",
-  "name": "api-server",
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx,mjs,cjs}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{json,css,scss,md,yml,yaml}": [
+      "prettier --write"
+    ]
+  },
+  "name": "music-server",
   "private": true,
   "scripts": {
     "build": "npx nest build",
