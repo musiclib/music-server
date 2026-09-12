@@ -37,12 +37,12 @@ jobs:
         run: npm run prettier -- --check
 
       - name: Start backend
-        run: npm run start:test > "$RUNNER_TEMP/backend.log" 2>&1 &
+        run: npm run start:test // > "$RUNNER_TEMP/backend.log" 2>&1 &
 
       - name: Wait for backend to start
         run: |
           LOG_FILE="$RUNNER_TEMP/backend.log"
-          EXPECTED='LOG [IndexerService] [accountId: 1 rootPathId: 2] adding folder'
+          EXPECTED='LOG [IndexerService] [accountId: 2 rootPathId: 2] adding folder'
           for i in $(seq 1 120); do
             if sed -E 's/\x1B\[[0-9;]*[[:alpha:]]//g' "$LOG_FILE" 2>/dev/null |
               grep -Fq "$EXPECTED"; then
